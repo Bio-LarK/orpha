@@ -13,7 +13,7 @@ angular
         'ngAnimate',
         'ngSanitize',
         'ui.router'
-    ]).config(function($stateProvider, $urlRouterProvider) {
+    ]).config(function ($stateProvider, $urlRouterProvider) {
         //
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/concept/1');
@@ -22,8 +22,8 @@ angular
         $stateProvider
             .state('concept', {
                 url: '/concept/:conceptId',
-                controller: function() {
-                    console.log('concept controller is running');
+                controller: function ($scope, Concept) {
+                    $scope.concept = Concept.one(3);
                 },
                 templateUrl: 'views/concept.html'
             });

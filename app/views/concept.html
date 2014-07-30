@@ -1,19 +1,40 @@
 <div>
-    <h1>Concept Name</h1>
+    <h1>{{ concept.label }}</h1>
 
     <div class="row">
         <div class="col-sm-8">
             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Summary
+                    </h3>
+                </div>
                 <div class="panel-body">
-                    hello world
+                    {{ concept.summary }}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Definition
+                    </h3>
+                </div>
+                <div class="panel-body" ng-bind-html="concept.definition">
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    hello world 2
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Expert Reviewers
+                    </h3>
                 </div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="reviewer in concept.reviewers">
+                        <a href="">{{ reviewer.name }}</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
