@@ -22,9 +22,11 @@ angular
         $stateProvider
             .state('concept', {
                 url: '/concept/:conceptId',
-                controller: function ($scope, Concept) {
-                    $scope.concept = Concept.one(3);
-                },
+                controller: ['$scope', 'Concept',
+                    function ($scope, Concept) {
+                        $scope.concept = Concept.one(3);
+                    }
+                ],
                 templateUrl: 'views/concept.html'
             });
     });

@@ -1,41 +1,260 @@
 <div>
-    <h1>{{ concept.label }}</h1>
+    <style>
+        .panel-default {
+            border: none;
+            box-shadow: none;
+            padding: 0;
+        }
+        .panel-default > .panel-heading {
+            border: none;
+            background-color: white;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .list-group-item {
+            border: none;
+            padding: 0;
+        }
+        .panel-body {
+            padding: 0;
+        }
+        h1 + p {
+            margin-bottom: 30px;
+        }
+        h1 {
+            /*font-family: 'PT Serif';*/
+            font-size: 40px;
+        }
+        h1 small {
+            font-size: 14px;
+        }
+        body {
+            color: #333;
+            line-height: 1.5;
+            font-family: 'PT Sans', Helvetica, arial, san-serif;
+        }
+        h2 { 
+            /*font-size: 20px;*/
+            /*font-weight: 200;*/
+            /*font-family: 'PT Sans';*/
+            margin-bottom: 20px;
+        }
+        h3.page-title, h3 {
+            /*font-size: 16px;*/
+            color: #555;
+            /*font-weight: 400;*/
+            /*font-family: 'PT Sans';*/
+        }
+    </style>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <h1>{{ concept.label }}
+        <small>Updated {{ concept.updated * 1000 | date:'d/M/yyyy' }}</small>
+    </h1>
+    <p class="text-muted">
+        <span ng-repeat="root in concept.roots">
+            {{ root.name }}
+            <span ng-show="$index !== concept.roots.length - 1">,</span>
+        </span>.</p>
+        </div>
+    </div>
+    
+
 
     <div class="row">
-        <div class="col-sm-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Summary
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    {{ concept.summary }}
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Definition
-                    </h3>
-                </div>
-                <div class="panel-body" ng-bind-html="concept.definition">
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Expert Reviewers
-                    </h3>
-                </div>
+        <div class="col-sm-2" >
+            <div class="panel panel-default" style="position: fixed; top: 200px;">
                 <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="reviewer in concept.reviewers">
-                        <a href="">{{ reviewer.name }}</a>
+                    <li class="list-group-item">
+                        Summary
+                    </li>
+
+                    <li class="list-group-item">
+                        Classifications
+                    </li>
+                    <li class="list-group-item">
+                        Genotype - Phenotype
+                    </li>
+                    <li class="list-group-item">
+                        Additional Information
                     </li>
                 </ul>
             </div>
         </div>
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="font-size: 18px;">
+                            {{ concept.summary }}
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body" ng-bind-html="concept.definition | limitTo:1000">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Properties</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="item in concept.properties">
+                                <strong>{{ item.name }}</strong>
+                                {{ item.value }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                Publications
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <a href="http://pubmed-browser.human-phenotype-ontology.org/#/term/D000130/mesh/Achondroplasia">681 Publications</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Classifications</h2>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Classifications</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-click="groupA = !groupA" style="cursor: pointer;">
+                                <i class="fa" ng-class="{'fa-caret-down': groupA, 'fa-caret-right': !groupA}"></i> FGFR3-related chondroplasia
+                            </li>
+                            <li class="list-group-item" style="padding-left: 40px; border: none;" ng-show="groupA">
+                                <i class="fa fa-caret-down"></i> Rare bone disease related to a common gene or pathway defect
+                            </li>
+                            <li class="list-group-item" style="padding-left: 60px; border: none;" ng-show="groupA">
+                                <i class="fa fa-caret-down"></i> Rare genetic bone disease
+                            </li>
+                            <li class="list-group-item" style="padding-left: 80px; border: none;" ng-show="groupA">
+                                <i class="fa fa-caret-down"></i> Rare genetic disease
+                            </li>
+                            <li class="list-group-item" style="padding-left: 100px; border: none;" ng-show="groupA">
+                                <i class="fa fa-caret-down" style="visibility: hidden"></i> Primary bone dysplasia with micromelia
+                            </li>
+
+                            <li class="list-group-item" ng-click="groupB = !groupB" style="cursor: pointer;">
+                                <i class="fa" ng-class="{'fa-caret-down': groupB, 'fa-caret-right': !group}"></i> Primary bone dysplasia with micromelia
+                            </li>
+                            <li class="list-group-item" style="padding-left: 40px; border: none;" ng-show="groupB">
+                                <i class="fa fa-caret-down"></i> Primary bone dysplasia
+                            </li>
+                            <li class="list-group-item" style="padding-left: 60px; border: none;" ng-show="groupB">
+                                <i class="fa fa-caret-down"></i> Rare genetic bone disease
+                            </li>
+                            <li class="list-group-item" style="padding-left: 80px; border: none;" ng-show="groupB">
+                                <i class="fa fa-caret-down"></i> Rare genetic disease
+                            </li>
+                            <li class="list-group-item" style="padding-left: 100px; border: none;" ng-show="groupB">
+                                <i class="fa fa-caret-down" style="visibility: hidden"></i> Rare genetic bone development disorder
+                            </li>
+                            <li class="
+list-group-item" style="padding-left: 80px; border: none;" ng-show="groupB">
+                                <i class="fa fa-caret-down"></i> Rare genetic developmental defect during embryogenesis
+                            </li>
+                            <li class="list-group-item" style="padding-left: 100px; border: none;" ng-show="groupB">
+                                <i class="fa fa-caret-down" style="visibility: hidden"></i> Rare genetic disease
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Children</h3>
+                        </div>
+                        <div class="panel-body">
+                            <span class="text-muted">No children.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Genotype - Phenotype</h2>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Genes</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="gene in concept.genes">
+                                <strong>{{ gene.name }}</strong>
+                                {{ gene.fullName }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Phenotypes</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="gene in concept.genes">
+                                <strong>{{ gene.name }}</strong>
+                                {{ gene.fullName }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Additional Information</h2>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">External Identifiers</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="item in concept.meta">
+                                <strong>{{ item.name }}</strong>
+                                <a ng-href="{{ item.link }}" target="_blank">{{ item.value }}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                Expert Reviewers
+                            </h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="reviewer in concept.reviewers">
+                                <a href="">{{ reviewer.name }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+
+
 </div>
