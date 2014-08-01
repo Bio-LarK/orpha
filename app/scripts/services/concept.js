@@ -105,6 +105,28 @@ angular.module('orphaApp')
                 //     name: 'Achondroplasia'
                 // }]
                 // ],
+                hpos: [{
+                    name: 'Rhizomelic shortening',
+                    definition: 'Disproportion of the length of the proximal limb, such as the shortened limbs of achondroplasia, or some other disorder of the hip or shoulder',
+                    disorderCount: 10
+                }, {
+                    name: 'Short femoral neck'
+                }, {
+                    name: 'Spinal canal stenosis'
+                }, {
+                    name: 'Recurrent otitis media'
+                }, {
+                    name: 'Trident abnormality'
+                }, {
+                    name: 'Upper airway obstruction'
+                }, {
+                    name: 'Recurrent otitis media in infancy and childhood'
+                }, {
+                    name: 'Recurrent otitis media in infancy'
+                }],
+                // Short limb dwarfism
+
+
                 genes: [{
                     id: 1,
                     name: 'FGFR3',
