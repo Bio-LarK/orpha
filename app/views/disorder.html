@@ -69,13 +69,13 @@
     }
     </style>
 
-    <div style="background-color: #ff9800; margin-bottom: 40px;">
+    <div style="background-color: white; margin-bottom: 40px;">
         <div class="container">
             <div class="row">
                 <!-- <div class="col-sm-2"></div> -->
                 <div class="col-sm-10">
-                    <h1 style="color: white;">{{ concept.title }}
-                        <small>Updated {{ concept.changed * 1000 | date:'d/M/yyyy' }}</small>
+                    <h1>{{ disorder.title }}
+                        <small>Updated {{ disorder.changed * 1000 | date:'d/M/yyyy' }}</small>
                     </h1>
                     <p class="text-muted">
                         <span ng-repeat="root in concept.roots">
@@ -113,7 +113,9 @@
             <div class="col-sm-10">
                 <div class="row">
                     <div class="col-md-7">
-                        <p>{{ concept.summary }}</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lectus eget odio gravida pharetra vitae in nulla. Integer ipsum massa, mollis et viverra sed, ullamcorper non arcu. Sed cursus diam posuere, dapibus enim vel, fermentum felis. Vestibulum rutrum consequat orci eu dapibus. Pellentesque ac dui odio. Donec adipiscing tortor eget congue ultricies. Sed semper laoreet auctor. Phasellus eget ornare quam. Ut dui turpis, cursus ac nunc vehicula, pulvinar ornare erat. Suspendisse ac mi quis justo ultrices vehicula. Praesent pretium turpis at varius fermentum. Ut ut ante quis augue posuere mollis. Nulla sodales et libero eget volutpat. Morbi quis arcu quis neque tempus dapibus eu vitae dui.</p>
+
+                        <p>Mauris fringilla facilisis sodales. In mollis elementum lectus, suscipit consectetur odio molestie vitae. Curabitur at rhoncus nulla. Integer vitae elit feugiat, faucibus mi id, tempus purus. Vivamus nec blandit eros. Nullam fermentum dui at elit cursus rhoncus. Phasellus eu metus eu tellus bibendum tincidunt eget volutpat sapien. Donec rutrum pellentesque turpis ut dignissim. Vivamus ut mattis leo. Sed vitae mattis tortor. Pellentesque eu sapien sed augue rhoncus fringilla id eu lectus. Pellentesque auctor laoreet risus eget congue. Cras non lorem mauris</p>
                         <div ng-bind-html="concept.definition | words:200"></div>
                     </div>
                     <div class="col-md-4 col-md-offset-1">
@@ -124,15 +126,70 @@
                             </li>
                         </ul>
 
-
-
-
+                        <h3>Synonyms</h3>
                         <ul class="list-unstyled">
-                            <li ng-repeat="item in concept.meta">
-                                <strong>{{ item.name }}</strong>
-                                <a ng-href="{{ item.link }}" target="_blank">{{ item.value }}</a>
+                        	<li ng-repeat="synonym in disorder.disorder_synonym">
+                        		<pre>
+                        			{{ synonym | json }}
+                        		</pre>
+                        	</li>
+                        </ul>
+
+						<h3>Orphanet</h3>
+						<ul class="list-unstyled">
+							<li>
+								OrphaID {{ disorder.disorder_orphaid }}
+							</li>
+							<li>
+								OrphaNumber {{ disorder.disorder_orphanumber }}
+							</li>
+						</ul>
+						<h3>External References</h3>
+                        <ul class="list-unstyled">
+                            <li ng-repeat="er in disorder.disorder_er">
+                            	<strong>{{ er.er_source }}</strong>
+                            	<a href="{{ er.er_orphaid }}">{{ er.er_reference }}</a>
                             </li>
                         </ul>
+
+						<h3>Expert</h3>
+						<ul class="list-unstyled">
+							<li ng-repeat="expert in disorder.disorder_expert">
+								<a ng-href="{{ expert_link }}">{{ expert.expert_orphaid }}</a>
+							</li>
+						</ul>
+
+						<h3>Prevalence Class</h3>
+						<div>
+							<a href="{{ disorder.disorder_prevalence.prevalence_orphaid }}">
+									{{ disorder.disorder_prevalence.prevalence_name }}
+								</a>
+						</div>
+
+						<h3>Age of Onset</h3>
+						<div>
+							<a href="{{ disorder.disorder_onset.aoo_orphaid }}">
+								{{ disorder.disorder_onset.aoo_name }}
+							</a>
+						</div>
+
+						<h3>Age of Death</h3>
+						<div>
+							<pre>
+								{{ disorder.disorder_death | json }}
+							</pre>
+							<a href="{{ disorder.disorder_death.aod_orphaid }}">
+								{{ disorder.disorder_death.aod_name }}
+							</a>
+						</div>
+
+						<h3>Type of Inheritance</h3>
+						<div>
+							<a href="{{ disorder.disorder_inheritance.toi_orphaid }}">
+								{{ disorder.disorder_inheritance.toi_name }}
+							</a>
+						</div>
+
 
 
                         Publications
@@ -147,8 +204,7 @@
                         <!-- <button class="btn btn-default pull-right">Edit</button> -->
                         <h2>Genotype</h2>
                         <div class="row">
-                            <div class="col-sm-4" ng-repeat="gene in concept.genes">
-
+                            <div class="col-sm-4" ng-repeat="disorder_gene in disorder.disorder_disgene">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <div class="media">
@@ -157,12 +213,29 @@
                                             </div>
                                             <div class="media-body">
                                                 <div>
-                                                    {{ gene.name }}
+                                                    <strong style="text-transform: capitalize;">{{ disorder_gene.disgene_gene.gene_name }}</strong>
                                                 </div>
-                                                <div class="text-muted">
-                                                    {{ gene.fullName }}
+                                                <div>
+                                                    At: {{ disorder_gene.disgene_at.dgt_orphaid }} -
+                                                    {{ disorder_gene.disgene_at.dgt_name }}
                                                 </div>
-                                                <p>Disorders: 13</p>
+                                                <div>
+                                                    As: {{ disorder_gene.disgene_as.dga_orphaid }} -
+                                                    {{ disorder_gene.disgene_as.dga_name }}
+                                                </div>
+                                                <div>
+                                                    Orphanumber: {{ disorder_gene.disgene_gene.gene_orphanumber }}
+                                                </div>
+                                                <div>
+                                                    OrphaID: {{ disorder_gene.disgene_gene.gene_orphaid }}
+                                                </div>
+                                                <div>
+                                                    Symbol: {{ disorder_gene.disgene_gene.gene_symbol }}
+                                                </div>
+                                                <div>
+                                                    Synonym: <span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">{{ syn }}</span>
+                                                </div>
+                                                <p>Disorders: {{ disorder_gene.disgene_gene.gene_disgene.length }}</p>
                                             </div>
                                         </div>
 
@@ -176,8 +249,8 @@
 
                         <button class="btn btn-default pull-right">Edit</button>
                         <h2>Phenotype</h2>
-                        <div class="row" ng-repeat="row in concept.hpos | inSlicesOf:3">
-                            <div class="col-sm-4 repeated-item" ng-repeat="hpo in row">
+                        <div class="row" ng-repeat="row in disorder.disorder_phenotype | inSlicesOf:3">
+                            <div class="col-sm-4 repeated-item" ng-repeat="disorder_phenotype in row">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <div class="media">
@@ -186,18 +259,19 @@
                                             </div>
                                             <div class="media-body">
                                                 <div>
-                                                    <strong>{{ hpo.name }}</strong>
+                                                    <strong>{{ disorder_phenotype.ds_sign.sign_name }}</strong>
+                                                </div>
+                                                <div>
+                                                	{{ disorder_phenotype.ds_sign.sign_orphaid }}
                                                 </div>
                                                 <div>
                                                     {{ hpo.definition || 'Definition goes here.' | limitTo:50 }}
                                                 </div>
+                                                <div>
+                                                	{{ disorder_phenotype.ds_frequency.signfreq_name }}
+                                                	{{ disorder_phenotype.ds_frequency.signfreq_orphaid }}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="text-muted">
-
-                                        </div>
-                                        <div>
-
                                         </div>
                                     </div>
 
@@ -214,11 +288,8 @@
                                         </li>
                                         <li class="list-group-item">
                                             <div class="row" style="font-size: 12px;">
-                                                <div class="col-sm-6">
-                                                    <span class="text-muted text-uppercase">{{ hpo.disorderCount }} Disorders</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <span class="text-muted text-uppercase">{{ hpo.disorderCount }} Genes</span>
+                                                <div class="col-sm-12">
+                                                    <span class="text-muted text-uppercase">{{ disorder_phenotype.ds_sign.sign_dissign.length }} Disorders</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -230,8 +301,21 @@
 
 
 
-                        <h2>Classifications</h2>
-                        <div class="row">
+                        <h2>Parents</h2>
+                        <div class="panel panel-default" ng-repeat="parent in disorder.disorder_parent">
+                        	<div class="panel-body">
+                        		{{ parent.disorder_name }}
+                        	</div>
+                        </div>
+
+                        <h2>Children</h2>
+                        <div class="panel panel-default" ng-repeat="child in disorder.disorder_child">
+                        	<div class="panel-body">
+                        		{{ child.disorder_name }}
+                        	</div>
+                        </div>
+
+                        <!--<div class="row">
                             <div class="col-sm-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -299,7 +383,7 @@ list-group-item" style="padding-left: 80px; border: none;" ng-if="groupB">
                                 </div>
                             </div>
                         </div>
-
+-->
 
                     </div>
                     <div class="col-sm-3">

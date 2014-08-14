@@ -15,8 +15,17 @@ body {
 }
 .navbar {
 	border-radius: 0;
+	margin-bottom: 0;
+	background-color: white;
+	border: none;
+	color: black;
 }
-
+.navbar-nav > li.active > a {
+	background-color: white;
+}
+a { 
+	color: inherit;
+}
 .ng-hide-add { 
 	animation:2s fadeOut ease; 
 	display: block !important;
@@ -25,6 +34,10 @@ body {
 /* when showing the picture */
 .ng-hide-remove      { 
 	animation:2s fadeIn ease; 
+}
+
+.text-muted, h1 small, h1 .small {
+	color: rgba(0,0,0, 0.54) !important;
 }
 
 
