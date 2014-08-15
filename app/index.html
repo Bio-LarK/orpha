@@ -39,9 +39,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Disorders</a>
+                    <li ui-sref-active="active"><a ui-sref="disorders">Disorders</a>
                     </li>
-                    <li><a href="#">Genes</a>
+                    <li ui-sref-active="active"><a ui-sref="genes">Genes</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
@@ -81,7 +81,7 @@
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="result.title for result in getResults($viewValue)" typeahead-on-select="changed($item, $model, $label)">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
@@ -100,11 +100,14 @@
         <ui-view></ui-view>
         <!-- <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div> -->
 
-        <div class="footer">
-            <p>
-                <span class="glyphicon glyphicon-heart"></span>from the Bio-LarK Team
-            </p>
-        </div>
+        <footer>
+            <div class="container">
+                <p>
+                    <span class="glyphicon glyphicon-heart"></span>
+                    from the Bio-LarK Team
+                </p>
+            </div>
+        </footer>
     </div>
 
 
@@ -157,6 +160,7 @@
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -170,6 +174,10 @@
     <script src="scripts/services/gene.js"></script>
     <script src="scripts/services/relationshipservice.js"></script>
     <script src="scripts/services/sign.js"></script>
+    <script src="scripts/controllers/disorders.js"></script>
+    <script src="scripts/controllers/genes.js"></script>
+    <script src="scripts/controllers/gene.js"></script>
+    <script src="scripts/services/searchservice.js"></script>
     <!-- endbuild -->
 </body>
 

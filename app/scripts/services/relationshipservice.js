@@ -13,6 +13,10 @@ angular.module('orphaApp')
         this.getRelated = function (resource, intermediaryPropertyName, fields) {
             // get the first property
             var firstIntermediary = _.first(resource[intermediaryPropertyName]);
+
+            if (!resource[intermediaryPropertyName].length) {
+                return;
+            }
             var ids = _.pluck(resource[intermediaryPropertyName], 'nid');
             var request = _.indexBy(ids, function (ids, index) {
                 return 'parameters[nid][' + index + ']';

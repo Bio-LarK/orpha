@@ -1,0 +1,10 @@
+<div class="container">
+	<ul class="list-unstyled">
+		<li ng-repeat="disorder in disorders">
+			<a ui-sref="disorder({disorderId: disorder.nid })">
+				{{ disorder.disorder_name }}
+			</a>
+		</li>
+	</ul>
+	<button ng-click="loadMore()">Load More</button>
+</div>
