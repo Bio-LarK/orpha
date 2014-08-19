@@ -1,0 +1,11 @@
+<div class="container">
+	<!-- <div ng-repeat="disorder in disorders">
+		{{ disorder.title | }}
+	</div> -->
+
+	<div ng-repeat="disorder in disorders">
+		<a ui-sref="disorder({disorderId: disorder.nid })">
+			{{ disorder.disorder_name }}	
+		</a>
+	</div>
+</div>

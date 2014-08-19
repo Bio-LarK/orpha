@@ -8,10 +8,15 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-  .controller('SignCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+    .controller('SignCtrl', function ($scope, $stateParams, Disorder) {
+
+        activate();
+
+        ////////////
+        function activate() {
+            // load the disorders
+            Disorder.getFromSign($stateParams.signId).then(function (disorders) {
+                $scope.disorders = disorders;
+            });
+        }
+    });
