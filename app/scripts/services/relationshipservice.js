@@ -10,7 +10,7 @@
 angular.module('orphaApp')
     .service('RelationshipService', function RelationshipService($http) {
         // AngularJS will instantiate a singleton by calling "new" on this function
-        this.getRelated = function (resource, intermediaryPropertyName, fields) {
+        this.getRelatedThroughIntermediary = function (resource, intermediaryPropertyName, fields) {
             // get the first property
             var firstIntermediary = _.first(resource[intermediaryPropertyName]);
 

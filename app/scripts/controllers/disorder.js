@@ -12,6 +12,8 @@ angular.module('orphaApp')
         var vm = $scope;
         activate();
 
+        $scope.toggleParents = toggleParents;
+
         ////////////
 
         function activate() {
@@ -20,6 +22,13 @@ angular.module('orphaApp')
             }, function (disorder) {
                 disorder.getGenes();
                 disorder.getSigns();
+            });
+        }
+
+        function toggleParents(disorder) {
+            disorder.isShowingParents = !disorder.isShowingParents;
+            disorder.getParents().then(function (disorders) {
+                console.log('parents', disorders);
             });
         }
 

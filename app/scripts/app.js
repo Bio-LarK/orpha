@@ -16,7 +16,8 @@ angular
         'ui.router',
         'truncate',
         'restangular',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'dotjem.angular.tree'
     ])
     .run(function ($rootScope, $http, $state) {
         $rootScope.getResults = function (text) {

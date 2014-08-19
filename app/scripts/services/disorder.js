@@ -12,18 +12,57 @@ angular.module('orphaApp')
         var Disorder = $resource('http://130.56.248.140/orphanet/api/entity_node/:nid', {
             'parameters[type]': 'disorder',
             nid: '@nid'
+        }, {
+            get: {
+                method: 'GET',
+                transformResponse: $http.defaults.transformResponse.concat([
+
+                    function (data, headersGetter) {
+                        data['disorder_parent'] = _.map(data.disorder_parent, function (parent) {
+                            return new Disorder(parent);
+                        });
+                        // data.FieldName = yourDateParsingFunction(data.FieldName);
+                        return data;
+                    }
+                ])
+            }
         });
 
         angular.extend(Disorder.prototype, {
             getGenes: function () {
                 // Get the gene ids
                 var fields = ['disgene_as', 'disgene_at', 'disgene_gene'];
-                return RelationshipService.getRelated(this, 'disorder_disgene', fields);
+                return RelationshipService.getRelatedThroughIntermediary(this, 'disorder_disgene', fields);
             },
             getSigns: function () {
                 // Get the gene ids
                 var fields = ['ds_sign', 'ds_frequency'];
-                return RelationshipService.getRelated(this, 'disorder_phenotype', fields);
+                return RelationshipService.getRelatedThroughIntermediary(this, 'disorder_phenotype', fields);
+            },
+            getParents: function () {
+                // Get all the parent ids
+                var that = this;
+                var ids = _.map(this['disorder_parent'], function (parent) {
+                    return parent.id || parent.nid;
+                });
+                if (!ids.length) {
+                    return $q.when(null);
+                }
+
+                // var ids = _.pluck(this['disorder_parent'], 'id');
+                var request = _.indexBy(ids, function (ids, index) {
+                    return 'parameters[nid][' + index + ']';
+                });
+                request.fields = ['nid', 'disorder_name', 'disorder_parent'].join(',');
+
+                return $http.get('http://130.56.248.140/orphanet/api/entity_node', {
+                    params: request
+                }).then(function (response) {
+                    that['disorder_parent'] = _.map(response.data, function (disorder) {
+                        return new Disorder(disorder);
+                    });
+                    return that['disorder_parent'];
+                });
             }
         });
 

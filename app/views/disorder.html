@@ -15,7 +15,6 @@
             </div>
         </div>
 
-
         <div class="panels">
 
             <div class="row">
@@ -30,7 +29,7 @@
 
                                     <p>The clinical presentation depends on the subtype. Previously, AxD was classified either as infantile, juvenile or adult, based simply on age of onset. The currently used classification system is based on a constellation of clinical and radiologic features and includes AxD type I and AxD type II (see these terms). AxD type I is more likely to be of early onset (mean 1.74 years) and shorter survival (median 14 years) whereas type II exhibits onset throughout the lifespan (mean 21.64 years, but can occur in early childhood) and has longer survival (median 25 years).</p>
                                 </div>
-                                
+
                                 <div class="col-sm-3">
                                     <div class="details">
                                         <h3>Synonyms</h3>
@@ -92,7 +91,7 @@
                                 <div class="col-sm-3">
                                     <div class="details" ng-repeat="er in disorder.disorder_er">
                                         <h3>{{ er.er_source }}</h3>
-                            {{ er.er_reference }}
+                                        {{ er.er_reference }}
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +101,21 @@
             </div>
         </div>
 
-<!-- http://130.56.248.140/orphanet/api/entity_node/115015/nodes_field_ds_sign?fields=ds_disorder -->
+        <div class="panels">
+            <h2>Classification</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul dx-start-with="disorder">
+                        <li ng-repeat="parent in $dxPrior.disorder_parent" ng-click="toggleParents(parent); $event.stopPropagation();">
+                            {{ parent.disorder_name }}
+                            <ul dx-connect="parent" ng-show="parent.isShowingParents" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- http://130.56.248.140/orphanet/api/entity_node/115015/nodes_field_ds_sign?fields=ds_disorder -->
 
         <div class="panels">
             <!-- <button class="btn btn-default pull-right">Edit</button> -->
@@ -127,7 +140,7 @@
                                         <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
                                             {{ disorder_phenotype.ds_sign.sign_name || 'Loading... '}}    
                                         </a>
-                                        
+
                                     </div>
                                     <div class="text-muted">
                                         {{ disorder_phenotype.ds_frequency.signfreq_name }}

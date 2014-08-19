@@ -105,13 +105,13 @@ a {
 	color: inherit;
 }
 .ng-hide-add { 
-	animation:2s fadeOut ease; 
+	animation:0.2s fadeOut ease; 
 	display: block !important;
 }
 
 /* when showing the picture */
 .ng-hide-remove      { 
-	animation:2s fadeIn ease; 
+	animation:0.2s fadeIn ease; 
 }
 
 .text-muted, h1 small, h1 .small {
