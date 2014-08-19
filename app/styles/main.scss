@@ -11,15 +11,93 @@ $icon-font-path:"../bower_components/bootstrap-sass-official/assets/fonts/bootst
 /* Space out content a bit */
 
 body {
-    background-color: white;
+    background-color: #F4F4F4;
+    font-family: 'Open Sans', Sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(0,0,0,0.87);
 }
-.navbar {
-	border-radius: 0;
-	margin-bottom: 0;
-	background-color: white;
-	border: none;
-	color: black;
+.navbar.navbar-bright {
+  border-radius: 0;
+  margin-bottom: 0;
+  background-color: #FFDA00;//; #FFC600;
+  border: none;
+  color: rgba(0,0,0,0.8);
+  font-size: 14px;
+  .navbar-brand {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .navbar-search input {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: none;
+    border-radius: 100px;
+  }
 }
+
+.details {
+  h3 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(0,0,0,0.87);
+  }
+  color: rgba(0,0,0,0.5);
+  margin-bottom: 24px;;
+}
+a.details {
+  margin-bottom: 0;
+}
+
+.title {
+  margin-top: 36px;
+  margin-bottom: 36px;
+  h1 {
+    font-weight: bold;
+    margin: 0;
+    color: rgba(0,0,0,0.7);
+  }
+}
+
+.list-er li {
+  line-height: 1.5;
+  color: rgba(0,0,0,0.7);
+  a {
+    color: rgba(0,0,0,0.7);
+  }
+  span {
+    color: rgba(0,0,0,0.87);
+  }
+}
+
+.panel {
+  a {
+    transition: 0.2s color;
+  }
+  &:hover {
+    a {
+      color: #3f51b5;
+    }
+  }
+}
+
+.panels {
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 36px;
+    margin-bottom: 24px;
+    color: rgba(0,0,0,0.5);
+    // text-transform: uppercase;
+  }
+}
+.panel-body {
+  padding: 20px;
+}
+
+
 .navbar-nav > li.active > a {
 	background-color: white;
 }

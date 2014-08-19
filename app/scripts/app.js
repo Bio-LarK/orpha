@@ -20,7 +20,9 @@ angular
     ])
     .run(function ($rootScope, $http, $state) {
         $rootScope.getResults = function (text) {
-            return $http.get('http://130.56.248.140/orphanet/api/search_node/retrieve.json?keys=' + encodeURIComponent(text) + '&simple=1').then(function (response) {
+            var keys = encodeURIComponent(text);
+            var url = 'http://130.56.248.140/orphanet/api/search_node/retrieve.json?keys=' + keys + '&simple=1';
+            return $http.get(url).then(function (response) {
                 return response.data;
             });
         };
@@ -51,13 +53,18 @@ angular
                 controller: 'GeneCtrl',
                 templateUrl: 'views/gene.html'
             })
+            .state('sign', {
+                url: '/sign/:signId/disorders',
+                controller: 'SignCtrl',
+                templateUrl: 'view/sign.html'
+            })
             .state('disorder', {
-                url: '/disorder/:disorderId',
+                url: '/disorders/:disorderId',
                 controller: 'DisorderCtrl',
                 templateUrl: 'views/disorder.html'
             })
             .state('disorders', {
-                url: '/disorders?page',
+                url: '/disorders?page?signId',
                 controller: 'DisordersCtrl',
                 templateUrl: 'views/disorders.html'
             })

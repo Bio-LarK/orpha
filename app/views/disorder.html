@@ -1,198 +1,144 @@
 <div>
     <style>
-    .panel-default {
-        /*border: none;
-            box-shadow: none;
-            padding: 0;*/
-        border-radius: 2px;
-        /*box-shadow: 0px 1px 2px rgba(0,0,0,0.1);*/
-    }
-    .panel-default > .panel-heading {
-        border: none;
-        background-color: white;
-        /*padding: 0;*/
-        margin-bottom: 10px;
-    }
-    .list-group-item {
-        /*border: none;*/
-        /*padding: 0;*/
-    }
-    .panel-body {
-        /*padding: 0;*/
-    }
-    h1 + p {
-        margin-bottom: 30px;
-    }
-    h1 {
-        /*font-family: 'PT Serif';*/
-        /*font-size: 40px;*/
-    }
-    h1,
-    h2,
-    h3,
-    .lead {
-        font-weight: 200;
-        color: rgba(0, 0, 0, 0.54);
-    }
-    .lead {
-        color: rgba(0, 0, 0, 0.87);
-    }
-    h1 small {
-        font-size: 14px;
-    }
-    .progress {
-        margin: 0;
-        box-shadow: none;
-    }
-    .progress-bar {
-        box-shadow: none;
-    }
-    body {
-        color: rgba(0, 0, 0, 0.87);
-        /*background-color: #f9f9f9;*/
-        /*line-height: 1.5;*/
-        /*font-family: 'PT Sans', Helvetica, arial, san-serif;*/
-    }
-    h2 {
-        /*font-size: 20px;*/
-        /*font-weight: 200;*/
-        /*font-family: 'PT Sans';*/
-        margin-bottom: 20px;
-        /*font-size: 24px;*/
-    }
-    h3.page-title,
-    h3 {
-        /*font-size: 16px;*/
-        color: #555;
-        /*font-weight: 400;*/
-        /*font-family: 'PT Sans';*/
-    }
     </style>
 
-    <div style="background-color: white; margin-bottom: 40px;">
-        <div class="container">
-            <div class="row">
-                <!-- <div class="col-sm-2"></div> -->
-                <div class="col-sm-10">
-                    <h1>{{ disorder.title }}
-                        <small>Updated {{ disorder.changed * 1000 | date:'d/M/yyyy' }}</small>
-                    </h1>
-                    <p class="text-muted">
-                    	Root Name here
-                        <span ng-repeat="root in concept.roots">
-                            <span ng-show="$index !== concept.roots.length - 1">,</span>
-                        </span>.</p>
+    <div class="container">
+        <div class="title">
+            <div class="media">
+                <div class="pull-left">
+                    <img src="http://dummyimage.com/70x70/dddddd/ffffff" alt="" class="media-object">
+                </div>
+                <div class="media-body">
+                    <h1>{{ disorder.title }}</h1>
+                    <p class="text-muted">Updated {{ disorder.changed * 1000 | date:'d/M/yyyy' }}</p>
                 </div>
             </div>
         </div>
 
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-2">
-                <ul class="list-unstyled">
-                    <li>
-                        Summary
-                    </li>
+        <div class="panels">
 
-                    <li>
-                        Classifications
-                    </li>
-                    <li>
-                        Genotype
-                    </li>
-                    <li>
-                        Phenotype
-                    </li>
-                    <li>
-                        Additional Information
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-10">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lectus eget odio gravida pharetra vitae in nulla. Integer ipsum massa, mollis et viverra sed, ullamcorper non arcu. Sed cursus diam posuere, dapibus enim vel, fermentum felis. Vestibulum rutrum consequat orci eu dapibus. Pellentesque ac dui odio. Donec adipiscing tortor eget congue ultricies. Sed semper laoreet auctor. Phasellus eget ornare quam. Ut dui turpis, cursus ac nunc vehicula, pulvinar ornare erat. Suspendisse ac mi quis justo ultrices vehicula. Praesent pretium turpis at varius fermentum. Ut ut ante quis augue posuere mollis. Nulla sodales et libero eget volutpat. Morbi quis arcu quis neque tempus dapibus eu vitae dui.</p>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p>Alexander disease (AxD) is a rare neurodegenerative disorder of the astrocytes comprised of two clinical forms: AxD Type I and Type II (see these terms) manifesting with various degrees of macrocephaly, spasticity, ataxia and seizures and leading to psychomotor regression and death.</p>
 
-                            <p>Mauris fringilla facilisis sodales. In mollis elementum lectus, suscipit consectetur odio molestie vitae. Curabitur at rhoncus nulla. Integer vitae elit feugiat, faucibus mi id, tempus purus. Vivamus nec blandit eros. Nullam fermentum dui at elit cursus rhoncus. Phasellus eu metus eu tellus bibendum tincidunt eget volutpat sapien. Donec rutrum pellentesque turpis ut dignissim. Vivamus ut mattis leo. Sed vitae mattis tortor. Pellentesque eu sapien sed augue rhoncus fringilla id eu lectus. Pellentesque auctor laoreet risus eget congue. Cras non lorem mauris</p>
-                            <div ng-bind-html="concept.definition | words:200"></div>
-                        </div>
+                                    <p>The prevalence is unknown. One population based study in Japan estimated an annual incidence of 1/ 2.7 million.</p>
 
-                        <h2>Genotype</h2>
-                        <div class="row">
-                            <div class="col-sm-6" ng-repeat="disorder_gene in disorder.disorder_disgene">
-                                <div class="panel panel-default" ui-sref="gene({geneId: disorder_gene.disgene_gene.nid })" style="cursor: pointer;">
-                                    <div class="panel-body">
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <img src="http://dummyimage.com/60x60/dddddd/ffffff" alt="" class="media-body">
-                                            </div>
-                                            <div class="media-body">
-                                                <div>
-                                                    <strong style="text-transform: capitalize;">{{ disorder_gene.disgene_gene.gene_name }}</strong>
-                                                </div>
-                                                <div>
-                                                    At: {{ disorder_gene.disgene_at.dgt_orphaid }} - {{ disorder_gene.disgene_at.dgt_name }}
-                                                </div>
-                                                <div>
-                                                    As: {{ disorder_gene.disgene_as.dga_orphaid }} - {{ disorder_gene.disgene_as.dga_name }}
-                                                </div>
-                                                <div>
-                                                    Orphanumber: {{ disorder_gene.disgene_gene.gene_orphanumber }}
-                                                </div>
-                                                <div>
-                                                    OrphaID: {{ disorder_gene.disgene_gene.gene_orphaid }}
-                                                </div>
-                                                <div>
-                                                    Symbol: {{ disorder_gene.disgene_gene.gene_symbol }}
-                                                </div>
-                                                <div>
-                                                    Synonym:
-                                                    <span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">{{ syn }}</span>
-                                                </div>
-                                                <p>Disorders: {{ disorder_gene.disgene_gene.gene_disgene.length }}</p>
-                                            </div>
+                                    <p>The clinical presentation depends on the subtype. Previously, AxD was classified either as infantile, juvenile or adult, based simply on age of onset. The currently used classification system is based on a constellation of clinical and radiologic features and includes AxD type I and AxD type II (see these terms). AxD type I is more likely to be of early onset (mean 1.74 years) and shorter survival (median 14 years) whereas type II exhibits onset throughout the lifespan (mean 21.64 years, but can occur in early childhood) and has longer survival (median 25 years).</p>
+                                </div>
+                                
+                                <div class="col-sm-3">
+                                    <div class="details">
+                                        <h3>Synonyms</h3>
+                                        <ul class="list-unstyled">
+                                            <li ng-repeat="synonym in disorder.disorder_synonym">
+                                                {{ synonym }}
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="details">
+                                        <h3>Orphanet ID</h3>
+                                        <ul class="list-unstyled">
+                                            <!-- <li>
+                                                OrphaID {{ disorder.disorder_orphaid }}
+                                            </li> -->
+                                            <li>
+                                                Orpha{{ disorder.disorder_orphanumber }}
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="details">
+                                        <h3>Prevalence Class</h3>
+                                        <div>
+                                            <a href="{{ disorder.disorder_prevalence.prevalence_orphaid }}">
+                                                    {{ disorder.disorder_prevalence.prevalence_name }}
+                                                </a>
                                         </div>
+                                    </div>
 
-                                        <!-- <div class="panel panel-default">
-                                <div class="panel-body"> -->
+                                    <div class="details">
+                                        <h3>Age of Onset</h3>
+                                        <div>
+                                            <a href="{{ disorder.disorder_onset.aoo_orphaid }}">
+                                                {{ disorder.disorder_onset.aoo_name }}
+                                            </a>
+                                        </div>
+                                    </div>
 
+                                    <div class="details">
+                                        <h3>Age of Death</h3>
+                                        <div>
+                                            <a href="{{ disorder.disorder_death.aod_orphaid }}">
+                                                {{ disorder.disorder_death.aod_name }}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="details">
+                                        <h3>Type of Inheritance</h3>
+                                        <div>
+                                            <a href="{{ disorder.disorder_inheritance.toi_orphaid }}">
+                                                {{ disorder.disorder_inheritance.toi_name || 'Unknown' }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="details" ng-repeat="er in disorder.disorder_er">
+                                        <h3>{{ er.er_source }}</h3>
+                            {{ er.er_reference }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- http://130.56.248.140/orphanet/api/entity_node/115015/nodes_field_ds_sign?fields=ds_disorder -->
+
+        <div class="panels">
+            <!-- <button class="btn btn-default pull-right">Edit</button> -->
+            <form class="form-inline pull-right" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputEmail2">Filter</label>
+                    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Filter" ng-model="test">
+                </div>
+                <!-- <button type="submit" class="btn btn-default">Sign in</button> -->
+            </form>
+            <h2>Phenotype</h2>
+            <div class="row" ng-repeat="row in disorder.disorder_phenotype | inSlicesOf:2 | filter:test">
+                <div class="col-sm-6 repeated-item" ng-repeat="disorder_phenotype in row | filter:test">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img src="http://dummyimage.com/40x40/dddddd/ffffff" alt="" class="media-body">
+                                </div>
+                                <div class="media-body">
+                                    <div>
+                                        <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
+                                            {{ disorder_phenotype.ds_sign.sign_name || 'Loading... '}}    
+                                        </a>
+                                        
+                                    </div>
+                                    <div class="text-muted">
+                                        {{ disorder_phenotype.ds_frequency.signfreq_name }}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <button class="btn btn-default pull-right">Edit</button>
-                        <h2>Phenotype</h2>
-                        <div class="row" ng-repeat="row in disorder.disorder_phenotype | inSlicesOf:2">
-                            <div class="col-sm-6 repeated-item" ng-repeat="disorder_phenotype in row">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <img src="http://dummyimage.com/40x40/dddddd/ffffff" alt="" class="media-body">
-                                            </div>
-                                            <div class="media-body">
-                                                <div>
-                                                    <strong>{{ disorder_phenotype.ds_sign.sign_name }}</strong>
-                                                </div>
-                                                <div>
-                                                    {{ disorder_phenotype.ds_sign.sign_orphaid }}
-                                                </div>
-                                                <div>
-                                                    {{ hpo.definition || 'Definition goes here.' | limitTo:50 }}
-                                                </div>
-                                                <div>
-                                                    {{ disorder_phenotype.ds_frequency.signfreq_name }} {{ disorder_phenotype.ds_frequency.signfreq_orphaid }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
+                        <ul class="list-group">
+                            <!--<li class="list-group-item">
                                             <div class="pull-left" style="margin-right: 10px; position: relative; top: 5px;">
                                                 IC
                                             </div>
@@ -201,104 +147,117 @@
                                                     <span class="sr-only">60% Complete</span>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="row" style="font-size: 12px;">
-                                                <div class="col-sm-12">
-                                                    <span class="text-muted text-uppercase">{{ disorder_phenotype.ds_sign.sign_dissign.length }} Disorders</span>
+                                        </li>-->
+                            <li class="list-group-item">
+                                <div class="row" style="font-size: 12px;">
+                                    <div class="col-sm-12">
+                                        <span class="text-muted text-uppercase">{{ disorder_phenotype.ds_sign.sign_dissign.length }} Disorders</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-sm-2">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="">Summary</a>
+                    </li>
+
+                    <li>24
+                        <a href="">Classifications</a>
+
+                    </li>
+                    <li>
+                        <a href="">Genotype</a>
+                    </li>
+                    <li>
+                        <a href="">Phenotype</a>
+                    </li>
+                    <li>
+                        <a href="">Additional Information</a>
+                    </li>
+                </ul>
+            </div> -->
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <!-- <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lectus eget odio gravida pharetra vitae in nulla. Integer ipsum massa, mollis et viverra sed, ullamcorper non arcu. Sed cursus diam posuere, dapibus enim vel, fermentum felis. Vestibulum rutrum consequat orci eu dapibus. Pellentesque ac dui odio. Donec adipiscing tortor eget congue ultricies. Sed semper laoreet auctor. Phasellus eget ornare quam. Ut dui turpis, cursus ac nunc vehicula, pulvinar ornare erat. Suspendisse ac mi quis justo ultrices vehicula. Praesent pretium turpis at varius fermentum. Ut ut ante quis augue posuere mollis. Nulla sodales et libero eget volutpat. Morbi quis arcu quis neque tempus dapibus eu vitae dui.</p>
+
+                            <p>Mauris fringilla facilisis sodales. In mollis elementum lectus, suscipit consectetur odio molestie vitae. Curabitur at rhoncus nulla. Integer vitae elit feugiat, faucibus mi id, tempus purus. Vivamus nec blandit eros. Nullam fermentum dui at elit cursus rhoncus. Phasellus eu metus eu tellus bibendum tincidunt eget volutpat sapien. Donec rutrum pellentesque turpis ut dignissim. Vivamus ut mattis leo. Sed vitae mattis tortor. Pellentesque eu sapien sed augue rhoncus fringilla id eu lectus. Pellentesque auctor laoreet risus eget congue. Cras non lorem mauris</p>
+                            <div ng-bind-html="concept.definition | words:200"></div>
+                        </div> -->
+
+                            <h2>Genotype</h2>
+                            <div class="row">
+                                <div class="col-sm-6" ng-repeat="disorder_gene in disorder.disorder_disgene">
+                                    <div class="panel panel-default" ui-sref="gene({geneId: disorder_gene.disgene_gene.nid })" style="cursor: pointer;">
+                                        <div class="panel-body">
+                                            <div class="media">
+                                                <div class="pull-left">
+                                                    <img src="http://dummyimage.com/60x60/dddddd/ffffff" alt="" class="media-body">
+                                                </div>
+                                                <div class="media-body">
+                                                    <div>
+                                                        <strong style="text-transform: capitalize;">{{ disorder_gene.disgene_gene.gene_name }}</strong>
+                                                    </div>
+                                                    <div>
+                                                        At: {{ disorder_gene.disgene_at.dgt_orphaid }} - {{ disorder_gene.disgene_at.dgt_name }}
+                                                    </div>
+                                                    <div>
+                                                        As: {{ disorder_gene.disgene_as.dga_orphaid }} - {{ disorder_gene.disgene_as.dga_name }}
+                                                    </div>
+                                                    <div>
+                                                        Orphanumber: {{ disorder_gene.disgene_gene.gene_orphanumber }}
+                                                    </div>
+                                                    <div>
+                                                        OrphaID: {{ disorder_gene.disgene_gene.gene_orphaid }}
+                                                    </div>
+                                                    <div>
+                                                        Symbol: {{ disorder_gene.disgene_gene.gene_symbol }}
+                                                    </div>
+                                                    <div>
+                                                        Synonym:
+                                                        <span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">{{ syn }}</span>
+                                                    </div>
+                                                    <p>Disorders: {{ disorder_gene.disgene_gene.gene_disgene.length }}</p>
                                                 </div>
                                             </div>
-                                        </li>
-                                    </ul>
 
+                                            <!-- <div class="panel panel-default">
+                                <div class="panel-body"> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <h2>Parents</h2>
+                            <div class="panel panel-default" ng-repeat="parent in disorder.disorder_parent">
+                                <div class="panel-body">
+                                    <a ui-sref="disorder({disorderId: parent.nid})">{{ parent.disorder_name }}</a>
+                                </div>
+                            </div>
+
+                            <h2>Children</h2>
+                            <div class="panel panel-default" ng-repeat="child in disorder.disorder_child">
+                                <div class="panel-body">
+                                    <a ui-sref="disorder({disorderId: child.nid})">{{ child.disorder_name }}</a>
                                 </div>
                             </div>
                         </div>
-
-
-
-                        <h2>Parents</h2>
-                        <div class="panel panel-default" ng-repeat="parent in disorder.disorder_parent">
-                            <div class="panel-body">
-                                <a ui-sref="disorder({disorderId: parent.nid})">{{ parent.disorder_name }}</a>
-                            </div>
-                        </div>
-
-                        <h2>Children</h2>
-                        <div class="panel panel-default" ng-repeat="child in disorder.disorder_child">
-                            <div class="panel-body">
-                                <a ui-sref="disorder({disorderId: child.nid})">{{ child.disorder_name }}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-md-offset-1">
-
-                        <h3>Synonyms</h3>
-                        <ul class="list-unstyled">
-                            <li ng-repeat="synonym in disorder.disorder_synonym">
-                                {{ synonym }}
-                            </li>
-                        </ul>
-
-                        <h3>Orphanet</h3>
-                        <ul class="list-unstyled">
-                            <li>
-                                OrphaID {{ disorder.disorder_orphaid }}
-                            </li>
-                            <li>
-                                OrphaNumber {{ disorder.disorder_orphanumber }}
-                            </li>
-                        </ul>
-                        <h3>External References</h3>
-                        <ul class="list-unstyled">
-                            <li ng-repeat="er in disorder.disorder_er">
-                                <strong>{{ er.er_source }}</strong>
-                                <a href="{{ er.er_orphaid }}">{{ er.er_reference }}</a>
-                            </li>
-                        </ul>
-
-                        <h3>Expert</h3>
-                        <ul class="list-unstyled">
-                            <li ng-repeat="expert in disorder.disorder_expert">
-                                <a ng-href="{{ expert_link }}">{{ expert.expert_orphaid }}</a>
-                            </li>
-                        </ul>
-
-                        <h3>Prevalence Class</h3>
-                        <div>
-                            <a href="{{ disorder.disorder_prevalence.prevalence_orphaid }}">
-									{{ disorder.disorder_prevalence.prevalence_name }}
-								</a>
-                        </div>
-
-                        <h3>Age of Onset</h3>
-                        <div>
-                            <a href="{{ disorder.disorder_onset.aoo_orphaid }}">
-								{{ disorder.disorder_onset.aoo_name }}
-							</a>
-                        </div>
-
-                        <h3>Age of Death</h3>
-                        <div>
-                            <a href="{{ disorder.disorder_death.aod_orphaid }}">
-								{{ disorder.disorder_death.aod_name }}
-							</a>
-                        </div>
-
-                        <h3>Type of Inheritance</h3>
-                        <div>
-                            <a href="{{ disorder.disorder_inheritance.toi_orphaid }}">
-								{{ disorder.disorder_inheritance.toi_name }}
-							</a>
-                        </div>
-
-
-
-                        Publications
-                        <a href="http://pubmed-browser.human-phenotype-ontology.org/#/term/D000130/mesh/Achondroplasia">681 Publications</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
