@@ -19,7 +19,10 @@ angular
         'ui.bootstrap',
         'dotjem.angular.tree'
     ])
-    .run(function ($rootScope, $http, $state) {
+    .run(function ($rootScope, $http, $state, $stateParams, Page) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+        $rootScope.Page = Page;
         $rootScope.getResults = function (text) {
             var keys = encodeURIComponent(text);
             var url = 'http://130.56.248.140/orphanet/api/search_node/retrieve.json?keys=' + keys + '&simple=1';
@@ -62,7 +65,7 @@ angular
             .state('disorder', {
                 url: '/disorders/:disorderId',
                 controller: 'DisorderCtrl',
-                templateUrl: 'views/disorder.html'
+                templateUrl: 'views/disorder.html',
             })
             .state('disorders', {
                 url: '/disorders?page?signId',

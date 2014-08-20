@@ -1,9 +1,9 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="orphaApp">
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title ng-bind="Page.title"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'> -->
@@ -21,11 +21,10 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 </head>
 
-<body ng-app="orphaApp">
-
+<body >
     <nav class="navbar navbar-bright" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -187,6 +186,7 @@
     <script src="scripts/services/searchservice.js"></script>
     <script src="scripts/controllers/sign.js"></script>
     <script src="scripts/directives/cmtree.js"></script>
+    <script src="scripts/services/page.js"></script>
     <!-- endbuild -->
 </body>
 

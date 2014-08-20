@@ -8,8 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisorderCtrl', function ($scope, Disorder, $stateParams) {
-        var vm = $scope;
+    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, Page) {
         activate();
 
         $scope.toggleParents = toggleParents;
@@ -17,11 +16,12 @@ angular.module('orphaApp')
         ////////////
 
         function activate() {
-            vm.disorder = Disorder.get({
+            $scope.disorder = Disorder.get({
                 nid: $stateParams.disorderId //136402
             }, function (disorder) {
                 disorder.getGenes();
                 disorder.getSigns();
+                Page.setTitle(disorder['disorder_name']);
             });
         }
 

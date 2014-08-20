@@ -99,6 +99,17 @@ a.details {
     color: rgba(0,0,0,0.5);
     // text-transform: uppercase;
   }
+  input.panels-filter {
+    border-radius: 100px;
+    border: none;
+    background-color: rgba(0,0,0,0.1);
+    position: relative;
+    top: -5px;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
 }
 .panel-body {
   padding: 20px;
