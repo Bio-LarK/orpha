@@ -17,6 +17,9 @@ body {
     line-height: 1.5;
     color: rgba(0,0,0,0.87);
 }
+footer {
+  margin-top: 40px;
+}
 .navbar.navbar-bright {
   border-radius: 0;
   margin-bottom: 0;
@@ -73,11 +76,15 @@ a.details {
 }
 
 .panel {
+  border-radius: 2px;
+  strong {
+    color: rgba(0,0,0,0.65);
+  }
   a {
     transition: 0.2s color;
   }
   &:hover {
-    a {
+    a, strong a {
       color: #3f51b5;
     }
   }

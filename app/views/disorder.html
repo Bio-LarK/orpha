@@ -41,13 +41,13 @@
                                     </div>
 
                                     <div class="details">
-                                        <h3>Orphanet ID</h3>
+                                        <h3>Orphanumber</h3>
                                         <ul class="list-unstyled">
-                                            <!-- <li>
-                                                OrphaID {{ disorder.disorder_orphaid }}
-                                            </li> -->
                                             <li>
-                                                Orpha{{ disorder.disorder_orphanumber }}
+                                                <a target="_" ng-href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN&data_id={{ disorder.disorder_orphaid }}">
+                                                    ORPHA{{ disorder.disorder_orphanumber }}    
+                                                </a>
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -81,9 +81,9 @@
 
                                     <div class="details">
                                         <h3>Type of Inheritance</h3>
-                                        <div>
-                                            <a href="{{ disorder.disorder_inheritance.toi_orphaid }}">
-                                                {{ disorder.disorder_inheritance.toi_name || 'Unknown' }}
+                                        <div ng-repeat="inheritance in disorder.disorder_inheritance">
+                                            <a href="{{ inheritance.toi_orphaid }}">
+                                                {{ inheritance.toi_name }}
                                             </a>
                                         </div>
                                     </div>
@@ -103,23 +103,131 @@
 
         <div class="panels">
             <h2>Classification</h2>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <ul dx-start-with="disorder">
-                        <li ng-repeat="parent in $dxPrior.disorder_parent" ng-click="toggleParents(parent); $event.stopPropagation();">
-                            {{ parent.disorder_name }}
-                            <ul dx-connect="parent" ng-show="parent.isShowingParents" />
-                        </li>
-                    </ul>
+            <p ng-hide="disorder.disorder_parent.length" class="text-muted">
+                Root disorder.
+            </p>
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="disorder in disorder.disorder_parent">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img src="http://dummyimage.com/40x40/fbc02d/fbc02d" alt="" class="media-object">
+                                </div>
+                                <div class="media-body">
+                                    <a ui-sref="disorder({disorderId: disorder.nid})">
+                                        <strong>
+                                            {{ disorder.disorder_name }}
+                                        </strong>
+                                    </a>
+                                    <p>An Orphanet summary for this disease is currently under development.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div style="font-size: 12px; color: grey; text-transform: uppercase">
+                                    Location in hierarchy
+                                </div>
+
+                                <a href="" ng-click="toggleParents(disorder);">
+                                    <i class="fa" ng-class="{
+                                                'fa-caret-right': !disorder.isShowingParents,
+                                                'fa-caret-down': disorder.isShowingParents,
+                                    }"></i> {{ disorder.disorder_name }}
+                                </a>
+                                <div dx-start-with="disorder" ng-show="disorder.isShowingParents" style="padding-left: 10px;">
+                                    <div ng-repeat="parent in $dxPrior.disorder_parent" ng-click="toggleParents(parent); $event.stopPropagation()" style="padding-left: 20px;">
+                                        <a href="">
+                                            <i ng-class="{
+                                                'fa-caret-right': !parent.isShowingParents,
+                                                'fa-caret-down': parent.isShowingParents,
+                                            }" class="fa" ng-show="parent.disorder_parent.length > 0"></i>
+
+                                            {{ parent.disorder_name }}
+                                        </a>
+                                        <div dx-connect="parent" ng-show="parent.isShowingParents" />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panels">
+            <h2>Children</h2>
+            <p ng-hide="disorder.disorder_child.length" class="text-muted">
+                No children.
+            </p>
+
+            <div class="row">
+                <div ng-repeat="disorder in disorder.disorder_child" class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img src="http://dummyimage.com/40x40/fbc02d/fbc02d" alt="" class="media-object">
+                                </div>
+                                <div class="media-body">
+                                    <a ui-sref="disorder({disorderId: disorder.nid})">
+                                        <strong>
+                                            {{ disorder.disorder_name }}
+                                        </strong>
+                                    </a>
+                                    <p>An Orphanet summary for this disease is currently under development.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
+
+        <div class="panels">
+            <h2>Genotype</h2>
+            <p ng-hide="disorder.disorder_disgene.length" class="text-muted">
+                No genotype.
+            </p>
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="disorder_gene in disorder.disorder_disgene">
+                    <div class="panel panel-default" ui-sref="gene({geneId: disorder_gene.disgene_gene.nid })" style="cursor: pointer;">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body">
+                                </div>
+                                <div class="media-body">
+                                    <div>
+                                        <strong style="text-transform: capitalize;">{{ disorder_gene.disgene_gene.gene_name }}</strong> ({{ disorder_gene.disgene_gene.gene_symbol }}<span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)
+                                    </div>
+                                    <div>
+                                        {{ disorder_gene.disgene_at.dgt_name }} {{ disorder_gene.disgene_as.dga_name }}
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group">
+                            <a href="" class="list-group-item">
+                                <i class="fa fa-search"></i> View Diseases ({{ disorder_gene.disgene_gene.gene_disgene.length }})
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
         <!-- http://130.56.248.140/orphanet/api/entity_node/115015/nodes_field_ds_sign?fields=ds_disorder -->
 
         <div class="panels">
             <!-- <button class="btn btn-default pull-right">Edit</button> -->
-            <form class="form-inline pull-right" role="form">
+            <form class="form-inline pull-right" role="form" ng-show="disorder.disorder_phenotype.length">
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail2">Filter</label>
                     <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Filter" ng-model="test">
@@ -127,20 +235,23 @@
                 <!-- <button type="submit" class="btn btn-default">Sign in</button> -->
             </form>
             <h2>Phenotype</h2>
-            <div class="row" ng-repeat="row in disorder.disorder_phenotype | inSlicesOf:2 | filter:test">
-                <div class="col-sm-6 repeated-item" ng-repeat="disorder_phenotype in row | filter:test">
+            <p ng-hide="disorder.disorder_phenotype.length" class="text-muted">
+                No phenotype.
+            </p>
+            <div class="row" ng-repeat="row in disorder.disorder_phenotype | inSlicesOf:3 | filter:test">
+                <div class="col-sm-4 repeated-item" ng-repeat="disorder_phenotype in row | filter:test">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
-                                    <img src="http://dummyimage.com/40x40/dddddd/ffffff" alt="" class="media-body">
+                                    <img src="http://dummyimage.com/40x40/fdd835/ffffff" alt="" class="media-body">
                                 </div>
                                 <div class="media-body">
                                     <div>
-                                        <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
-                                            {{ disorder_phenotype.ds_sign.sign_name || 'Loading... '}}    
-                                        </a>
-
+                                        <!-- <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })"> -->
+                                            <strong>{{ disorder_phenotype.ds_sign.sign_name }}</strong>
+                                        <!-- </a> -->
+                                        <p class="" ng-hide="disorder_phenotype.ds_sign.sign_name">Loading...</p>
                                     </div>
                                     <div class="text-muted">
                                         {{ disorder_phenotype.ds_frequency.signfreq_name }}
@@ -150,24 +261,14 @@
                         </div>
 
 
-                        <ul class="list-group">
-                            <!--<li class="list-group-item">
-                                            <div class="pull-left" style="margin-right: 10px; position: relative; top: 5px;">
-                                                IC
-                                            </div>
-                                            <div class="progress" style="height: 10px; margin: 10px;">
-                                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                    <span class="sr-only">60% Complete</span>
-                                                </div>
-                                            </div>
-                                        </li>-->
-                            <li class="list-group-item">
-                                <div class="row" style="font-size: 12px;">
-                                    <div class="col-sm-12">
-                                        <span class="text-muted text-uppercase">{{ disorder_phenotype.ds_sign.sign_dissign.length }} Disorders</span>
-                                    </div>
-                                </div>
-                            </li>
+                        <div class="list-group" ng-show="disorder_phenotype.ds_sign.sign_dissign.length">
+                            <a class="list-group-item" ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
+                                <!-- <div class="row" style="font-size: 12px;"> -->
+                                    <!-- <div class="col-sm-12"> -->
+                                        <i class="fa fa-search"></i> View Disorders <span class="text-muted text-uppercase"> ({{ disorder_phenotype.ds_sign.sign_dissign.length }})</span>
+                                    <!-- </div> -->
+                                <!-- </div> -->
+                            </a>
                         </ul>
 
                     </div>
@@ -175,6 +276,9 @@
             </div>
 
         </div>
+
+
+        
 
         <div class="container">
             <div class="row">
@@ -209,52 +313,10 @@
                             <div ng-bind-html="concept.definition | words:200"></div>
                         </div> -->
 
-                            <h2>Genotype</h2>
-                            <div class="row">
-                                <div class="col-sm-6" ng-repeat="disorder_gene in disorder.disorder_disgene">
-                                    <div class="panel panel-default" ui-sref="gene({geneId: disorder_gene.disgene_gene.nid })" style="cursor: pointer;">
-                                        <div class="panel-body">
-                                            <div class="media">
-                                                <div class="pull-left">
-                                                    <img src="http://dummyimage.com/60x60/dddddd/ffffff" alt="" class="media-body">
-                                                </div>
-                                                <div class="media-body">
-                                                    <div>
-                                                        <strong style="text-transform: capitalize;">{{ disorder_gene.disgene_gene.gene_name }}</strong>
-                                                    </div>
-                                                    <div>
-                                                        At: {{ disorder_gene.disgene_at.dgt_orphaid }} - {{ disorder_gene.disgene_at.dgt_name }}
-                                                    </div>
-                                                    <div>
-                                                        As: {{ disorder_gene.disgene_as.dga_orphaid }} - {{ disorder_gene.disgene_as.dga_name }}
-                                                    </div>
-                                                    <div>
-                                                        Orphanumber: {{ disorder_gene.disgene_gene.gene_orphanumber }}
-                                                    </div>
-                                                    <div>
-                                                        OrphaID: {{ disorder_gene.disgene_gene.gene_orphaid }}
-                                                    </div>
-                                                    <div>
-                                                        Symbol: {{ disorder_gene.disgene_gene.gene_symbol }}
-                                                    </div>
-                                                    <div>
-                                                        Synonym:
-                                                        <span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">{{ syn }}</span>
-                                                    </div>
-                                                    <p>Disorders: {{ disorder_gene.disgene_gene.gene_disgene.length }}</p>
-                                                </div>
-                                            </div>
-
-                                            <!-- <div class="panel panel-default">
-                                <div class="panel-body"> -->
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
 
 
+                            <!-- 
                             <h2>Parents</h2>
                             <div class="panel panel-default" ng-repeat="parent in disorder.disorder_parent">
                                 <div class="panel-body">
@@ -267,7 +329,7 @@
                                 <div class="panel-body">
                                     <a ui-sref="disorder({disorderId: child.nid})">{{ child.disorder_name }}</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
