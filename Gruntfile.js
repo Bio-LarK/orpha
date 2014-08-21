@@ -34,6 +34,12 @@ module.exports = function (grunt) {
             src: ['**']
         },
 
+        changelog: {
+            options: {
+                // Task-specific options go here.
+            }
+        },
+
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             bower: {
