@@ -1,3 +1,13 @@
+<a name="0.3.1"></a>
+### 0.3.1 (2014-08-21)
+
+
+#### Bug Fixes
+
+* **bump:** fix bump 'path' instead of 'patch' ([43f2fee3](https://github.com/Bio-LarK/orpha/commit/43f2fee3b1f74ed820f92de5191d2826af1f4dd4))
+* **disorder-page:** change the disorder properties to not have a double border ([4246e82e](https://github.com/Bio-LarK/orpha/commit/4246e82e79ae45e6ea9f2b3368089c7f8a808098))
+
+
 <a name="0.3.0"></a>
 ## 0.3.0 (2014-08-21)
 
