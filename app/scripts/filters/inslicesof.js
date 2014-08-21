@@ -13,22 +13,22 @@ angular.module('orphaApp')
                     return items;
                 }
 
-                var array = [];
-                for (var i = 0; i < items.length; i++) {
-                    var chunkIndex = parseInt(i / count, 10);
-                    var isFirst = (i % count === 0);
-                    if (isFirst) {
-                        array[chunkIndex] = [];
+                var array = _.groupBy(items, function (val, index) {
+                    return Math.floor(index / count);
+                });
+
+                $rootScope.arraysinSliceOf = $rootScope.arraysinSliceOf || [];
+
+                var temp = null;
+                angular.forEach($rootScope.arraysinSliceOf, function (arrayInSliceOf) {
+                    if (angular.equals(arrayInSliceOf, array)) {
+                        temp = arrayInSliceOf;
                     }
-                    array[chunkIndex].push(items[i]);
+                });
+                if (temp) {
+                    return temp;
                 }
-
-                if (angular.equals($rootScope.arrayinSliceOf, array)) {
-                    return $rootScope.arrayinSliceOf;
-                } else {
-                    $rootScope.arrayinSliceOf = array;
-                }
-
+                $rootScope.arraysinSliceOf.push(array);
                 return array;
             };
 
