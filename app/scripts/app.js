@@ -17,7 +17,8 @@ angular
         'truncate',
         'restangular',
         'ui.bootstrap',
-        'dotjem.angular.tree'
+        'dotjem.angular.tree',
+        'ui.utils'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, Page) {
         $rootScope.$state = $state;

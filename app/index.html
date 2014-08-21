@@ -25,7 +25,22 @@
 </head>
 
 <body >
-    <nav class="navbar navbar-bright" role="navigation">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        .navbar.ui-scrollfix {
+            position:fixed;
+            top:0;
+            z-index: 100;
+        }
+    </style>
+    <nav class="navbar navbar-bright" role="navigation" ui-scrollfix>
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -168,6 +183,7 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
     <script src="bower_components/dotjem-angular-tree/dotjem-angular-tree.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
