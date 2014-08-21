@@ -106,47 +106,45 @@
 
                         </div>
 
-                        <div class="list-group">
-                            <div class="list-group-item" style="overflow: hidden;">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="details">
-                                            <h3>Prevalence Class</h3>
-                                            <div>
-                                                <a href="{{ disorder.disorder_prevalence.prevalence_orphaid }}">
-                                                {{ disorder.disorder_prevalence.prevalence_name }}
-                                            </a>
-                                            </div>
+                        <div class="list-group-item" style="overflow: hidden;">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="details">
+                                        <h3>Prevalence Class</h3>
+                                        <div>
+                                            <a href="{{ disorder.disorder_prevalence.prevalence_orphaid }}">
+                                            {{ disorder.disorder_prevalence.prevalence_name }}
+                                        </a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="details">
-                                            <h3>Age of Onset</h3>
-                                            <div>
-                                                <a href="{{ disorder.disorder_onset.aoo_orphaid }}">
-                                                {{ disorder.disorder_onset.aoo_name }}
-                                            </a>
-                                            </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="details">
+                                        <h3>Age of Onset</h3>
+                                        <div>
+                                            <a href="{{ disorder.disorder_onset.aoo_orphaid }}">
+                                            {{ disorder.disorder_onset.aoo_name }}
+                                        </a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="details">
-                                            <h3>Age of Death</h3>
-                                            <div>
-                                                <a href="{{ disorder.disorder_death.aod_orphaid }}">
-                                                {{ disorder.disorder_death.aod_name }}
-                                            </a>
-                                            </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="details">
+                                        <h3>Age of Death</h3>
+                                        <div>
+                                            <a href="{{ disorder.disorder_death.aod_orphaid }}">
+                                            {{ disorder.disorder_death.aod_name }}
+                                        </a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="details">
-                                            <h3>Type of Inheritance</h3>
-                                            <div ng-repeat="inheritance in disorder.disorder_inheritance">
-                                                <a href="{{ inheritance.toi_orphaid }}">
-                                                    {{ inheritance.toi_name == 'Autosomal dominant' && 'AD' || 'AR' }}
-                                                </a>
-                                            </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="details">
+                                        <h3>Type of Inheritance</h3>
+                                        <div ng-repeat="inheritance in disorder.disorder_inheritance">
+                                            <a href="{{ inheritance.toi_orphaid }}">
+                                                {{ inheritance.toi_name == 'Autosomal dominant' && 'AD' || 'AR' }}
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -191,7 +189,7 @@
                                 <div class="panel-body">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img src="http://dummyimage.com/40x40/fbc02d/fbc02d" alt="" class="media-object">
+                                            <img src="http://dummyimage.com/40x40/dddddd/dddddd" alt="" class="media-object">
                                         </div>
                                         <div class="media-body">
                                             <a ui-sref="disorder({disorderId: disorder.nid})">
