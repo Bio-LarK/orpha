@@ -511,7 +511,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('deploy', [
         'build',
-        'bump-only:path',
+        'bump-only:patch',
         'changelog',
         'bump-commit',
         'gh-pages'
