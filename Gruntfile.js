@@ -40,6 +40,23 @@ module.exports = function (grunt) {
             }
         },
 
+        bump: {
+            options: {
+                files: ['package.json'],
+                updateConfigs: [],
+                commit: true,
+                commitMessage: 'Release v%VERSION%',
+                commitFiles: ['package.json', 'CHANGELOG.md'],
+                createTag: true,
+                tagName: 'v%VERSION%',
+                tagMessage: 'Version %VERSION%',
+                push: true,
+                pushTo: 'upstream',
+                gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+            }
+        },
+
+
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             bower: {
@@ -494,6 +511,9 @@ module.exports = function (grunt) {
 
     grunt.registerTask('deploy', [
         'build',
+        'bump-only:minor',
+        'changelog',
+        'bump-commit',
         'gh-pages'
     ]);
 };
