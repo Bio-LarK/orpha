@@ -1,3 +1,12 @@
+<a name="0.3.2"></a>
+### 0.3.2 (2014-08-21)
+
+
+#### Bug Fixes
+
+* **insliceof:** fix insliceof not working on pages with multiple insliceofs ([f1d55091](https://github.com/Bio-LarK/orpha/commit/f1d55091b6c2c5279127f78250816eba9a14827a))
+
+
 <a name="0.3.1"></a>
 ### 0.3.1 (2014-08-21)
 
