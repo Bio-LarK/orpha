@@ -139,9 +139,10 @@
                                 <div class="col-sm-3">
                                     <div class="detail">
                                         <h3 class="detail-title">Type of Inheritance</h3>
+                                        <div class="text-muted" ng-hide="disorder.disorder_inheritance.length">Unknown</div>
                                         <div ng-repeat="inheritance in disorder.disorder_inheritance" class="detail-info">
                                             <a href="{{ inheritance.toi_orphaid }}">
-                                                {{ inheritance.toi_name == 'Autosomal dominant' && 'AD' || 'AR' }}
+                                                {{ inheritance.label }}
                                             </a>
                                         </div>
                                     </div>

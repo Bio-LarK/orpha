@@ -17,12 +17,23 @@ angular.module('orphaApp')
                 method: 'GET',
                 transformResponse: $http.defaults.transformResponse.concat([
 
-                    function (data, headersGetter) {
-                        data['disorder_parent'] = _.map(data.disorder_parent, function (parent) {
+                    function (disorder, headersGetter) {
+                        // Convert parents to Disorder objects
+                        disorder['disorder_parent'] = _.map(disorder.disorder_parent, function (parent) {
                             return new Disorder(parent);
                         });
-                        // data.FieldName = yourDateParsingFunction(data.FieldName);
-                        return data;
+
+                        // Add in shorthand for inheritance
+                        _.each(disorder['disorder_inheritance'], function (disorderInheritance) {
+                            if (disorderInheritance['toi_name'] === 'Autosomal dominant') {
+                                disorderInheritance.label = 'AD';
+                            } else if (disorderInheritance['toi_name'] === 'Autosomal recessive') {
+                                disorderInheritance.label = 'AR';
+                            } else {
+                                disorderInheritance.label = disorderInheritance['toi_name'];
+                            }
+                        });
+                        return disorder;
                     }
                 ])
             }
