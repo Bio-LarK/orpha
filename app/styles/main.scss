@@ -115,6 +115,17 @@ footer {
       color: #3f51b5;
     }
   }
+
+  .panel-body {
+    padding: 20px;
+  }
+  .list-group-item {
+    padding: 14px 20px;
+  }
+  a.list-group-item:hover {
+    background-color: inherit;
+  }
+
 }
 
 .panels {
@@ -137,9 +148,6 @@ footer {
     }
   }
 
-}
-.panel-body {
-  padding: 20px;
 }
 
 
