@@ -1,3 +1,14 @@
+<a name="0.3.6"></a>
+### 0.3.6 (2014-08-22)
+
+
+#### Features
+
+* **disorder-page:** add link to phenotype page from phenotype card ([3df01908](https://github.com/Bio-LarK/orpha/commit/3df019081400c1be9b52cbefa6505efceff31e90))
+* **gene-page:** add content to gene page ([4138c9ce](https://github.com/Bio-LarK/orpha/commit/4138c9ce41b064f247bda442bea3b03eb90cd7db))
+* **sign-page:** add sign page ([174d92de](https://github.com/Bio-LarK/orpha/commit/174d92deaaa4229b5c889c0eaf2d5f0a31899a80))
+
+
 <a name="0.3.5"></a>
 ### 0.3.5 (2014-08-22)
 
