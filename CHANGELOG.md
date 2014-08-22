@@ -1,3 +1,12 @@
+<a name="0.3.5"></a>
+### 0.3.5 (2014-08-22)
+
+
+#### Bug Fixes
+
+* **disorder-page:** fix classification title not highlighting purple on hover ([5dd4d54b](https://github.com/Bio-LarK/orpha/commit/5dd4d54b836b92fd2805446a6953b6c15063477f))
+
+
 <a name="0.3.4"></a>
 ### 0.3.4 (2014-08-22)
 
