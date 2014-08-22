@@ -87,6 +87,17 @@ angular.module('orphaApp')
             });
         };
 
+        Disorder.getFromGene = function (geneId) {
+            return $http.get('http://130.56.248.140/orphanet/api/entity_node/' +
+                geneId + '/nodes_field_disgene_gene?fields=disgene_disorder').then(function (response) {
+                var disorders = _.map(response.data, function (disgeneGene) {
+                    return new Disorder(disgeneGene['disgene_disorder']);
+                });
+                return disorders;
+            });
+        };
+
+
         return Disorder;
     });
 
