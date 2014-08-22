@@ -109,39 +109,37 @@
                         <div class="list-group-item" style="overflow: hidden;">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <div class="details">
-                                        <h3>Prevalence Class</h3>
-                                        <div>
+                                    <div class="detail">
+                                        <h3 class="detail-title">Prevalence Class</h3>
+                                        <div class="detail-info">
                                             <a href="{{ disorder.disorder_prevalence.prevalence_orphaid }}">
-                                            {{ disorder.disorder_prevalence.prevalence_name }}
+                                            {{ disorder.disorder_prevalence.prevalence_name || 'Unknown' }}
                                         </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="details">
-                                        <h3>Age of Onset</h3>
-                                        <div>
+                                    <div class="detail">
+                                        <h3 class="detail-title">Age of Onset</h3>
+                                        <div class="detail-info">
                                             <a href="{{ disorder.disorder_onset.aoo_orphaid }}">
-                                            {{ disorder.disorder_onset.aoo_name }}
+                                            {{ disorder.disorder_onset.aoo_name || 'Unknown' }}
                                         </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="details">
-                                        <h3>Age of Death</h3>
-                                        <div>
-                                            <a href="{{ disorder.disorder_death.aod_orphaid }}">
-                                            {{ disorder.disorder_death.aod_name }}
+                                    <div class="detail">
+                                        <h3 class="detail-title">Age of Death</h3>
+                                        <a class="detail-info" href="{{ disorder.disorder_death.aod_orphaid }}">
+                                            {{ disorder.disorder_death.aod_name || 'Unknown' }}
                                         </a>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="details">
-                                        <h3>Type of Inheritance</h3>
-                                        <div ng-repeat="inheritance in disorder.disorder_inheritance">
+                                    <div class="detail">
+                                        <h3 class="detail-title">Type of Inheritance</h3>
+                                        <div ng-repeat="inheritance in disorder.disorder_inheritance" class="detail-info">
                                             <a href="{{ inheritance.toi_orphaid }}">
                                                 {{ inheritance.toi_name == 'Autosomal dominant' && 'AD' || 'AR' }}
                                             </a>
@@ -158,16 +156,16 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4 style="margin: 0; font-weight: bold; color:rgba(0,0,0,0.6); margin-bottom: 14px; font-size: 14px;">External Identifiers</h4>
-                            <dl class="dl-horizontal" style="margin: 0;">
-                                <dt style="font-weight: normal; text-align: left;margin-bottom:10px;">Orphanumber</dt>
-                                <dd>
-                                    <a style="color: rgba(0, 0, 0, 0.5)" target="_" ng-href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN&data_id={{ disorder.disorder_orphaid }}">
+                            <dl class="dl-horizontal detail detail-externalidentifiers" style="margin: 0;">
+                                <dt class="detail-title">Orphanumber</dt>
+                                <dd class="detail-info">
+                                    <a target="_" ng-href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN&data_id={{ disorder.disorder_orphaid }}">
                                         ORPHA{{ disorder.disorder_orphanumber }}    
                                     </a>
                                 </dd>
 
-                                <dt style="font-weight: normal; text-align: left; margin-bottom:10px;" ng-repeat-start="er in disorder.disorder_er">{{ er.er_source }}</dt>
-                                <dd ng-repeat-end style="color: rgba(0, 0, 0, 0.5)">
+                                <dt class="detail-title" ng-repeat-start="er in disorder.disorder_er">{{ er.er_source }}</dt>
+                                <dd ng-repeat-end class="detail-info">
                                     {{ er.er_reference }}
                                 </dd>
 
@@ -195,11 +193,12 @@
                                             <img src="http://dummyimage.com/40x40/dddddd/dddddd" alt="" class="media-object">
                                         </div>
                                         <div class="media-body">
-                                            <a ui-sref="disorder({disorderId: disorder.nid})">
-                                                <strong>
-                                                    {{ disorder.disorder_name }}
-                                                </strong>
-                                            </a>
+                                            <h5>
+                                                <a ui-sref="disorder({disorderId: disorder.nid})">
+                                                        {{ disorder.disorder_name }}
+                                                </a>    
+                                            </h5>
+                                            
                                             <p>An Orphanet summary for this disease is currently under development.</p>
                                         </div>
                                     </div>
@@ -255,9 +254,9 @@
                                 </div>
                                 <div class="media-body">
                                     <a ui-sref="disorder({disorderId: disorder.nid})">
-                                        <strong>
+                                        <h5>
                                             {{ disorder.disorder_name }}
-                                        </strong>
+                                        </h5>
                                     </a>
                                     <p>An Orphanet summary for this disease is currently under development.</p>
                                 </div>
@@ -293,7 +292,7 @@
                                 </div>
                                 <div class="media-body">
                                     <div>
-                                        <strong style="text-transform: capitalize;">{{ disorder_gene.disgene_gene.gene_name }}</strong>({{ disorder_gene.disgene_gene.gene_symbol }}
+                                        <h5>{{ disorder_gene.disgene_gene.gene_name }}</h5>({{ disorder_gene.disgene_gene.gene_symbol }}
                                         <span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)
                                     </div>
                                     <div>
@@ -340,7 +339,7 @@
                                 <div class="media-body">
                                     <div>
                                         <!-- <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })"> -->
-                                        <strong>{{ disorder_phenotype.ds_sign.sign_name }}</strong>
+                                        <h5>{{ disorder_phenotype.ds_sign.sign_name }}</h5>
                                         <!-- </a> -->
                                         <p class="" ng-hide="disorder_phenotype.ds_sign.sign_name">Loading...</p>
                                     </div>
