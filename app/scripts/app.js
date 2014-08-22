@@ -54,7 +54,7 @@ angular
                 templateUrl: 'views/genes.html'
             })
             .state('gene', {
-                url: '/gene/:geneId',
+                url: '/gene/:geneId/disorders',
                 controller: 'GeneCtrl',
                 templateUrl: 'views/gene.html'
             })
