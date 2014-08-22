@@ -306,7 +306,7 @@
                                             {{ disorder_gene.disgene_at.dgt_name }}
                                         </span>
                                         <h5 style="display: inline">
-                                            <a ui-sref="gene({geneId: disorder_gene.disgene_gene.nid })">{{ disorder_gene.disgene_gene.gene_name }}</a>
+                                            <a ui-sref="gene({geneId: disorder_gene.disgene_gene.nid})">{{ disorder_gene.disgene_gene.gene_name }}</a>
                                         </h5>
                                         <!--<span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)-->
                                     </div>
@@ -376,7 +376,11 @@
                                 <div class="media-body">
                                     <div>
                                         <!-- <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })"> -->
-                                        <h5>{{ disorder_phenotype.ds_sign.sign_name }}</h5>
+                                        <h5>
+                                            <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
+                                                {{ disorder_phenotype.ds_sign.sign_name }}
+                                            </a>
+                                        </h5>
                                         <!-- </a> -->
                                         <p class="" ng-hide="disorder_phenotype.ds_sign.sign_name">Loading...</p>
                                     </div>
