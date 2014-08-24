@@ -1,3 +1,12 @@
+<a name="0.3.7"></a>
+### 0.3.7 (2014-08-25)
+
+
+#### Features
+
+* **build:** improve build process using grunt-build-control ([9dcbdfaa](https://github.com/Bio-LarK/orpha/commit/9dcbdfaae8dedb3e4dca1f7a7ad3326b98841f88))
+
+
 <a name="0.3.6"></a>
 ### 0.3.6 (2014-08-22)
 
