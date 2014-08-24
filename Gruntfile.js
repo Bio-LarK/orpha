@@ -40,6 +40,34 @@ module.exports = function (grunt) {
             }
         },
 
+        buildcontrol: {
+            options: {
+                dir: 'dist',
+                commit: true,
+                push: true,
+                message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+            },
+            pages: {
+                options: {
+                    remote: 'https://github.com/Bio-LarK/orpha.git',
+                    branch: 'gh-pages'
+                }
+            },
+            heroku: {
+                options: {
+                    remote: 'git@heroku.com:example-heroku-webapp-1988.git',
+                    branch: 'master',
+                    tag: require('./package.json').version
+                }
+            },
+            local: {
+                options: {
+                    remote: '../',
+                    branch: 'build'
+                }
+            }
+        },
+
         bump: {
             options: {
                 files: ['package.json'],
@@ -50,8 +78,8 @@ module.exports = function (grunt) {
                 createTag: true,
                 tagName: 'v%VERSION%',
                 tagMessage: 'Version %VERSION%',
-                push: false,
-                pushTo: 'upstream',
+                push: true,
+                pushTo: 'origin',
                 gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
             }
         },
@@ -514,6 +542,6 @@ module.exports = function (grunt) {
         'bump-only:patch',
         'changelog',
         'bump-commit',
-        'gh-pages'
+        'buildcontrol:pages'
     ]);
 };
