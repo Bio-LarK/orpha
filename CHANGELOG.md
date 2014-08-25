@@ -1,3 +1,19 @@
+<a name="0.7.3"></a>
+### 0.7.3 (2014-08-26)
+
+
+#### Bug Fixes
+
+* **build:**
+  * change bower version ([198db153](https://github.com/Bio-LarK/orpha/commit/198db1538a5409adde14b38445c2562f7f6f9bd3))
+  * remove update config ([73d1134c](https://github.com/Bio-LarK/orpha/commit/73d1134c25ee3757087827ce62ae1fbce89bce48))
+
+
+#### Features
+
+* **loading-bar:** add global loading bar ([67b9a1d3](https://github.com/Bio-LarK/orpha/commit/67b9a1d3347666ea76b960a2ed4768514e5dadb5))
+
+
 <a name="0.6.0"></a>
 ## 0.6.0 (2014-08-25)
 
