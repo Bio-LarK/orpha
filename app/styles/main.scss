@@ -38,6 +38,68 @@ footer {
     box-shadow: none;
     border-radius: 100px;
   }
+  .navbar-nav li {
+    margin-right: 5px;
+  }
+  .navbar-nav li a {
+    border-radius: 100px;
+    margin: 7px 0;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .nav > li > a:hover, .nav > li > a:focus {
+    background-color: rgba(0,0,0,0.1);
+    color: rgba(0,0,0,0.87);
+  }
+}
+
+.spinner {
+  font-size: 24px; 
+  text-align: center;
+
+  .fa-spin {
+    -webkit-animation: spin 0.5s infinite linear;
+    -moz-animation: spin 0.5s infinite linear;
+    -o-animation: spin 0.5s infinite linear;
+    animation: spin 0.5s infinite linear;
+  }
+}
+
+.footer {
+  background-color: white; 
+  padding: 20px; 
+  text-align: center;
+  .footer-poweredby {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: rgba(0,0,0,0.54);
+  }
+
+  &:hover a {
+    color: #3f51b5;
+  }
+}
+
+.logo-list {
+  list-style: none;
+  img {
+      // -webkit-filter: grayscale(100%);
+      // -moz-filter: grayscale(100%);
+      // filter: grayscale(100%);
+  }
+}
+.logo-list-item {
+  display: inline-block;
+  margin-right: 40px;
+}
+.logo-list-item-uq img {
+  max-height: 80px; max-width: 100px;
+}
+.logo-list-item-garvan img {
+  max-height: 110px; max-width: 110px;
+}
+.logo-list-item-usyd img {
+  max-height: 100px; max-width: 130px;
 }
 
 // .details {
@@ -180,13 +242,11 @@ a {
 	color: rgba(0,0,0, 0.54) !important;
 }
 
-
-.my-repeat-animation.ng-enter, 
-.my-repeat-animation.ng-leave, 
-.my-repeat-animation.ng-move {
-  -webkit-transition: 0.5s linear all;
-  transition: 0.5s linear all;
-  position:relative;
+.col-sm-4.ng-enter {
+  animation:5s fadeIn ease; 
+}
+.col-sm-4.ng-leave {
+  animation:5s fadeOut ease;
 }
 
 .my-repeat-animation.ng-enter {
