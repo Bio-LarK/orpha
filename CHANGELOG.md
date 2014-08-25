@@ -1,3 +1,12 @@
+<a name="0.3.16"></a>
+### 0.3.16 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** change deploy to origin ([4b99aae9](https://github.com/Bio-LarK/orpha/commit/4b99aae94610a0147e3ad823e029558bea02f955))
+
+
 <a name="0.3.15"></a>
 ### 0.3.15 (2014-08-25)
 
