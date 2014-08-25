@@ -1,3 +1,12 @@
+<a name="0.3.17"></a>
+### 0.3.17 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** fix origin not allowed in remote for pages ([2fc46328](https://github.com/Bio-LarK/orpha/commit/2fc46328ccd458488a9ee3339a01e9fb4e6db0d9))
+
+
 <a name="0.3.16"></a>
 ### 0.3.16 (2014-08-25)
 
