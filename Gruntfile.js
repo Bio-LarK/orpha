@@ -80,7 +80,7 @@ module.exports = function (grunt) {
                 createTag: true,
                 tagName: 'v%VERSION%',
                 tagMessage: 'Version %VERSION%',
-                push: false,
+                push: true,
                 pushTo: 'origin',
                 gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
             }
@@ -510,6 +510,9 @@ module.exports = function (grunt) {
     });
 
 
+
+
+
     grunt.registerTask('test', [
         'clean:server',
         'concurrent:test',
@@ -544,6 +547,6 @@ module.exports = function (grunt) {
     grunt.registerTask('deploy', 'Builds and deploys', function (type) {
         type = type || 'patch';
 
-        grunt.task.run(['bump-only:' + type, 'changelog', 'bump-commit', 'build', 'buildcontrol:pages']);
+        grunt.task.run(['build', 'bump-only:' + type, 'changelog', 'bump-commit', 'gh-pages']);
     });
 };
