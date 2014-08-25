@@ -1,3 +1,12 @@
+<a name="0.3.9"></a>
+### 0.3.9 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** fix pages deploy not working ([9378427d](https://github.com/Bio-LarK/orpha/commit/9378427d2f8bfdf0fee8c4330172ec1f1c4e334a))
+
+
 <a name="0.3.8"></a>
 ### 0.3.8 (2014-08-25)
 
