@@ -219,6 +219,7 @@ module.exports = function (grunt) {
             }
         },
 
+
         // Empties folders to start fresh
         clean: {
             dist: {
