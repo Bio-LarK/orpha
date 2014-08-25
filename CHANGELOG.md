@@ -1,3 +1,12 @@
+<a name="0.3.8"></a>
+### 0.3.8 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** fix deploy task to allow version types ([0648f0cc](https://github.com/Bio-LarK/orpha/commit/0648f0cc4ef0c31b8cb9ca89b608c792bfb0d636))
+
+
 <a name="0.3.7"></a>
 ### 0.3.7 (2014-08-25)
 
