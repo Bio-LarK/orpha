@@ -1,3 +1,12 @@
+<a name="0.3.21"></a>
+### 0.3.21 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** disable connect commits ([a74eb3dc](https://github.com/Bio-LarK/orpha/commit/a74eb3dc93f32f26f24c94b0541e7f43322079aa))
+
+
 <a name="0.3.20"></a>
 ### 0.3.20 (2014-08-25)
 
