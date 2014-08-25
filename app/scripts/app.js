@@ -35,6 +35,10 @@ angular
         $rootScope.changed = function ($item, $model, $label) {
             console.log($item, $model, $label);
             var params = {};
+            var type = $item.type.toLowerCase();
+            if (type === 'clinical sign') {
+                type = 'sign';
+            }
             params[$item.type.toLowerCase() + 'Id'] = $item.node;
             $state.go($item.type.toLowerCase(), params);
             console.log($item.type.toLowerCase(), params);
