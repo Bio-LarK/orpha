@@ -1,3 +1,21 @@
+<a name="0.3.24"></a>
+### 0.3.24 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **genes-page:** change title to read 'all genes' instead of 'genes' ([85a77128](https://github.com/Bio-LarK/orpha/commit/85a771286e86f67b1fafc727f75d3b3d2214a0de))
+* **orpha:** genes and signs page ([38d4e9b9](https://github.com/Bio-LarK/orpha/commit/38d4e9b99c018041e63c99f882e0a9a2bedbd292), closes [#1](https://github.com/Bio-LarK/orpha/issues/1), [#2](https://github.com/Bio-LarK/orpha/issues/2))
+
+
+#### Features
+
+* **genes-page:**
+  * add title to genes page ([677851f1](https://github.com/Bio-LarK/orpha/commit/677851f10755b999eee970bf0f93ce26050e8160))
+  * format genes to look like they do on the disorder page ([212ea8ba](https://github.com/Bio-LarK/orpha/commit/212ea8ba45ecc23bf07aecc79c5a9ed5aefd35fa))
+* **signs-page:** add signs page ([b88c3386](https://github.com/Bio-LarK/orpha/commit/b88c33865785d0e7d8f3b66b0a4d4e90ef753642))
+
+
 <a name="0.3.23"></a>
 ### 0.3.23 (2014-08-25)
 
