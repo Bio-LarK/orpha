@@ -37,12 +37,13 @@ module.exports = function (grunt) {
         changelog: {
             options: {
                 // Task-specific options go here.
+                version: require('./package.json').version
             }
         },
 
         buildcontrol: {
             options: {
-                dir: 'dist',
+                dir: '<%= yeoman.dist %>',
                 commit: true,
                 push: true,
                 message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
