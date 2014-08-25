@@ -1,3 +1,12 @@
+<a name="0.3.12"></a>
+### 0.3.12 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** adding package json ([4a838bf5](https://github.com/Bio-LarK/orpha/commit/4a838bf57046d2ff2fc5a0b4107ef2eb02814db1))
+
+
 <a name="0.3.11"></a>
 ### 0.3.11 (2014-08-25)
 
