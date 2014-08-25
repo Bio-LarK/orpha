@@ -1,3 +1,12 @@
+<a name="0.3.23"></a>
+### 0.3.23 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** switched to use gh-pages ([cf9ef1a2](https://github.com/Bio-LarK/orpha/commit/cf9ef1a20e71ffbd83be7c0c78aeb26fc8938de7))
+
+
 <a name="0.3.22"></a>
 ### 0.3.22 (2014-08-25)
 
