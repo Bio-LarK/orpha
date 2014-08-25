@@ -39,9 +39,9 @@ angular
             if (type === 'clinical sign') {
                 type = 'sign';
             }
-            params[$item.type.toLowerCase() + 'Id'] = $item.node;
-            $state.go($item.type.toLowerCase(), params);
-            console.log($item.type.toLowerCase(), params);
+            params[type + 'Id'] = $item.node;
+            $state.go(type, params);
+            console.log(type, params);
         };
     })
     .config(function ($stateProvider, $urlRouterProvider, RestangularProvider) {
