@@ -50,7 +50,7 @@ module.exports = function (grunt) {
             },
             pages: {
                 options: {
-                    remote: 'https://github.com/cmcnamara87/orpha.git',
+                    remote: 'origin',
                     branch: 'gh-pages'
                 }
             },
