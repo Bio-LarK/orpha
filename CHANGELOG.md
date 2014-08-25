@@ -1,3 +1,12 @@
+<a name="0.5.0"></a>
+## 0.5.0 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **global-search:** fix search to work with clinical signs ([c1faab89](https://github.com/Bio-LarK/orpha/commit/c1faab8909b58b5d25f4c049a10eb1f2fbe8fff5))
+
+
 <a name="0.4.0"></a>
 ## 0.4.0 (2014-08-25)
 
