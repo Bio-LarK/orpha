@@ -1,3 +1,12 @@
+<a name="0.3.22"></a>
+### 0.3.22 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** disable bump push ([79ce3b3e](https://github.com/Bio-LarK/orpha/commit/79ce3b3eba9778324b8138f50d8439edac8706f1))
+
+
 <a name="0.3.21"></a>
 ### 0.3.21 (2014-08-25)
 
