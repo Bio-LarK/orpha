@@ -14,12 +14,7 @@ angular.module('orphaApp')
             nid: '@nid'
         });
 
-        angular.extend(Sign.prototype, {
-            // getGenes: function () {
-            //     // Get the gene ids
-            //     this.genes = RelationshipService.getRelated(this['disorder_disgene'], 'disgene_gene', Gene);
-            // }
-        });
+        angular.extend(Sign.prototype, {});
 
 
         return Sign;

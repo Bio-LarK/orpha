@@ -8,9 +8,9 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisordersCtrl', function ($scope, $timeout, $stateParams, Disorder) {
-
+    .controller('DisordersCtrl', function ($scope, $timeout, $stateParams, promiseTracker, Disorder) {
         $scope.loadMore = loadMore;
+        $scope.loadingTracker = promiseTracker();
         $scope.page = 0;
         activate();
 
@@ -21,6 +21,7 @@ angular.module('orphaApp')
                 fields: 'nid,disorder_name',
                 page: $scope.page++
             });
+            $scope.loadingTracker.addPromise($scope.disorders.$promise);
         }
 
         function loadMore() {
@@ -30,5 +31,6 @@ angular.module('orphaApp')
             }, function (disorders) {
                 $scope.disorders = $scope.disorders.concat(disorders);
             });
+            $scope.loadingTracker.addPromise(disorders.$promise);
         }
     });

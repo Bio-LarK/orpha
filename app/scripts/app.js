@@ -18,7 +18,8 @@ angular
         'restangular',
         'ui.bootstrap',
         'dotjem.angular.tree',
-        'ui.utils'
+        'ui.utils',
+        'ajoslin.promise-tracker'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, Page) {
         $rootScope.$state = $state;

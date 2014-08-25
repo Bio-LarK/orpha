@@ -8,14 +8,14 @@
  * Service in the orphaApp.
  */
 angular.module('orphaApp')
-    .service('RelationshipService', function RelationshipService($http) {
+    .service('RelationshipService', function RelationshipService($http, $q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.getRelatedThroughIntermediary = function (resource, intermediaryPropertyName, fields) {
             // get the first property
             var firstIntermediary = _.first(resource[intermediaryPropertyName]);
 
             if (!resource[intermediaryPropertyName].length) {
-                return;
+                return $q.when();
             }
             var ids = _.pluck(resource[intermediaryPropertyName], 'nid');
             var request = _.indexBy(ids, function (ids, index) {

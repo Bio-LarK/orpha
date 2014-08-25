@@ -13,9 +13,15 @@ angular.module('orphaApp')
                     return items;
                 }
 
-                var array = _.groupBy(items, function (val, index) {
-                    return Math.floor(index / count);
-                });
+                var array = [];
+                for (var i = 0; i < items.length; i++) {
+                    var chunkIndex = parseInt(i / count, 10);
+                    var isFirst = (i % count === 0);
+                    if (isFirst) {
+                        array[chunkIndex] = [];
+                    }
+                    array[chunkIndex].push(items[i]);
+                }
 
                 $rootScope.arraysinSliceOf = $rootScope.arraysinSliceOf || [];
 
@@ -26,8 +32,10 @@ angular.module('orphaApp')
                     }
                 });
                 if (temp) {
+                    console.log('no change');
                     return temp;
                 }
+                console.log('change');
                 $rootScope.arraysinSliceOf.push(array);
                 return array;
             };
