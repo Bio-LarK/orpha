@@ -17,7 +17,7 @@ angular.module('orphaApp')
 
         function activate() {
             vm.genes = Gene.query({
-                fields: 'nid,gene_name'
+                fields: 'nid,gene_name,gene_symbol,gene_disgene'
             });
         }
     });
