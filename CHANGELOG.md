@@ -1,3 +1,12 @@
+<a name="0.6.0"></a>
+## 0.6.0 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **global-search:** fix typo with signs ([e5c32541](https://github.com/Bio-LarK/orpha/commit/e5c325410bb9c6381c653d08227355e846b67e0c))
+
+
 <a name="0.5.0"></a>
 ## 0.5.0 (2014-08-25)
 
