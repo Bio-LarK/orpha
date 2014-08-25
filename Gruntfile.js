@@ -35,10 +35,7 @@ module.exports = function (grunt) {
         },
 
         changelog: {
-            options: {
-                // Task-specific options go here.
-                version: require('./package.json').version
-            }
+            options: {}
         },
 
         buildcontrol: {
@@ -73,7 +70,7 @@ module.exports = function (grunt) {
         bump: {
             options: {
                 files: ['package.json'],
-                updateConfigs: [],
+                updateConfigs: ['pkg', 'component'],
                 commit: true,
                 commitMessage: 'Release v%VERSION%',
                 commitFiles: ['-a'],

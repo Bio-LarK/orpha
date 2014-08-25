@@ -20,6 +20,20 @@ body {
 footer {
   margin-top: 40px;
 }
+
+#loading-bar .bar {
+  background: rgba(0,0,0,0.3);
+}
+#loading-bar-spinner .spinner-icon {
+  border-top-color:  rgba(0,0,0,0.3);
+  border-left-color: rgba(0,0,0,0.3);
+}
+#loading-bar .peg {
+  -moz-box-shadow: rgba(0,0,0,0.3) 1px 0 6px 1px;
+  -ms-box-shadow: rgba(0,0,0,0.3) 1px 0 6px 1px;
+  -webkit-box-shadow: rgba(0,0,0,0.3) 1px 0 6px 1px;
+  box-shadow: rgba(0,0,0,0.3) 1px 0 6px 1px;
+}
 .navbar.navbar-bright {
   border-radius: 0;
   margin-bottom: 0;
@@ -56,7 +70,7 @@ footer {
 .spinner {
   font-size: 24px; 
   text-align: center;
-
+  color: rgba(0,0,0,0.2);
   .fa-spin {
     -webkit-animation: spin 0.5s infinite linear;
     -moz-animation: spin 0.5s infinite linear;
