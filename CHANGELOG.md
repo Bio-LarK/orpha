@@ -2,6 +2,10 @@
 ### 0.3.11 (2014-08-25)
 
 
+<a name="0.3.11"></a>
+### 0.3.11 (2014-08-25)
+
+
 #### Bug Fixes
 
 * **build:** fix deploy pages issues ([616aab0e](https://github.com/Bio-LarK/orpha/commit/616aab0e3e46f7ff4579818004ee27c1333223a1))
