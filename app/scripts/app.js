@@ -63,6 +63,11 @@ angular
                 controller: 'SignCtrl',
                 templateUrl: 'views/sign.html'
             })
+            .state('signs', {
+                url: '/signs',
+                controller: 'SignsCtrl',
+                templateUrl: 'views/signs.html'
+            })
             .state('disorder', {
                 url: '/disorders/:disorderId',
                 controller: 'DisorderCtrl',
