@@ -1,3 +1,13 @@
+<a name="0.4.0"></a>
+## 0.4.0 (2014-08-25)
+
+
+#### Features
+
+* **home-age:** Add logos to footer and style navbar ([8c71c81c](https://github.com/Bio-LarK/orpha/commit/8c71c81c162fb2bc18a16a5e3f451224e8e29348))
+* **loading-spinners:** add loading spinners to the site ([0d996d3d](https://github.com/Bio-LarK/orpha/commit/0d996d3d619a17fb2deabec57e9f2831c51faee4))
+
+
 <a name="0.3.24"></a>
 ### 0.3.24 (2014-08-25)
 
