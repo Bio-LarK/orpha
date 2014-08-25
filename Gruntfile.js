@@ -542,6 +542,6 @@ module.exports = function (grunt) {
     grunt.registerTask('deploy', 'Builds and deploys', function (type) {
         type = type || 'patch';
 
-        grunt.task.run(['build', 'bump-only:' + type, 'changelog', 'bump-commit', 'buildcontrol:pages']);
+        grunt.task.run(['bump-only:' + type, 'changelog', 'bump-commit', 'build', 'buildcontrol:pages']);
     });
 };
