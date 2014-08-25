@@ -1,3 +1,12 @@
+<a name="0.3.19"></a>
+### 0.3.19 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** change order of deploy tasks ([454bf514](https://github.com/Bio-LarK/orpha/commit/454bf51482f8cd290891da4f40ebc4b4d2303b8a))
+
+
 <a name="0.3.18"></a>
 ### 0.3.18 (2014-08-25)
 
