@@ -1,3 +1,12 @@
+<a name="0.3.15"></a>
+### 0.3.15 (2014-08-25)
+
+
+#### Bug Fixes
+
+* **build:** change deploy to old git ([728c2f0d](https://github.com/Bio-LarK/orpha/commit/728c2f0dc2f96f738c65db5b7be24255bdfc6970))
+
+
 <a name="0.3.14"></a>
 ### 0.3.14 (2014-08-25)
 
