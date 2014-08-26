@@ -31,7 +31,16 @@ module.exports = function (grunt) {
             options: {
                 base: '<%= yeoman.dist %>'
             },
-            src: ['**']
+            'gh-pages': {
+                src: ['**']
+            },
+            'live': {
+                options: {
+                    branch: 'master',
+                    repo: 'ssh://craig@130.56.248.140/var/repo/orphanet.git'
+                },
+                src: ['**']
+            }
         },
 
         changelog: {
