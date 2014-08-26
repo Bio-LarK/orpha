@@ -61,7 +61,7 @@ module.exports = function (grunt) {
                     branch: 'gh-pages'
                 }
             },
-            heroku: {
+            live: {
                 options: {
                     remote: 'ssh://craig@130.56.248.140/var/repo/orphanet.git',
                     branch: 'master',
@@ -235,7 +235,7 @@ module.exports = function (grunt) {
                     src: [
                         '.tmp',
                         '<%= yeoman.dist %>/{,*/}*',
-                        '!<%= yeoman.dist %>/.git*'
+                        // '!<%= yeoman.dist %>/.git*'
                     ]
                 }]
             },
@@ -515,10 +515,6 @@ module.exports = function (grunt) {
         grunt.task.run(['serve:' + target]);
     });
 
-
-
-
-
     grunt.registerTask('test', [
         'clean:server',
         'concurrent:test',
@@ -553,6 +549,6 @@ module.exports = function (grunt) {
     grunt.registerTask('deploy', 'Builds and deploys', function (type) {
         type = type || 'patch';
 
-        grunt.task.run(['build', 'bump-only:' + type, 'changelog', 'bump-commit', 'gh-pages']);
+        grunt.task.run(['build', 'bump-only:' + type, 'changelog', 'bump-commit', 'buildcontrol:live']);
     });
 };
