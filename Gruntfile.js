@@ -53,7 +53,7 @@ module.exports = function (grunt) {
                 commit: true,
                 push: true,
                 message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
-                connectCommits: false
+                connectCommits: true
             },
             pages: {
                 options: {
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
             },
             heroku: {
                 options: {
-                    remote: 'git@heroku.com:example-heroku-webapp-1988.git',
+                    remote: 'ssh://craig@130.56.248.140/var/repo/orphanet.git',
                     branch: 'master',
                     tag: require('./package.json').version
                 }
