@@ -60,9 +60,7 @@
                                         <div class="detail">
                                             <h3 class="detail-title">Prevalence Class</h3>
                                             <div class="detail-info">
-                                                <a href="{{ disorder.disorder_prevalence.prevalence_orphaid }}">
                                                 {{ disorder.disorder_prevalence.prevalence_name || 'Unknown' }}
-                                            </a>
                                             </div>
                                         </div>
                                     </div>
@@ -70,18 +68,16 @@
                                         <div class="detail">
                                             <h3 class="detail-title">Age of Onset</h3>
                                             <div class="detail-info">
-                                                <a href="{{ disorder.disorder_onset.aoo_orphaid }}">
                                                 {{ disorder.disorder_onset.aoo_name || 'Unknown' }}
-                                            </a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="detail">
                                             <h3 class="detail-title">Age of Death</h3>
-                                            <a class="detail-info" href="{{ disorder.disorder_death.aod_orphaid }}">
+                                            <div class="detail-info">
                                                 {{ disorder.disorder_death.aod_name || 'Unknown' }}
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -89,9 +85,7 @@
                                             <h3 class="detail-title">Type of Inheritance</h3>
                                             <div class="text-muted" ng-hide="disorder.disorder_inheritance.length">Unknown</div>
                                             <div ng-repeat="inheritance in disorder.disorder_inheritance" class="detail-info">
-                                                <a href="{{ inheritance.toi_orphaid }}">
                                                     {{ inheritance.label }}
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
