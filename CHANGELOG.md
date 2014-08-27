@@ -1,3 +1,13 @@
+<a name="0.7.5"></a>
+### 0.7.5 (2014-08-27)
+
+
+#### Bug Fixes
+
+* **disorder-page:** remove links to disease details ([37fc1bde](https://github.com/Bio-LarK/orpha/commit/37fc1bde2594171911e713991094354a7261d8a3))
+* **drupal:** add drupal to gitignore temporarily ([cb13b71e](https://github.com/Bio-LarK/orpha/commit/cb13b71e3ebe8c7e1bb0b6f3b1887153edd47108))
+
+
 <a name="0.7.4"></a>
 ### 0.7.4 (2014-08-26)
 
