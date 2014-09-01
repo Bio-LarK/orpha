@@ -24,6 +24,7 @@ angular.module('orphaApp')
             $scope.loadingTracker.addPromise($scope.disorders.$promise);
         }
 
+
         function loadMore() {
             var disorders = Disorder.query({
                 fields: 'nid,disorder_name',
