@@ -1,3 +1,12 @@
+<a name="0.7.6"></a>
+### 0.7.6 (2014-09-02)
+
+
+#### Bug Fixes
+
+* **disorder-summary:** add note about summary missing ([1ae7a915](git@github.com:Bio-LarK/orpha/commit/1ae7a915c81f861e4a6b87b307ba54130dd9cef5), closes [#14](git@github.com:Bio-LarK/orpha/issues/14))
+
+
 <a name="0.7.5"></a>
 ### 0.7.5 (2014-08-27)
 
