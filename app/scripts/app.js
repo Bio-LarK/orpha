@@ -20,12 +20,16 @@ angular
         'dotjem.angular.tree',
         'ui.utils',
         'ajoslin.promise-tracker',
-        'angular-loading-bar'
+        'angular-loading-bar',
+        'xeditable',
+        'config'
     ])
-    .run(function ($rootScope, $http, $state, $stateParams, Page) {
+    .run(function ($rootScope, $http, $state, $stateParams, editableOptions, Page) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.Page = Page;
+        editableOptions.theme = 'bs3';
+
         $rootScope.getResults = function (text) {
             var keys = encodeURIComponent(text);
             var url = 'http://130.56.248.140/orphanet/api/search_node/retrieve.json?keys=' + keys + '&simple=1';
@@ -73,6 +77,12 @@ angular
                 url: '/signs',
                 controller: 'SignsCtrl',
                 templateUrl: 'views/signs.html'
+            })
+            .state('suggestions', {
+                url: '/suggestions',
+                controller: 'SuggestionsCtrl as suggestionsVm',
+                // controllerAs: 'suggestionsVm',
+                templateUrl: 'views/suggestions.html',
             })
             .state('disorder', {
                 url: '/disorders/:disorderId',

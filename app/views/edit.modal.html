@@ -1,0 +1,27 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">Propose a change</h4>
+    </div>
+    <div class="modal-body">
+        <h3>{{ editVm.concept.title }}</h3>
+
+        <div>
+            Changing property: {{ editVm.propertyLabel }}
+        </div>
+        <div>
+            Select a value:
+            <select ng-model="editVm.prevalenceClass" ng-options="class as class.title for class in editVm.prevalenceClasses"></select>
+        </div>
+        <div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="editVm.save(yo)">Save</button>
+        <button class="btn btn-default" ng-click="editVm.cancel()">Cancel</button>
+    </div>
+</div>

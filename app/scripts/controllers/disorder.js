@@ -8,11 +8,14 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, Page, promiseTracker) {
+    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, Page, promiseTracker, $modal) {
         $scope.disorderTracker = promiseTracker();
+        $scope.disorder = null;
         $scope.signsTracker = promiseTracker();
         $scope.genesTracker = promiseTracker();
         $scope.toggleParents = toggleParents;
+        $scope.edit = edit;
+        $scope.edit2 = edit2;
         activate();
         ////////////
 
@@ -21,11 +24,14 @@ angular.module('orphaApp')
                 nid: $stateParams.disorderId //136402
             }, function (disorder) {
                 $scope.disorder = disorder;
-                var genesPromise = disorder.getGenes();
-                $scope.genesTracker.addPromise(genesPromise);
-                var signsPromise = disorder.getSigns();
-                $scope.signsTracker.addPromise(signsPromise);
+
                 Page.setTitle(disorder['disorder_name']);
+
+                var genesPromise = disorder.getGenes();
+                var signsPromise = disorder.getSigns();
+
+                $scope.signsTracker.addPromise(signsPromise);
+                $scope.genesTracker.addPromise(genesPromise);
             });
             $scope.disorderTracker.addPromise(disorder.$promise);
             $scope.signsTracker.addPromise(disorder.$promise);
@@ -38,5 +44,50 @@ angular.module('orphaApp')
                 console.log('parents', disorders);
             });
         }
+
+        function edit() {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/edit.modal.html',
+                controller: 'EditModalCtrl as editVm',
+                // size: size,
+                resolve: {
+                    concept: function() {
+                        return $scope.disorder;
+                    },
+                    propertyLabel: function() {
+                        return 'Prevalence Class';
+                    },
+                    propertyName: function() {
+                        return 'disorder_prevalence';
+                    },
+                    propertyContentType: function() {
+                        return 'prevalence_class';
+                    }
+                }
+            });
+        }
+
+        function edit2() {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/edit.modal.html',
+                controller: 'EditModalCtrl as editVm',
+                // size: size,
+                resolve: {
+                    concept: function() {
+                        return $scope.disorder;
+                    },
+                    propertyLabel: function() {
+                        return 'Age of Onset';
+                    },
+                    propertyName: function() {
+                        return 'disorder_onset';
+                    },
+                    propertyContentType: function() {
+                        return 'age_of_onset';
+                    }
+                }
+            });
+        }
+
 
     });

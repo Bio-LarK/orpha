@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="title">
+        <h1>Suggestions</h1>
+    </div>
+    <div ng-repeat="suggestion in suggestionsVm.suggestions | orderBy:'-created'">
+        <div class="panel panel-default">
+            <div class="panel-body">
+            	Concept: {{ suggestion.ltrans_onnode.title }}
+            	<br/>
+            	Old Value: {{ suggestion.ltrans_cvalref.title }}
+            	<br/>
+            	New Value: {{ suggestion.ltrans_svalref.title }}
+            	<div>
+            		<button class="btn btn-default">
+            			<i class="fa fa-check"></i> Accept
+            		</button>
+            		<button class="btn btn-default">
+            			<i class="fa fa-times"></i> Reject
+					</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+</div>

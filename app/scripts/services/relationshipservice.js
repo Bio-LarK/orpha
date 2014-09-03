@@ -8,7 +8,7 @@
  * Service in the orphaApp.
  */
 angular.module('orphaApp')
-    .service('RelationshipService', function RelationshipService($http, $q) {
+    .service('RelationshipService', function RelationshipService($http, $q, ENV) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.getRelatedThroughIntermediary = function (resource, intermediaryPropertyName, fields) {
             // get the first property
@@ -24,12 +24,16 @@ angular.module('orphaApp')
             request['paramaters[type]'] = firstIntermediary.type;
             request.fields = ['nid', 'type', 'title'].concat(fields).join(',');
 
-            return $http.get('http://130.56.248.140/orphanet/api/entity_node', {
+            return $http.get(ENV.apiEndpoint + '/entity_node', {
                 params: request
             }).then(function (response) {
                 var intermediaries = response.data;
                 resource[intermediaryPropertyName] = intermediaries;
             });
+        };
+
+        this.getRelated = function() {
+
         };
 
         // var relatedIds = _.reduce(list, function (relatedIds, relation) {

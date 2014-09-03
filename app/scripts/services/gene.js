@@ -8,8 +8,8 @@
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
-    .factory('Gene', function ($resource) {
-        var Gene = $resource('http://130.56.248.140/orphanet/api/entity_node/:nid', {
+    .factory('Gene', function ($resource, ENV) {
+        var Gene = $resource(ENV.apiEndpoint + '/entity_node/:nid', {
             'parameters[type]': 'gene',
             nid: '@nid'
         });

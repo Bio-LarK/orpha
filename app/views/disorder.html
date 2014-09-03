@@ -59,15 +59,18 @@
                                     <div class="col-sm-3">
                                         <div class="detail">
                                             <h3 class="detail-title">Prevalence Class</h3>
-                                            <div class="detail-info">
-                                                {{ disorder.disorder_prevalence.prevalence_name || 'Unknown' }}
+                                            <div class="detail-info" ng-click="edit()" style="border-bottom: 1px blue dotted; cursor: pointer;">
+                                                <!-- <a href="#" editable-select="user.group" onshow="loadGroups()" e-ng-options="g.id as g.text for g in groups"> -->
+                                                    {{ disorder.disorder_prevalence.prevalence_name || 'Unknown' }}
+                                                <!-- </a> -->
+                                                
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="detail">
                                             <h3 class="detail-title">Age of Onset</h3>
-                                            <div class="detail-info">
+                                            <div class="detail-info" ng-click="edit2()" style="border-bottom: 1px blue dotted; cursor: pointer;">
                                                 {{ disorder.disorder_onset.aoo_name || 'Unknown' }}
                                             </div>
                                         </div>
@@ -85,7 +88,7 @@
                                             <h3 class="detail-title">Type of Inheritance</h3>
                                             <div class="text-muted" ng-hide="disorder.disorder_inheritance.length">Unknown</div>
                                             <div ng-repeat="inheritance in disorder.disorder_inheritance" class="detail-info">
-                                                    {{ inheritance.label }}
+                                                {{ inheritance.label }}
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +98,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <p>The incorporation of Orphanet summaries for diseases is currently under development. The summary below is for illustrative purposes.</p> 
+                                    <p>The incorporation of Orphanet summaries for diseases is currently under development. The summary below is for illustrative purposes.</p>
 
                                     <p>This disorder is a rare neurodegenerative disorder of the astrocytes comprised of two clinical forms: AxD Type I and Type II (see these terms) manifesting with various degrees of macrocephaly, spasticity, ataxia and seizures and leading to psychomotor regression and death.</p>
 
@@ -186,7 +189,7 @@
                     Root disorder.
                 </p>
                 <div class="row">
-                
+
                     <div class="col-sm-12">
                         <div class="row" ng-repeat="row in disorder.disorder_parent | inSlicesOf:3">
                             <div class="col-sm-4" ng-repeat="disorder in row">
@@ -202,18 +205,18 @@
                                                             {{ disorder.disorder_name }}
                                                     </a> 
                                                 </h5>
-                
+
                                                 <p>An Orphanet summary for this disease is currently under development.</p>
                                             </div>
                                         </div>
-                
+
                                     </div>
                                     <ul class="list-group">
                                         <li class="list-group-item">
                                             <div style="font-size: 12px; color: grey; text-transform: uppercase">
                                                 Location in hierarchy
                                             </div>
-                
+
                                             <a href="" ng-click="toggleParents(disorder);">
                                                 <i class="fa" ng-class="{
                                                             'fa-caret-right': !disorder.isShowingParents,
@@ -260,7 +263,7 @@
                 <p ng-hide="disorder.disorder_child.length" class="text-muted">
                     No children.
                 </p>
-                
+
                 <div class="row" ng-repeat="row in disorder.disorder_child | filter:filterChildren |  inSlicesOf:3">
                     <div class="col-sm-4" ng-repeat="disorder in row">
                         <div class="panel panel-default">
@@ -275,11 +278,11 @@
                                                 {{ disorder.disorder_name }}
                                             </a>
                                         </h5>
-                
+
                                         <p>An Orphanet summary for this disease is currently under development.</p>
                                     </div>
                                 </div>
-                
+
                             </div>
                         </div>
                     </div>
@@ -408,8 +411,8 @@
                                     </div>
                                 </div>
                             </div>
-                
-                
+
+
                             <div class="list-group" ng-show="disorder_phenotype.ds_sign.sign_dissign.length">
                                 <a class="list-group-item" ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
                                     <!-- <div class="row" style="font-size: 12px;"> -->
@@ -420,7 +423,7 @@
                                     <!-- </div> -->
                                 </a>
                                 </ul>
-                
+
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
@@ -42,6 +42,39 @@ module.exports = function (grunt) {
                 src: ['**']
             }
         },
+
+        ngconstant: {
+            // Options for all targets
+            options: {
+                space: '  ',
+                wrap: '\'use strict\';\n\n {%= __ngModule %}',
+                name: 'config',
+            },
+            // Environment targets
+            development: {
+                options: {
+                    dest: '<%= yeoman.app %>/scripts/config.js'
+                },
+                constants: {
+                    ENV: {
+                        name: 'development',
+                        apiEndpoint: 'api'
+                    }
+                }
+            },
+            production: {
+                options: {
+                    dest: '<%= yeoman.dist %>/scripts/config.js'
+                },
+                constants: {
+                    ENV: {
+                        name: 'production',
+                        apiEndpoint: 'api'
+                    }
+                }
+            }
+        },
+
 
         changelog: {
             options: {}
@@ -143,32 +176,21 @@ module.exports = function (grunt) {
             //     https: false
             // }],
             proxies: [{
-                context: '/orphanet',
+                context: '/api',
                 host: '130.56.248.140',
-                // port: 8080,
-                https: false
+                headers: {
+                    host: '130.56.248.140:80'
+                },
+                rewrite: {
+                    '^/api': '/orphanet/api',
+                }
             }],
             livereload: {
                 options: {
                     open: true,
-                    middleware: function (connect, options) {
-                        if (!Array.isArray(options.base)) {
-                            options.base = [options.base];
-                        }
-
-                        // Setup the proxy
-                        var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
-
-                        // Serve static files.
-                        options.base.forEach(function (base) {
-                            middlewares.push(connect.static(base));
-                        });
-
-                        // Make directory browse-able.
-                        var directory = options.directory || options.base[options.base.length - 1];
-                        middlewares.push(connect.directory(directory));
-
-                        var stuff = [
+                    middleware: function(connect) {
+                        return [
+                            require('grunt-connect-proxy/lib/utils').proxyRequest,
                             connect.static('.tmp'),
                             connect().use(
                                 '/bower_components',
@@ -176,16 +198,13 @@ module.exports = function (grunt) {
                             ),
                             connect.static(appConfig.app)
                         ];
-
-                        middlewares = stuff.concat(middlewares);
-                        return middlewares;
                     }
                 }
             },
             test: {
                 options: {
                     port: 9001,
-                    middleware: function (connect) {
+                    middleware: function(connect) {
                         return [
                             connect.static('.tmp'),
                             connect.static('test'),
@@ -494,13 +513,14 @@ module.exports = function (grunt) {
     });
 
 
-    grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+    grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'connect:dist:keepalive']);
         }
 
         grunt.task.run([
             'clean:server',
+            'ngconstant:development',
             'wiredep',
             'configureProxies:server',
             'concurrent:server',
@@ -510,7 +530,7 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+    grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function(target) {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
         grunt.task.run(['serve:' + target]);
     });
@@ -525,6 +545,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'ngconstant:production',
         'wiredep',
         'useminPrepare',
         'concurrent:dist',
@@ -546,7 +567,7 @@ module.exports = function (grunt) {
         'build'
     ]);
 
-    grunt.registerTask('deploy', 'Builds and deploys', function (type) {
+    grunt.registerTask('deploy', 'Builds and deploys', function(type) {
         type = type || 'patch';
 
         grunt.task.run(['build', 'bump-only:' + type, 'changelog', 'bump-commit', 'buildcontrol:live']);
