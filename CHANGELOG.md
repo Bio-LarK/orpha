@@ -1,3 +1,19 @@
+<a name="0.8.0"></a>
+## 0.8.0 (2014-09-04)
+
+
+#### Bug Fixes
+
+* **build:** add ghpages to buildcontrol process ([89f26eeb](git@github.com:Bio-LarK/orpha/commit/89f26eebf8b8321283876f6639be1249e42445f4))
+
+
+#### Features
+
+* **suggestions:**
+  * add removing a suggestion ([aa3040c3](git@github.com:Bio-LarK/orpha/commit/aa3040c31168c031cc11786e3bcf61005a9de839))
+  * add suggestions ([2cfc0b93](git@github.com:Bio-LarK/orpha/commit/2cfc0b933f0557b6b0168d23519ab6a5e85f423d))
+
+
 <a name="0.7.6"></a>
 ### 0.7.6 (2014-09-02)
 
