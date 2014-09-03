@@ -90,7 +90,7 @@ module.exports = function(grunt) {
             },
             pages: {
                 options: {
-                    remote: 'https://github.com/Bio-LarK/orpha.git',
+                    remote: 'git@github.com:Bio-LarK/orpha.git',
                     branch: 'gh-pages'
                 }
             },
@@ -566,6 +566,11 @@ module.exports = function(grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('deploypages', 'Builds and deploys', function(type) {
+        type = type || 'patch';
+        grunt.task.run(['build', 'bump-only:' + type, 'changelog', 'bump-commit', 'buildcontrol:pages']);
+    });
 
     grunt.registerTask('deploy', 'Builds and deploys', function(type) {
         type = type || 'patch';
