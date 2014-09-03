@@ -8,15 +8,15 @@
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
-    .factory('suggestionService', function($http, ENV) {
+    .factory('suggestionService', function($http, ENV, ListTransaction) {
         var service = {
             getNewSuggestions: getNewSuggestions
         };
         return service;
 
         function getNewSuggestions() {
-            return $http.get(ENV.apiEndpoint + '/entity_node?parameters[type]=list_transaction').then(function(response) {
-                var listTransactions = response.data;
+            return ListTransaction.query({}).$promise.then(function(listTransactions) {
+                // var listTransactions = response.data;
 
                 var refIds = _.pluck(listTransactions, 'ltrans_svalref');
                 var request = _.indexBy(refIds, function(ids, index) {

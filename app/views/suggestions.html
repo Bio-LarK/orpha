@@ -11,10 +11,10 @@
             	<br/>
             	New Value: {{ suggestion.ltrans_svalref.title }}
             	<div>
-            		<button class="btn btn-default">
-            			<i class="fa fa-check"></i> Accept
+            		<button class="btn btn-default" ng-click="suggestionsVm.approve(suggestion)">
+            			<i class="fa fa-check"></i> Approve
             		</button>
-            		<button class="btn btn-default">
+            		<button class="btn btn-default" ng-click="suggestionsVm.approve(suggestion)">
             			<i class="fa fa-times"></i> Reject
 					</button>
             	</div>
