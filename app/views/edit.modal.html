@@ -4,24 +4,34 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <h4 class="modal-title">Propose a change</h4>
+        <h4 class="modal-title">{{ editVm.concept.title }}</h4>
     </div>
     <div class="modal-body">
-        <h3>{{ editVm.concept.title }}</h3>
+        <dl>
+            <dt>
+                Changing property: 
+            </dt>
+            <dd>
+                {{ editVm.propertyLabel }}
+            </dd>
 
-        <div>
-            Changing property: {{ editVm.propertyLabel }}
-        </div>
-        <div>
-            Select a value:
-            <select ng-model="editVm.prevalenceClass" ng-options="class as class.title for class in editVm.prevalenceClasses"></select>
-        </div>
-        <div>
+            <dt>
+                Current value:
+            </dt>
+            <dd>
+                {{ editVm.concept[editVm.propertyName].title }}
+            </dd>
 
-        </div>
+            <dt>
+                Proposed value:
+            </dt>
+            <dd>
+                <select ng-model="editVm.prevalenceClass" ng-options="class as class.title for class in editVm.prevalenceClasses"></select>
+            </dd>
+        </dl>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="editVm.save(yo)">Save</button>
         <button class="btn btn-default" ng-click="editVm.cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="editVm.save(yo)">Propose Change</button>
     </div>
 </div>

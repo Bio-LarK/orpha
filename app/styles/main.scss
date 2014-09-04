@@ -12,7 +12,8 @@ $icon-font-path:"../bower_components/bootstrap-sass-official/assets/fonts/bootst
 
 body {
     background-color: #F4F4F4;
-    font-family: 'Open Sans', Sans-serif;
+    font-family: 'Helvetica', Sans-serif;
+    // font-family: 'Open Sans', Sans-serif;
     font-size: 14px;
     line-height: 1.5;
     color: rgba(0,0,0,0.87);
@@ -21,6 +22,19 @@ footer {
   margin-top: 40px;
 }
 
+.editable {
+  border-bottom: 2px blue dotted; 
+  cursor: pointer;
+}
+.editable-card {
+  border: 2px blue dotted; 
+  cursor: pointer;
+}
+.modal-content {
+  border-radius: 2px;
+  border: none;
+  box-shadow: none;
+}
 #loading-bar .bar {
   background: rgba(0,0,0,0.3);
 }

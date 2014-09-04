@@ -1,0 +1,49 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">Relationship between
+            <strong>{{ editVm.gene.title }}</strong>and
+            <strong>{{ editVm.disorder.title }}</strong>
+        </h4>
+    </div>
+    <div class="modal-header">
+        <div class="btn-group btn-group-justified">
+            <label class="btn btn-default" ng-model="editVm.proposalType" btn-radio="'edit'"><i class="fa fa-pencil"></i> Edit</label>
+            <label class="btn btn-default" ng-model="editVm.proposalType" btn-radio="'remove'"><i class="fa fa-times"></i> Remove</label>
+        </div>
+    </div>
+    <div ng-switch on="editVm.proposalType">
+        <div class="modal-body" ng-switch-when="remove">
+            <p>
+                Remove the relationship between
+                <strong>{{ editVm.gene.title }}</strong>and
+                <strong>{{ editVm.disorder.title }}</strong>
+            </p>
+        </div>
+        <div class="modal-body" ng-switch-when="edit">
+            <dl>
+                <dt>Relationship Status</dt>
+                <dd>
+<!--                     {{ editVm.disorderGene.disgene_as.title }} -->
+                    <select ng-model="editVm.disorderGeneStatus" ng-options="status as status.title for status in editVm.disorderGeneStatuses"></select>
+                </dd>
+
+                <dt>Relationship Type</dt>
+                <dd>
+                    <!-- {{ editVm.disorderGene.disgene_at.title }} -->
+                    <select ng-model="editVm.disorderGeneType" ng-options="type as type.title for type in editVm.disorderGeneTypes"></select>
+                </dd>
+            </dl>
+            
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <!-- <button class="btn btn-link pull-left">Remove Relationship</button> -->
+        <button class="btn btn-default" ng-click="editVm.cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="editVm.proposeChanges()">Propose Change</button>
+    </div>
+</div>

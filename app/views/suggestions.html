@@ -2,14 +2,35 @@
 	<div class="title">
         <h1>Suggestions</h1>
     </div>
+    
     <div ng-repeat="suggestion in suggestionsVm.suggestions | orderBy:'-created'">
         <div class="panel panel-default">
             <div class="panel-body">
-            	Concept: {{ suggestion.ltrans_onnode.title }}
-            	<br/>
-            	Old Value: {{ suggestion.ltrans_cvalref.title }}
-            	<br/>
-            	New Value: {{ suggestion.ltrans_svalref.title }}
+            	<dl>
+            		<dt>Concept</dt>
+            		<dd>{{ suggestion.ltrans_onnode.title }}</dd>
+
+            		<dt>Old Value</dt>
+            		<dd>{{ suggestion.ltrans_cvalref.title }}</dd>
+
+					<dt>
+						New Value
+					</dt>
+					<dd>
+						{{ suggestion.ltrans_svalref.title }}
+					</dd>
+
+					<dt>
+						Suggested By
+					</dt>
+					<dd>
+						{{ suggestion.author.name }}
+					</dd>
+
+					<dt>Status</dt>
+					<dd>Not Approved</dd>
+            	</dl>
+            	
             	<div>
             		<button class="btn btn-default" ng-click="suggestionsVm.approve(suggestion)">
             			<i class="fa fa-check"></i> Approve

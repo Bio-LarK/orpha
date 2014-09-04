@@ -16,6 +16,8 @@ angular.module('orphaApp')
         $scope.toggleParents = toggleParents;
         $scope.edit = edit;
         $scope.edit2 = edit2;
+        $scope.editGenotype = editGenotype; 
+        $scope.editDisorderGene = editDisorderGene;
         activate();
         ////////////
 
@@ -66,6 +68,48 @@ angular.module('orphaApp')
                 }
             });
         }
+
+        function editDisorderGene(disorderGene) {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/editdisordergene.modal.html',
+                controller: 'EditDisorderGeneCtrl as editVm',
+                // size: size,
+                resolve: {
+                    disorderGene: function() {
+                        return disorderGene;
+                    },
+                    gene: function() {
+                        return disorderGene.disgene_gene;
+                    },
+                    disorder: function() {
+                        return $scope.disorder;
+                    }
+                }
+            });
+        }
+        function editGenotype(node) {
+            console.log('open modal', node);
+            var modalInstance = $modal.open({
+                templateUrl: 'views/edit.modal.html',
+                controller: 'EditModalCtrl as editVm',
+                // size: size,
+                resolve: {
+                    concept: function() {
+                        return node;
+                    },
+                    propertyLabel: function() {
+                        return 'Gene Relationship Type';
+                    },
+                    propertyName: function() {
+                        return 'disgene_at';
+                    },
+                    propertyContentType: function() {
+                        return 'disorder_gene_at';
+                    }
+                }
+            });
+        }
+
 
         function edit2() {
             var modalInstance = $modal.open({

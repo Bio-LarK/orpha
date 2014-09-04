@@ -51,20 +51,26 @@ angular.module('orphaApp')
         }
 
         function getGenes() {
+            /* jshint validthis: true */
+            var disorder = this;
             // Get the gene ids
             var fields = ['disgene_as', 'disgene_at', 'disgene_gene'];
-            return RelationshipService.getRelatedThroughIntermediary(this, 'disorder_disgene', fields);
+            return RelationshipService.getRelatedThroughIntermediary(disorder, 'disorder_disgene', fields);
         }
 
         function getSigns() {
+            /* jshint validthis: true */
+            var disorder = this;
             // Get the gene ids
             var fields = ['ds_sign', 'ds_frequency'];
-            return RelationshipService.getRelatedThroughIntermediary(this, 'disorder_phenotype', fields);
+            return RelationshipService.getRelatedThroughIntermediary(disorder, 'disorder_phenotype', fields);
         }
 
         function getParents() {
+            /* jshint validthis: true */
+            var disorder = this;
+
             // Get all the parent ids
-            var that = this;
             var ids = _.map(this['disorder_parent'], function(parent) {
                 return parent.id || parent.nid;
             });
@@ -81,10 +87,10 @@ angular.module('orphaApp')
             return $http.get(ENV.apiEndpoint + '/entity_node', {
                 params: request
             }).then(function(response) {
-                that['disorder_parent'] = _.map(response.data, function(disorder) {
+                disorder['disorder_parent'] = _.map(response.data, function(disorder) {
                     return new Disorder(disorder);
                 });
-                return that['disorder_parent'];
+                return disorder['disorder_parent'];
             });
 
         }
