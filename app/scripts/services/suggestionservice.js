@@ -34,7 +34,6 @@ angular.module('orphaApp')
                 });
 
 
-
                 var conceptIds = _.pluck(listTransactions, 'ltrans_onnode');
                 var conceptRequest = _.indexBy(conceptIds, function(ids, index) {
                     return 'parameters[nid][' + index + ']';
