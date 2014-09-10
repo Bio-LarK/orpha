@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="title">
+        <h1>{{ vm.request.title || 'No title' }}</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div ng-repeat="transaction in vm.request.$tr_trans">
+                <div>
+                    Change: {{ transaction.ltrans_cvalref.title }} to {{ transaction.ltrans_svalref.title }}
+                </div>
+
+                <div>
+                    Property: {{ transaction.ltrans_onprop }}
+                </div>
+            </div>
+            <div>
+                Reason:
+                <div ng-bind-html="vm.request.body.value"></div>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-click="vm.accept(vm.request)">Accept</button>
+                <button class="btn btn-default">Reject</button>
+            </div>
+        </div>
+    </div>
+
+
+    <h2>Discussion</h2>
+    <div>
+        <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+
+</div>

@@ -8,7 +8,8 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('EditDisorderGeneCtrl', function($scope, $http, $modalInstance, disorder, gene, disorderGene, ENV, ListTransaction) {
+    .controller('EditDisorderGeneCtrl', function($scope, $http, $modalInstance, 
+        disorder, gene, disorderGene, ENV, ListTransaction) {
         var vm = this;
         vm.disorderGene = disorderGene;
         vm.gene = gene;
@@ -55,18 +56,18 @@ angular.module('orphaApp')
                 }
 
                 if (vm.disorderGene['disgene_at'].nid !== vm.disorderGeneType.nid) {
-                    var propertyName = 'disgene_at';
-                    var listTransaction = new ListTransaction({
+                    var propertyName2 = 'disgene_at';
+                    var listTransaction2 = new ListTransaction({
                         title: 'transaction',
                         type: 'list_transaction',
 
                         ltrans_position: '0',
                         ltrans_onnode: vm.disorderGene.nid,
-                        ltrans_onprop: propertyName,
+                        ltrans_onprop: propertyName2,
                         ltrans_svalref: vm.disorderGeneType.nid,
-                        ltrans_cvalref: vm.disorderGene[propertyName].nid
+                        ltrans_cvalref: vm.disorderGene[propertyName2].nid
                     });
-                    listTransaction.$save();
+                    listTransaction2.$save();
                 }
                 
                 $modalInstance.dismiss('cancel');

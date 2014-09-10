@@ -80,14 +80,21 @@ angular
             })
             .state('suggestions', {
                 url: '/suggestions',
-                controller: 'SuggestionsCtrl as suggestionsVm',
-                // controllerAs: 'suggestionsVm',
+                controller: 'SuggestionsCtrl as vm',
                 templateUrl: 'views/suggestions.html',
+            })
+            .state('suggestion', {
+                url: '/suggestions/:suggestionId',
+                controller: 'SuggestionCtrl as vm',
+                templateUrl: 'views/suggestion.html',
             })
             .state('disorder', {
                 url: '/disorders/:disorderId',
                 controller: 'DisorderCtrl',
                 templateUrl: 'views/disorder.html',
+            })
+            .state('disorder.edit', {
+                url: '/edit'
             })
             .state('disorders', {
                 url: '/disorders?page?signId',

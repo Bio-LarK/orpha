@@ -1,4 +1,8 @@
 $icon-font-path:"../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+$brand-primary: #3f51b5;
+$border-radius-base: 1px;
+
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
@@ -70,7 +74,7 @@ footer {
     margin-right: 5px;
   }
   .navbar-nav li a {
-    border-radius: 100px;
+    // border-radius: 100px;
     margin: 7px 0;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -256,15 +260,15 @@ footer {
 a { 
 	color: inherit;
 }
-.ng-hide-add { 
-	animation:0.2s fadeOut ease; 
-	display: block !important;
-}
+// .ng-hide-add { 
+// 	animation:0.2s fadeOut ease; 
+// 	display: block !important;
+// }
 
 /* when showing the picture */
-.ng-hide-remove      { 
-	animation:0.2s fadeIn ease; 
-}
+// .ng-hide-remove      { 
+// 	animation:0.2s fadeIn ease; 
+// }
 
 .text-muted, h1 small, h1 .small {
 	color: rgba(0,0,0, 0.54) !important;

@@ -9,15 +9,17 @@
  */
 angular.module('orphaApp')
     .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, Page, promiseTracker, $modal) {
-        $scope.disorderTracker = promiseTracker();
-        $scope.disorder = null;
-        $scope.signsTracker = promiseTracker();
-        $scope.genesTracker = promiseTracker();
-        $scope.toggleParents = toggleParents;
-        $scope.edit = edit;
-        $scope.edit2 = edit2;
-        $scope.editGenotype = editGenotype; 
-        $scope.editDisorderGene = editDisorderGene;
+        var vm = $scope;
+        vm.disorderTracker = promiseTracker();
+        vm.disorder = null;
+        vm.signsTracker = promiseTracker();
+        vm.genesTracker = promiseTracker();
+        vm.toggleParents = toggleParents;
+        vm.edit = edit;
+        vm.edit2 = edit2;
+        vm.editGenotype = editGenotype; 
+        vm.editDisorderGene = editDisorderGene;
+        vm.isEditing = false;
         activate();
         ////////////
 
@@ -25,19 +27,19 @@ angular.module('orphaApp')
             var disorder = Disorder.get({
                 nid: $stateParams.disorderId //136402
             }, function (disorder) {
-                $scope.disorder = disorder;
+                vm.disorder = disorder;
 
                 Page.setTitle(disorder['disorder_name']);
 
                 var genesPromise = disorder.getGenes();
                 var signsPromise = disorder.getSigns();
 
-                $scope.signsTracker.addPromise(signsPromise);
-                $scope.genesTracker.addPromise(genesPromise);
+                vm.signsTracker.addPromise(signsPromise);
+                vm.genesTracker.addPromise(genesPromise);
             });
-            $scope.disorderTracker.addPromise(disorder.$promise);
-            $scope.signsTracker.addPromise(disorder.$promise);
-            $scope.genesTracker.addPromise(disorder.$promise);
+            vm.disorderTracker.addPromise(disorder.$promise);
+            vm.signsTracker.addPromise(disorder.$promise);
+            vm.genesTracker.addPromise(disorder.$promise);
         }
 
         function toggleParents(disorder) {
@@ -54,7 +56,7 @@ angular.module('orphaApp')
                 // size: size,
                 resolve: {
                     concept: function() {
-                        return $scope.disorder;
+                        return vm.disorder;
                     },
                     propertyLabel: function() {
                         return 'Prevalence Class';
@@ -82,7 +84,7 @@ angular.module('orphaApp')
                         return disorderGene.disgene_gene;
                     },
                     disorder: function() {
-                        return $scope.disorder;
+                        return vm.disorder;
                     }
                 }
             });
@@ -118,7 +120,7 @@ angular.module('orphaApp')
                 // size: size,
                 resolve: {
                     concept: function() {
-                        return $scope.disorder;
+                        return vm.disorder;
                     },
                     propertyLabel: function() {
                         return 'Age of Onset';
