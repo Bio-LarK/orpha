@@ -8,15 +8,16 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, Page, promiseTracker, $modal) {
+    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, Page, promiseTracker, $modal, modalService) {
         var vm = $scope;
         vm.disorderTracker = promiseTracker();
         vm.disorder = null;
         vm.signsTracker = promiseTracker();
         vm.genesTracker = promiseTracker();
         vm.toggleParents = toggleParents;
-        vm.edit = edit;
-        vm.edit2 = edit2;
+        vm.editAgeOfOnset = editAgeOfOnset;
+        vm.editPrevalenceClass = editPrevalenceClass;
+        vm.editAgeOfDeath = editAgeOfDeath;
         vm.editGenotype = editGenotype; 
         vm.editDisorderGene = editDisorderGene;
         vm.isEditing = false;
@@ -49,26 +50,15 @@ angular.module('orphaApp')
             });
         }
 
-        function edit() {
-            var modalInstance = $modal.open({
-                templateUrl: 'views/edit.modal.html',
-                controller: 'EditModalCtrl as editVm',
-                // size: size,
-                resolve: {
-                    concept: function() {
-                        return vm.disorder;
-                    },
-                    propertyLabel: function() {
-                        return 'Prevalence Class';
-                    },
-                    propertyName: function() {
-                        return 'disorder_prevalence';
-                    },
-                    propertyContentType: function() {
-                        return 'prevalence_class';
-                    }
-                }
-            });
+        function editAgeOfOnset() {
+            return modalService.openAgeOfOnset(vm.disorder);
+        }
+
+        function editPrevalenceClass() {
+            return modalService.openPrevalenceClassModal(vm.disorder);
+        }
+        function editAgeOfDeath() {
+            return modalService.openAgeOfDeath(vm.disorder);
         }
 
         function editDisorderGene(disorderGene) {
@@ -112,28 +102,6 @@ angular.module('orphaApp')
             });
         }
 
-
-        function edit2() {
-            var modalInstance = $modal.open({
-                templateUrl: 'views/edit.modal.html',
-                controller: 'EditModalCtrl as editVm',
-                // size: size,
-                resolve: {
-                    concept: function() {
-                        return vm.disorder;
-                    },
-                    propertyLabel: function() {
-                        return 'Age of Onset';
-                    },
-                    propertyName: function() {
-                        return 'disorder_onset';
-                    },
-                    propertyContentType: function() {
-                        return 'age_of_onset';
-                    }
-                }
-            });
-        }
-
+        
 
     });

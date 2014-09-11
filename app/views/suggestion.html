@@ -46,7 +46,7 @@
                     <strong>
                         {{ transaction.ltrans_onprop }}
                     </strong>
-                    : {{ transaction.ltrans_cvalref.title }}
+                    : {{ transaction.ltrans_cvalref.title || 'Unknown' }}
                     <i class="fa fa-arrow-right"></i>
                     {{ transaction.ltrans_svalref.title }}
                 </div>

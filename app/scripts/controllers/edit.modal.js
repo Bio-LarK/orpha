@@ -9,7 +9,8 @@
  */
 angular.module('orphaApp')
     .controller('EditModalCtrl', function($scope, $http, $modalInstance,
-        ENV, ListTransaction, concept, propertyName, propertyContentType, propertyLabel, TransactionRequest) {
+        ENV, ListTransaction, concept, propertyName, propertyContentType, propertyLabel, TransactionRequest,
+        toaster) {
 
         var vm = this;
         vm.concept = concept;
@@ -28,7 +29,7 @@ angular.module('orphaApp')
         ////
 
         function activate() {
-            getPropertyOptions();
+            return getPropertyOptions();
         }
 
         function getPropertyOptions() {
@@ -74,6 +75,7 @@ angular.module('orphaApp')
                         summary: vm.reason
                     }
                 });
+                toaster.pop('success', 'Suggestion submitted.');
                 return transactionRequest.$save();
             });
 
