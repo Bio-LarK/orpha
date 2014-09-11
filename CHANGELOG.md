@@ -1,3 +1,12 @@
+<a name="0.9.8"></a>
+### 0.9.8 (2014-09-11)
+
+
+#### Bug Fixes
+
+* **drupal:** fix incorrect base url ([f9de7d46](git@github.com:Bio-LarK/orpha/commit/f9de7d46f30f8736db8b3ae434c481a73f55bbed))
+
+
 <a name="0.9.7"></a>
 ### 0.9.7 (2014-09-11)
 
