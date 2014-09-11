@@ -23,7 +23,8 @@ angular
         'angular-loading-bar',
         'xeditable',
         'config',
-        'toaster'
+        'toaster',
+        'monospaced.elastic'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, editableOptions, Page) {
         $rootScope.$state = $state;

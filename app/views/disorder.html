@@ -32,13 +32,13 @@
                 </div>
                 <div class="media-body">
                     <h1>
-                        <span class="editable">
+                        <span>
                             {{ disorder.title || 'Loading...' }}
                         </span>
                     </h1>
                     <div style="color: rgba(0,0,0,0.5); margin-top: 7px;" ng-show="disorder.disorder_synonym.length">
 
-                        <span class="editable">
+                        <span>
                             <small style="font-size: 16px;">
                                 Synonyms:
                                 <span ng-repeat="synonym in disorder.disorder_synonym">
@@ -330,7 +330,7 @@
                 </p>
                 <div class="row" ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:3">
                     <div class="col-sm-4" ng-repeat="disorder_gene in row">
-                        <div class="panel panel-default editable-card" ng-click="editDisorderGene(disorder_gene)">
+                        <div class="panel panel-default" ng-click="editDisorderGene(disorder_gene)">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">

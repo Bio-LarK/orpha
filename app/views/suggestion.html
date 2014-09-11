@@ -17,7 +17,7 @@
                 <div>
                     {{ vm.suggestion.created * 1000 | date:'mediumDate' }}
                 </div>
-                <div class="label" ng-class="{'label-success': vm.suggestion.$tr_status.nid == 1, 'label-danger': vm.suggestion.$tr_status.nid == 2}">
+                <div class="label label-default" ng-class="{'label-success': vm.suggestion.$tr_status.nid == 1, 'label-danger': vm.suggestion.$tr_status.nid == 2}">
                     {{ vm.suggestion.$tr_status.trstatus_value }}
                 </div>
 
@@ -29,7 +29,7 @@
                 </div>
                 <div class="media-body">
                     <div>
-                        <a href>{{ vm.suggestion.$author.name }}</a>
+                        <a href><strong>{{ vm.suggestion.$author.name }}</strong></a>
                     </div>
                     <div>
                         proposed a change - #{{ vm.suggestion.nid }}.
