@@ -2,6 +2,10 @@
 ## 0.9.0 (2014-09-11)
 
 
+<a name="0.9.0"></a>
+## 0.9.0 (2014-09-11)
+
+
 #### Bug Fixes
 
 * **suggestion:** styled suggestion page ([536a9d74](git@github.com:Bio-LarK/orpha/commit/536a9d743f3475f259a6aea866a4acd7e6d53d87))
