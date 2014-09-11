@@ -17,10 +17,10 @@
     </style>
 
     <div class="container">
-        <div class="pull-right">
+        <!--<div class="pull-right">
             <button class="btn btn-primary" ui-sref="disorder.edit" ng-hide="$state.includes('disorder.edit')">Edit</button>    
             <button class="btn btn-default" ui-sref="disorder" ng-show="$state.includes('disorder.edit')">Done</button>
-        </div>
+        </div>-->
         
         <div class="title">
             <div class="pull-right text-muted" ng-hide="disorderTracker.active()">
@@ -415,7 +415,7 @@
                 </p>
                 <div class="row" ng-repeat="row in disorder.disorder_phenotype | filter:filterPhenotype | inSlicesOf:3">
                     <div class="col-sm-4 repeated-item" ng-repeat="disorder_phenotype in row">
-                        <div class="panel panel-default editable-card">
+                        <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
