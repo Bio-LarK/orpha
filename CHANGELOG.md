@@ -1,3 +1,13 @@
+<a name="0.9.9"></a>
+### 0.9.9 (2014-09-12)
+
+
+#### Bug Fixes
+
+* **border-radius:** change default border radius ([66850052](git@github.com:Bio-LarK/orpha/commit/668500529680c688f2815a1b7052c455c2861514))
+* **disorder:** remove edit on phenotype ([2d75fe00](git@github.com:Bio-LarK/orpha/commit/2d75fe00433c3cc176f2a01434fb42a69aea23ed))
+
+
 <a name="0.9.8"></a>
 ### 0.9.8 (2014-09-11)
 
