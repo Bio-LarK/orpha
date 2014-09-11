@@ -1,3 +1,21 @@
+<a name="0.9.0"></a>
+## 0.9.0 (2014-09-11)
+
+
+#### Bug Fixes
+
+* **suggestion:** styled suggestion page ([536a9d74](git@github.com:Bio-LarK/orpha/commit/536a9d743f3475f259a6aea866a4acd7e6d53d87))
+
+
+#### Features
+
+* **modal-service:** add modal service for managing modals ([971e98f4](git@github.com:Bio-LarK/orpha/commit/971e98f458b2f88cb0afce90a81e7928e04fc705))
+* **suggestions:**
+  * style suggestions modal and suggestions page ([dd550365](git@github.com:Bio-LarK/orpha/commit/dd550365a533e1de61dac75614109b178147c7aa))
+  * edit genotype disorder relationship ([931ac01d](git@github.com:Bio-LarK/orpha/commit/931ac01de6bcf0287c59fff4d44fd818aa19de41))
+* **transaction-request:** add transaction request model ([8a1ea2db](git@github.com:Bio-LarK/orpha/commit/8a1ea2db5bba8dc9dcdbe43a47438bc60e854143))
+
+
 <a name="0.8.0"></a>
 ## 0.8.0 (2014-09-04)
 
