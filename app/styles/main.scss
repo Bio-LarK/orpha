@@ -1,7 +1,7 @@
 $icon-font-path:"../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 $brand-primary: #3f51b5;
-$border-radius-base: 1px;
+$border-radius-base: 3px;
 
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
@@ -35,7 +35,6 @@ footer {
   cursor: pointer;
 }
 .modal-content {
-  border-radius: 2px;
   border: none;
   box-shadow: none;
 }
@@ -68,13 +67,12 @@ footer {
     border: none;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: none;
-    border-radius: 100px;
   }
   .navbar-nav li {
     margin-right: 5px;
   }
   .navbar-nav li a {
-    // border-radius: 100px;
+    border-radius: 3px;
     margin: 7px 0;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -199,7 +197,6 @@ footer {
 }
 
 .panel {
-  border-radius: 2px;
   h5 {
       text-transform: capitalize;
       font-weight: bold;
@@ -241,7 +238,6 @@ footer {
     // text-transform: uppercase;
   }
   input.panels-filter {
-    border-radius: 100px;
     border: none;
     background-color: rgba(0,0,0,0.1);
     position: relative;
