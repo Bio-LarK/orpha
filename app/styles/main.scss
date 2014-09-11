@@ -15,7 +15,7 @@ $border-radius-base: 1px;
 /* Space out content a bit */
 
 body {
-    background-color: #F4F4F4;
+    background-color: white;
     font-family: 'Helvetica', Sans-serif;
     // font-family: 'Open Sans', Sans-serif;
     font-size: 14px;
@@ -219,7 +219,7 @@ footer {
     }
   }
 
-  .panel-body {
+  .panel-body,.panel-heading {
     padding: 20px;
   }
   .list-group-item {

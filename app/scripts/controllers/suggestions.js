@@ -8,27 +8,56 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('SuggestionsCtrl', function($http, $scope, ENV, suggestionService, TransactionRequest) {
+    .controller('SuggestionsCtrl', function($http, $scope, ENV, suggestionService, TransactionRequest, $log, $q) {
         var vm = this;
         vm.suggestions = null;
+        vm.openSuggestions = null;
+        vm.closedSuggestions = null;
         vm.isShowingOpen = true;
+        vm.suggestionTypeChanged = suggestionTypeChanged;
         activate();
 
         ///////
 
         function activate() {
             // Load all transation requests
-            TransactionRequest.query({
-                'parameters[tr_status]': 3,
+            getSubmittedTransactions().then(function(suggestions) {
+                vm.openSuggestions = suggestions;
+                vm.suggestions = vm.openSuggestions;
+            });
+            getClosedTransactions().then(function(suggestions) {
+                vm.closedSuggestions = suggestions;
+            });
+        }
+
+        function getSubmittedTransactions() {
+            return getTransactions(3);
+        }
+        function getClosedTransactions() {
+            return $q.all([
+                getTransactions(1),
+                getTransactions(2)
+            ]).then(function(transactions) {
+                return _.flatten(transactions);
+            });
+        }
+        function getTransactions(status) {
+            return TransactionRequest.query({
+                'parameters[tr_status]': status,
                 fields: 'nid,title,tr_status,tr_timestamp,tr_user,tr_trans,created,author'
             }).$promise.then(function(suggestions) {
-                vm.suggestions = suggestions;
+                return suggestions;
+            }, function() {
+                return [];
             });
+        }
 
-
-         // suggestionService.getNewSuggestions().then(function(suggestions) {
-            //    console.log('got suggestions', suggestions);
-            //    vm.suggestions = suggestions;
-            //  });
+        function suggestionTypeChanged(isShowingOpen) {
+            vm.suggestions = null;
+            if(isShowingOpen) {
+                vm.suggestions = vm.openSuggestions;
+            } else {
+                vm.suggestions = vm.closedSuggestions;
+            }
         }
     });

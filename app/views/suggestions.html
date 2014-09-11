@@ -8,13 +8,13 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="btn-group">
-                            <label class="btn btn-default" ng-model="vm.isShowingOpen" btn-radio="true">
+                            <label class="btn btn-default" ng-model="vm.isShowingOpen" btn-radio="true" ng-change="vm.suggestionTypeChanged(vm.isShowingOpen)">
                                 Open
-                                <span class="badge">{{ vm.suggestions.length }}</span>
+                                <span class="badge">{{ vm.openSuggestions.length }}</span>
                             </label>
-                            <label class="btn btn-default" ng-model="vm.isShowingOpen" btn-radio="false">
+                            <label class="btn btn-default" ng-model="vm.isShowingOpen" btn-radio="false" ng-change="vm.suggestionTypeChanged(vm.isShowingOpen)">
                                 Closed
-                                <span class="badge">0</span>
+                                <span class="badge">{{ vm.closedSuggestions.length }}</span>
                             </label>
                         </div>
                     </div>
@@ -26,8 +26,15 @@
                     </div>
                 </div>
             </div>
+            
             <div class="list-group">
-                <div class="list-group-item" ng-repeat="suggestion in vm.suggestions">
+                <div class="list-group-item text-center" ng-show="vm.suggestions === null">
+                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                </div>
+                <div class="list-group-item text-muted" ng-hide="vm.suggestions.length">
+                    No suggestions
+                </div>
+                <div class="list-group-item" ng-repeat="suggestion in vm.suggestions | orderBy:'-created'">
                     <div class="row">
                         <div class="col-sm-1">
                             <div class="text-muted">
@@ -35,8 +42,14 @@
                             </div>
                         </div>
                         <div class="col-sm-11">
-                            <div class="pull-right text-muted">
-                                {{ suggestion.created * 1000 | date:'mediumDate' }} 
+                            <div class="pull-right text-muted text-right">
+                                <div>
+                                    {{ suggestion.created * 1000 | date:'mediumDate' }}     
+
+                                </div>
+                                <div class="label" ng-class="{'label-success': suggestion.tr_status.nid == 1, 'label-danger': suggestion.tr_status.nid == 2}">
+                                    {{ suggestion.tr_status.trstatus_value }}
+                                </div>
                             </div>
                             <h5>
                                 <a ui-sref="suggestion({suggestionId: suggestion.nid})">

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -27,6 +28,8 @@
 </head>
 
 <body >
+    <toaster-container></toaster-container>
+    
     <style>
         body {
             padding-top: 50px;
@@ -64,7 +67,7 @@
                     </li>
                     <li ng-class="{'active': $state.includes('signs') || $state.includes('sign')}"><a ui-sref="signs">Clinical Signs</a>
                     </li>
-                    <li ui-sref-active="active"><a ui-sref="suggestions">Suggestions</a>
+                    <li ng-class="{'active': $state.includes('suggestion') || $state.includes('suggestions')}"><a ui-sref="suggestions">Suggestions</a>
                     </li>
                     <!--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
@@ -120,7 +123,10 @@
 
     <!-- Add your site or application content here -->
     <div>
-        <ui-view></ui-view>
+        <div style="background-color: #F4F4F4">
+            <ui-view></ui-view>    
+        </div>
+        
         <!-- <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div> -->
 
         <footer class="footer">
@@ -203,6 +209,7 @@
     <script src="bower_components/angular-promise-tracker/promise-tracker.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="bower_components/angularjs-toaster/toaster.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

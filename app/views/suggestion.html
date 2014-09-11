@@ -1,34 +1,81 @@
 <div class="container">
     <div class="title">
-        <h1>{{ vm.request.title || 'No title' }}</h1>
+        <ol class="breadcrumb" style="margin:0; padding: 0; margin-bottom: 10px;">
+            <li><a ui-sref="suggestions">Suggestions</a>
+            </li>
+            <li class="active">Suggestion #{{ vm.suggestion.nid }}</li>
+            <!-- <li><a href="#">Library</a> -->
+            <!-- </li> -->
+            <!-- <li class="active">Data</li> -->
+        </ol>
+        <h1>{{ vm.suggestion.title || 'No title' }}</h1>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-body">
-            <div ng-repeat="transaction in vm.request.$tr_trans">
+        <div class="panel-heading">
+            <div class="pull-right" style="text-align: right;">
                 <div>
-                    Change: {{ transaction.ltrans_cvalref.title }} to {{ transaction.ltrans_svalref.title }}
+                    {{ vm.suggestion.created * 1000 | date:'mediumDate' }}
+                </div>
+                <div class="label" ng-class="{'label-success': vm.suggestion.$tr_status.nid == 1, 'label-danger': vm.suggestion.$tr_status.nid == 2}">
+                    {{ vm.suggestion.$tr_status.trstatus_value }}
                 </div>
 
-                <div>
-                    Property: {{ transaction.ltrans_onprop }}
+            </div>
+
+            <div class="media" style="margin-top: 0;">
+                <div class="pull-left">
+                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="media-object" style="width:40px;height:40px;" />
+                </div>
+                <div class="media-body">
+                    <div>
+                        <a href>{{ vm.suggestion.$author.name }}</a>
+                    </div>
+                    <div>
+                        proposed a change - #{{ vm.suggestion.nid }}.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="transaction in vm.suggestion.$tr_trans">
+                <h4 style="margin: 0; margin-bottom: 14px;">
+                    <a ui-sref="disorder({disorderId: transaction.ltrans_onnode.nid})">{{ transaction.ltrans_onnode.title }}</a>
+                </h4>
+                <div style="margin-bottom: 14px;">
+                    <strong>
+                        {{ transaction.ltrans_onprop }}
+                    </strong>
+                    : {{ transaction.ltrans_cvalref.title }}
+                    <i class="fa fa-arrow-right"></i>
+                    {{ transaction.ltrans_svalref.title }}
                 </div>
             </div>
             <div>
-                Reason:
-                <div ng-bind-html="vm.request.body.value"></div>
+                <div ng-bind-html="vm.suggestion.body.value"></div>
             </div>
             <div>
-                <button class="btn btn-default" ng-click="vm.accept(vm.request)">Accept</button>
-                <button class="btn btn-default">Reject</button>
+
             </div>
         </div>
     </div>
-
-
-    <h2>Discussion</h2>
-    <div>
-        <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+    <div class="panel panel-default" ng-hide="vm.suggestion.$tr_status.nid < 3">
+        <div class="panel-body">
+            <div class="pull-left">
+                <div style="">
+                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:35px;height:35px" alt="" />&nbsp;&nbsp;Dr John Smith
+                </div>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-default" ng-click="vm.accept(vm.suggestion)">
+                    <i class="fa fa-check"></i> Accept
+                </button>
+                &nbsp;
+                <button class="btn btn-default" ng-click="vm.reject(vm.suggestion)">
+                    <i class="fa fa-times"></i> Reject
+                </button>
+            </div>
+        </div>
     </div>
 
 </div>

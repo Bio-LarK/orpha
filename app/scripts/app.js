@@ -22,7 +22,8 @@ angular
         'ajoslin.promise-tracker',
         'angular-loading-bar',
         'xeditable',
-        'config'
+        'config',
+        'toaster'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, editableOptions, Page) {
         $rootScope.$state = $state;
