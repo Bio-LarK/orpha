@@ -1,3 +1,21 @@
+<a name="0.9.7"></a>
+### 0.9.7 (2014-09-11)
+
+
+#### Bug Fixes
+
+* **build:**
+  * production api endpoint ([09107fc2](git@github.com:Bio-LarK/orpha/commit/09107fc25ccec83b69d3bb5159cd91f96f4176b6))
+  * changed api endpoint for production ([9ee68c00](git@github.com:Bio-LarK/orpha/commit/9ee68c00cd6d5c0e9509824a001763d2586c65a9))
+* **pages:** fix spaces at the bottom of all pages ([63618bba](git@github.com:Bio-LarK/orpha/commit/63618bba4ef74d6a220108e3973812681d04e28b))
+
+
+#### Features
+
+* **drupal:** add drupal ([76085cf1](git@github.com:Bio-LarK/orpha/commit/76085cf1e85719ddc5318d13d60013aaeff8d478))
+* **edit-modal:** explanation box now resizes ([5ab1a8e0](git@github.com:Bio-LarK/orpha/commit/5ab1a8e04d6314738641f4c9399cb5dd75d7f658))
+
+
 <a name="0.9.6"></a>
 ### 0.9.6 (2014-09-11)
 
