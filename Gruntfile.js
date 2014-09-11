@@ -69,7 +69,7 @@ module.exports = function(grunt) {
                 constants: {
                     ENV: {
                         name: 'production',
-                        apiEndpoint: 'api'
+                        apiEndpoint: 'http://130.56.248.140/orphanet/api'
                     }
                 }
             }
