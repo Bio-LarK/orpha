@@ -469,6 +469,13 @@ module.exports = function(grunt) {
                     dest: '<%= yeoman.dist %>/images',
                     src: ['generated/*']
                 }, {
+                    // put drupal in the dist
+                    expand: true,
+                    dot: true, // include hidden files
+                    cwd: 'drupal',
+                    dest: '<%= yeoman.dist %>/drupal',
+                    src: ['**']
+                }, {
                     expand: true,
                     cwd: '.',
                     src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
