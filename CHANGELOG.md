@@ -1,3 +1,12 @@
+<a name="0.13.0"></a>
+## 0.13.0 (2014-09-12)
+
+
+#### Features
+
+* **disorder:** add edit bar to page top ([92c660f1](git@github.com:Bio-LarK/orpha/commit/92c660f182a62ca137a232a6532b06417799a2bd))
+
+
 <a name="0.12.1"></a>
 ### 0.12.1 (2014-09-12)
 
