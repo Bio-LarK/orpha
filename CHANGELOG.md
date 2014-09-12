@@ -1,3 +1,12 @@
+<a name="0.10.0"></a>
+## 0.10.0 (2014-09-12)
+
+
+#### Features
+
+* **genotype-modal:** add genotype property editing ([2815cdcb](git@github.com:Bio-LarK/orpha/commit/2815cdcb772306bde7f8abba285d7fe48c917213))
+
+
 <a name="0.9.9"></a>
 ### 0.9.9 (2014-09-12)
 
