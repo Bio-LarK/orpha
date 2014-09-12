@@ -22,6 +22,28 @@ body {
     line-height: 1.5;
     color: rgba(0,0,0,0.87);
 }
+body {
+    padding-top: 50px;
+}
+.navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.navbar.ui-scrollfix {
+    position:fixed;
+    top:0;
+    z-index: 100;
+}
+.disorder-page {
+  padding-top: 60px;
+}
+.edit-bar {
+  width: 100%;
+  position:fixed;
+    top:50px;
+    z-index: 100;
+}
 footer {
   margin-top: 40px;
 }
