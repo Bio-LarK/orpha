@@ -1,3 +1,12 @@
+<a name="0.11.0"></a>
+## 0.11.0 (2014-09-12)
+
+
+#### Features
+
+* **disorder:** add editing mode ([5f0362eb](git@github.com:Bio-LarK/orpha/commit/5f0362eb3d02f7116e8d3f2d2779aacf4e5ca7e8))
+
+
 <a name="0.10.0"></a>
 ## 0.10.0 (2014-09-12)
 
