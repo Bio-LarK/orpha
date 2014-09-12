@@ -381,7 +381,7 @@
                 <div class="row" ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:3">
                     <div class="col-sm-4" ng-repeat="disorder_gene in row">
                         
-                        <div class="panel panel-default" ng-click="editDisorderGene(disorder_gene)" ng-hide="isEditing">
+                        <div class="panel panel-default" ng-hide="isEditing">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
