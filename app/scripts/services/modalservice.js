@@ -12,11 +12,31 @@ angular.module('orphaApp')
         var service = {
             openPrevalenceClassModal: openPrevalenceClassModal,
             openAgeOfOnset: openAgeOfOnset,
-            openAgeOfDeath: openAgeOfDeath
+            openAgeOfDeath: openAgeOfDeath,
+            openEditTitle: openEditTitle
         };
         return service;
 
         ///////
+
+        function openEditTitle(concept) {   
+            var config = {
+                concept: concept,
+                propertyName: 'title',
+                propertyLabel: 'Disorder Name'
+            };
+
+            return $modal.open({
+                templateUrl: 'views/edittitle.modal.html',
+                controller: 'EditTitleCtrl as vm',
+                resolve: {
+                    config: function() {
+                        return config;
+                    }
+
+                }
+            });
+        }
 
         function openPrevalenceClassModal(concept) {
             return openPropertyModal(
@@ -53,6 +73,7 @@ angular.module('orphaApp')
                 'type_of_inheritance'
             );
         }
+
 
         function openPropertyModal(concept, propertyLabel, propertyName, propertyContentType) {
             var config = {

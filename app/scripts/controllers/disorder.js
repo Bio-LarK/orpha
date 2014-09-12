@@ -22,6 +22,7 @@ angular.module('orphaApp')
         vm.editDisorderPhenotype = editDisorderPhenotype;
         vm.startEditing = startEditing;
         vm.stopEditing = stopEditing;
+        vm.editTitle = editTitle;
         vm.isEditing = false;
         activate();
         ////////////
@@ -57,6 +58,10 @@ angular.module('orphaApp')
             disorder.getParents().then(function (disorders) {
                 console.log('parents', disorders);
             });
+        }
+
+        function editTitle() {
+            return modalService.openEditTitle(vm.disorder);
         }
 
         function editAgeOfOnset() {

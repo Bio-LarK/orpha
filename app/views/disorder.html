@@ -23,8 +23,8 @@
         <div class="title">
             <div class="pull-right text-muted text-right" ng-hide="disorderTracker.active()">
                 <div style="margin-bottom: 10px;">
-                    <button class="btn btn-primary" ng-click="startEditing()" ng-hide="isEditing">Edit</button>    
-                    <button class="btn btn-default" ng-click="stopEditing()" ng-show="isEditing">Done</button>
+                    <button class="btn btn-primary" ng-click="startEditing()" ng-hide="isEditing"><i class="fa fa-pencil"></i> Edit</button>    
+                    <button class="btn btn-default" ng-click="stopEditing()" ng-show="isEditing"><i class="fa fa-check"></i> Done</button>
                 </div>
                 Updated {{ disorder.changed * 1000 | date:'d/M/yyyy' }}
             </div>
@@ -34,7 +34,10 @@
                 </div>
                 <div class="media-body">
                     <h1>
-                        <span>
+                        <span ng-show="isEditing" class="editable" ng-click="editTitle()">
+                            {{ disorder.title || 'Loading...' }}
+                        </span>
+                        <span ng-hide="isEditing">
                             {{ disorder.title || 'Loading...' }}
                         </span>
                     </h1>

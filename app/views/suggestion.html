@@ -29,7 +29,9 @@
                 </div>
                 <div class="media-body">
                     <div>
-                        <a href><strong>{{ vm.suggestion.$author.name }}</strong></a>
+                        <a href>
+                            <strong>{{ vm.suggestion.$author.name }}</strong>
+                        </a>
                     </div>
                     <div>
                         proposed a change - #{{ vm.suggestion.nid }}.
@@ -57,11 +59,23 @@
 
             <div ng-repeat="transaction in vm.suggestion.$tr_trans">
                 <div style="margin-bottom: 14px;">
-                    <strong>
-                        {{ transaction.ltrans_onprop }}
-                    </strong>: {{ transaction.ltrans_cvalref.title || 'Unknown' }}
-                    <i class="fa fa-arrow-right"></i>
-                    {{ transaction.ltrans_svalref.title }}
+                    <div ng-show="transaction.isRefChange">
+                        <strong>
+                            {{ transaction.ltrans_onprop }}
+                        </strong>: {{ transaction.ltrans_cvalref.title || 'Unknown' }}
+                        <i class="fa fa-arrow-right"></i>
+                        {{ transaction.ltrans_svalref.title }}
+                    </div>
+
+                    <div ng-hide="transaction.isRefChange">
+                        <strong>
+                            {{ transaction.ltrans_onprop }}
+                        </strong>: {{ transaction.ltrans_cvalplain || 'Unknown' }}
+                        <i class="fa fa-arrow-right"></i>
+                        {{ transaction.ltrans_svalplain }}
+                    </div>
+
+
                 </div>
             </div>
             <div>

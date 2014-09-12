@@ -22,6 +22,11 @@ angular.module('orphaApp')
         	/* jshint validthis: true */
             var listTransaction = this;
             listTransaction.title = 'Loading...';
+            if(listTransaction['ltrans_svalref']) {
+                listTransaction.isRefChange = true;
+            } else {
+                listTransaction.isRefChange = false;
+            }
 
             return $q.all([
             	loadNode(listTransaction),
@@ -72,6 +77,9 @@ angular.module('orphaApp')
 
         function loadSuggestedRef(listTransaction) {
         	var nodeId = listTransaction['ltrans_svalref'];
+            if(!nodeId) {
+                return $q.when(false);
+            }
             var nodeRequest = {
                 fields: 'nid,title'
             };
@@ -84,6 +92,9 @@ angular.module('orphaApp')
 
         function loadCurrentRef(listTransaction) {
         	var nodeId = listTransaction['ltrans_cvalref'];
+            if(!nodeId) {
+                return $q.when(false);
+            }
             var nodeRequest = {
                 fields: 'nid,title'
             };
