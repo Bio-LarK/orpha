@@ -1,3 +1,12 @@
+<a name="0.13.1"></a>
+### 0.13.1 (2014-09-12)
+
+
+#### Bug Fixes
+
+* **disorders-page:** page title now displays correctly ([81ae58e6](git@github.com:Bio-LarK/orpha/commit/81ae58e6a050cb1bb2df9fd9e0476c3705c962f7))
+
+
 <a name="0.13.0"></a>
 ## 0.13.0 (2014-09-12)
 
