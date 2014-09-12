@@ -1,3 +1,12 @@
+<a name="0.12.0"></a>
+## 0.12.0 (2014-09-12)
+
+
+#### Features
+
+* **disorder:** add editing disorder name ([7d5b0f66](git@github.com:Bio-LarK/orpha/commit/7d5b0f66fa2938df474a49eee1625fbfd8a6fde7))
+
+
 <a name="0.11.0"></a>
 ## 0.11.0 (2014-09-12)
 
