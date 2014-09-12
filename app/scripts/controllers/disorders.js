@@ -8,7 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisordersCtrl', function ($scope, $timeout, $stateParams, promiseTracker, Disorder) {
+    .controller('DisordersCtrl', function ($scope, $timeout, $stateParams, promiseTracker, Disorder, Page) {
         $scope.loadMore = loadMore;
         $scope.loadingTracker = promiseTracker();
         $scope.page = 0;
@@ -17,6 +17,7 @@ angular.module('orphaApp')
         //////////////
 
         function activate() {
+            Page.setTitle('All Disorders');
             $scope.disorders = Disorder.query({
                 fields: 'nid,disorder_name',
                 page: $scope.page++
