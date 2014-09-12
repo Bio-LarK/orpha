@@ -17,13 +17,15 @@
     </style>
 
     <div class="container">
-        <!--<div class="pull-right">
-            <button class="btn btn-primary" ui-sref="disorder.edit" ng-hide="$state.includes('disorder.edit')">Edit</button>    
-            <button class="btn btn-default" ui-sref="disorder" ng-show="$state.includes('disorder.edit')">Done</button>
-        </div>-->
+        <div class="pull-right">
+        </div>
         
         <div class="title">
-            <div class="pull-right text-muted" ng-hide="disorderTracker.active()">
+            <div class="pull-right text-muted text-right" ng-hide="disorderTracker.active()">
+                <div style="margin-bottom: 10px;">
+                    <button class="btn btn-primary" ng-click="startEditing()" ng-hide="isEditing">Edit</button>    
+                    <button class="btn btn-default" ng-click="stopEditing()" ng-show="isEditing">Done</button>
+                </div>
                 Updated {{ disorder.changed * 1000 | date:'d/M/yyyy' }}
             </div>
             <div class="media">
@@ -64,8 +66,8 @@
                 <div class="col-sm-8">
                     <div class="panel panel-default">
                         <div class="list-group">
-                            <div class="list-group-item" style="overflow: hidden;">
-                                <div class="row">
+                            <div class="list-group-item">
+                                <div class="row" ng-show="isEditing">
                                     <div class="col-sm-3">
                                         <div class="detail">
                                             <h3 class="detail-title">Prevalence Class</h3>
@@ -90,6 +92,51 @@
                                             <h3 class="detail-title">Age of Death</h3>
                                             <div class="detail-info" ng-click="editAgeOfDeath()">
                                                 <span class="editable">
+                                                    {{ disorder.disorder_death.aod_name || 'Unknown' }}    
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="detail">
+                                            <h3 class="detail-title">Type of Inheritance</h3>
+                                            <div>
+                                                <div class="text-muted" ng-hide="disorder.disorder_inheritance.length">Unknown</div>
+                                                <div ng-repeat="inheritance in disorder.disorder_inheritance" class="detail-info">
+                                                    {{ inheritance.label }}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" ng-hide="isEditing">
+                                    <div class="col-sm-3">
+                                        <div class="detail">
+                                            <h3 class="detail-title">Prevalence Class</h3>
+                                            <div class="detail-info">
+                                                <span class="">{{ disorder.disorder_prevalence.prevalence_name || 'Unknown' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="detail">
+                                            <h3 class="detail-title">Age of Onset</h3>
+                                            <div class="detail-info">
+                                                <span class="">
+                                                    {{ disorder.disorder_onset.aoo_name || 'Unknown' }}
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="detail">
+                                            <h3 class="detail-title">Age of Death</h3>
+                                            <div class="detail-info">
+                                                <span class="">
                                                     {{ disorder.disorder_death.aod_name || 'Unknown' }}    
                                                 </span>
                                             </div>
@@ -330,20 +377,14 @@
                 </p>
                 <div class="row" ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:3">
                     <div class="col-sm-4" ng-repeat="disorder_gene in row">
-                        <div class="panel panel-default editable-card" ng-click="editDisorderGene(disorder_gene)">
+                        
+                        <div class="panel panel-default" ng-click="editDisorderGene(disorder_gene)" ng-hide="isEditing">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
                                         <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body">
                                     </div>
                                     <div class="media-body">
-                                        <!-- <button class="btn btn-default">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                        <button class="btn btn-default">
-                                            <i class="fa fa-pencil"></i>
-                                        </button> -->
-
                                         <div>
                                             <span class="text-muted">
                                                 {{ disorder_gene.disgene_at.dgt_name }}
@@ -370,14 +411,6 @@
                                                     {{ disorder_gene.disgene_as.dga_name }}
                                                 </div>
                                             </div>
-                                            <!--<dl class="dl-horizontal detail detail-externalidentifiers">
-                                                <dt class="detail-title">Symbol</dt>
-                                                <dd class="detail-info">{{ disorder_gene.disgene_gene.gene_symbol }}</dd>
-                                                <dt>
-                                                    Status
-                                                </dt>
-                                                <dd>{{ disorder_gene.disgene_as.dga_name }}</dd>
-                                            </dl>-->
                                         </div>
                                     </div>
                                 </div>
@@ -386,6 +419,47 @@
                                 <a href="" class="list-group-item">
                                     <i class="fa fa-search"></i> View Disorders ({{ disorder_gene.disgene_gene.gene_disgene.length }})
                                 </a>
+                            </div>
+                        </div>
+
+
+                        <!-- editable -->
+                        <div class="panel panel-default editable-card" ng-click="editDisorderGene(disorder_gene)" ng-show="isEditing">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body">
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <span class="text-muted">
+                                                {{ disorder_gene.disgene_at.dgt_name }}
+                                            </span>
+                                            <h5 style="display: inline">
+                                                {{ disorder_gene.disgene_gene.gene_name }}
+                                            </h5>
+                                            <!--<span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)-->
+                                        </div>
+                                        <div style="margin-top: 10px;">
+                                            <div class="detail detail-genotype">
+                                                <div class="detail-title">
+                                                    Symbol:
+                                                </div>
+                                                <div class="detail-info">
+                                                    {{ disorder_gene.disgene_gene.gene_symbol }}
+                                                </div>
+                                            </div>
+                                            <div class="detail detail-genotype">
+                                                <div class="detail-title">
+                                                    Status:
+                                                </div>
+                                                <div class="detail-info">
+                                                    {{ disorder_gene.disgene_as.dga_name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -415,7 +489,9 @@
                 </p>
                 <div class="row" ng-repeat="row in disorder.disorder_phenotype | filter:filterPhenotype | inSlicesOf:3">
                     <div class="col-sm-4 repeated-item" ng-repeat="disorder_phenotype in row">
-                        <div class="panel panel-default editable-card" ng-click="editDisorderPhenotype(disorder_phenotype)">
+    
+
+                        <div class="panel panel-default" ng-hide="isEditing">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
@@ -423,13 +499,11 @@
                                     </div>
                                     <div class="media-body">
                                         <div>
-                                            <!-- <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })"> -->
                                             <h5>
                                                 <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
                                                     {{ disorder_phenotype.ds_sign.sign_name }}
                                                 </a>
                                             </h5>
-                                            <!-- </a> -->
                                             <p class="" ng-hide="disorder_phenotype.ds_sign.sign_name">Loading...</p>
                                         </div>
                                         <div class="text-muted">
@@ -442,15 +516,31 @@
 
                             <div class="list-group" ng-show="disorder_phenotype.ds_sign.sign_dissign.length">
                                 <a class="list-group-item" ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
-                                    <!-- <div class="row" style="font-size: 12px;"> -->
-                                    <!-- <div class="col-sm-12"> -->
                                     <i class="fa fa-search"></i> View Disorders
                                     <span class="text-muted text-uppercase">({{ disorder_phenotype.ds_sign.sign_dissign.length }})</span>
-                                    <!-- </div> -->
-                                    <!-- </div> -->
                                 </a>
-                                </ul>
+                            </div>
+                        </div>
 
+
+                        <div class="panel panel-default editable-card" ng-click="editDisorderPhenotype(disorder_phenotype)" ng-show="isEditing">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body">
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <h5>
+                                                {{ disorder_phenotype.ds_sign.sign_name }}
+                                            </h5>
+                                            <p class="" ng-hide="disorder_phenotype.ds_sign.sign_name">Loading...</p>
+                                        </div>
+                                        <div class="text-muted">
+                                            {{ disorder_phenotype.ds_frequency.signfreq_name }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

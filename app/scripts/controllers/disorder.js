@@ -20,6 +20,8 @@ angular.module('orphaApp')
         vm.editAgeOfDeath = editAgeOfDeath;
         vm.editDisorderGene = editDisorderGene;
         vm.editDisorderPhenotype = editDisorderPhenotype;
+        vm.startEditing = startEditing;
+        vm.stopEditing = stopEditing;
         vm.isEditing = false;
         activate();
         ////////////
@@ -41,6 +43,13 @@ angular.module('orphaApp')
             vm.disorderTracker.addPromise(disorder.$promise);
             vm.signsTracker.addPromise(disorder.$promise);
             vm.genesTracker.addPromise(disorder.$promise);
+        }
+
+        function startEditing() {
+            vm.isEditing = true;
+        }
+        function stopEditing() {
+            vm.isEditing = false;
         }
 
         function toggleParents(disorder) {
