@@ -8,17 +8,18 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('EditDisorderGeneCtrl', function($scope, $http, $modalInstance, 
-        disorder, gene, disorderGene, ENV, ListTransaction) {
+    .controller('EditDisorderGeneCtrl', function($scope, $http, $modalInstance, config, 
+        ENV, ListTransaction, $q, TransactionRequest, toaster) {
         var vm = this;
-        vm.disorderGene = disorderGene;
-        vm.gene = gene;
+        vm.disorderGene = config.relationshipNode;
+        vm.gene = config.rightNode;
         vm.proposalType = 'edit';
-        vm.disorder = disorder;
+        vm.disorder = config.leftNode;
         vm.disorderGeneStatuses = null;
         vm.disorderGeneStatus = null;
         vm.disorderGeneTypes = null;
         vm.disorderGeneType = null;
+        vm.reason = null;
         vm.cancel = cancel;
         vm.proposeChanges = proposeChanges;
 
@@ -36,51 +37,57 @@ angular.module('orphaApp')
         }
 
         function proposeChanges() {
-            // debugger;
-            if (vm.proposalType !== 'edit') {
-                console.log('No way to store a remove at this time');
-            } else {
-                if (vm.disorderGene['disgene_as'].nid !== vm.disorderGeneStatus.nid) {
-                    var propertyName = 'disgene_as';
-                    var listTransaction = new ListTransaction({
-                        title: 'transaction',
-                        type: 'list_transaction',
+            var transactions = [];
+            if (vm.disorderGene['disgene_as'].nid !== vm.disorderGeneStatus.nid) {
+                var propertyName = 'disgene_as';
+                var listTransaction = new ListTransaction({
+                    title: 'transaction',
+                    type: 'list_transaction',
 
-                        ltrans_position: '0',
-                        ltrans_onnode: vm.disorderGene.nid,
-                        ltrans_onprop: propertyName,
-                        ltrans_svalref: vm.disorderGeneStatus.nid,
-                        ltrans_cvalref: vm.disorderGene[propertyName].nid
-                    });
-                    listTransaction.$save();
-                }
-
-                if (vm.disorderGene['disgene_at'].nid !== vm.disorderGeneType.nid) {
-                    var propertyName2 = 'disgene_at';
-                    var listTransaction2 = new ListTransaction({
-                        title: 'transaction',
-                        type: 'list_transaction',
-
-                        ltrans_position: '0',
-                        ltrans_onnode: vm.disorderGene.nid,
-                        ltrans_onprop: propertyName2,
-                        ltrans_svalref: vm.disorderGeneType.nid,
-                        ltrans_cvalref: vm.disorderGene[propertyName2].nid
-                    });
-                    listTransaction2.$save();
-                }
-                
-                $modalInstance.dismiss('cancel');
-                // lets just deal with curated for now
-                // if(vm.disorderGene) {}
+                    ltrans_position: transactions.length,
+                    ltrans_onnode: vm.disorderGene.nid,
+                    ltrans_onprop: propertyName,
+                    ltrans_svalref: vm.disorderGeneStatus.nid,
+                    ltrans_cvalref: vm.disorderGene[propertyName].nid
+                });
+                transactions.push(listTransaction.$save());
             }
-            // check which type of suggestion it is
-            // remove or edit
-            // Check if status 
-            // Create a list transaction
 
-            // Create a transaction request
+            if (vm.disorderGene['disgene_at'].nid !== vm.disorderGeneType.nid) {
+                var propertyName2 = 'disgene_at';
+                var listTransaction2 = new ListTransaction({
+                    title: 'transaction',
+                    type: 'list_transaction',
 
+                    ltrans_position: transactions.length,
+                    ltrans_onnode: vm.disorderGene.nid,
+                    ltrans_onprop: propertyName2,
+                    ltrans_svalref: vm.disorderGeneType.nid,
+                    ltrans_cvalref: vm.disorderGene[propertyName2].nid
+                });
+                transactions.push(listTransaction2.$save());
+            }
+
+            $q.all(transactions).then(function(cats) {
+                var transactionIds = _.pluck(cats, 'nid');
+                // Add it to a transaction request
+                var transactionRequest = new TransactionRequest({
+                    title: 'Relationship between ' + vm.disorder.title + ' and ' + vm.gene.title,
+                    type: 'transaction_request',
+                    'tr_timestamp': new Date().getTime() / 1000,
+                    'tr_trans': transactionIds,
+                    'tr_status': 3,
+                    'tr_user': 0,
+                    body: {
+                        value: vm.reason,
+                        summary: vm.reason
+                    }
+                });
+                toaster.pop('success', 'Suggestion submitted.');
+                return transactionRequest.$save();
+            });
+
+            $modalInstance.dismiss('cancel');
         }
 
         function getDisorderGeneStatuses() {

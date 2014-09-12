@@ -29,12 +29,31 @@ angular.module('orphaApp')
             	loadCurrentRef(listTransaction)
         	]).then(function() {
                 listTransaction.title = listTransaction['ltrans_onnode'].title;
+                listTransaction.relatedNodes = [
+                    listTransaction['ltrans_onnode']
+                ];
+
         		// Create the title
         		if(listTransaction['ltrans_onnode'].type === 'disorder_gene') {
         			listTransaction.title = 'Relationship between ' + 
         			listTransaction['ltrans_onnode']['disgene_disorder'].title + ' and ' + 
         			listTransaction['ltrans_onnode']['disgene_gene'].title;
-        		}
+
+                    listTransaction.relatedNodes = [
+                        listTransaction['ltrans_onnode']['disgene_disorder'],
+                        listTransaction['ltrans_onnode']['disgene_gene']
+                    ];
+        		} else if(listTransaction['ltrans_onnode'].type === 'disorder_sign') {
+                    listTransaction.title = 'Relationship between ' + 
+                    listTransaction['ltrans_onnode']['ds_disorder'].title + ' and ' + 
+                    listTransaction['ltrans_onnode']['ds_sign'].title;
+
+                    listTransaction.relatedNodes = [
+                        listTransaction['ltrans_onnode']['ds_disorder'],
+                        listTransaction['ltrans_onnode']['ds_sign']
+                    ];
+                }
+                return listTransaction;
         	});
             
         }
@@ -42,7 +61,7 @@ angular.module('orphaApp')
         function loadNode(listTransaction) {
         	var nodeId = listTransaction['ltrans_onnode'];
             var nodeRequest = {
-                fields: 'nid,title,type,disgene_disorder,disgene_gene'
+                fields: 'nid,title,type,disgene_disorder,disgene_gene,ds_sign,ds_disorder'
             };
             return $http.get(ENV.apiEndpoint + '/entity_node/' + nodeId, {
                 params: nodeRequest

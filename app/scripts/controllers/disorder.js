@@ -18,8 +18,8 @@ angular.module('orphaApp')
         vm.editAgeOfOnset = editAgeOfOnset;
         vm.editPrevalenceClass = editPrevalenceClass;
         vm.editAgeOfDeath = editAgeOfDeath;
-        vm.editGenotype = editGenotype; 
         vm.editDisorderGene = editDisorderGene;
+        vm.editDisorderPhenotype = editDisorderPhenotype;
         vm.isEditing = false;
         activate();
         ////////////
@@ -62,46 +62,41 @@ angular.module('orphaApp')
         }
 
         function editDisorderGene(disorderGene) {
+            var config = {
+                relationshipNode: disorderGene,
+                leftNode: vm.disorder, 
+                rightNode: disorderGene.disgene_gene
+            };
+
             var modalInstance = $modal.open({
                 templateUrl: 'views/editdisordergene.modal.html',
                 controller: 'EditDisorderGeneCtrl as editVm',
                 // size: size,
                 resolve: {
-                    disorderGene: function() {
-                        return disorderGene;
-                    },
-                    gene: function() {
-                        return disorderGene.disgene_gene;
-                    },
-                    disorder: function() {
-                        return vm.disorder;
-                    }
-                }
-            });
-        }
-        function editGenotype(node) {
-            console.log('open modal', node);
-            var modalInstance = $modal.open({
-                templateUrl: 'views/edit.modal.html',
-                controller: 'EditModalCtrl as editVm',
-                // size: size,
-                resolve: {
-                    concept: function() {
-                        return node;
-                    },
-                    propertyLabel: function() {
-                        return 'Gene Relationship Type';
-                    },
-                    propertyName: function() {
-                        return 'disgene_at';
-                    },
-                    propertyContentType: function() {
-                        return 'disorder_gene_at';
+                    config: function() {
+                        return config;
                     }
                 }
             });
         }
 
-        
+        function editDisorderPhenotype(disorderSign) {
+            var config = {
+                relationshipNode: disorderSign,
+                leftNode: vm.disorder, 
+                rightNode: disorderSign.ds_sign
+            };
+            var modalInstance = $modal.open({
+                templateUrl: 'views/editdisorderphenotype.modal.html',
+                controller: 'EditDisorderPhenotypeCtrl as vm',
+                // size: size,
+                resolve: {
+                    config: function() {
+                        return config;
+                    }
+                }
+            });
+        }
+
 
     });

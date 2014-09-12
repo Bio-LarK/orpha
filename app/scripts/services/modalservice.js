@@ -20,55 +20,55 @@ angular.module('orphaApp')
 
         function openPrevalenceClassModal(concept) {
             return openPropertyModal(
-                concept, 
-                'Prevalence Class', 
-                'disorder_prevalence', 
+                concept,
+                'Prevalence Class',
+                'disorder_prevalence',
                 'prevalence_class'
             );
         }
 
         function openAgeOfOnset(concept) {
             return openPropertyModal(
-                concept, 
-                'Age of Onset', 
-                'disorder_onset', 
+                concept,
+                'Age of Onset',
+                'disorder_onset',
                 'age_of_onset'
             );
         }
+
         function openAgeOfDeath(concept) {
             return openPropertyModal(
-                concept, 
-                'Age of Death', 
-                'disorder_death', 
+                concept,
+                'Age of Death',
+                'disorder_death',
                 'age_of_death'
             );
         }
+
         function openTOI(concept) {
             return openPropertyModal(
-                concept, 
-                'Type of Inheritance', 
-                'disorder_inhertiance', 
+                concept,
+                'Type of Inheritance',
+                'disorder_inhertiance',
                 'type_of_inheritance'
             );
         }
 
         function openPropertyModal(concept, propertyLabel, propertyName, propertyContentType) {
+            var config = {
+                concept: concept,
+                propertyLabel: propertyLabel,
+                propertyName: propertyName,
+                propertyContentType: propertyContentType
+            };
             return $modal.open({
                 templateUrl: 'views/edit.modal.html',
                 controller: 'EditModalCtrl as editVm',
                 resolve: {
-                    concept: function() {
-                        return concept;
-                    },
-                    propertyLabel: function() {
-                        return propertyLabel;
-                    },
-                    propertyName: function() {
-                        return propertyName;
-                    },
-                    propertyContentType: function() {
-                        return propertyContentType;
+                    config: function() {
+                        return config;
                     }
+
                 }
             });
         }

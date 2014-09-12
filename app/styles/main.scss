@@ -33,6 +33,9 @@ footer {
 .editable-card {
   border: 2px blue dotted; 
   cursor: pointer;
+  a {
+    color: black !important;
+  }
 }
 .modal-content {
   border: none;

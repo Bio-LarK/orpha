@@ -330,7 +330,7 @@
                 </p>
                 <div class="row" ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:3">
                     <div class="col-sm-4" ng-repeat="disorder_gene in row">
-                        <div class="panel panel-default" ng-click="editDisorderGene(disorder_gene)">
+                        <div class="panel panel-default editable-card" ng-click="editDisorderGene(disorder_gene)">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
@@ -345,7 +345,7 @@
                                         </button> -->
 
                                         <div>
-                                            <span class="text-muted" ng-click="editGenotype(disorder_gene)">
+                                            <span class="text-muted">
                                                 {{ disorder_gene.disgene_at.dgt_name }}
                                             </span>
                                             <h5 style="display: inline">
@@ -366,7 +366,7 @@
                                                 <div class="detail-title">
                                                     Status:
                                                 </div>
-                                                <div class="detail-info" ng-click="editGenotype(disorder_disgene)">
+                                                <div class="detail-info">
                                                     {{ disorder_gene.disgene_as.dga_name }}
                                                 </div>
                                             </div>
@@ -415,7 +415,7 @@
                 </p>
                 <div class="row" ng-repeat="row in disorder.disorder_phenotype | filter:filterPhenotype | inSlicesOf:3">
                     <div class="col-sm-4 repeated-item" ng-repeat="disorder_phenotype in row">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default editable-card" ng-click="editDisorderPhenotype(disorder_phenotype)">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">

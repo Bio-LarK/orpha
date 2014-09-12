@@ -34,7 +34,7 @@
                 <div class="list-group-item text-muted" ng-hide="vm.suggestions.length">
                     No suggestions
                 </div>
-                <div class="list-group-item" ng-repeat="suggestion in vm.suggestions | orderBy:'-created'">
+                <div class="list-group-item" ng-repeat="suggestion in vm.suggestions | orderBy:'-changed'">
                     <div class="row">
                         <div class="col-sm-1">
                             <div class="text-muted">

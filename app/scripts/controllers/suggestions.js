@@ -44,7 +44,7 @@ angular.module('orphaApp')
         function getTransactions(status) {
             return TransactionRequest.query({
                 'parameters[tr_status]': status,
-                fields: 'nid,title,tr_status,tr_timestamp,tr_user,tr_trans,created,author'
+                fields: 'nid,title,tr_status,tr_timestamp,tr_user,tr_trans,created,author,changed'
             }).$promise.then(function(suggestions) {
                 return suggestions;
             }, function() {

@@ -38,15 +38,28 @@
             </div>
         </div>
         <div class="panel-body">
+
+            <h4 style="margin: 0; margin-bottom: 14px;" class="text-capitalize">
+
+                <span ng-show="vm.suggestion.$relatedNodes.length > 1">
+                    Relationship between
+                    <a ui-sref="disorder({disorderId: vm.suggestion.$relatedNodes[0].nid})">{{ vm.suggestion.$relatedNodes[0].title }}</a> and
+
+                    <a ui-sref="disorder({disorderId: vm.suggestion.$relatedNodes[1].nid})">{{ vm.suggestion.$relatedNodes[1].title }}</a> 
+                </span>
+
+                <span ng-show="vm.suggestion.$relatedNodes.length == 1">
+                    <a ui-sref="disorder({disorderId: vm.suggestion.$relatedNodes[0].nid})">{{ vm.suggestion.$relatedNodes[0].title }}</a>
+                </span>
+
+            </h4>
+
+
             <div ng-repeat="transaction in vm.suggestion.$tr_trans">
-                <h4 style="margin: 0; margin-bottom: 14px;">
-                    <a ui-sref="disorder({disorderId: transaction.ltrans_onnode.nid})">{{ transaction.ltrans_onnode.title }}</a>
-                </h4>
                 <div style="margin-bottom: 14px;">
                     <strong>
                         {{ transaction.ltrans_onprop }}
-                    </strong>
-                    : {{ transaction.ltrans_cvalref.title || 'Unknown' }}
+                    </strong>: {{ transaction.ltrans_cvalref.title || 'Unknown' }}
                     <i class="fa fa-arrow-right"></i>
                     {{ transaction.ltrans_svalref.title }}
                 </div>
