@@ -1,3 +1,12 @@
+<a name="0.12.1"></a>
+### 0.12.1 (2014-09-12)
+
+
+#### Bug Fixes
+
+* **disorder:** fix modal appearing on genotype ([f909121d](git@github.com:Bio-LarK/orpha/commit/f909121d490bef1baec40cd0b06e22f34dff7f51))
+
+
 <a name="0.12.0"></a>
 ## 0.12.0 (2014-09-12)
 
