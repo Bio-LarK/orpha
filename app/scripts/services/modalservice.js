@@ -20,22 +20,23 @@ angular.module('orphaApp')
         ///////
 
         function openEditTitle(concept) {   
-            var config = {
-                concept: concept,
-                propertyName: 'title',
-                propertyLabel: 'Disorder Name'
-            };
+            // var config = {
+            //     concept: concept,
+            //     propertyName: 'title',
+            //     propertyLabel: 'Disorder Name
+            //     '
+            // };
 
-            return $modal.open({
-                templateUrl: 'views/edittitle.modal.html',
-                controller: 'EditTitleCtrl as vm',
-                resolve: {
-                    config: function() {
-                        return config;
-                    }
+            // return $modal.open({
+            //     templateUrl: 'views/edittitle.modal.html',
+            //     controller: 'EditTitleCtrl as vm',
+            //     resolve: {
+            //         config: function() {
+            //             return config;
+            //         }
 
-                }
-            });
+            //     }
+            // });
         }
 
         function openPrevalenceClassModal(concept) {
