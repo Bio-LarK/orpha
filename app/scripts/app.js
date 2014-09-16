@@ -24,7 +24,8 @@ angular
         'xeditable',
         'config',
         'toaster',
-        'monospaced.elastic'
+        'monospaced.elastic',
+        'textAngular'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, editableOptions, Page) {
         $rootScope.$state = $state;

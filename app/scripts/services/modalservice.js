@@ -13,31 +13,51 @@ angular.module('orphaApp')
             openPrevalenceClassModal: openPrevalenceClassModal,
             openAgeOfOnset: openAgeOfOnset,
             openAgeOfDeath: openAgeOfDeath,
-            openEditTitle: openEditTitle
+            openEditTitle: openEditTitle,
+            openEditDescription: openEditDescription
         };
         return service;
 
         ///////
 
         function openEditTitle(concept) {   
-            // var config = {
-            //     concept: concept,
-            //     propertyName: 'title',
-            //     propertyLabel: 'Disorder Name
-            //     '
-            // };
+            var config = {
+                concept: concept,
+                propertyName: 'title',
+                propertyLabel: 'Disorder Name'
+            };
 
-            // return $modal.open({
-            //     templateUrl: 'views/edittitle.modal.html',
-            //     controller: 'EditTitleCtrl as vm',
-            //     resolve: {
-            //         config: function() {
-            //             return config;
-            //         }
+            return $modal.open({
+                templateUrl: 'views/edittitle.modal.html',
+                controller: 'EditTitleCtrl as vm',
+                resolve: {
+                    config: function() {
+                        return config;
+                    }
 
-            //     }
-            // });
+                }
+            });
         }
+
+        function openEditDescription(concept) {   
+            var config = {
+                concept: concept,
+                propertyName: 'body',
+                propertyLabel: 'Description'
+            };
+
+            return $modal.open({
+                templateUrl: 'views/editbody.modal.html',
+                controller: 'EditTitleCtrl as vm',
+                resolve: {
+                    config: function() {
+                        return config;
+                    }
+
+                }
+            });
+        }
+
 
         function openPrevalenceClassModal(concept) {
             return openPropertyModal(

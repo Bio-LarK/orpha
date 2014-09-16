@@ -25,6 +25,16 @@ body {
 body {
     padding-top: 50px;
 }
+
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    // margin:20px 0;
+}
+
 .navbar {
     position: absolute;
     top: 0;

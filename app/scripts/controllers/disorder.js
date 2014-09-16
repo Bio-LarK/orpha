@@ -23,7 +23,8 @@ angular.module('orphaApp')
         vm.startEditing = startEditing;
         vm.stopEditing = stopEditing;
         vm.editTitle = editTitle;
-        vm.isEditing = false;
+        vm.isEditing = true;
+        vm.editDescription = editDescription;
         activate();
         ////////////
 
@@ -51,6 +52,10 @@ angular.module('orphaApp')
         }
         function stopEditing() {
             vm.isEditing = false;
+        }
+
+        function editDescription() {
+            return modalService.openEditDescription(vm.disorder);
         }
 
         function toggleParents(disorder) {

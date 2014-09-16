@@ -68,13 +68,28 @@
                     </div>
 
                     <div ng-hide="transaction.isRefChange">
-                        <strong>
-                            {{ transaction.ltrans_onprop }}
-                        </strong>: {{ transaction.ltrans_cvalplain || 'Unknown' }}
-                        <i class="fa fa-arrow-right"></i>
-                        {{ transaction.ltrans_svalplain }}
-                    </div>
 
+                        <div ng-show="transaction.ltrans_onprop=='body'">
+                            <div>
+                                <strong>
+                                {{ transaction.ltrans_onprop }}
+                                </strong>:
+                            </div>
+                            <div ng-bind-html="transaction.ltrans_cvalplain"></div>
+                            <div style="margin: 20px 0">
+                                <i class="fa fa-arrow-down"></i>
+                            </div>
+                            <div ng-bind-html="transaction.ltrans_svalplain"></div>
+                        </div>
+                        <div ng-hide="transaction.ltrans_onprop=='body'">
+                            <strong>
+                            {{ transaction.ltrans_onprop }}
+                            </strong>: {{ transaction.ltrans_cvalplain || 'Unknown' }}
+                            <i class="fa fa-arrow-right"></i>
+                            {{ transaction.ltrans_svalplain }}
+                        </div>
+                    </div>
+                    
 
                 </div>
             </div>

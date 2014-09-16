@@ -16,7 +16,7 @@ angular.module('orphaApp')
         vm.concept = config.concept;
         vm.propertyName = config.propertyName;
         vm.propertyLabel = config.propertyLabel;
-        vm.propertyValue = vm.concept[vm.propertyName];
+        vm.propertyValue = vm.concept[vm.propertyName].substring(0, 400);
         vm.save = save;
         vm.cancel = cancel;
         vm.reason = '';
@@ -37,7 +37,7 @@ angular.module('orphaApp')
                 'ltrans_onnode': vm.concept.nid,
                 'ltrans_onprop': vm.propertyName,
                 'ltrans_svalplain': vm.propertyValue,
-                'ltrans_cvalplain': vm.concept[vm.propertyName],
+                'ltrans_cvalplain': vm.concept[vm.propertyName].substring(0, 500),
                 body: {
                     value: vm.reason,
                     summary: vm.reason
