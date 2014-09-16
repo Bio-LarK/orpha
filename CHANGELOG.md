@@ -1,3 +1,18 @@
+<a name="0.14.0"></a>
+## 0.14.0 (2014-09-16)
+
+
+#### Bug Fixes
+
+* **disorder:** change default to 'not editing' ([dd1c36c0](git@github.com:Bio-LarK/orpha/commit/dd1c36c0cbdea4a50b048cc53b1e8649dfc352a8))
+* **pubmed:** fix new pubmed windows not working ([c7dfe54f](git@github.com:Bio-LarK/orpha/commit/c7dfe54f3c2001a369608388463d4281950daaf9))
+
+
+#### Features
+
+* **disorder:** make description editable ([2da43bb3](git@github.com:Bio-LarK/orpha/commit/2da43bb32060dd3954bd02dff01a2f149a77380a))
+
+
 <a name="0.13.1"></a>
 ### 0.13.1 (2014-09-12)
 
