@@ -23,7 +23,7 @@ angular.module('orphaApp')
         vm.startEditing = startEditing;
         vm.stopEditing = stopEditing;
         vm.editTitle = editTitle;
-        vm.isEditing = true;
+        vm.isEditing = false;
         vm.editDescription = editDescription;
         activate();
         ////////////
