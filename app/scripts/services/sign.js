@@ -10,7 +10,7 @@
 angular.module('orphaApp')
     .factory('Sign', function ($resource, ENV, Gene, RelationshipService) {
         var Sign = $resource(ENV.apiEndpoint + '/entity_node/:nid', {
-            'parameters[type]': 'sign',
+            'parameters[type]': 'clinical_sign',
             nid: '@nid'
         });
 
