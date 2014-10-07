@@ -1,3 +1,12 @@
+<a name="0.14.5"></a>
+### 0.14.5 (2014-10-07)
+
+
+#### Bug Fixes
+
+* **signs:** fix 'view disorders' link not working ([8f3b885b](git@github.com:Bio-LarK/orpha/commit/8f3b885b793ce3b04a445daa9ccebaef3e224571))
+
+
 <a name="0.14.4"></a>
 ### 0.14.4 (2014-10-07)
 
