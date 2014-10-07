@@ -1,3 +1,12 @@
+<a name="0.14.3"></a>
+### 0.14.3 (2014-10-07)
+
+
+#### Bug Fixes
+
+* **sign-service:** fix the resource type ([ca851d73](git@github.com:Bio-LarK/orpha/commit/ca851d7371d87407841216f0c6509963d6e924ba))
+
+
 <a name="0.14.2"></a>
 ### 0.14.2 (2014-10-07)
 
