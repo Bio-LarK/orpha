@@ -1,3 +1,12 @@
+<a name="0.14.2"></a>
+### 0.14.2 (2014-10-07)
+
+
+#### Bug Fixes
+
+* **sign-service:** fix base url ([fc716535](git@github.com:Bio-LarK/orpha/commit/fc716535b211371497a407bf57131bf41355387b))
+
+
 <a name="0.14.1"></a>
 ### 0.14.1 (2014-10-07)
 
