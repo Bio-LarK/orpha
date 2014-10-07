@@ -1,3 +1,12 @@
+<a name="0.14.4"></a>
+### 0.14.4 (2014-10-07)
+
+
+#### Bug Fixes
+
+* **sign-service:** fix the type again ([24b74428](git@github.com:Bio-LarK/orpha/commit/24b7442827f28c313ddec10a0724293215fea6b8))
+
+
 <a name="0.14.3"></a>
 ### 0.14.3 (2014-10-07)
 
