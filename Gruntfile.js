@@ -177,12 +177,12 @@ module.exports = function(grunt) {
             // }],
             proxies: [{
                 context: '/api',
-                host: '130.56.248.140',
+                host: 'orphanet.bio-lark.org',
                 headers: {
-                    host: '130.56.248.140:80'
+                    host: 'orphanet.bio-lark.org:80'
                 },
                 rewrite: {
-                    '^/api': '/orphanet/api',
+                    '^/api': '/drupal/api',
                 }
             }],
             livereload: {
