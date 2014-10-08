@@ -25,7 +25,8 @@ angular
         'config',
         'toaster',
         'monospaced.elastic',
-        'textAngular'
+        'textAngular',
+        'duScroll'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, editableOptions, Page) {
         $rootScope.$state = $state;
@@ -61,10 +62,9 @@ angular
         //
         // Now set up the states
         $stateProvider
-            .state('genes', {
-                url: '/genes?page',
-                controller: 'GenesCtrl',
-                templateUrl: 'views/genes.html'
+            .state('tour', {
+                url: '/tour',
+                templateUrl: 'views/tour.html'
             })
             .state('gene', {
                 url: '/gene/:geneId/disorders',

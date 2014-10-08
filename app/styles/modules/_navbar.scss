@@ -1,0 +1,66 @@
+.navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &.ui-scrollfix {
+    	position:fixed;
+    	top:0;
+    	z-index: 100;
+    }
+}
+
+.navbar.navbar-bright {
+	border-radius: 0;
+	margin-bottom: 0;
+	background-color: #FFDA00;//; #FFC600;
+	border: none;
+	color: rgba(0,0,0,0.8);
+	font-size: 14px;
+
+	.navbar-brand {
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	.navbar-search input {
+		border: none;
+		background-color: rgba(255, 255, 255, 0.5);
+		box-shadow: none;
+	}
+	.navbar-nav li {
+		margin-right: 5px;
+	}
+	.navbar-nav li a {
+		border-radius: 3px;
+		margin: 7px 0;
+		padding-top: 7px;
+		padding-bottom: 7px;
+	}
+	.nav > li > a:hover, .nav > li > a:focus {
+		background-color: rgba(0,0,0,0.1);
+		color: rgba(0,0,0,0.87);
+	}
+}
+
+
+.navbar-nav > li.active > a {
+	background-color: white;
+}
+
+.navbar.navbar-tour {
+	.navbar-collapse {
+		opacity: 0.2;
+		transition: 1s opacity;
+	}
+	&.ui-scrollfix {
+		.navbar-collapse {
+			opacity: 1;
+		}
+	}
+	&:hover {
+		.navbar-collapse {
+			opacity: 1;
+		}
+	}
+}

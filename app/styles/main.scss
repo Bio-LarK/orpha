@@ -6,6 +6,13 @@ $border-radius-base: 3px;
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
+
+@import "modules/jumbotron.scss";
+@import "modules/navbar.scss";
+@import "modules/pagenav.scss";
+@import "pages/tour.scss";
+
+
  .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -35,16 +42,6 @@ body {
     // margin:20px 0;
 }
 
-.navbar {
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-.navbar.ui-scrollfix {
-    position:fixed;
-    top:0;
-    z-index: 100;
-}
 .disorder-page {
   padding-top: 60px;
 }
@@ -86,37 +83,7 @@ footer {
   -webkit-box-shadow: rgba(0,0,0,0.3) 1px 0 6px 1px;
   box-shadow: rgba(0,0,0,0.3) 1px 0 6px 1px;
 }
-.navbar.navbar-bright {
-  border-radius: 0;
-  margin-bottom: 0;
-  background-color: #FFDA00;//; #FFC600;
-  border: none;
-  color: rgba(0,0,0,0.8);
-  font-size: 14px;
-  .navbar-brand {
-    text-transform: uppercase;
-    font-weight: bold;
-  }
 
-  .navbar-search input {
-    border: none;
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: none;
-  }
-  .navbar-nav li {
-    margin-right: 5px;
-  }
-  .navbar-nav li a {
-    border-radius: 3px;
-    margin: 7px 0;
-    padding-top: 7px;
-    padding-bottom: 7px;
-  }
-  .nav > li > a:hover, .nav > li > a:focus {
-    background-color: rgba(0,0,0,0.1);
-    color: rgba(0,0,0,0.87);
-  }
-}
 
 .spinner {
   font-size: 24px; 
@@ -285,9 +252,6 @@ footer {
 }
 
 
-.navbar-nav > li.active > a {
-	background-color: white;
-}
 a { 
 	color: inherit;
 }
