@@ -101,11 +101,57 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default" ng-hide="vm.suggestion.$tr_status.nid < 3">
+
+    <!-- Discussion -->
+    <div class="panel panel-default" ng-repeat="comment in vm.comments">
+        <div class="panel-heading" style="padding: 15px;">
+            <div class="media" style="margin-top: 0;">
+                <div class="pull-left">
+                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:20px;height:20px" alt="" />
+                    &nbsp;&nbsp;
+                    <strong>Dr John Smith</strong>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="padding: 15px;" ng-bind-html="comment.text">
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding: 15px;">
+            <div class="media" style="margin-top: 0;">
+                <div class="pull-left">
+                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:20px;height:20px" alt="" />
+                    &nbsp;&nbsp;
+                    <strong>Dr John Smith</strong>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="padding: 15px;">
+            <textarea msd-elastic="\n" ng-model="vm.comment.text" class="form-control" rows="4"></textarea>
+            <div class="pull-right" style="margin-top: 10px;">
+                <button class="btn btn-default" ng-click="vm.accept(vm.suggestion)">
+                    <i class="fa fa-check"></i> Accept <span ng-show="vm.comment.text.length">and comment</span>
+                </button>
+                <button class="btn btn-default" ng-click="vm.reject(vm.suggestion)">
+                    <i class="fa fa-times"></i> Reject <span ng-show="vm.comment.text.length">and comment</span>
+                </button>
+
+                <button class="btn btn-primary" ng-click="vm.addComment(vm.comment)">Comment</button>
+            </div>
+        </div>
+    </div>
+    <!-- /Discussion -->
+
+
+    <!-- Accept / Reject Panel -->
+    <!-- <div class="panel panel-default" ng-hide="vm.suggestion.$tr_status.nid < 3">
         <div class="panel-body">
             <div class="pull-left">
                 <div style="">
-                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:35px;height:35px" alt="" />&nbsp;&nbsp;Dr John Smith
+                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:35px;height:35px" alt="" />
+                    &nbsp;&nbsp;
+                    <strong>Dr John Smith</strong>
                 </div>
             </div>
             <div class="pull-right">
@@ -118,6 +164,9 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
+    <!-- /Accept / Reject Panel -->
+
+    
 
 </div>

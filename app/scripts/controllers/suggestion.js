@@ -13,6 +13,9 @@ angular.module('orphaApp')
         vm.suggestion = null;
         vm.accept = accept;
         vm.reject = reject;
+        vm.comments = [];
+        vm.comment = {};
+        vm.addComment = addComment;
     	activate();
 
     	//////////
@@ -49,6 +52,11 @@ angular.module('orphaApp')
                 toaster.pop('success', 'Suggestion Rejected');
                 $state.go('suggestions');    
             });
+        }
+
+        function addComment(comment) {
+            vm.comments.push(comment);
+            vm.comment = {};
         }
   });
 
