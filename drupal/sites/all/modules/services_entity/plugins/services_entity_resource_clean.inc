@@ -187,61 +187,47 @@ class ServicesEntityResourceControllerClean extends ServicesEntityResourceContro
     return $data;
   }*/
 
-  protected function get_data($wrapper, $fields = '*', $related = true) {
+  protected function get_data($wrapper, $fields = '*', $getRelated = false) {
     if ($fields != '*') {
       $fields_array = explode(',', $fields);
     }
-    //echo 'getting data<br/>';
     $data = array();
-    header("Content-type: text/html;");    
     $filtered = $this->property_access_filter($wrapper);
-    //echo 'wrapper is ' . $wrapper . '<br/>';
     foreach ($filtered as $name => $property) {
-      //echo "name is " . $name . "<br/>";
       // We don't want 'field_' at the beginning of fields. This is a drupalism and shouldn't be in the api.
       $name = preg_replace('/^field_/', '', $name);
+
       // If fields is set and it isn't one of them, go to the next.
-      if ($related && $fields != '*' && !in_array($name, $fields_array)) {
+      if ($getRelated && $fields != '*' && !in_array($name, $fields_array)) {
         continue;
       }
-      //echo 'matches<br/>';
       try {
         if ($property instanceof EntityDrupalWrapper) {
-	 //  echo 'entiy drupal wrapper<br/>';          
-// For referenced entities only return the URI.
-	  if($related) {
-	    $data[$name] = $this->get_data($property, $fields, false);
-	  } else {
+          // For referenced entities only return the URI.
+          if($getRelated) {
+	         $data[$name] = $this->get_data($property, $fields, false);
+          } else {
             if ($id = $property->getIdentifier()) {
-              $data[$name] = $this->get_resource_reference($property->type(), $id);
+              $data[$name] = $this->get_resource_reference($property->type(), $id, $property->title->value());
             }
-	  }
-        }
-        elseif ($property instanceof EntityValueWrapper) {
-	   //echo $name . "- value<br/>";          
-$data[$name] = $property->value();
-        }
-        elseif ($property instanceof EntityListWrapper || $property instanceof EntityStructureWrapper) {
-	  //echo 'list<br/>';
-	  $data[$name] = array();
-	  if($related) {
-	    //print_r($property->value());
-	    //echo '<br/>';
-	    foreach($property as $id => $value) {
-	      if($value instanceof EntityValueWrapper) {
-	        //echo 'yo<br/>';
-	        $data[$name][$id] = $value->value();
-	      } else {
-	        //echo "loading $id $value $propertybr/>";
-	        $data[$name][$id] = $this->get_data($value, $fields, false);
-	      }
-	    }
-	  } else {
+          // }
+        } elseif ($property instanceof EntityValueWrapper) {
+          $data[$name] = $property->value();
+        } elseif ($property instanceof EntityListWrapper || $property instanceof EntityStructureWrapper) {
+          $data[$name] = array();
+          if($getRelated) {
+            foreach($property as $id => $value) {
+              if($value instanceof EntityValueWrapper) {
+                $data[$name][$id] = $value->value();
+              } else {
+                $data[$name][$id] = $this->get_data($value, $fields, false);
+              }
+            }
+          } else {
             $data[$name] = $this->get_data($property, $fields, false);
           }
-	}
-      }
-      catch (EntityMetadataWrapperException $e) {
+        }
+      } catch (EntityMetadataWrapperException $e) {
         // A property causes problems - ignore that.
       }
     }
@@ -266,10 +252,12 @@ $data[$name] = $property->value();
    * @param type $id
    * @return type
    */
-  protected function get_resource_reference($resource, $id) {
+  protected function get_resource_reference($resource, $id, $title = '') {
     $return = array(
       'uri' => services_resource_uri(array('entity_' . $resource, $id)),
       'id' => $id,
+      'nid' => $id,
+      'title' => $title,
       'resource' => $resource,
     );
     if (module_exists('uuid') && entity_get_info($resource)) {

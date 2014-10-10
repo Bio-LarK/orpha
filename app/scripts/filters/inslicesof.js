@@ -3,7 +3,6 @@
 angular.module('orphaApp')
     .filter('inSlicesOf', ['$rootScope',
         function ($rootScope) {
-            console.log('staring in slice of!!');
             var makeSlices = function (items, count) {
                 if (!count) {
                     count = 3;
@@ -32,10 +31,8 @@ angular.module('orphaApp')
                     }
                 });
                 if (temp) {
-                    console.log('no change');
                     return temp;
                 }
-                console.log('change');
                 $rootScope.arraysinSliceOf.push(array);
                 return array;
             };

@@ -26,22 +26,18 @@ angular
         'toaster',
         'monospaced.elastic',
         'textAngular',
-        'duScroll'
+        'duScroll',
+        'sf.treeRepeat'
     ])
-    .run(function ($rootScope, $http, $state, $stateParams, editableOptions, Page) {
+    .run(function ($rootScope, $http, $state, $stateParams, 
+        editableOptions, Page, ENV, searchService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.Page = Page;
         editableOptions.theme = 'bs3';
 
-        $rootScope.getResults = function (text) {
-            var keys = encodeURIComponent(text);
-            var url = 'http://130.56.248.140/orphanet/api/search_node/retrieve.json?keys=' + keys + '&simple=1';
-            return $http.get(url).then(function (response) {
-                return response.data;
-            });
-        };
-        $rootScope.changed = function ($item, $model, $label) {
+        $rootScope.getResults = searchService.search;
+        $rootScope.changed = function($item, $model, $label) {
             console.log($item, $model, $label);
             var params = {};
             var type = $item.type.toLowerCase();
@@ -53,15 +49,29 @@ angular
             console.log(type, params);
         };
     })
-    .config(function ($stateProvider, $urlRouterProvider, RestangularProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, ENV) {
 
-        RestangularProvider.setBaseUrl('http://130.56.248.140/orphanet/api');
+        RestangularProvider.setBaseUrl(ENV.apiEndpoint);
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/disorders');
         //
         // Now set up the states
         $stateProvider
+            .state('home', {
+                url: '/home',
+                controller: 'HomeCtrl as vm',
+                templateUrl: 'views/home.html'
+            })
+            .state('classification', {
+                url: '/classification/:classificationId',
+                controller: 'ClassificationCtrl as vm',
+                templateUrl: 'views/classification.html'
+            })
+            .state('landing', {
+                url: '/landing',
+                templateUrl: 'views/landing.html'
+            })
             .state('tour', {
                 url: '/tour',
                 templateUrl: 'views/tour.html'

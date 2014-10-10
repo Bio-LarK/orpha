@@ -1,0 +1,125 @@
+<style>
+.selected {
+    font-weight: bold;
+}
+</style>
+<div class="container">
+
+    <div class="title">
+        <div class="pull-right text-muted text-right" ng-hide="disorderTracker.active()">
+            <!-- TODO: add time -->
+            Updated: {{ vm.classification.changed * 1000 | date:'d/M/yyyy' }}
+        </div>
+        <div class="media">
+            <div class="pull-left">
+                <div style="display:inline-block;background-color:{{vm.classification.getColor()}};width:70px;height:70px;"></div>
+            </div>
+            <div class="media-body">
+                <h1>
+                    {{ vm.classification.title }}
+                </h1>
+                <div style="color: rgba(0,0,0,0.5); margin-top: 7px;">
+                    <span>
+                        <small style="font-size: 16px;">
+                            <!-- TODO: Add meta info -->
+                            More information could be provided here.
+                        </small>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <div sf-treepeat="child in disorder_child of vm.rootDisorder">
+                        <div style="border-left:20px solid #eee;" ng-show="child.disorder_child.length">
+                            <div style="border-bottom:1px solid #eee; padding: 10px;">
+
+                                <a href ng-click="vm.toggleOpen(child)">
+                                    <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
+                                    </i>
+                                </a>
+
+                                <a href ng-click="vm.selectDisorder(child)" ng-class="{'selected': child.nid == vm.selectedDisorder.nid}">
+
+                                    <span class="badge pull-right" style="background-color:#ccc">
+                                        {{ child.disorder_child.length }}
+                                    </span>
+
+                                    <i class="fa fa-stethoscope"></i> {{ child.disorder_name }}
+                                </a>
+                            </div>
+                            <div ng-show="child.isOpen">
+                                <div sf-treecurse>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-8">
+            <!-- <h3 style="margin: 0;">{{ vm.selectedDisorder.disorder_name }}</h3> -->
+            <p ng-hide="vm.selectedDisorder.disorder_child.length" class="text-muted">
+                No children.
+            </p>
+
+            <div class="row" ng-repeat="row in vm.selectedDisorder.disorder_child | filter:filterChildren |  inSlicesOf:2">
+                <div class="col-sm-6" ng-repeat="disorder in row">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <div style="width:40px;height:40px;">
+                                        <div ng-repeat="classification in disorder.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/$parent.disorder.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                                        </div>
+                                    </div>
+                                    <!-- <img src="http://dummyimage.com/40x40/dddddd/dddddd" alt="" class="media-object"> -->
+                                </div>
+                                <div class="media-body">
+                                    <h5>
+                                        <a ui-sref="disorder({disorderId: disorder.nid})">
+                                            {{ disorder.disorder_name }}
+                                        </a>
+                                    </h5>
+                                    <!-- <p>
+                                        {{ disorder.disorder_class.length }}
+                                    </p> -->
+
+                                    <p>An Orphanet summary for this disease is currently under development.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- disorder_class -->
+    <!--    <accordion close-others="oneAtATime">
+        <accordion-group heading="{{ child.disorder_name }}" ng-repeat="child in vm.disorder.disorder_child" is-open="child.isOpen">
+            <ul class="list-group">
+                <li ng-repeat="disorder in child.disorder_child" class="list-group-item" >
+                    <a href ng-click="disorder.isOpen = true; vm.selectDisorder(child, disorder)">
+                        <i class="fa fa-caret-down" ng-show="disorder.disorder_child.length"></i> {{ disorder.disorder_name }}
+                    </a>
+                </li>
+            </ul>
+        </accordion-group>
+    </accordion> -->
+
+
+    <!-- <ul dx-start-with="vm.disorder">
+            <li ng-repeat="child in $dxPrior.disorder_child">
+                <a href ng-click="child.loadChildren()">{{ child.disorder_name }}</a>
+                <ul dx-connect="child"/>
+            </li>
+        </ul> -->
+
+</div>

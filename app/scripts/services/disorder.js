@@ -8,7 +8,8 @@
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
-    .factory('Disorder', function($resource, $http, $q, RelationshipService, ENV) {
+    .factory('Disorder', function($resource, $http, $q, RelationshipService, ENV, $log,
+        Classification) {
         var Disorder = $resource(ENV.apiEndpoint + '/entity_node/:nid', {
             'parameters[type]': 'disorder',
             nid: '@nid'
@@ -18,25 +19,51 @@ angular.module('orphaApp')
                 transformResponse: $http.defaults.transformResponse.concat([
                     transformGetResponse
                 ])
-            }
+            },
+            query: {
+                method: 'GET',
+                isArray: true,
+                transformResponse: $http.defaults.transformResponse.concat([
+                    transformQueryResponse
+                ])
+            },
         });
         Disorder.prototype.getGenes = getGenes;
         Disorder.prototype.getSigns = getSigns;
         Disorder.prototype.getParents = getParents;
+        Disorder.prototype.loadParents = getParents;
+        Disorder.prototype.loadChildren = loadChildren;
 
         Disorder.getFromSign = getFromSign;
         Disorder.getFromGene = getFromGene;
-
+        Disorder.getRoots = getRoots;
+        Disorder.getRootForClassification = getRootForClassification;
         return Disorder;
 
         ///////////////////
 
+        function transformQueryResponse(transactionRequests, headersGetter) {
+            _.each(transactionRequests, function(transactionRequest) {
+                transformGetResponse(transactionRequest);
+            });
+            return transactionRequests;
+        }
+
         function transformGetResponse(disorder, headersGetter) {
             // Convert parents to Disorder objects
+            disorder['disorder_parent'] = _.sortBy(disorder['disorder_parent'], 'nid');
             disorder['disorder_parent'] = _.map(disorder.disorder_parent, function(parent) {
                 return new Disorder(parent);
             });
-
+            disorder['disorder_child'] = _.sortBy(disorder['disorder_child'], 'nid');
+            disorder['disorder_child'] = _.map(disorder.disorder_child, function(child) {
+                $log.debug('wrapping children');
+                return new Disorder(child);
+            });
+            disorder['disorder_class'] = _.map(disorder.disorder_class, function(classification) {
+                return new Classification(classification);
+            });
+            disorder.isOpenable = true;
             disorder.body = '<p>The incorporation of Orphanet summaries for diseases is ' +
             'currently under development. The summary below is for illustrative purposes.</p> ' +
             '<p>This disorder is a rare neurodegenerative disorder of the astrocytes comprised ' +
@@ -80,7 +107,7 @@ angular.module('orphaApp')
             return RelationshipService.getRelatedThroughIntermediary(disorder, 'disorder_phenotype', fields);
         }
 
-        function getParents() {
+        function getParents(classification) {
             /* jshint validthis: true */
             var disorder = this;
 
@@ -96,17 +123,47 @@ angular.module('orphaApp')
             var request = _.indexBy(ids, function(ids, index) {
                 return 'parameters[nid][' + index + ']';
             });
+            $log.debug('classifications', classification);
+            if(classification) {
+                request['parameters[disorder_class]'] = classification.nid;
+            }
             request.fields = ['nid', 'disorder_name', 'disorder_parent'].join(',');
 
             return $http.get(ENV.apiEndpoint + '/entity_node', {
                 params: request
             }).then(function(response) {
-                disorder['disorder_parent'] = _.map(response.data, function(disorder) {
-                    return new Disorder(disorder);
+                disorder['disorder_parent'] = _.map(response.data, function(parent) {
+                    parent = new Disorder(parent);
+                    parent.disorder_child = [disorder];
+                    return parent;
                 });
                 return disorder['disorder_parent'];
             });
+        }
 
+
+        function loadChildren() {
+            /* jshint validthis: true */
+            var disorder = this;
+            if(disorder.hasLoadedChildren) {
+                return $q.when(disorder['disorder_child']);
+            }
+            return Disorder.query({
+                fields: 'nid,disorder_name,disorder_child,disorder_class',
+                'parameters[disorder_parent]': disorder.nid
+            }).$promise.then(function(children) {
+                disorder.hasLoadedChildren = true;
+                disorder['disorder_child'] = _.sortBy(children, 'nid');
+
+                var isOpenable = false;
+                _.each(children, function(child) {
+                    isOpenable = isOpenable || child['disorder_child'].length;
+                    _.each(child['disorder_child'], function(grandChild) {
+                        grandChild.isOpenable = true;
+                    });
+                });
+                disorder.isOpenable = isOpenable;
+            });
         }
 
         function getFromSign(signId) {
@@ -126,6 +183,37 @@ angular.module('orphaApp')
                     return new Disorder(disgeneGene['disgene_disorder']);
                 });
                 return disorders;
+            });
+        }
+
+        function getRoots() {
+            var fields = 'nid,title,disorder_name,disorder_class';
+            var page1 = Disorder.query({
+                'parameters[disorder_root]': 1,
+                'fields': fields,
+                'page': 0
+            }).$promise;
+
+            var page2 = Disorder.query({
+                'parameters[disorder_root]': 1,
+                'fields': fields,
+                'page': 1
+            }).$promise;
+
+            return $q.all([page1, page2]).then(function(disorders) {
+                return _.flatten(disorders);
+            });
+        }
+
+        function getRootForClassification(classification) {
+            return Disorder.query({
+                'parameters[disorder_root]': 1,
+                'parameters[disorder_class]': classification.nid,
+            }).$promise.then(function(disorders) {
+                if(!disorders.length) {
+                    return null;
+                } 
+                return disorders[0];
             });
         }
 
