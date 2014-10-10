@@ -1,3 +1,19 @@
+<a name="0.15.0"></a>
+## 0.15.0 (2014-10-10)
+
+
+#### Bug Fixes
+
+* **proxy:** update proxy to new url ([46b17178](git@github.com:Bio-LarK/orpha/commit/46b171783d1e739ccead911649bcc0c17c8c2291))
+
+
+#### Features
+
+* **classification:** add classification page ([f327f6b0](git@github.com:Bio-LarK/orpha/commit/f327f6b0f68a4ca145f053569c49f0f4570c5d15))
+* **suggestion:** add comments ([c7203782](git@github.com:Bio-LarK/orpha/commit/c7203782cda8a2515c1c7a3238327af28c66cf20), closes [#29](git@github.com:Bio-LarK/orpha/issues/29))
+* **tour:** add tour page scaffolding ([da35ec1c](git@github.com:Bio-LarK/orpha/commit/da35ec1c24fa928ab4e8021839541a197b61bf81), closes [#30](git@github.com:Bio-LarK/orpha/issues/30))
+
+
 <a name="0.14.5"></a>
 ### 0.14.5 (2014-10-07)
 
