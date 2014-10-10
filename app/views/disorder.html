@@ -101,7 +101,10 @@
             </div>
             <div class="media">
                 <div class="pull-left">
-                    <img src="http://dummyimage.com/70x70/dddddd/dddddd" alt="" class="media-object">
+                    <div style="width:70px;height:70px;">
+                        <div ng-repeat="classification in disorder.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                        </div>
+                    </div>
                 </div>
                 <div class="media-body">
                     <h1>
@@ -321,29 +324,30 @@
                 <div class="row">
 
                     <div class="col-sm-12">
-                        <div class="row" ng-repeat="row in disorder.disorder_parent | inSlicesOf:3">
-                            <div class="col-sm-4" ng-repeat="disorder in row">
+                        <div class="row" ng-repeat="row in disorder.disorder_class | inSlicesOf:3">
+                            <div class="col-sm-4" ng-repeat="classification in row">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <div class="media">
                                             <div class="pull-left">
-                                                <img src="http://dummyimage.com/40x40/dddddd/dddddd" alt="" class="media-object">
+                                                <div style="display:inline-block;background-color:{{classification.getColor()}};width:40px;height:40px;"></div>
                                             </div>
                                             <div class="media-body">
                                                 <h5>
-                                                    <a ui-sref="disorder({disorderId: disorder.nid})">
-                                                            {{ disorder.title }}
+                                                    <a ui-sref="classification({classificationId: classification.nid})">
+                                                        {{ classification.title }}
                                                     </a> 
                                                 </h5>
 
-                                                <p>An Orphanet summary for this disease is currently under development.</p>
+                                                <p>An Orphanet summary for this classification is currently under development.</p>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <div style="font-size: 12px; color: grey; text-transform: uppercase">
+                                    <div class="list-group">
+                                        <a class="list-group-item" href ui-sref="classification({classificationId: classification.nid})">
+                                            <i class="fa fa-bullseye"></i> Locate in Classification
+                                            <!-- <div style="font-size: 12px; color: grey; text-transform: uppercase">
                                                 Location in hierarchy
                                             </div>
 
@@ -365,9 +369,9 @@
                                                     </a>
                                                     <div dx-connect="parent" ng-show="parent.isShowingParents" />
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                            </div> -->
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
