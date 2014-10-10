@@ -1,3 +1,12 @@
+<a name="0.16.1"></a>
+### 0.16.1 (2014-10-10)
+
+
+#### Bug Fixes
+
+* **api:** missing bracket ([cfb9928e](git@github.com:Bio-LarK/orpha/commit/cfb9928e688893b8ef857d8963a1836e42130cd9))
+
+
 <a name="0.16.0"></a>
 ## 0.16.0 (2014-10-10)
 
