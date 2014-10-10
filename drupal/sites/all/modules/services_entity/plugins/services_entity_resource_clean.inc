@@ -210,7 +210,7 @@ class ServicesEntityResourceControllerClean extends ServicesEntityResourceContro
             if ($id = $property->getIdentifier()) {
               $data[$name] = $this->get_resource_reference($property->type(), $id, $property->title->value());
             }
-          // }
+          }
         } elseif ($property instanceof EntityValueWrapper) {
           $data[$name] = $property->value();
         } elseif ($property instanceof EntityListWrapper || $property instanceof EntityStructureWrapper) {
