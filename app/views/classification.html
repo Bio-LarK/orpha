@@ -35,24 +35,27 @@
             <div class="panel panel-default">
                 <div class="list-group">
                     <div sf-treepeat="child in disorder_child of vm.rootDisorder">
-                        <div style="border-left:20px solid #eee;" ng-show="child.disorder_child.length">
-                            <div style="border-bottom:1px solid #eee; padding: 10px;">
-
-                                <a href ng-click="vm.toggleOpen(child)">
-                                    <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
-                                    </i>
-                                </a>
-
-                                <a href ng-click="vm.selectDisorder(child)" ng-class="{'selected': child.nid == vm.selectedDisorder.nid}">
-
-                                    <span class="badge pull-right" style="background-color:#ccc">
-                                        {{ child.disorder_child.length }}
-                                    </span>
-
-                                    <i class="fa fa-stethoscope"></i> {{ child.disorder_name }}
-                                </a>
+                        <div ng-show="child.disorder_child.length">
+                            <div style="border-bottom:1px solid #eee; padding: 10px; position: relative;">
+                                
+                                <div style="position: absolute; top: 0; left: 0;background-color: #eee; width: 20px; padding:10px 0;text-align: center; line-height: 1.5; height: 100%">
+                                    <a href ng-click="vm.toggleOpen(child)" style="height: 100%">
+                                        <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
+                                        </i>
+                                    </a>
+                                </div>
+                                
+                                <div style="padding-left:20px;">
+                                    <a href ng-click="vm.selectDisorder(child)" ng-class="{'selected': child.nid == vm.selectedDisorder.nid}">
+                                        <span class="badge pull-right" style="background-color:#ccc">
+                                            {{ child.disorder_child.length }}
+                                        </span>
+                                        <i class="fa fa-stethoscope"></i> {{ child.disorder_name }}
+                                    </a>
+                                </div>
+                                
                             </div>
-                            <div ng-show="child.isOpen">
+                            <div ng-show="child.isOpen" style="border-left:20px solid #eee;">
                                 <div sf-treecurse>
                                 </div>
                             </div>
