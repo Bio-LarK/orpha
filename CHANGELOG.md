@@ -1,3 +1,12 @@
+<a name="0.16.3"></a>
+### 0.16.3 (2014-10-10)
+
+
+#### Features
+
+* **disorder:** incorporate classifications ([54fa0c2b](git@github.com:Bio-LarK/orpha/commit/54fa0c2bfb6d5c1f5d32f29dec172d69c24ffe75))
+
+
 <a name="0.16.2"></a>
 ### 0.16.2 (2014-10-10)
 
