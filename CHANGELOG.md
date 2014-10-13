@@ -1,3 +1,12 @@
+<a name="0.17.1"></a>
+### 0.17.1 (2014-10-13)
+
+
+#### Features
+
+* **disorder:** add striping to children disorders ([df8e5a35](git@github.com:Bio-LarK/orpha/commit/df8e5a3543c0f6ec8d4b86203809168e638ef5b2))
+
+
 <a name="0.17.0"></a>
 ## 0.17.0 (2014-10-13)
 
