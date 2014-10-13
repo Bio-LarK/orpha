@@ -198,34 +198,34 @@ class ServicesEntityResourceControllerClean extends ServicesEntityResourceContro
       $name = preg_replace('/^field_/', '', $name);
 
       // If fields is set and it isn't one of them, go to the next.
-      if ($getRelated && $fields != '*' && !in_array($name, $fields_array)) {
+      if ($fields != '*' && !in_array($name, $fields_array)) {
         continue;
       }
       try {
         if ($property instanceof EntityDrupalWrapper) {
           // For referenced entities only return the URI.
-          if($getRelated) {
-	         $data[$name] = $this->get_data($property, $fields, false);
-          } else {
+          // if($getRelated) {
+	         // $data[$name] = $this->get_data($property, $fields, false);
+          // } else {
             if ($id = $property->getIdentifier()) {
               $data[$name] = $this->get_resource_reference($property->type(), $id, $property->title->value());
             }
-          }
+          // }
         } elseif ($property instanceof EntityValueWrapper) {
           $data[$name] = $property->value();
         } elseif ($property instanceof EntityListWrapper || $property instanceof EntityStructureWrapper) {
           $data[$name] = array();
-          if($getRelated) {
-            foreach($property as $id => $value) {
-              if($value instanceof EntityValueWrapper) {
-                $data[$name][$id] = $value->value();
-              } else {
-                $data[$name][$id] = $this->get_data($value, $fields, false);
-              }
-            }
-          } else {
+          // if($getRelated) {
+          //   foreach($property as $id => $value) {
+          //     if($value instanceof EntityValueWrapper) {
+          //       $data[$name][$id] = $value->value();
+          //     } else {
+          //       $data[$name][$id] = $this->get_data($value, $fields, false);
+          //     }
+          //   }
+          // } else {
             $data[$name] = $this->get_data($property, $fields, false);
-          }
+          // }
         }
       } catch (EntityMetadataWrapperException $e) {
         // A property causes problems - ignore that.
