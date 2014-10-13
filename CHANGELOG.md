@@ -1,3 +1,12 @@
+<a name="0.17.3"></a>
+### 0.17.3 (2014-10-13)
+
+
+#### Bug Fixes
+
+* **api:** fix relationship loading ([cd33d412](git@github.com:Bio-LarK/orpha/commit/cd33d41268bed0134b43f12b5b45ca2aedc0da99))
+
+
 <a name="0.17.2"></a>
 ### 0.17.2 (2014-10-13)
 
