@@ -49,9 +49,11 @@ angular
             console.log(type, params);
         };
     })
-    .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, ENV) {
+    .config(function ($stateProvider, $animateProvider, $urlRouterProvider, RestangularProvider, ENV) {
 
         RestangularProvider.setBaseUrl(ENV.apiEndpoint);
+
+        $animateProvider.classNameFilter(/^((?!(fa-spin)).)*$/);
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/home');

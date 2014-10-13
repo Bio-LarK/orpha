@@ -152,6 +152,7 @@ angular.module('orphaApp')
                 fields: 'nid,disorder_name,disorder_child,disorder_class',
                 'parameters[disorder_parent]': disorder.nid
             }).$promise.then(function(children) {
+                $log.debug('children loaded');
                 disorder.hasLoadedChildren = true;
                 disorder['disorder_child'] = _.sortBy(children, 'nid');
 

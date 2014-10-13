@@ -2,6 +2,42 @@
 .selected {
     font-weight: bold;
 }
+.tree {
+
+}
+.tree-branch {
+
+}
+.tree-branch-item {
+    border-bottom: 1px solid #eee; 
+    padding: 10px; 
+    position: relative;
+}
+.tree-branch-item-arrow {
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    display: block;
+    background-color: #eee; 
+    width: 20px; 
+    padding:10px 0;
+    text-align: center; 
+    line-height: 1.5; 
+    height: 100%
+}
+.tree-branch-item-content {
+    padding-left: 20px;
+}
+.tree-branch-children {
+    border-left: 20px solid #eee;
+}
+.tree-branch-children-loading {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    border-left: 20px solid #eee;
+    border-bottom: 1px solid #eee;
+}
 </style>
 <div class="container">
 
@@ -35,27 +71,26 @@
             <div class="panel panel-default">
                 <div class="list-group">
                     <div sf-treepeat="child in disorder_child of vm.rootDisorder">
-                        <div ng-show="child.disorder_child.length">
-                            <div style="border-bottom:1px solid #eee; padding: 10px; position: relative;">
+                        <div ng-show="child.disorder_child.length" class="tree-branch">
+                            <div class="tree-branch-item">
+                                <a href ng-click="vm.toggleOpen(child)" class="tree-branch-item-arrow">
+                                    <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
+                                    </i>
+                                </a>
                                 
-                                <div style="position: absolute; top: 0; left: 0;background-color: #eee; width: 20px; padding:10px 0;text-align: center; line-height: 1.5; height: 100%">
-                                    <a href ng-click="vm.toggleOpen(child)" style="height: 100%">
-                                        <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
-                                        </i>
-                                    </a>
-                                </div>
-                                
-                                <div style="padding-left:20px;">
+                                <div class="tree-branch-item-content">
                                     <a href ng-click="vm.selectDisorder(child)" ng-class="{'selected': child.nid == vm.selectedDisorder.nid}">
                                         <span class="badge pull-right" style="background-color:#ccc">
                                             {{ child.disorder_child.length }}
                                         </span>
-                                        <i class="fa fa-stethoscope"></i> {{ child.disorder_name }}
+                                        <i class="fa fa-stethoscope"></i> {{ child.title }}
                                     </a>
                                 </div>
-                                
                             </div>
-                            <div ng-show="child.isOpen" style="border-left:20px solid #eee;">
+                            <div ng-show="child.isOpen" class="tree-branch-children" >
+                                <div class="tree-branch-children-loading" ng-hide="child.hasLoadedChildren">
+                                    <i class="fa fa-refresh fa-spin"></i>    
+                                </div>
                                 <div sf-treecurse>
                                 </div>
                             </div>
@@ -89,9 +124,6 @@
                                             {{ disorder.title }}
                                         </a>
                                     </h5>
-                                    <!-- <p>
-                                        {{ disorder.disorder_class.length }}
-                                    </p> -->
 
                                     <p>An Orphanet summary for this disease is currently under development.</p>
                                 </div>
