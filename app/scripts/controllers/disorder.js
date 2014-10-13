@@ -8,7 +8,8 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, Page, promiseTracker, $modal, modalService) {
+    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, $log,
+        Page, promiseTracker, $modal, modalService) {
         var vm = $scope;
         vm.disorderTracker = promiseTracker();
         vm.disorder = null;
@@ -40,8 +41,10 @@ angular.module('orphaApp')
                     _.each(parents, function(parent) {
                         _.each(parent['disorder_class'], function(parentClassification) {
                             var classification = _.find(vm.disorder['disorder_class'], {nid: parentClassification.nid});
-                            classification.parents = classification.parents || [];
-                            classification.parents.push(parent);
+                            if(classification) {
+                                classification.parents = classification.parents || [];    
+                                classification.parents.push(parent);
+                            }
                         });
                     });
                 });

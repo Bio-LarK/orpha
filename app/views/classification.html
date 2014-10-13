@@ -52,7 +52,8 @@
         </div>
         <div class="media">
             <div class="pull-left">
-                <div style="display:inline-block;background-color:{{vm.classification.getColor()}};width:70px;height:70px;"></div>
+                <img ng-hide="vm.classification" src="http://dummyimage.com/70x70/dddddd/dddddd" alt="" class="media-object">
+                <div ng-show="vm.classification" style="display:inline-block;background-color:{{vm.classification.getColor()}};width:70px;height:70px;"></div>
             </div>
             <div class="media-body">
                 <h1>

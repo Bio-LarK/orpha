@@ -338,7 +338,12 @@
                                                         {{ classification.title }}
                                                     </a> 
                                                 </h5>
-                                                <p>An Orphanet summary for this classification is currently under development.</p>
+                                                <!-- <p>An Orphanet summary for this classification is currently under development.</p> -->
+                                                <ul class="list-unstyled" style="margin: 0;">
+                                                    <li ng-repeat="parent in classification.parents">
+                                                        <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
 
@@ -346,16 +351,16 @@
 
                                     <div class="list-group">
                                         <a class="list-group-item" href ui-sref="classification({classificationId: classification.nid, disorderId: disorder.nid})">
-                                            <i class="fa fa-bullseye"></i> Open at to location of {{ disorder.title }}
+                                            <i class="fa fa-bullseye"></i> Open to location of {{ disorder.title }}
                                         </a>
-                                        <div class="list-group-item" ng-show="classification.parents.length">
+                                        <!-- <div class="list-group-item" ng-show="classification.parents.length">
                                             <h5>Parents</h5>
                                             <ul class="list-unstyled">
-                                                    <li ng-repeat="parent in classification.parents">
-                                                        <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
-                                                    </li>
-                                                </ul>
-                                        </div>
+                                                <li ng-repeat="parent in classification.parents">
+                                                    <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
