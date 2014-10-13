@@ -35,6 +35,7 @@ angular.module('orphaApp')
 
         Disorder.getFromSign = getFromSign;
         Disorder.getFromGene = getFromGene;
+        Disorder.getParentsFromDisorderInClassification = getParentsFromDisorderInClassification;
         Disorder.getRoots = getRoots;
         Disorder.getRootForClassification = getRootForClassification;
         return Disorder;
@@ -107,40 +108,36 @@ angular.module('orphaApp')
             return RelationshipService.getRelatedThroughIntermediary(disorder, 'disorder_phenotype', fields);
         }
 
-        function getParents(classification) {
-            /* jshint validthis: true */
-            var disorder = this;
-
-            $log.debug('getting parents of disorder', disorder.nid);
-
+        function getParentsFromDisorderInClassification(disorder, classification) {
             // Get all the parent ids
-            var ids = _.map(this['disorder_parent'], function(parent) {
+            var ids = _.map(disorder['disorder_parent'], function(parent) {
                 return parent.id || parent.nid;
             });
+
+            $log.debug('GETTING PARENTS', ids);
             if (!ids.length) {
                 return $q.when(null);
             }
-
-            // var ids = _.pluck(this['disorder_parent'], 'id');
             var request = _.indexBy(ids, function(ids, index) {
                 return 'parameters[nid][' + index + ']';
             });
-            $log.debug('classifications', classification);
             if(classification) {
                 request['parameters[disorder_class]'] = classification.nid;
             }
             request.fields = ['nid', 'disorder_name', 'disorder_parent', 'disorder_class'].join(',');
-            $log.debug('request fields', request);
-            return $http.get(ENV.apiEndpoint + '/entity_node', {
-                params: request
-            }).then(function(response) {
-                var promises = [];
-                var parents = response.data;
+            return Disorder.query(request).$promise;
+        }
 
+
+        function getParents(classification) {
+
+            /* jshint validthis: true */
+            var disorder = this;
+
+            return Disorder.getParentsFromDisorderInClassification(disorder, classification).then(function(parents) {
                 // Load the children for the parents
-                promises = _.map(parents, function(parent) {
+                var promises = _.map(parents, function(parent) {
                     $log.debug('loading children for parents', parent.title);
-                    parent = new Disorder(parent);
                     return parent.loadChildren().then(function(children) {
                         $log.debug('loaded children for parent', parent.title, children);
                         var index = _.findIndex(parent['disorder_child'], function(child) {
@@ -160,6 +157,9 @@ angular.module('orphaApp')
                 });
                 $log.debug('returning promises');
                 return $q.all(promises);
+            }, function() {
+                $log.debug('no parents found');
+                return [];
             });
         }
 
