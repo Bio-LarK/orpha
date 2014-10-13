@@ -34,6 +34,8 @@ angular.module('orphaApp')
             }, function (disorder) {
                 vm.disorder = disorder;
 
+                vm.disorder.loadChildren();
+
                 Page.setTitle(disorder['disorder_name']);
 
                 var genesPromise = disorder.getGenes();
