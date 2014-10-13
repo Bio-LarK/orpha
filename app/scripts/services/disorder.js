@@ -32,6 +32,7 @@ angular.module('orphaApp')
         Disorder.prototype.getSigns = getSigns;
         Disorder.prototype.getParents = getParents;
         Disorder.prototype.loadChildren = loadChildren;
+        Disorder.prototype.loadParents = loadParents;
 
         Disorder.getFromSign = getFromSign;
         Disorder.getFromGene = getFromGene;
@@ -161,6 +162,33 @@ angular.module('orphaApp')
                 $log.debug('no parents found');
                 return [];
             });
+        }
+
+        function loadParents() {
+            /* jshint validthis: true */
+            var disorder = this;
+            return Disorder.getParentsFromDisorderInClassification(disorder).then(function(parents) {
+                disorder['disorder_parent'] = parents;
+                return parents;
+            });
+            // return Disorder.query({
+            //     fields: 'nid,title,disorder_name,disorder_child,disorder_class',
+            //     'parameters[disorder_child]': disorder.nid
+            // }).$promise.then(function(children) {
+            //     $log.debug('children loaded');
+            //     disorder.hasLoadedChildren = true;
+            //     disorder['disorder_child'] = _.sortBy(children, 'nid');
+
+            //     var isOpenable = false;
+            //     _.each(children, function(child) {
+            //         isOpenable = isOpenable || child['disorder_child'].length;
+            //         _.each(child['disorder_child'], function(grandChild) {
+            //             grandChild.isOpenable = true;
+            //         });
+            //     });
+            //     disorder.isOpenable = isOpenable;
+            //     return children;
+            // });
         }
 
 

@@ -36,6 +36,7 @@ angular.module('orphaApp')
                 vm.disorder = disorder;
 
                 vm.disorder.loadChildren();
+                vm.disorder.loadParents();
 
                 Disorder.getParentsFromDisorderInClassification(disorder).then(function(parents) {
                     _.each(parents, function(parent) {
