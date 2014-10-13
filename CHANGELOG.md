@@ -1,3 +1,12 @@
+<a name="0.17.4"></a>
+### 0.17.4 (2014-10-13)
+
+
+#### Bug Fixes
+
+* **disorder:** fix setting parents under classifications ([97d28150](git@github.com:Bio-LarK/orpha/commit/97d28150d212a6eaed6ec43493a5ce098b11b342))
+
+
 <a name="0.17.3"></a>
 ### 0.17.3 (2014-10-13)
 
