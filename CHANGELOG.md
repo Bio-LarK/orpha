@@ -1,3 +1,12 @@
+<a name="0.17.0"></a>
+## 0.17.0 (2014-10-13)
+
+
+#### Features
+
+* **classification:** add locating a disorder in the tree ([ac812304](git@github.com:Bio-LarK/orpha/commit/ac812304126c924039470708e37cdc49e7153ddb))
+
+
 <a name="0.16.3"></a>
 ### 0.16.3 (2014-10-10)
 
