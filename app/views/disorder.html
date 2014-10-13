@@ -346,7 +346,7 @@
                                     </div>
                                     <div class="list-group">
                                         <a class="list-group-item" href ui-sref="classification({classificationId: classification.nid})">
-                                            <i class="fa fa-bullseye"></i> Locate disorder in Classification
+                                            <i class="fa fa-bullseye"></i> Locate in Classification
                                             <!-- <div style="font-size: 12px; color: grey; text-transform: uppercase">
                                                 Location in hierarchy
                                             </div>
@@ -453,33 +453,25 @@
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body">
+                                        <!-- <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body"> -->
                                     </div>
                                     <div class="media-body">
                                         <div>
                                             <span class="text-muted">
-                                                {{ disorder_gene.disgene_at.dgt_name }}
+                                                {{ disorder_gene.disgene_at.title }}
                                             </span>
                                             <h5 style="display: inline">
-                                                <a ui-sref="gene({geneId: disorder_gene.disgene_gene.nid})">{{ disorder_gene.disgene_gene.gene_name }}</a>
+                                                <a ui-sref="gene({geneId: disorder_gene.disgene_gene.nid})">{{ disorder_gene.disgene_gene.title }}</a>
                                             </h5>
                                             <!--<span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)-->
                                         </div>
                                         <div style="margin-top: 10px;">
                                             <div class="detail detail-genotype">
                                                 <div class="detail-title">
-                                                    Symbol:
-                                                </div>
-                                                <div class="detail-info">
-                                                    {{ disorder_gene.disgene_gene.gene_symbol }}
-                                                </div>
-                                            </div>
-                                            <div class="detail detail-genotype">
-                                                <div class="detail-title">
                                                     Status:
                                                 </div>
                                                 <div class="detail-info">
-                                                    {{ disorder_gene.disgene_as.dga_name }}
+                                                    {{ disorder_gene.disgene_as.title }}
                                                 </div>
                                             </div>
                                         </div>
@@ -488,7 +480,7 @@
                             </div>
                             <div class="list-group">
                                 <a href="" class="list-group-item">
-                                    <i class="fa fa-search"></i> View Disorders ({{ disorder_gene.disgene_gene.gene_disgene.length }})
+                                    <i class="fa fa-search"></i> View Disorders
                                 </a>
                             </div>
                         </div>
@@ -499,33 +491,25 @@
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body">
+                                        <!-- <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body"> -->
                                     </div>
                                     <div class="media-body">
                                         <div>
                                             <span class="text-muted">
-                                                {{ disorder_gene.disgene_at.dgt_name }}
+                                                {{ disorder_gene.disgene_at.title }}
                                             </span>
                                             <h5 style="display: inline">
-                                                {{ disorder_gene.disgene_gene.gene_name }}
+                                                {{ disorder_gene.disgene_gene.title }}
                                             </h5>
                                             <!--<span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)-->
                                         </div>
                                         <div style="margin-top: 10px;">
                                             <div class="detail detail-genotype">
                                                 <div class="detail-title">
-                                                    Symbol:
-                                                </div>
-                                                <div class="detail-info">
-                                                    {{ disorder_gene.disgene_gene.gene_symbol }}
-                                                </div>
-                                            </div>
-                                            <div class="detail detail-genotype">
-                                                <div class="detail-title">
                                                     Status:
                                                 </div>
                                                 <div class="detail-info">
-                                                    {{ disorder_gene.disgene_as.dga_name }}
+                                                    {{ disorder_gene.disgene_as.title }}
                                                 </div>
                                             </div>
                                         </div>
@@ -537,9 +521,6 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- http://130.56.248.140/orphanet/api/entity_node/115015/nodes_field_ds_sign?fields=ds_disorder -->
 
         <div class="panels">
             <!-- <button class="btn btn-default pull-right">Edit</button> -->
@@ -566,19 +547,19 @@
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body">
+                                        <!-- <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body"> -->
                                     </div>
                                     <div class="media-body">
                                         <div>
                                             <h5>
                                                 <a ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
-                                                    {{ disorder_phenotype.ds_sign.sign_name }}
+                                                    {{ disorder_phenotype.ds_sign.title }}
                                                 </a>
                                             </h5>
-                                            <p class="" ng-hide="disorder_phenotype.ds_sign.sign_name">Loading...</p>
+                                            <p class="" ng-hide="disorder_phenotype.ds_sign.title">Loading...</p>
                                         </div>
                                         <div class="text-muted">
-                                            {{ disorder_phenotype.ds_frequency.signfreq_name }}
+                                            {{ disorder_phenotype.ds_frequency.title }}
                                         </div>
                                     </div>
                                 </div>
@@ -598,7 +579,7 @@
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body">
+                                        <!-- <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body"> -->
                                     </div>
                                     <div class="media-body">
                                         <div>

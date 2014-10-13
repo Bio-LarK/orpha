@@ -9,7 +9,7 @@
         </div>
         <div class="media">
             <div class="pull-left">
-                <img src="http://dummyimage.com/70x70/fdd835/fdd835" alt="" class="media-object">
+                <!-- <img src="http://dummyimage.com/70x70/fdd835/fdd835" alt="" class="media-object"> -->
             </div>
             <div class="media-body">
                 <h1>{{ sign.title || 'Loading...' }}
@@ -49,12 +49,12 @@
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
-                                    <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body">
+                                    <!-- <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body"> -->
                                 </div>
                                 <div class="media-body">
                                     <div>
                                         <h5>
-                                            <a ui-sref="sign({signId: sign.nid })">{{ sign.sign_name }}</a>
+                                            <a ui-sref="sign({signId: sign.nid })">{{ sign.title }}</a>
                                         </h5>
                                     </div>
                                     <div class="text-muted">
@@ -70,7 +70,6 @@
                                 <!-- <div class="row" style="font-size: 12px;"> -->
                                 <!-- <div class="col-sm-12"> -->
                                 <i class="fa fa-search"></i> View Disorders
-                                <span class="text-muted text-uppercase">({{ disorder_phenotype.ds_sign.sign_dissign.length }})</span>
                                 <!-- </div> -->
                                 <!-- </div> -->
                             </a>
@@ -111,7 +110,7 @@
                                     <div>
                                         <h5>
                                             <a ui-sref="sign({signId: sign.nid })">
-                                                {{ sign.sign_name }}
+                                                {{ sign.title }}
                                             </a>
                                         </h5>
                                     </div>
@@ -167,12 +166,15 @@
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
-                                    <img src="http://dummyimage.com/40x40/dddddd/dddddd" alt="" class="media-object">
+                                    <div style="width:40px;height:40px;">
+                                        <div ng-repeat="classification in disorder.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="media-body">
                                     <a ui-sref="disorder({disorderId: disorder.nid})">
                                         <strong>
-                                            {{ disorder.disorder_name }}
+                                            {{ disorder.title }}
                                         </strong>
                                     </a>
                                     <p>An Orphanet summary for this disease is currently under development.</p>
