@@ -31,7 +31,6 @@ angular.module('orphaApp')
         Disorder.prototype.getGenes = getGenes;
         Disorder.prototype.getSigns = getSigns;
         Disorder.prototype.getParents = getParents;
-        Disorder.prototype.loadParents = getParents;
         Disorder.prototype.loadChildren = loadChildren;
 
         Disorder.getFromSign = getFromSign;
@@ -91,6 +90,7 @@ angular.module('orphaApp')
             return disorder;
         }
 
+
         function getGenes() {
             /* jshint validthis: true */
             var disorder = this;
@@ -111,6 +111,8 @@ angular.module('orphaApp')
             /* jshint validthis: true */
             var disorder = this;
 
+            $log.debug('getting parents of disorder', disorder.nid);
+
             // Get all the parent ids
             var ids = _.map(this['disorder_parent'], function(parent) {
                 return parent.id || parent.nid;
@@ -127,17 +129,37 @@ angular.module('orphaApp')
             if(classification) {
                 request['parameters[disorder_class]'] = classification.nid;
             }
-            request.fields = ['nid', 'disorder_name', 'disorder_parent'].join(',');
-
+            request.fields = ['nid', 'disorder_name', 'disorder_parent', 'disorder_class'].join(',');
+            $log.debug('request fields', request);
             return $http.get(ENV.apiEndpoint + '/entity_node', {
                 params: request
             }).then(function(response) {
-                disorder['disorder_parent'] = _.map(response.data, function(parent) {
+                var promises = [];
+                var parents = response.data;
+
+                // Load the children for the parents
+                promises = _.map(parents, function(parent) {
+                    $log.debug('loading children for parents', parent.title);
                     parent = new Disorder(parent);
-                    parent.disorder_child = [disorder];
-                    return parent;
+                    return parent.loadChildren().then(function(children) {
+                        $log.debug('loaded children for parent', parent.title, children);
+                        var index = _.findIndex(parent['disorder_child'], function(child) {
+                            $log.debug('finding match', child, child.nid, disorder.nid);
+                            return child.nid === disorder.nid;
+                        });
+                        $log.debug('index of child in parent',index);
+                        parent['disorder_child'].splice(index, 1);
+                        parent['disorder_child'].unshift(disorder);
+                        return parent;
+                    }, function() {
+                        return parent;
+                    });
+                    // parent.hasLoadedChildren = true;
+                    // parent.disorder_child = [disorder];
+                    // return parent;
                 });
-                return disorder['disorder_parent'];
+                $log.debug('returning promises');
+                return $q.all(promises);
             });
         }
 
@@ -164,6 +186,7 @@ angular.module('orphaApp')
                     });
                 });
                 disorder.isOpenable = isOpenable;
+                return children;
             });
         }
 

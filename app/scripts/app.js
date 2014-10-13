@@ -66,7 +66,7 @@ angular
                 templateUrl: 'views/home.html'
             })
             .state('classification', {
-                url: '/classification/:classificationId',
+                url: '/classification/:classificationId?disorderId',
                 controller: 'ClassificationCtrl as vm',
                 templateUrl: 'views/classification.html'
             })

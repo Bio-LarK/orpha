@@ -1,6 +1,10 @@
 <style>
 .selected {
     font-weight: bold;
+    border-right: 2px solid #FFDA00;
+}
+.selected-card {
+    border: 2px solid #FFDA00;
 }
 .tree {
 
@@ -72,14 +76,14 @@
                 <div class="list-group">
                     <div sf-treepeat="child in disorder_child of vm.rootDisorder">
                         <div ng-show="child.disorder_child.length" class="tree-branch">
-                            <div class="tree-branch-item">
+                            <div class="tree-branch-item" ng-class="{'selected': child.nid == vm.selectedDisorder.nid}">
                                 <a href ng-click="vm.toggleOpen(child)" class="tree-branch-item-arrow">
                                     <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
                                     </i>
                                 </a>
                                 
-                                <div class="tree-branch-item-content">
-                                    <a href ng-click="vm.selectDisorder(child)" ng-class="{'selected': child.nid == vm.selectedDisorder.nid}">
+                                <div class="tree-branch-item-content" >
+                                    <a href ng-click="vm.selectDisorder(child)">
                                         <span class="badge pull-right" style="background-color:#ccc">
                                             {{ child.disorder_child.length }}
                                         </span>
@@ -108,7 +112,7 @@
 
             <div class="row" ng-repeat="row in vm.selectedDisorder.disorder_child | filter:filterChildren |  inSlicesOf:2">
                 <div class="col-sm-6" ng-repeat="disorder in row">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" ng-class="{'selected-card': vm.initialDisorder.nid == disorder.nid}">
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
