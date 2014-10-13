@@ -124,7 +124,7 @@ angular.module('orphaApp')
             if(classification) {
                 request['parameters[disorder_class]'] = classification.nid;
             }
-            request.fields = ['nid', 'disorder_name', 'disorder_parent', 'disorder_class'].join(',');
+            request.fields = ['nid', 'disorder_name', 'title', 'disorder_parent', 'disorder_class'].join(',');
             return Disorder.query(request).$promise;
         }
 
@@ -165,13 +165,14 @@ angular.module('orphaApp')
 
 
         function loadChildren() {
+            $log.debug('loading children now...');
             /* jshint validthis: true */
             var disorder = this;
             if(disorder.hasLoadedChildren) {
                 return $q.when(disorder['disorder_child']);
             }
             return Disorder.query({
-                fields: 'nid,disorder_name,disorder_child,disorder_class',
+                fields: 'nid,title,disorder_name,disorder_child,disorder_class',
                 'parameters[disorder_parent]': disorder.nid
             }).$promise.then(function(children) {
                 $log.debug('children loaded');

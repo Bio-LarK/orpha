@@ -187,7 +187,7 @@ class ServicesEntityResourceControllerClean extends ServicesEntityResourceContro
     return $data;
   }*/
 
-  protected function get_data($wrapper, $fields = '*', $getRelated = false) {
+  protected function get_data($wrapper, $fields = '*') {
     if ($fields != '*') {
       $fields_array = explode(',', $fields);
     }
@@ -196,7 +196,6 @@ class ServicesEntityResourceControllerClean extends ServicesEntityResourceContro
     foreach ($filtered as $name => $property) {
       // We don't want 'field_' at the beginning of fields. This is a drupalism and shouldn't be in the api.
       $name = preg_replace('/^field_/', '', $name);
-
       // If fields is set and it isn't one of them, go to the next.
       if ($fields != '*' && !in_array($name, $fields_array)) {
         continue;
@@ -204,32 +203,21 @@ class ServicesEntityResourceControllerClean extends ServicesEntityResourceContro
       try {
         if ($property instanceof EntityDrupalWrapper) {
           // For referenced entities only return the URI.
-          // if($getRelated) {
-	         // $data[$name] = $this->get_data($property, $fields, false);
-          // } else {
-            if ($id = $property->getIdentifier()) {
-              $data[$name] = $this->get_resource_reference($property->type(), $id, $property->title->value());
-            }
-          // }
-        } elseif ($property instanceof EntityValueWrapper) {
-          $data[$name] = $property->value();
-        } elseif ($property instanceof EntityListWrapper || $property instanceof EntityStructureWrapper) {
-          $data[$name] = array();
-          // if($getRelated) {
-          //   foreach($property as $id => $value) {
-          //     if($value instanceof EntityValueWrapper) {
-          //       $data[$name][$id] = $value->value();
-          //     } else {
-          //       $data[$name][$id] = $this->get_data($value, $fields, false);
-          //     }
-          //   }
-          // } else {
-            $data[$name] = $this->get_data($property, $fields, false);
-          // }
+          if ($id = $property->getIdentifier()) {
+            $data[$name] = $this->get_resource_reference($property->type(), $id, $property->title->value());
+          }
         }
-      } catch (EntityMetadataWrapperException $e) {
+        elseif ($property instanceof EntityValueWrapper) {
+          $data[$name] = $property->value();
+        }
+        elseif ($property instanceof EntityListWrapper || $property instanceof EntityStructureWrapper) {
+          $data[$name] = $this->get_data($property);
+        }
+      }
+      catch (EntityMetadataWrapperException $e) {
         // A property causes problems - ignore that.
       }
+
     }
     // If bundle = entity_type, don't send it.
     if (method_exists($wrapper, 'entityInfo')) {
