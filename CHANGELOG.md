@@ -1,3 +1,14 @@
+<a name="0.17.2"></a>
+### 0.17.2 (2014-10-13)
+
+
+#### Bug Fixes
+
+* **api:** fix fields filtering ([8487b738](git@github.com:Bio-LarK/orpha/commit/8487b738d947c962c5aa39652bd165fd3b288ed0))
+* **disorder:** fix no parents in classification ([66c902d1](git@github.com:Bio-LarK/orpha/commit/66c902d1560cad6d262a8ec5ef5d4b622a5712d0))
+* **disorders:** parents in classification ([3f560114](git@github.com:Bio-LarK/orpha/commit/3f560114a7ff48ef4400183aabc315ab8e432211))
+
+
 <a name="0.17.1"></a>
 ### 0.17.1 (2014-10-13)
 
