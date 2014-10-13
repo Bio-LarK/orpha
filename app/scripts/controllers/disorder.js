@@ -36,6 +36,16 @@ angular.module('orphaApp')
 
                 vm.disorder.loadChildren();
 
+                Disorder.getParentsFromDisorderInClassification(disorder).then(function(parents) {
+                    _.each(parents, function(parent) {
+                        _.each(parent['disorder_class'], function(parentClassification) {
+                            var classification = _.find(vm.disorder['disorder_class'], {nid: parentClassification.nid});
+                            classification.parents = classification.parents || [];
+                            classification.parents.push(parent);
+                        });
+                    });
+                });
+
                 Page.setTitle(disorder['disorder_name']);
 
                 var genesPromise = disorder.getGenes();

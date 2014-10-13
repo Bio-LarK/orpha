@@ -310,7 +310,7 @@
                 </div>
             </div>
         </div>
-
+    
         <div class="panels">
             <h2>Classification</h2>
             <div class="spinner" ng-show="disorderTracker.active();">
@@ -338,39 +338,24 @@
                                                         {{ classification.title }}
                                                     </a> 
                                                 </h5>
-
                                                 <p>An Orphanet summary for this classification is currently under development.</p>
                                             </div>
                                         </div>
 
                                     </div>
+
                                     <div class="list-group">
                                         <a class="list-group-item" href ui-sref="classification({classificationId: classification.nid, disorderId: disorder.nid})">
-                                            <i class="fa fa-bullseye"></i> Locate in Classification
-                                            <!-- <div style="font-size: 12px; color: grey; text-transform: uppercase">
-                                                Location in hierarchy
-                                            </div>
-
-                                            <a href="" ng-click="toggleParents(disorder);">
-                                                <i class="fa" ng-class="{
-                                                            'fa-caret-right': !disorder.isShowingParents,
-                                                            'fa-caret-down': disorder.isShowingParents,
-                                                }"></i> {{ disorder.disorder_name }}
-                                            </a>
-                                            <div dx-start-with="disorder" ng-show="disorder.isShowingParents" style="padding-left: 10px;">
-                                                <div ng-repeat="parent in $dxPrior.disorder_parent" ng-click="toggleParents(parent); $event.stopPropagation()" style="padding-left: 20px;">
-                                                    <a href="">
-                                                        <i ng-class="{
-                                                            'fa-caret-right': !parent.isShowingParents,
-                                                            'fa-caret-down': parent.isShowingParents,
-                                                        }" class="fa" ng-show="parent.disorder_parent.length > 0"></i>
-                            
-                                                        {{ parent.disorder_name }}
-                                                    </a>
-                                                    <div dx-connect="parent" ng-show="parent.isShowingParents" />
-                                                </div>
-                                            </div> -->
+                                            <i class="fa fa-bullseye"></i> Open at {{ disorder.title }}
                                         </a>
+                                        <div class="list-group-item" ng-show="classification.parents.length">
+                                            <h5>Parents</h5>
+                                            <ul class="list-unstyled">
+                                                    <li ng-repeat="parent in classification.parents">
+                                                        <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
+                                                    </li>
+                                                </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -399,23 +384,23 @@
                 </p>
 
                 <div class="row" ng-repeat="row in disorder.disorder_child | filter:filterChildren |  inSlicesOf:3">
-                    <div class="col-sm-4" ng-repeat="disorder in row">
+                    <div class="col-sm-4" ng-repeat="child in row">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
                                         <div style="width:40px;height:40px;">
-                                            <div ng-repeat="classification in disorder.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                                            <div ng-repeat="classification in child.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/child.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="media-body">
                                         <h5>
-                                            <a ui-sref="disorder({disorderId: disorder.nid})">
-                                                {{ disorder.title }}
+                                            <a ui-sref="disorder({disorderId: child.nid})">
+                                                {{ child.title }}
                                             </a>
                                         </h5>
-
+                                        
                                         <p>An Orphanet summary for this disease is currently under development.</p>
                                     </div>
                                 </div>
