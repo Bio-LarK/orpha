@@ -102,7 +102,7 @@
             <div class="media">
                 <div class="pull-left">
                     <div style="width:70px;height:70px;">
-                        <div ng-repeat="classification in disorder.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                        <div ng-repeat="classification in disorder.disorder_class|orderBy:'hueIndex'" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;border-left:2px solid white;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
                         </div>
                     </div>
                 </div>
@@ -397,7 +397,7 @@
                                 <div class="media">
                                     <div class="pull-left">
                                         <div style="width:40px;height:40px;">
-                                            <div ng-repeat="classification in child.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/child.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                                            <div ng-repeat="classification in child.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/child.disorder_class.length}}%;height:100%;border-left:1px solid white;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
                                             </div>
                                         </div>
                                     </div>
@@ -445,7 +445,7 @@
                                 <div class="media">
                                     <div class="pull-left">
                                         <div style="width:40px;height:40px;">
-                                            <div ng-repeat="classification in child.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/child.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                                            <div ng-repeat="classification in child.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/child.disorder_class.length}}%;height:100%;border-left:1px solid white;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
                                             </div>
                                         </div>
                                     </div>

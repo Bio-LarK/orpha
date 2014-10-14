@@ -121,7 +121,7 @@
                             <div class="media">
                                 <div class="pull-left">
                                     <div style="width:40px;height:40px;">
-                                        <div ng-repeat="classification in disorder.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/$parent.disorder.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                                        <div ng-repeat="classification in disorder.disorder_class|orderBy:'hueIndex'" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/$parent.disorder.disorder_class.length}}%;height:100%;border-left:1px solid white" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
                                         </div>
                                     </div>
                                     <!-- <img src="http://dummyimage.com/40x40/dddddd/dddddd" alt="" class="media-object"> -->
