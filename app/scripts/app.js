@@ -72,6 +72,11 @@ angular
                 controller: 'GeneCtrl',
                 templateUrl: 'views/gene.html'
             })
+            .state('genes', {
+                url: '/genes',
+                controller: 'GenesCtrl',
+                templateUrl: 'views/genes.html'
+            })
             .state('sign', {
                 url: '/sign/:signId/disorders',
                 controller: 'SignCtrl',
