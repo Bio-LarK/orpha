@@ -1,3 +1,14 @@
+<a name="0.18.2"></a>
+### 0.18.2 (2014-10-14)
+
+
+#### Bug Fixes
+
+* **classifications:** fix only 20 appearing, now full amount ([de9e4760](git@github.com:Bio-LarK/orpha/commit/de9e4760aa5698422feac01a81f2f475c4e8d8e9), closes [#39](git@github.com:Bio-LarK/orpha/issues/39))
+* **disorder:** fix external references not loading ([1345d025](git@github.com:Bio-LarK/orpha/commit/1345d025ec7fb50feca833b6b3eec0dd678f9ce6), closes [#35](git@github.com:Bio-LarK/orpha/issues/35))
+* **navbar:** make navbar link to disorders/classifications page ([b81309c0](git@github.com:Bio-LarK/orpha/commit/b81309c08f1788a5b217259dbf8649efa33e5e56), closes [#37](git@github.com:Bio-LarK/orpha/issues/37), [#36](git@github.com:Bio-LarK/orpha/issues/36))
+
+
 <a name="0.18.1"></a>
 ### 0.18.1 (2014-10-14)
 
