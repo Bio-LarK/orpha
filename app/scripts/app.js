@@ -30,24 +30,13 @@ angular
         'sf.treeRepeat'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, 
-        editableOptions, Page, ENV, searchService) {
+        editableOptions, Page, ENV, siteSearchService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.Page = Page;
         editableOptions.theme = 'bs3';
 
-        $rootScope.getResults = searchService.search;
-        $rootScope.changed = function($item, $model, $label) {
-            console.log($item, $model, $label);
-            var params = {};
-            var type = $item.type.toLowerCase();
-            if (type === 'clinical sign') {
-                type = 'sign';
-            }
-            params[type + 'Id'] = $item.node;
-            $state.go(type, params);
-            console.log(type, params);
-        };
+        $rootScope.siteSearchService = siteSearchService;
     })
     .config(function ($stateProvider, $animateProvider, $urlRouterProvider, RestangularProvider, ENV) {
 
@@ -56,12 +45,12 @@ angular
         $animateProvider.classNameFilter(/^((?!(fa-spin)).)*$/);
 
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/landing');
         //
         // Now set up the states
         $stateProvider
             .state('home', {
-                url: '/home',
+                url: '/landing',
                 controller: 'HomeCtrl as vm',
                 templateUrl: 'views/home.html'
             })

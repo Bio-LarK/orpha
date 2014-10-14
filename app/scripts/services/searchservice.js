@@ -9,9 +9,8 @@
  */
 angular.module('orphaApp')
     .factory('searchService', function ($http, ENV, $state) {
-        
         var service = {
-        	search: search
+        	search: search,
         };
         return service;
 

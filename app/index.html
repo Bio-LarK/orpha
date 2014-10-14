@@ -49,7 +49,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{'active': $state.includes('home') || $state.includes('disorder')}"><a ui-sref="home">Disorders</a>
+                    <li ng-class="{'active': $state.includes('disorder')}"><a ui-sref="home">Disorders</a>
                     </li>
                     <li ng-class="{'active': $state.includes('genes') || $state.includes('gene')}"><a ui-sref="genes">Genes</a>
                     </li>
@@ -100,7 +100,7 @@
                 </ul>
                 <form class="navbar-form navbar-right navbar-search" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" ng-model="asyncSelected" placeholder="Search" typeahead="result.title for result in getResults($viewValue)" typeahead-on-select="changed($item, $model, $label)">
+                        <input type="text" class="form-control" ng-model="siteSearchService.query" placeholder="Search" typeahead="result.title for result in siteSearchService.getResults($viewValue)" typeahead-on-select="siteSearchService.changed($item, $model, $label)">
                     </div>
                     <!-- <button type="submit" class="btn btn-default">Search</button> -->
                 </form>
@@ -249,6 +249,7 @@
     <script src="scripts/controllers/classification.js"></script>
     <script src="scripts/services/classification.js"></script>
     <script src="scripts/services/disorderrepo.js"></script>
+    <script src="scripts/services/sitesearchservice.js"></script>
     <!-- endbuild -->
 </body>
 
