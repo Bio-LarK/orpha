@@ -2,7 +2,7 @@
     background-color: $brand-secondary;
     margin: 0;
     text-align: center;
-    color: white;
+    color: rgba(0,0,0,0.8);
     position: relative;
 
     .jumbotron-heading {
@@ -17,14 +17,17 @@
         font-size: 18px;
         font-weight: 300;
         line-height: 1.5;
-        color: rgba(255, 255, 255, 1);
+        color: rgba(0,0,0,0.54);
+    }
+    .hero-icon {
+        border: 1px solid rgba(0,0,0,0.54);
     }
 }
 .jumbotron.jumbotron-home {
     background-color: $brand-secondary;
     margin: 0;
     text-align: center;
-    color: white;
+    color: rgba(0,0,0,0.8);
     position: relative;
     padding-top: 30px;
     padding-bottom: 0;
@@ -55,6 +58,7 @@
         box-shadow: 0 0 30px -10px rgba(0,0,0,0.5);
         position: relative;
         bottom: -20px;
+        margin: 0 auto;
 
     }
 
@@ -70,7 +74,8 @@
         font-size: 18px;
         font-weight: 300;
         line-height: 1.5;
-        color: rgba(255, 255, 255, 1);
+        color: rgba(0,0,0,0.54);
+        // color: rgba(255, 255, 255, 1);
     }
 
 } 
