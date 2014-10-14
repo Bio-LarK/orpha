@@ -107,7 +107,7 @@ angular
             })
             .state('disorders', {
                 url: '/disorders?page?signId',
-                controller: 'DisordersCtrl',
+                controller: 'DisordersCtrl as vm',
                 templateUrl: 'views/disorders.html'
             })
             .state('concept', {

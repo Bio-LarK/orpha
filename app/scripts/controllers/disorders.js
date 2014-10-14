@@ -8,31 +8,49 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisordersCtrl', function ($scope, $timeout, $stateParams, promiseTracker, Disorder, Page) {
-        $scope.loadMore = loadMore;
-        $scope.loadingTracker = promiseTracker();
-        $scope.page = 0;
+    .controller('DisordersCtrl', function ($scope, $timeout, $stateParams, promiseTracker, Classification, Page) {
+
+        var vm = this;
+        vm.classifications = null;
         activate();
 
-        //////////////
+        ///////
 
         function activate() {
-            Page.setTitle('All Disorders');
-            $scope.disorders = Disorder.query({
-                fields: 'nid,disorder_name',
-                page: $scope.page++
-            });
-            $scope.loadingTracker.addPromise($scope.disorders.$promise);
+            getAllClassifications();
+            Page.setTitle('All Classifications');
         }
 
-
-        function loadMore() {
-            var disorders = Disorder.query({
-                fields: 'nid,disorder_name',
-                page: $scope.page++
-            }, function (disorders) {
-                $scope.disorders = $scope.disorders.concat(disorders);
+        function getAllClassifications() {
+            return Classification.getAll({}).then(function(classifications) {
+                vm.classifications = classifications;
             });
-            $scope.loadingTracker.addPromise(disorders.$promise);
         }
+
+        // $scope.loadMore = loadMore;
+        // $scope.loadingTracker = promiseTracker();
+        // $scope.page = 0;
+        // activate();
+
+        // //////////////
+
+        // function activate() {
+        //     Page.setTitle('All Disorders');
+        //     $scope.disorders = Disorder.query({
+        //         fields: 'nid,disorder_name',
+        //         page: $scope.page++
+        //     });
+        //     $scope.loadingTracker.addPromise($scope.disorders.$promise);
+        // }
+
+
+        // function loadMore() {
+        //     var disorders = Disorder.query({
+        //         fields: 'nid,disorder_name',
+        //         page: $scope.page++
+        //     }, function (disorders) {
+        //         $scope.disorders = $scope.disorders.concat(disorders);
+        //     });
+        //     $scope.loadingTracker.addPromise(disorders.$promise);
+        // }
     });
