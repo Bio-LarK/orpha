@@ -33,6 +33,7 @@ angular.module('orphaApp')
         Disorder.prototype.getParents = getParents;
         Disorder.prototype.loadChildren = loadChildren;
         Disorder.prototype.loadParents = loadParents;
+        Disorder.prototype.loadExternalIdentifiers = loadExternalIdentifiers;
 
         Disorder.getFromSign = getFromSign;
         Disorder.getFromGene = getFromGene;
@@ -216,6 +217,28 @@ angular.module('orphaApp')
                 });
                 disorder.isOpenable = isOpenable;
                 return children;
+            });
+        }
+        function loadExternalIdentifiers() {
+            /* jshint validthis: true */
+            var disorder = this;
+            $log.debug('ers', disorder['disorder_er']);
+
+            if(!disorder['disorder_er'].length) {
+                return [];
+            }
+            var request = _.reduce(disorder['disorder_er'], function(request, er, key) {
+                request['parameters[nid][' + key + ']'] = er.nid;
+                return request;
+            }, {});
+            request.type = 'external_reference';
+            request.hello = 'world';
+
+            return $http.get(ENV.apiEndpoint + '/entity_node', {
+                params: request
+            }).then(function(response) {
+                disorder['disorder_er'] = response.data;
+                return response.data;
             });
         }
 

@@ -37,6 +37,7 @@ angular.module('orphaApp')
 
                 vm.disorder.loadChildren();
                 vm.disorder.loadParents();
+                vm.disorder.loadExternalIdentifiers();
 
                 Disorder.getParentsFromDisorderInClassification(disorder).then(function(parents) {
                     _.each(parents, function(parent) {
