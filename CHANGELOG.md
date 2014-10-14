@@ -1,3 +1,13 @@
+<a name="0.18.0"></a>
+## 0.18.0 (2014-10-14)
+
+
+#### Features
+
+* **disorder:** add parents ([c75cec22](git@github.com:Bio-LarK/orpha/commit/c75cec2233c9b7bbe70e5793e339bc2f09930dca))
+* **landing:** add landing page ([72bfa4f9](git@github.com:Bio-LarK/orpha/commit/72bfa4f927b2732fb18f8024da4a00ea08e199a9))
+
+
 <a name="0.17.4"></a>
 ### 0.17.4 (2014-10-13)
 
