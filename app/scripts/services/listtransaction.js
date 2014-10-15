@@ -34,30 +34,30 @@ angular.module('orphaApp')
             	loadCurrentRef(listTransaction)
         	]).then(function() {
                 listTransaction.title = listTransaction['ltrans_onnode'].title;
-                listTransaction.relatedNodes = [
-                    listTransaction['ltrans_onnode']
-                ];
+          //       listTransaction.relatedNodes = [
+          //           listTransaction['ltrans_onnode']
+          //       ];
 
-        		// Create the title
-        		if(listTransaction['ltrans_onnode'].type === 'disorder_gene') {
-        			listTransaction.title = 'Relationship between ' + 
-        			listTransaction['ltrans_onnode']['disgene_disorder'].title + ' and ' + 
-        			listTransaction['ltrans_onnode']['disgene_gene'].title;
+        		// // Create the title
+        		// if(listTransaction['ltrans_onnode'].type === 'disorder_gene') {
+        		// 	listTransaction.title = 'Relationship between ' + 
+        		// 	listTransaction['ltrans_onnode']['disgene_disorder'].title + ' and ' + 
+        		// 	listTransaction['ltrans_onnode']['disgene_gene'].title;
 
-                    listTransaction.relatedNodes = [
-                        listTransaction['ltrans_onnode']['disgene_disorder'],
-                        listTransaction['ltrans_onnode']['disgene_gene']
-                    ];
-        		} else if(listTransaction['ltrans_onnode'].type === 'disorder_sign') {
-                    listTransaction.title = 'Relationship between ' + 
-                    listTransaction['ltrans_onnode']['ds_disorder'].title + ' and ' + 
-                    listTransaction['ltrans_onnode']['ds_sign'].title;
+          //           listTransaction.relatedNodes = [
+          //               listTransaction['ltrans_onnode']['disgene_disorder'],
+          //               listTransaction['ltrans_onnode']['disgene_gene']
+          //           ];
+        		// } else if(listTransaction['ltrans_onnode'].type === 'disorder_sign') {
+          //           listTransaction.title = 'Relationship between ' + 
+          //           listTransaction['ltrans_onnode']['ds_disorder'].title + ' and ' + 
+          //           listTransaction['ltrans_onnode']['ds_sign'].title;
 
-                    listTransaction.relatedNodes = [
-                        listTransaction['ltrans_onnode']['ds_disorder'],
-                        listTransaction['ltrans_onnode']['ds_sign']
-                    ];
-                }
+          //           listTransaction.relatedNodes = [
+          //               listTransaction['ltrans_onnode']['ds_disorder'],
+          //               listTransaction['ltrans_onnode']['ds_sign']
+          //           ];
+          //       }
                 return listTransaction;
         	});
             

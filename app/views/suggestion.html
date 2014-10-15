@@ -17,8 +17,8 @@
                 <div>
                     {{ vm.suggestion.created * 1000 | date:'mediumDate' }}
                 </div>
-                <div class="label label-default" ng-class="{'label-success': vm.suggestion.$tr_status.nid == 1, 'label-danger': vm.suggestion.$tr_status.nid == 2}">
-                    {{ vm.suggestion.$tr_status.trstatus_value }}
+                <div class="label label-default">
+                    {{ vm.suggestion.tr_status.title }}
                 </div>
 
             </div>
@@ -30,7 +30,7 @@
                 <div class="media-body">
                     <div>
                         <a href>
-                            <strong>{{ vm.suggestion.$author.name }}</strong>
+                            <strong><!-- FIXME: get real names -->Dr Anonymous {{ vm.suggestion.$author.name }}</strong>
                         </a>
                     </div>
                     <div>
@@ -40,24 +40,11 @@
             </div>
         </div>
         <div class="panel-body">
-
             <h4 style="margin: 0; margin-bottom: 14px;" class="text-capitalize">
-
-                <span ng-show="vm.suggestion.$relatedNodes.length > 1">
-                    Relationship between
-                    <a ui-sref="disorder({disorderId: vm.suggestion.$relatedNodes[0].nid})">{{ vm.suggestion.$relatedNodes[0].title }}</a> and
-
-                    <a ui-sref="disorder({disorderId: vm.suggestion.$relatedNodes[1].nid})">{{ vm.suggestion.$relatedNodes[1].title }}</a> 
-                </span>
-
-                <span ng-show="vm.suggestion.$relatedNodes.length == 1">
-                    <a ui-sref="disorder({disorderId: vm.suggestion.$relatedNodes[0].nid})">{{ vm.suggestion.$relatedNodes[0].title }}</a>
-                </span>
-
+                <span ng-bind-html="vm.suggestion.description"></span>
             </h4>
 
-
-            <div ng-repeat="transaction in vm.suggestion.$tr_trans">
+            <div ng-repeat="transaction in vm.suggestion.tr_trans">
                 <div style="margin-bottom: 14px;">
                     <div ng-show="transaction.isRefChange">
                         <strong>

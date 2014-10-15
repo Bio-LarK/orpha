@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
     .controller('EditTitleCtrl', function($scope, $http, $modalInstance,
-        ENV, ListTransaction, config, TransactionRequest,
+        ENV, ListTransaction, config, TransactionRequest, transactionStatusService,
         toaster) {
 
         var vm = this;
@@ -45,22 +45,24 @@ angular.module('orphaApp')
             });
             listTransaction.$save().then(function() {
                 // Add it to a transaction request
-                var transactionRequest = new TransactionRequest({
-                    title: vm.concept.title + ' - ' + vm.propertyLabel,
-                    type: 'transaction_request',
-                    'tr_timestamp': new Date().getTime() / 1000,
-                    'tr_trans': [
-                        listTransaction.nid
-                    ],
-                    'tr_status': 3,
-                    'tr_user': 0,
-                    body: {
-                        value: vm.reason,
-                        summary: vm.reason
-                    }
+                return transactionStatusService.loadStatusCodes().then(function() {
+                    var transactionRequest = new TransactionRequest({
+                        title: vm.concept.title + ' - ' + vm.propertyLabel,
+                        type: 'transaction_request',
+                        'tr_timestamp': new Date().getTime() / 1000,
+                        'tr_trans': [
+                            listTransaction.nid
+                        ],
+                        'tr_status': transactionStatusService.submittedNid,
+                        'tr_user': 0,
+                        body: {
+                            value: vm.reason,
+                            summary: vm.reason
+                        }
+                    });
+                    toaster.pop('success', 'Suggestion submitted.');
+                    return transactionRequest.$save();
                 });
-                toaster.pop('success', 'Suggestion submitted.');
-                return transactionRequest.$save();
             });
 
             $modalInstance.close();

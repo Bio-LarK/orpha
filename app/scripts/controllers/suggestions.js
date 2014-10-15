@@ -8,7 +8,8 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('SuggestionsCtrl', function($http, $scope, ENV, suggestionService, TransactionRequest, $log, $q) {
+    .controller('SuggestionsCtrl', function($http, $scope, ENV, suggestionService, 
+        TransactionRequest, $log, $q, transactionStatusService) {
         var vm = this;
         vm.suggestions = null;
         vm.openSuggestions = null;
@@ -20,23 +21,27 @@ angular.module('orphaApp')
         ///////
 
         function activate() {
-            // Load all transation requests
-            getSubmittedTransactions().then(function(suggestions) {
-                vm.openSuggestions = suggestions;
-                vm.suggestions = vm.openSuggestions;
+
+            return transactionStatusService.loadStatusCodes().then(function() {
+                // Load all transation requests
+                getSubmittedTransactions().then(function(suggestions) {
+                    vm.openSuggestions = suggestions;
+                    vm.suggestions = vm.openSuggestions;
+                });
+                getClosedTransactions().then(function(suggestions) {
+                    vm.closedSuggestions = suggestions;
+                });
             });
-            getClosedTransactions().then(function(suggestions) {
-                vm.closedSuggestions = suggestions;
-            });
+            
         }
 
         function getSubmittedTransactions() {
-            return getTransactions(3);
+            return getTransactions(transactionStatusService.submittedNid);
         }
         function getClosedTransactions() {
             return $q.all([
-                getTransactions(1),
-                getTransactions(2)
+                getTransactions(transactionStatusService.acceptedNid),
+                getTransactions(transactionStatusService.rejectedNid)
             ]).then(function(transactions) {
                 return _.flatten(transactions);
             });
@@ -44,7 +49,6 @@ angular.module('orphaApp')
         function getTransactions(status) {
             return TransactionRequest.query({
                 'parameters[tr_status]': status,
-                fields: 'nid,title,tr_status,tr_timestamp,tr_user,tr_trans,created,author,changed'
             }).$promise.then(function(suggestions) {
                 return suggestions;
             }, function() {
