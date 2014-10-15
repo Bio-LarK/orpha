@@ -49,6 +49,12 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li ui-sref-active="active">
+                        <a ui-sref="home">
+                            Home
+                        </a>
+                    </li>
+
                     <li ng-class="{'active': $state.includes('disorder') || $state.includes('classification') || $state.includes('disorders')}"><a ui-sref="disorders">Disorders</a>
                     </li>
                     <li ng-class="{'active': $state.includes('genes') || $state.includes('gene')}"><a ui-sref="genes">Genes</a>

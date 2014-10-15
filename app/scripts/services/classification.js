@@ -14,14 +14,10 @@ angular.module('orphaApp')
         var colorOptions = [];
 
         for (var i = 0; i < 31; i++) {
-            var hue = 12 * i;
-            var sat = 90;
+            var hue = (360/31) * i;
+            var sat = 60;
             var lightness = 70;
             colorOptions.push('hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)');
-
-            // var rgb = hslToRgb(hue, sat, lightness);
-            // $log.debug('rgb', rgb);
-            // $log.debug('lum is', 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[1] / 255);
         }
         var pointer = 0;
 
