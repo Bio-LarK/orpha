@@ -8,7 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-	.controller('HomeCtrl', function (Disorder, Classification, $log) {
+	.controller('HomeCtrl', function (Disorder, Classification, $log, Page) {
 		var vm = this;
 		vm.classifications = null;
 		activate();
@@ -17,6 +17,7 @@ angular.module('orphaApp')
 
 		function activate() {
 			getAllClassifications();
+			Page.setTitle('Orphanet - Rare diseases are rare but rare disease patients are numerous.');
 		}
 
 		function getAllClassifications() {
