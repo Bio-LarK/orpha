@@ -24,37 +24,36 @@ angular.module('orphaApp')
 
             return transactionStatusService.loadStatusCodes().then(function() {
                 // Load all transation requests
-                getSubmittedTransactions().then(function(suggestions) {
+                TransactionRequest.getOpen().then(function(suggestions) {
                     vm.openSuggestions = suggestions;
                     vm.suggestions = vm.openSuggestions;
                 });
-                getClosedTransactions().then(function(suggestions) {
+                TransactionRequest.getClosed().then(function(suggestions) {
                     vm.closedSuggestions = suggestions;
                 });
             });
-            
         }
 
-        function getSubmittedTransactions() {
-            return getTransactions(transactionStatusService.submittedNid);
-        }
-        function getClosedTransactions() {
-            return $q.all([
-                getTransactions(transactionStatusService.acceptedNid),
-                getTransactions(transactionStatusService.rejectedNid)
-            ]).then(function(transactions) {
-                return _.flatten(transactions);
-            });
-        }
-        function getTransactions(status) {
-            return TransactionRequest.query({
-                'parameters[tr_status]': status,
-            }).$promise.then(function(suggestions) {
-                return suggestions;
-            }, function() {
-                return [];
-            });
-        }
+        // function getSubmittedTransactions() {
+        //     return getTransactions(transactionStatusService.submittedNid);
+        // }
+        // function getClosedTransactions() {
+        //     return $q.all([
+        //         getTransactions(transactionStatusService.acceptedNid),
+        //         getTransactions(transactionStatusService.rejectedNid)
+        //     ]).then(function(transactions) {
+        //         return _.flatten(transactions);
+        //     });
+        // }
+        // function getTransactions(status) {
+        //     return TransactionRequest.query({
+        //         'parameters[tr_status]': status,
+        //     }).$promise.then(function(suggestions) {
+        //         return suggestions;
+        //     }, function() {
+        //         return [];
+        //     });
+        // }
 
         function suggestionTypeChanged(isShowingOpen) {
             vm.suggestions = null;

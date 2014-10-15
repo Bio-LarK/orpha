@@ -29,28 +29,44 @@ angular.module('orphaApp')
         TransactionRequest.prototype.loadDescription = loadDescription;
         TransactionRequest.prototype.accept = accept;
         TransactionRequest.prototype.reject = reject;
+
+        TransactionRequest.getOpen = getOpen;
+        TransactionRequest.getClosed = getClosed;
         return TransactionRequest;
 
         ///////////////////
 
+        function getOpen(page) {
+            if(!page) {
+                page = 0;
+            }
+            return transactionStatusService.loadStatusCodes().then(function() {
+                return TransactionRequest.query({
+                    'parameters[tr_status]': transactionStatusService.submittedNid,
+                    page: page
+                }).$promise;
+            });
+        }
+        function getClosed(page) {
+            if(!page) {
+                page = 0;
+            }
+            return transactionStatusService.loadStatusCodes().then(function() {
+                var promise1 = TransactionRequest.query({
+                    'parameters[tr_status]': transactionStatusService.acceptedNid,
+                    page: page
+                }).$promise;
+                var promise2 = TransactionRequest.query({
+                    'parameters[tr_status]': transactionStatusService.rejectedNid,
+                    page: page
+                }).$promise;
+                return $q.all([promise1, promise2]).then(function(requests) {
+                    return _.flatten(requests);
+                });
+            });
+        }
+
         function transformGetResponse(transactionRequest, headersGetter) {
-            // transactionRequest['tr_trans'] = _.map(transactionRequest['tr_trans'], function(transaction) {
-            //     return new ListTransaction(transaction);
-            // });
-            // delete transactionRequest['tr_trans'];
-
-            // transactionRequest['$tr_user'] = transactionRequest['tr_user'];
-            // delete transactionRequest['tr_user'];
-
-            // transactionRequest['$tr_status'] = transactionRequest['tr_status'];
-            // delete transactionRequest['tr_status'];
-
-            // transactionRequest['$author'] = transactionRequest['author'];
-            // delete transactionRequest['author'];
-
-            // transactionRequest['$source'] = transactionRequest['source'];
-            // delete transactionRequest['source'];
-
             return transactionRequest;
         }
 
