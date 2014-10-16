@@ -8,7 +8,7 @@
                             Search, Browse, Contribute.
                         </h1>
                         <p class="leading">
-                            Rare diseases are rare but rare disease patients are numerous.
+                            Rare diseases are rare, but rare disease patients are numerous.
                         </p>
                     </div>
                     <div class="jumbotron-home-action">
@@ -43,7 +43,11 @@
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
-                                    <div style="display:inline-block;background-color:{{classification.getColor()}};width:40px;height:40px;"></div>
+                                    <div style="width:50px;height:50px;">
+                                        <colormap classification="classification" type="disorder"></colormap>        
+                                    </div>
+                                    
+                                    <!-- <div style="display:inline-block;background-color:{{classification.getColor()}};width:40px;height:40px;"></div> -->
                                 </div>
                                 <div class="media-body">
                                     <h5>
