@@ -173,7 +173,7 @@ angular.module('orphaApp')
 
                 _.each(scope.allClassifications, function(allClassification, i) {
                     var hue = (360/31) * i;
-                    var sat = 100;
+                    var sat = 70;
                     var lightness = 70;
                     allClassification.color = 'hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)';
                 });

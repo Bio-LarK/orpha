@@ -110,7 +110,7 @@ angular.module('orphaApp')
             var request = _.indexBy(ids, function(ids, index) {
                 return 'parameters[nid][' + index + ']';
             });
-            if(classification) {
+            if (classification) {
                 request['parameters[disorder_class]'] = classification.nid;
             }
             request.fields = ['nid', 'disorder_name', 'title', 'disorder_parent', 'disorder_class'].join(',');
@@ -133,7 +133,7 @@ angular.module('orphaApp')
                             $log.debug('finding match', child, child.nid, disorder.nid);
                             return child.nid === disorder.nid;
                         });
-                        $log.debug('index of child in parent',index);
+                        $log.debug('index of child in parent', index);
                         parent['disorder_child'].splice(index, 1);
                         parent['disorder_child'].unshift(disorder);
                         return parent;
@@ -159,24 +159,6 @@ angular.module('orphaApp')
                 disorder['disorder_parent'] = parents;
                 return parents;
             });
-            // return Disorder.query({
-            //     fields: 'nid,title,disorder_name,disorder_child,disorder_class',
-            //     'parameters[disorder_child]': disorder.nid
-            // }).$promise.then(function(children) {
-            //     $log.debug('children loaded');
-            //     disorder.hasLoadedChildren = true;
-            //     disorder['disorder_child'] = _.sortBy(children, 'nid');
-
-            //     var isOpenable = false;
-            //     _.each(children, function(child) {
-            //         isOpenable = isOpenable || child['disorder_child'].length;
-            //         _.each(child['disorder_child'], function(grandChild) {
-            //             grandChild.isOpenable = true;
-            //         });
-            //     });
-            //     disorder.isOpenable = isOpenable;
-            //     return children;
-            // });
         }
 
 
@@ -184,34 +166,50 @@ angular.module('orphaApp')
             $log.debug('loading children now...');
             /* jshint validthis: true */
             var disorder = this;
-            if(disorder.hasLoadedChildren) {
+            if (disorder.hasLoadedChildren) {
                 return $q.when(disorder['disorder_child']);
             }
-            return Disorder.query({
-                fields: 'nid,title,disorder_name,disorder_child,disorder_class',
-                'parameters[disorder_parent]': disorder.nid
-            }).$promise.then(function(children) {
-                $log.debug('children loaded');
+            return _loadChildrenHelper(disorder, 0).then(function(children) {
                 disorder.hasLoadedChildren = true;
                 disorder['disorder_child'] = _.sortBy(children, 'nid');
+                _markIsDisorderGroup(disorder, disorder['disorder_child']);
+            });
+        }
 
-                var isOpenable = false;
-                _.each(children, function(child) {
-                    isOpenable = isOpenable || child['disorder_child'].length;
-                    _.each(child['disorder_child'], function(grandChild) {
-                        grandChild.isOpenable = true;
+        function _loadChildrenHelper(disorder, page) {
+            return Disorder.query({
+                fields: 'nid,title,disorder_name,disorder_child,disorder_class',
+                'parameters[disorder_parent]': disorder.nid,
+                page: page
+            }).$promise.then(function(children) {
+                if (children.length === 20) {
+                    // we need to get more!
+                    return _loadChildrenHelper(disorder, ++page).then(function(otherChildren) {
+                        return children.concat(otherChildren);
                     });
-                });
-                disorder.isOpenable = isOpenable;
+                }
                 return children;
             });
         }
+
+        function _markIsDisorderGroup(disorder, children) {
+            var isOpenable = false;
+            _.each(children, function(child) {
+                isOpenable = isOpenable || child['disorder_child'].length;
+                _.each(child['disorder_child'], function(grandChild) {
+                    grandChild.isOpenable = true;
+                });
+            });
+            disorder.isOpenable = isOpenable;
+
+        }
+
         function loadExternalIdentifiers() {
             /* jshint validthis: true */
             var disorder = this;
             $log.debug('ers', disorder['disorder_er']);
 
-            if(!disorder['disorder_er'].length) {
+            if (!disorder['disorder_er'].length) {
                 return [];
             }
             var request = _.reduce(disorder['disorder_er'], function(request, er, key) {
@@ -232,17 +230,17 @@ angular.module('orphaApp')
         function getFromSign(signId) {
             return $http.get(ENV.apiEndpoint + '/entity_node/' +
                 signId + '/nodes_field_ds_sign?fields=ds_disorder').then(function(response) {
-                    var disorderSigns = response.data;
-                    var ids = [];
-                    _.each(disorderSigns, function(disorderSign) {
-                        ids.push(disorderSign.ds_disorder.nid);
-                    });
-                    ids = _.uniq(ids);
-                    $log.debug('ids', ids);
-                    var disorders = _.map(response.data, function(dsSign) {
-                        return new Disorder(dsSign['ds_disorder']);
-                    });
-                    return disorders;
+                var disorderSigns = response.data;
+                var ids = [];
+                _.each(disorderSigns, function(disorderSign) {
+                    ids.push(disorderSign.ds_disorder.nid);
+                });
+                ids = _.uniq(ids);
+                $log.debug('ids', ids);
+                var disorders = _.map(response.data, function(dsSign) {
+                    return new Disorder(dsSign['ds_disorder']);
+                });
+                return disorders;
             });
         }
 
@@ -280,9 +278,9 @@ angular.module('orphaApp')
                 'parameters[disorder_root]': 1,
                 'parameters[disorder_class]': classification.nid,
             }).$promise.then(function(disorders) {
-                if(!disorders.length) {
+                if (!disorders.length) {
                     return null;
-                } 
+                }
                 return disorders[0];
             });
         }

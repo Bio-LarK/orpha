@@ -9,10 +9,9 @@
 	</div>
 	
 	<div style="width: 100%; height: 100%;" ng-if="type == 'disorder'">
-	
-			<div ng-repeat="classification in myClassifications| orderBy:'position'" 
-				style="display:inline-block;background-color:{{classification.color}};width:{{100/myClassifications.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
-			</div>
+		<div ng-repeat="classification in myClassifications| orderBy:'position'" 
+			style="display:inline-block;background-color:{{classification.color}};width:{{100/myClassifications.length}}%;height:100%;border-left:1px solid white;cursor:pointer;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+		</div>
 	</div>
 </div>
 
