@@ -9,7 +9,9 @@
         </div>
         <div class="media">
             <div class="pull-left">
-                <!-- <img src="http://dummyimage.com/70x70/fdd835/fdd835" alt="" class="media-object"> -->
+                <div style="width:70px;height:70px;">
+                    <colormap classifications="sign.classifications"></colormap>    
+                </div>
             </div>
             <div class="media-body">
                 <h1>{{ sign.title || 'Loading...' }}
@@ -104,7 +106,10 @@
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
-                                    <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body">
+                                    <div style="width:50px;height:50px">
+                                        <colormap classifications="sign.classifications"></colormap>      
+                                    </div>
+                                    <!-- <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body"> -->
                                 </div>
                                 <div class="media-body">
                                     <div>
@@ -115,7 +120,7 @@
                                         </h5>
                                     </div>
                                     <div class="text-muted">
-                                        Sign
+                                        {{ sign.disorders.length || 'A lot of '}} Disorders
                                     </div>
                                 </div>
                             </div>
@@ -155,20 +160,19 @@
 
         <h2>Disorders</h2>
 
-        <div ng-hide="disordersTracker.active()">
-            <p ng-hide="disorders.length" class="text-muted">
+        <div ng-show="sign.disorders">
+            <p ng-hide="sign.disorders.length" class="text-muted">
                 Root disorder.
             </p>
 
-            <div class="row" ng-repeat="row in disorders | filter:disordersFilter | inSlicesOf:3">
+            <div class="row" ng-repeat="row in sign.disorders | filter:disordersFilter | inSlicesOf:3">
                 <div ng-repeat="disorder in row" class="col-sm-4">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
-                                    <div style="width:40px;height:40px;">
-                                        <div ng-repeat="classification in disorder.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
-                                        </div>
+                                    <div style="width:50px;height:50px;">
+                                        <colormap classifications="disorder.disorder_class" type="disorder"></colormap>
                                     </div>
                                 </div>
                                 <div class="media-body">

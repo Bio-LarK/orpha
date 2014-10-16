@@ -101,9 +101,12 @@
             </div>
             <div class="media">
                 <div class="pull-left">
+
                     <div style="width:70px;height:70px;">
-                        <div ng-repeat="classification in disorder.disorder_class|orderBy:'hueIndex'" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;border-left:2px solid white;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
-                        </div>
+                        <colormap classifications="disorder.disorder_class" type="disorder"></colormap>
+
+                        <!-- <div ng-repeat="classification in disorder.disorder_class|orderBy:'hueIndex'" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/disorder.disorder_class.length}}%;height:100%;border-left:2px solid white;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
+                        </div> -->
                     </div>
                 </div>
                 <div class="media-body">
@@ -237,7 +240,18 @@
                         <div class="panel-body" ng-click="isEditing && editDescription()" ng-class="{'editable-card': isEditing}">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div ng-bind-html="disorder.body"></div>
+                                  <!--   <div class="row">
+                                        <div class="col-sm-4">
+                                            <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Idiopathic_cardiomyopathy%2C_gross_pathology_20G0018_lores.jpg/345px-Idiopathic_cardiomyopathy%2C_gross_pathology_20G0018_lores.jpg" alt="" class="pull-left img-responsive" style="border: 1px solid grey;">
+                                        </div>
+                                        <div class="col-sm-8" style="border-left: 1px solid #ccc;"> -->
+                                            <div ng-bind-html="disorder.body"></div>
+                                        <!-- </div>
+                                    </div> -->
+                                    
+
+
+                                    
                                 </div>
 
                                 <!--<div class="col-sm-3">
@@ -332,7 +346,10 @@
                                     <div class="panel-body">
                                         <div class="media">
                                             <div class="pull-left">
-                                                <div style="display:inline-block;background-color:{{classification.getColor()}};width:40px;height:40px;"></div>
+                                                <div style="width:50px;height:50px;">
+                                                    <colormap classification="classification" type="disorder"></colormap>
+                                                </div>
+                                                <!-- <div style="display:inline-block;background-color:{{classification.getColor()}};width:40px;height:40px;"></div> -->
                                             </div>
                                             <div class="media-body">
                                                 <h5>
@@ -391,20 +408,19 @@
                 </p>
 
                 <div class="row" ng-repeat="row in disorder.disorder_parent | filter:filterChildren |  inSlicesOf:3">
-                    <div class="col-sm-4" ng-repeat="child in row">
+                    <div class="col-sm-4" ng-repeat="parent in row">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="pull-left">
                                         <div style="width:40px;height:40px;">
-                                            <div ng-repeat="classification in child.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/child.disorder_class.length}}%;height:100%;border-left:1px solid white;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
-                                            </div>
+                                            <colormap classifications="parent.disorder_class" type="disorder"></colormap>
                                         </div>
                                     </div>
                                     <div class="media-body">
                                         <h5>
-                                            <a ui-sref="disorder({disorderId: child.nid})">
-                                                {{ child.title }}
+                                            <a ui-sref="disorder({disorderId: parent.nid})">
+                                                {{ parent.title }}
                                             </a>
                                         </h5>
                                         
@@ -445,8 +461,7 @@
                                 <div class="media">
                                     <div class="pull-left">
                                         <div style="width:40px;height:40px;">
-                                            <div ng-repeat="classification in child.disorder_class" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/child.disorder_class.length}}%;height:100%;border-left:1px solid white;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
-                                            </div>
+                                            <colormap classifications="child.disorder_class" type="disorder"></colormap>
                                         </div>
                                     </div>
                                     <div class="media-body">

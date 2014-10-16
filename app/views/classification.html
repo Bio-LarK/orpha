@@ -52,8 +52,12 @@
         </div>
         <div class="media">
             <div class="pull-left">
-                <img ng-hide="vm.classification" src="http://dummyimage.com/70x70/dddddd/dddddd" alt="" class="media-object">
-                <div ng-show="vm.classification" style="display:inline-block;background-color:{{vm.classification.getColor()}};width:70px;height:70px;"></div>
+                <!-- <img ng-hide="vm.classification" src="http://dummyimage.com/70x70/dddddd/dddddd" alt="" class="media-object"> -->
+                <!-- <div ng-show="vm.classification" style="display:inline-block;background-color:{{vm.classification.getColor()}}></div> -->
+                <div style="width:70px;height:70px;">
+                    <colormap classification="vm.classification" type="disorder"></colormap>    
+                </div>
+                
             </div>
             <div class="media-body">
                 <h1>
@@ -120,9 +124,8 @@
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
-                                    <div style="width:40px;height:40px;">
-                                        <div ng-repeat="classification in disorder.disorder_class|orderBy:'hueIndex'" style="display:inline-block;background-color:{{classification.getColor()}};width:{{100/$parent.disorder.disorder_class.length}}%;height:100%;border-left:1px solid white" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
-                                        </div>
+                                    <div style="width:50px;height:50px;">
+                                        <colormap classifications="disorder.disorder_class" type="disorder"></colormap>
                                     </div>
                                     <!-- <img src="http://dummyimage.com/40x40/dddddd/dddddd" alt="" class="media-object"> -->
                                 </div>

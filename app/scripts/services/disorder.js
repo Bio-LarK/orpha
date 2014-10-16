@@ -232,10 +232,17 @@ angular.module('orphaApp')
         function getFromSign(signId) {
             return $http.get(ENV.apiEndpoint + '/entity_node/' +
                 signId + '/nodes_field_ds_sign?fields=ds_disorder').then(function(response) {
-                var disorders = _.map(response.data, function(dsSign) {
-                    return new Disorder(dsSign['ds_disorder']);
-                });
-                return disorders;
+                    var disorderSigns = response.data;
+                    var ids = [];
+                    _.each(disorderSigns, function(disorderSign) {
+                        ids.push(disorderSign.ds_disorder.nid);
+                    });
+                    ids = _.uniq(ids);
+                    $log.debug('ids', ids);
+                    var disorders = _.map(response.data, function(dsSign) {
+                        return new Disorder(dsSign['ds_disorder']);
+                    });
+                    return disorders;
             });
         }
 

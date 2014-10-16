@@ -17,10 +17,16 @@ angular.module('orphaApp')
         /////////////
 
         function activate() {
-            $scope.signs = Sign.query({
+            var promise = Sign.query({
                 fields: 'nid,sign_name,sign_dissign'
+            }).$promise;
+            promise.then(function(signs) {
+                $scope.signs = signs;
+                _.each(signs, function(sign) {
+                    sign.loadDisorders();
+                });
             });
-            $scope.loadingTracker.addPromise($scope.signs.$promise);
+            $scope.loadingTracker.addPromise(promise);
         }
 
         function loadMore() {

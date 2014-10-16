@@ -5,16 +5,24 @@
     <div class="row" ng-repeat="row in signs | inSlicesOf:3">
         <div ng-repeat="sign in row" class="col-sm-4">
             <div class="panel panel-default">
+                <ul class="list-group">
+                    <li class="list-group-item" style="padding: 5px 0; text-align: center; font-size:12px; text-transform: uppercase; color: #ddd;">
+                        Clinical Sign
+                    </li>
+                </ul>
                 <div class="panel-body">
                     <div class="media">
                         <div class="pull-left">
                             <!-- <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body"> -->
+                            <div style="width:50px;height:50px;">
+                                <colormap classifications="sign.classifications"></colormap>    
+                            </div>
                         </div>
                         <div class="media-body">
                             <div>
                                 <h5>
                                     <a ui-sref="sign({signId: sign.nid })">
-                                        {{ sign.sign_name }}
+                                        <i class="fa fa-stethoscope"></i> {{ sign.sign_name }}
                                     </a>
                                 </h5>
                             </div>

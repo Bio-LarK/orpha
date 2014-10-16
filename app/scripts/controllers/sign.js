@@ -15,16 +15,36 @@ angular.module('orphaApp')
 
         ////////////
         function activate() {
-            $scope.sign = Sign.get({
+            Sign.get({
                 nid: $stateParams.signId
+            }).$promise.then(function(sign) {
+                $scope.sign = sign;
+                sign.loadDisorders();
+                sign.loadChildren().then(function(children) {
+                    _.each(children, function(child) {
+                        child.loadDisorders();
+                    });
+                });
             });
-            $scope.signTracker.addPromise($scope.sign);
+            // $scope.signTracker.addPromise($scope.sign);
 
-            // load the disorders
-            var disorderPromise = Disorder.getFromSign($stateParams.signId).then(function (disorders) {
-                $scope.disorders = disorders;
-            });
-            $scope.disordersTracker.addPromise($scope.sign);
-            $scope.disordersTracker.addPromise(disorderPromise);
+            // // load the disorders
+            // var disorderPromise = Disorder.getFromSign($stateParams.signId).then(function (disorders) {
+            //     $scope.disorders = disorders;
+            // });
+            // $scope.disordersTracker.addPromise($scope.sign);
+            // $scope.disordersTracker.addPromise(disorderPromise);
+
+            /*
+            _.each(disorders, function(disorder) {
+                        _.each(disorder['disorder_class'], function(classification) {
+                            if(!angular.isDefined(classifications[classification.nid])) {
+                                classifications[classification.nid] = classification;
+                                classifications[classification.nid].count = 0;
+                            } 
+                            classifications[classification.nid].count++;
+                        });
+                    });
+*/
         }
     });
