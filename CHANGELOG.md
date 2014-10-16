@@ -1,3 +1,12 @@
+<a name="0.19.1"></a>
+### 0.19.1 (2014-10-16)
+
+
+#### Bug Fixes
+
+* **home:** fix colours on homepage ([223d47f5](git@github.com:Bio-LarK/orpha/commit/223d47f5d015b9cdb6861455f49465793ad94e93))
+
+
 <a name="0.19.0"></a>
 ## 0.19.0 (2014-10-16)
 
