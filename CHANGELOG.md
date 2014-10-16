@@ -1,3 +1,12 @@
+<a name="0.19.0"></a>
+## 0.19.0 (2014-10-16)
+
+
+#### Features
+
+* **stuff:** lots of colours. ([f671a98d](git@github.com:Bio-LarK/orpha/commit/f671a98daaaddb49e9847ac3f00874de30619429))
+
+
 <a name="0.18.4"></a>
 ### 0.18.4 (2014-10-16)
 
