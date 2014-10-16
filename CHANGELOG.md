@@ -1,3 +1,16 @@
+<a name="0.18.3"></a>
+### 0.18.3 (2014-10-16)
+
+
+#### Bug Fixes
+
+* **landing:** fix title not appearing ([3da06289](git@github.com:Bio-LarK/orpha/commit/3da06289d7ebc8df0a5cf37bf6c480afd390b325), closes [#46](git@github.com:Bio-LarK/orpha/issues/46))
+* **suggestions:**
+  * fix closed not loading ([94122998](git@github.com:Bio-LarK/orpha/commit/941229988ac8d50b8806278afbc31aad134683f0))
+  * fix not loading ([527842db](git@github.com:Bio-LarK/orpha/commit/527842db0291b3ebf6a01a2b296accd73d6e3600), closes [#45](git@github.com:Bio-LarK/orpha/issues/45))
+* **transaction-request:** fix no accepted or rejected failing ([2fcb26c4](git@github.com:Bio-LarK/orpha/commit/2fcb26c4ccc183aeb4ff2b937d6cac37e5e34c74))
+
+
 <a name="0.18.2"></a>
 ### 0.18.2 (2014-10-14)
 
