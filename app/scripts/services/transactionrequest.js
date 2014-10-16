@@ -44,7 +44,11 @@ angular.module('orphaApp')
                 return TransactionRequest.query({
                     'parameters[tr_status]': transactionStatusService.submittedNid,
                     page: page
-                }).$promise;
+                }).$promise.then(function(transactionRequest) {
+                    return transactionRequest;
+                }, function() {
+                    return [];
+                });
             });
         }
         function getClosed(page) {
@@ -55,11 +59,19 @@ angular.module('orphaApp')
                 var promise1 = TransactionRequest.query({
                     'parameters[tr_status]': transactionStatusService.acceptedNid,
                     page: page
-                }).$promise;
+                }).$promise.then(function(transactionRequests) {
+                    return transactionRequests;
+                }, function() {
+                    return [];
+                });
                 var promise2 = TransactionRequest.query({
                     'parameters[tr_status]': transactionStatusService.rejectedNid,
                     page: page
-                }).$promise;
+                }).$promise.then(function(transactionRequests) {
+                    return transactionRequests;
+                }, function() {
+                    return [];
+                });
                 return $q.all([promise1, promise2]).then(function(requests) {
                     return _.flatten(requests);
                 });
