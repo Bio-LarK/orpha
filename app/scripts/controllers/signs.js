@@ -8,7 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('SignsCtrl', function ($scope, Sign, promiseTracker) {
+    .controller('SignsCtrl', function ($scope, Sign, promiseTracker, Page) {
         $scope.loadMore = loadMore;
         $scope.loadingTracker = promiseTracker();
         $scope.page = 0;
@@ -27,6 +27,7 @@ angular.module('orphaApp')
                 });
             });
             $scope.loadingTracker.addPromise(promise);
+            Page.setTitle('All Clinical Signs');
         }
 
         function loadMore() {

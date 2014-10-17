@@ -70,28 +70,6 @@ angular.module('orphaApp')
                     return disorders;
                 });
             });
-
-            // return $http.get(ENV.apiEndpoint + '/entity_node', {
-            //  params: params
-            // }).then(function(response) {
-            //  var disorderSigns = response.data;
-            //  var disorderIds = [];
-            //  _.each(disorderSigns, function(disorderSign) {
-            //      disorderIds.push(disorderSign['ds_disorder'].nid);
-            //  });
-            //  var params = {};
-            //  _.each(disorderIds, function(disorderId, i) {
-            //      params['parameters[nid][' + i + ']'] = disorderId;
-            //  });
-            //  return Disorder.query(params).$promise.then(function(disorders) {
-            //      sign.disorders = disorders;
-            //            var classifications = _.pluck(disorders, 'disorder_class');
-            //            $log.debug('classifications!', classifications);
-            //            sign.classifications = _.flatten(classifications);
-            //            $log.debug('lfattened!', sign.classifications);
-            //      return disorders;
-            //  });
-            // });
         }
 
         function _loadDisorderSignHelper(sign, ids, page) {

@@ -8,7 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('GenesCtrl', function ($scope, Gene, promiseTracker) {
+    .controller('GenesCtrl', function ($scope, Gene, promiseTracker, Page) {
         $scope.loadMore = loadMore;
         $scope.loadingTracker = promiseTracker();
         $scope.page = 0;
@@ -18,6 +18,7 @@ angular.module('orphaApp')
         /////////////
 
         function activate() {
+            Page.setTitle('Genes');
             $scope.genes = Gene.query({
                 fields: 'nid,gene_name,gene_symbol,gene_disgene',
                 page: $scope.page++

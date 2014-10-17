@@ -13,11 +13,5 @@ angular.module('orphaApp')
             'parameters[type]': 'gene',
             nid: '@nid'
         });
-
-        angular.extend(Gene.prototype, {
-
-        });
-
-
         return Gene;
     });

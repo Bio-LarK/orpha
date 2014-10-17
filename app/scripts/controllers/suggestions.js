@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
     .controller('SuggestionsCtrl', function($http, $scope, ENV, suggestionService, 
-        TransactionRequest, $log, $q, transactionStatusService) {
+        TransactionRequest, $log, $q, transactionStatusService, Page) {
         var vm = this;
         vm.suggestions = null;
         vm.openSuggestions = null;
@@ -21,7 +21,8 @@ angular.module('orphaApp')
         ///////
 
         function activate() {
-
+            Page.setTitle('Suggestions');
+            
             return transactionStatusService.loadStatusCodes().then(function() {
                 // Load all transation requests
                 TransactionRequest.getOpen().then(function(suggestions) {
