@@ -249,10 +249,16 @@ angular.module('orphaApp')
         function getFromGene(geneId) {
             return $http.get(ENV.apiEndpoint + '/entity_node/' +
                 geneId + '/nodes_field_disgene_gene?fields=disgene_disorder').then(function(response) {
-                var disorders = _.map(response.data, function(disgeneGene) {
-                    return new Disorder(disgeneGene['disgene_disorder']);
+
+                var request = _.reduce(response.data, function(request, disgeneGene, key) {
+                    request['parameters[nid][' + key + ']'] = disgeneGene['disgene_disorder'].nid;
+                    return request;
+                }, {});
+
+                return Disorder.query(request).$promise.then(function(disorders) {
+                    return disorders;
                 });
-                return disorders;
+
             });
         }
 
