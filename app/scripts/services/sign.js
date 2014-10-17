@@ -64,7 +64,7 @@ angular.module('orphaApp')
                     disorderIds.push(disorderSign['ds_disorder'].nid);
                 });
                 return _loadDisordersHelper(sign, disorderIds, 0).then(function(disorders) {
-                    sign.disorders = disorders;
+                    // sign.disorders = disorders;
                     var classifications = _.pluck(disorders, 'disorder_class');
                     sign.classifications = _.flatten(classifications);
                     return disorders;
@@ -90,6 +90,7 @@ angular.module('orphaApp')
                 cache: true
             }).then(function(response) {
                 var disorderSigns = response.data;
+                sign.disorders = sign.disorders.concat(_.pluck(disorderSigns, 'ds_disorder'));
                 if (disorderSigns.length === 20) {
                     return _loadDisorderSignHelper(sign, ids, page + 1).then(function(otherDisordersSigns) {
                         return disorderSigns.concat(otherDisordersSigns);
@@ -112,7 +113,11 @@ angular.module('orphaApp')
                 return $q.when([]);
             }
             return Disorder.query(params).$promise.then(function(disorders) {
-                sign.disorders = sign.disorders.concat(disorders);
+                _.each(disorders, function(disorder) {
+                    var stubDisorder = _.find(sign.disorders, {nid: disorder.nid});
+                    angular.copy(disorder, stubDisorder);
+                });
+                // sign.disorders = sign.disorders.concat(disorders);
                 if (disorders.length === 20) {
                     return _loadDisordersHelper(sign, ids, page + 1).then(function(otherDisorders) {
                         return disorders.concat(otherDisorders);
