@@ -16,6 +16,7 @@ angular.module('orphaApp')
         }, {
             get: {
                 method: 'GET',
+                cache: true,
                 transformResponse: $http.defaults.transformResponse.concat([
                     transformGetResponse
                 ])
@@ -23,6 +24,7 @@ angular.module('orphaApp')
             query: {
                 method: 'GET',
                 isArray: true,
+                cache: true,
                 transformResponse: $http.defaults.transformResponse.concat([
                     transformQueryResponse
                 ])

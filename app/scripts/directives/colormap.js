@@ -23,7 +23,6 @@ angular.module('orphaApp')
                 scope.$watch('classifications', function(classifications) {
                     if(classifications) {
                         scope.myClassifications = classifications;
-                        $log.debug(' yo yo yo', scope.myClassifications.length);
                         prepData(scope.myClassifications);    
                     }
                     
@@ -37,6 +36,7 @@ angular.module('orphaApp')
                 });
 
                 function prepData(classifications) {
+                    // TODO: make this less disgusting!
                     var highestCount = 0;
                     _.each(classifications, function(classification) {
                         var allClassification = _.find(scope.allClassifications, {name: classification.title});
@@ -45,6 +45,10 @@ angular.module('orphaApp')
                         classification.position = scope.allClassifications.indexOf(allClassification);
                         // $log.debug('position', classifications.position);
                         allClassification.isOn = true;
+                        allClassification.nid = classification.nid;
+                        allClassification.tooltip = '<div style="display:inline-block;margin-right:5px;' + 
+                        'width:10px;height:10px;background-color:'+ 
+                        allClassification.color + '"></div>' + allClassification.name;
                         if(!allClassification.count) {
                             allClassification.count = 0;
                         }
@@ -55,7 +59,7 @@ angular.module('orphaApp')
                         }
                     });
                     _.each(scope.allClassifications, function(allClassification, i) {
-                        var hue = 20;//(360/31) * i;
+                        var hue = 20; //(360/31) * i;
                         var sat = 100;
                         var lightness = 50;
                         // $log.debug('scope.type', scope.type);
@@ -172,7 +176,7 @@ angular.module('orphaApp')
                 }];
 
                 _.each(scope.allClassifications, function(allClassification, i) {
-                    var hue = (360/31) * i;
+                    var hue = (320/31) * i;
                     var sat = 70;
                     var lightness = 70;
                     allClassification.color = 'hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)';
