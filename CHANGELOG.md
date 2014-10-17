@@ -1,3 +1,12 @@
+<a name="0.19.5"></a>
+### 0.19.5 (2014-10-17)
+
+
+#### Features
+
+* **icon:** add loading spinners ([837c620f](git@github.com:Bio-LarK/orpha/commit/837c620fac191dc159efb29d4f5d4ae791d1fde0))
+
+
 <a name="0.19.4"></a>
 ### 0.19.4 (2014-10-17)
 
