@@ -1,3 +1,12 @@
+<a name="0.19.3"></a>
+### 0.19.3 (2014-10-17)
+
+
+#### Bug Fixes
+
+* **gene:** fix disorders not showing bars ([d454e9f8](git@github.com:Bio-LarK/orpha/commit/d454e9f8f463f33ef50693c02df80f4a5cf328df), closes [#52](git@github.com:Bio-LarK/orpha/issues/52))
+
+
 <a name="0.19.2"></a>
 ### 0.19.2 (2014-10-17)
 
