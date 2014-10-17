@@ -21,6 +21,9 @@ angular.module('orphaApp')
             /* jshint validthis: true */
             var sign = this;
             var ids = _.pluck(sign['sign_child'], 'nid');
+            // if(ids.length > 100) {
+            //     ids = ids.slice(0, 100);
+            // }
             var params = {};
             _.each(ids, function(id, i) {
                 params['parameters[nid][' + i + ']'] = id;
@@ -38,7 +41,9 @@ angular.module('orphaApp')
             return $q.when([]);
         }
 
-        function loadDisorders() {
+        function loadDisorders(onlyLoadSome) {
+            var someAmount = 50;
+            $log.debug('some amount?', onlyLoadSome);
             /* jshint validthis: true */
             var sign = this;
 
@@ -49,11 +54,10 @@ angular.module('orphaApp')
                 sign.disorders = [];
                 return $q.when([]);
             }
-            if(ids.length > 300) {
-                ids = ids.slice(0, 300);
+            if(ids.length > someAmount && onlyLoadSome) {
+                ids = ids.slice(0, someAmount);
             }
             sign.disorders = [];
-
             return _loadDisorderSignHelper(sign, ids, 0).then(function(disorderSigns) {
                 var disorderIds = [];
                 _.each(disorderSigns, function(disorderSign) {
@@ -91,6 +95,7 @@ angular.module('orphaApp')
         }
 
         function _loadDisorderSignHelper(sign, ids, page) {
+            $log.debug('loading disorder sign helper', page);
             var params = {
                 'parameters[type]': 'disorder_sign',
                 fields: 'ds_disorder'
@@ -99,7 +104,9 @@ angular.module('orphaApp')
             _.each(paginatedIds, function(id, i) {
                 params['parameters[nid][' + i + ']'] = id;
             });
-            
+            if(paginatedIds.length === 0) {
+                return $q.when([]);
+            }
             return $http.get(ENV.apiEndpoint + '/entity_node', {
                 params: params,
                 cache: true
@@ -115,11 +122,17 @@ angular.module('orphaApp')
         }
 
         function _loadDisordersHelper(sign, ids, page) {
+            if(ids.length === 0) {
+                return $q.when([]);
+            }
             var params = {};
             var paginatedIds = ids.slice(page * 20, page * 20 + 20);
             _.each(paginatedIds, function(id, i) {
                 params['parameters[nid][' + i + ']'] = id;
             });
+            if(paginatedIds.length === 0) {
+                return $q.when([]);
+            }
             return Disorder.query(params).$promise.then(function(disorders) {
                 sign.disorders = sign.disorders.concat(disorders);
                 if (disorders.length === 20) {

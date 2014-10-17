@@ -23,7 +23,7 @@ angular.module('orphaApp')
             promise.then(function(signs) {
                 $scope.signs = signs;
                 _.each(signs, function(sign) {
-                    sign.loadDisorders();
+                    sign.loadDisorders(true);
                 });
             });
             $scope.loadingTracker.addPromise(promise);
@@ -32,11 +32,11 @@ angular.module('orphaApp')
         function loadMore() {
             var signs = Sign.query({
                 fields: 'nid,sign_name,sign_dissign,title',
-                page: $scope.page++
+                page: ++$scope.page
             }, function (signs) {
                 $scope.signs = $scope.signs.concat(signs);
                 _.each(signs, function(sign) {
-                    sign.loadDisorders();
+                    sign.loadDisorders(true);
                 });
             });
             $scope.loadingTracker.addPromise(signs.$promise);
