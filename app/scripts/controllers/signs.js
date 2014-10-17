@@ -31,10 +31,13 @@ angular.module('orphaApp')
 
         function loadMore() {
             var signs = Sign.query({
-                fields: 'nid,Sign_name',
+                fields: 'nid,sign_name,sign_dissign,title',
                 page: $scope.page++
             }, function (signs) {
                 $scope.signs = $scope.signs.concat(signs);
+                _.each(signs, function(sign) {
+                    sign.loadDisorders();
+                });
             });
             $scope.loadingTracker.addPromise(signs.$promise);
         }

@@ -1,3 +1,14 @@
+<a name="0.19.2"></a>
+### 0.19.2 (2014-10-17)
+
+
+#### Bug Fixes
+
+* **classifications:** add disorder counts ([bcc9bba2](git@github.com:Bio-LarK/orpha/commit/bcc9bba2900de1cd2324372868545c11ff117e59), closes [#54](git@github.com:Bio-LarK/orpha/issues/54))
+* **disorder:** remove pagination of loading children ([94b7dc0e](git@github.com:Bio-LarK/orpha/commit/94b7dc0e307268eb5248f7a3ccf67828f27e4d8a), closes [#56](git@github.com:Bio-LarK/orpha/issues/56))
+* **sign:** fix disorders not loading if over 100 disorders ([1c38ef1e](git@github.com:Bio-LarK/orpha/commit/1c38ef1e0b11b7b84c6460ded908ba738ea8b417), closes [#59](git@github.com:Bio-LarK/orpha/issues/59))
+
+
 <a name="0.19.1"></a>
 ### 0.19.1 (2014-10-16)
 
