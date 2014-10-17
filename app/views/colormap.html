@@ -1,13 +1,15 @@
 
 <div style="width: 100%; height: 100%;background-color:white;">
 	
+	<!-- square -->
 	<div style="width: 100%; height: 100%;border:1px solid #ddd;" ng-if="type !== 'disorder'">
 		<div ng-repeat="classification in allClassifications" style="float: left; width: 25%;height:12.5%;">
-			<div style="width:100%;height:100%;background-color:{{classification.color}};opacity:{{classification.opacity}}" ng-show="classification.isOn" tooltip-html-unsafe="{{ classification.tooltip }}" ui-sref="classification({classificationId: classification.nid })"></div>
+			<div style="width:100%;height:100%;background-color:{{classification.color}};opacity:{{classification.opacity}}" ng-show="classification.isOn" tooltip-animation="false" tooltip-html-unsafe="{{ classification.tooltip }}" ui-sref="classification({classificationId: classification.nid })"></div>
 			<div style="width:100%;height:100%;background-color:white" ng-hide="classification.isOn"></div>	
 		</div>	
 	</div>
 	
+	<!-- lines -->
 	<div style="width: 100%; height: 100%;" ng-if="type == 'disorder'">
 		<div ng-repeat="classification in myClassifications| orderBy:'position'" 
 			style="display:inline-block;background-color:{{classification.color}};width:{{100/myClassifications.length}}%;height:100%;border-left:1px solid white;cursor:pointer;" tooltip="{{ classification.title }}" ui-sref="classification({classificationId: classification.nid })">
