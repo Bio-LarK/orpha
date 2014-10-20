@@ -1,3 +1,17 @@
+<a name="0.19.8"></a>
+### 0.19.8 (2014-10-20)
+
+
+#### Bug Fixes
+
+* **disorders-page:** fix colors not matching ([7b2c78eb](git@github.com:Bio-LarK/orpha/commit/7b2c78eb1420f0b8d0633757058c4a3b39346326), closes [#60](git@github.com:Bio-LarK/orpha/issues/60))
+
+
+#### Features
+
+* **disorder-page:** add icons to phenotypes and genes ([5c4e78b4](git@github.com:Bio-LarK/orpha/commit/5c4e78b41f92d5c28929b2518a9c0800ea534771), closes [#66](git@github.com:Bio-LarK/orpha/issues/66), [#67](git@github.com:Bio-LarK/orpha/issues/67))
+
+
 <a name="0.19.7"></a>
 ### 0.19.7 (2014-10-20)
 
