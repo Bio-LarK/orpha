@@ -19,6 +19,7 @@ angular.module('orphaApp')
                 nid: $stateParams.geneId //136402
             }).$promise.then(function(gene) {
                 $scope.gene = gene;
+                Page.setTitle(gene.title);
                 gene.loadDisorders();
             });
             // $scope.geneTracker.addPromise($scope.gene.$promise);
