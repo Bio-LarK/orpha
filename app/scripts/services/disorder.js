@@ -292,7 +292,6 @@ angular.module('orphaApp')
                 return disorders[0];
             });
         }
-
     });
 
 /*

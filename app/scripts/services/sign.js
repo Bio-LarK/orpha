@@ -68,6 +68,7 @@ angular.module('orphaApp')
                     // sign.disorders = disorders;
                     var classifications = _.pluck(disorders, 'disorder_class');
                     sign.classifications = _.flatten(classifications);
+                    $log.debug('disorders loaded');
                     return disorders;
                 });
             });

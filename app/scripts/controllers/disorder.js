@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
     .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, $log,
-        Page, promiseTracker, $modal, modalService) {
+        Page, promiseTracker, $modal, modalService, Sign, Gene) {
         var vm = $scope;
         vm.disorderTracker = promiseTracker();
         vm.disorder = null;
@@ -53,10 +53,35 @@ angular.module('orphaApp')
 
                 Page.setTitle(disorder['disorder_name']);
 
+                // FIXME: This is terrible, and should all be serverside
                 var genesPromise = disorder.getGenes();
                 var signsPromise = disorder.getSigns();
+                signsPromise.then(function() {
+                    _.each(disorder['disorder_phenotype'], function(disorderSign) {
+                        Sign.get({
+                            nid: disorderSign['ds_sign'].nid
+                        }).$promise.then(function(sign) {
+                            disorderSign['ds_sign'] = sign;
+                            sign.loadDisorders(true);
+                            // _.extend(disorderSign['ds_sign'], sign);
+                            // $log.debug('new sign!', disorderSign['ds_sign'], sign);
+                        });
+                    });
+                });
+                genesPromise.then(function() {
+                    _.each(disorder['disorder_disgene'], function(disorderGene) {
+                        Gene.get({
+                            nid: disorderGene['disgene_gene'].nid
+                        }).$promise.then(function(gene) {
+                            disorderGene['disgene_gene'] = gene;
+                            gene.loadDisorders(true);
+                            // _.extend(disorderSign['ds_sign'], sign);
+                            // $log.debug('new sign!', disorderSign['ds_sign'], sign);
+                        });
+                    });
+                });
 
-                vm.signsTracker.addPromise(signsPromise);
+                // vm.signsTracker.addPromise(signsPromise);
                 vm.genesTracker.addPromise(genesPromise);
             });
             vm.disorderTracker.addPromise(disorder.$promise);
