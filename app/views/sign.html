@@ -165,7 +165,7 @@
                 Root disorder.
             </p>
 
-            <div class="row" ng-repeat="row in sign.disorders | filter:disordersFilter | inSlicesOf:3">
+            <div class="row" ng-repeat="row in sign.disorders | limitTo:limit | filter:disordersFilter | inSlicesOf:3">
                 <div ng-repeat="disorder in row" class="col-sm-4">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -189,6 +189,7 @@
                     </div>
                 </div>
             </div>
+            <button class="btn btn-default" ng-click="showMore()" ng-show="limit < sign.disorders.length">Load More</button>
         </div>
         <div class="spinner" ng-show="disordersTracker.active();">
             <i class="fa fa-spin fa-circle-o-notch"></i>

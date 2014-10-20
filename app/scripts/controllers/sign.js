@@ -10,10 +10,16 @@
 angular.module('orphaApp')
     .controller('SignCtrl', function ($scope, $stateParams, Disorder, Sign, promiseTracker, Page) {
         $scope.signTracker = promiseTracker();
+        $scope.limit = 10;
         $scope.disordersTracker = promiseTracker();
+        $scope.showMore = showMore;
         activate();
 
         ////////////
+
+        function showMore() {
+            $scope.limit += 20;
+        }
         function activate() {
             Sign.get({
                 nid: $stateParams.signId
