@@ -4,7 +4,7 @@
 	</div> -->
 
     <div class="title">
-        <div class="pull-right text-muted" ng-hide="geneTracker.active()">
+        <div class="pull-right text-muted">
             Updated {{ gene.changed * 1000 | date:'d/M/yyyy' }}
         </div>
         <div class="media">
@@ -17,7 +17,7 @@
             <div class="media-body">
                 <h1>
                     {{ gene.title || 'Loading...' }} 
-                    <span ng-hide="geneTracker.active()">({{ gene.gene_symbol }})</span>
+                    <span>({{ gene.gene_symbol }})</span>
                 </h1>
                 <div style="color: rgba(0,0,0,0.5); margin-top: 7px;" ng-show="gene.gene_synonym.length">
                     <small style="font-size: 16px;">
@@ -36,6 +36,7 @@
     </div>
 
     <div class="panels">
+
     	<form class="form-inline pull-right" role="form" ng-show="disorders.length > 1">
             <div class="form-group">
                 <label class="sr-only" for="exampleInputEmail2">Filter</label>
@@ -45,25 +46,27 @@
         </form>
 
         <h2>Disorders</h2>
-        <div ng-hide="geneTracker.active();">
-            <p ng-hide="disorders.length" class="text-muted">
+        <div>
+            <p ng-hide="gene.gene_disgene.length" class="text-muted">
                 Root disorder.
             </p>
             
-            <div class="row" ng-repeat="row in disorders | filter:disordersFilter | inSlicesOf:3">
-                <div ng-repeat="disorder in row" class="col-sm-4">
+            <div class="row" ng-repeat="row in gene.gene_disgene | filter:disordersFilter | inSlicesOf:3">
+                <div ng-repeat="disorderGene in row" class="col-sm-4">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="media">
                                 <div class="pull-left">
                                     <div style="width:40px;height:40px;">
-                                        <colormap classifications="disorder.disorder_class" type="disorder"></colormap>
+                                        <colormap classifications="disorderGene.disgene_disorder.disorder_class" type="disorder"></colormap>
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <a ui-sref="disorder({disorderId: disorder.nid})">
+                                    <!-- {{ disorderGene.disgene_as.title }} -->
+                                    <span class="text-muted">{{ disorderGene.disgene_at.title }}</span>
+                                    <a ui-sref="disorder({disorderId: disorderGene.disgene_disorder.nid})">
                                         <strong>
-                                            {{ disorder.title }}
+                                            {{ disorderGene.disgene_disorder.title }}
                                         </strong>
                                     </a>
                                     <p>An Orphanet summary for this disease is currently under development.</p>
@@ -78,6 +81,5 @@
         <div class="spinner" ng-show="geneTracker.active();">
             <i class="fa fa-spin fa-circle-o-notch"></i>
         </div>
-
     </div>
 </div>

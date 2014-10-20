@@ -15,20 +15,25 @@ angular.module('orphaApp')
 
         ///////////
         function activate() {
-            $scope.gene = Gene.get({
+            Gene.get({
                 nid: $stateParams.geneId //136402
+            }).$promise.then(function(gene) {
+                $scope.gene = gene;
+                gene.loadDisorders();
             });
-            $scope.geneTracker.addPromise($scope.gene.$promise);
-            $scope.disordersTracker.addPromise($scope.gene.$promise);
-            $scope.gene.$promise.then(function(gene) {
-                Page.setTitle(gene.title);
-            });
+            // $scope.geneTracker.addPromise($scope.gene.$promise);
+            // $scope.disordersTracker.addPromise($scope.gene.$promise);
+            // $scope.gene.$promise.then(function(gene) {
+            //     Page.setTitle(gene.title);
+            // });
+
+
             // load the disorders
-            var disordersPromise = Disorder.getFromGene($stateParams.geneId).then(function (disorders) {
-                $scope.disorders = disorders;
-                $scope.gene.classifications = _.flatten(_.pluck($scope.disorders, 'disorder_class'));
-            });
-            $scope.disordersTracker.addPromise(disordersPromise);
+            // var disordersPromise = Disorder.getFromGene($stateParams.geneId).then(function (disorders) {
+            //     $scope.disorders = disorders;
+            //     $scope.gene.classifications = _.flatten(_.pluck($scope.disorders, 'disorder_class'));
+            // });
+            // $scope.disordersTracker.addPromise(disordersPromise);
 
         }
     });
