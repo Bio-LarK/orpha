@@ -1,3 +1,13 @@
+<a name="0.19.11"></a>
+### 0.19.11 (2014-10-20)
+
+
+#### Bug Fixes
+
+* **sign:** remove _no_name_ parent ([44d862b9](git@github.com:Bio-LarK/orpha/commit/44d862b99831e2df123652b562daf8bd5e68223a), closes [#65](git@github.com:Bio-LarK/orpha/issues/65))
+* **signs:** remove no_name sign ([915cc2eb](git@github.com:Bio-LarK/orpha/commit/915cc2eb1dac34e1ebb7a067a2a6bbcbea543fe7), closes [#64](git@github.com:Bio-LarK/orpha/issues/64))
+
+
 <a name="0.19.10"></a>
 ### 0.19.10 (2014-10-20)
 
