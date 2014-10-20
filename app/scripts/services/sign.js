@@ -42,7 +42,7 @@ angular.module('orphaApp')
         }
 
         function loadDisorders(onlyLoadSome) {
-            var someAmount = 50;
+            var someAmount = 20;
             $log.debug('some amount?', onlyLoadSome);
             /* jshint validthis: true */
             var sign = this;
@@ -52,6 +52,7 @@ angular.module('orphaApp')
             var ids = _.pluck(sign['sign_dissign'], 'nid');
             if(ids.length === 0) {
                 sign.disorders = [];
+                sign.classifications = [];
                 return $q.when([]);
             }
             if(ids.length > someAmount && onlyLoadSome) {

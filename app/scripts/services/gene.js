@@ -17,7 +17,7 @@ angular.module('orphaApp')
         return Gene;
 
         function loadDisorders(onlyLoadSome) {
-            var someAmount = 50;
+            var someAmount = 20;
             $log.debug('some amount?', onlyLoadSome);
             /* jshint validthis: true */
             var gene = this;
@@ -27,6 +27,7 @@ angular.module('orphaApp')
             var ids = _.pluck(gene['gene_disgene'], 'nid');
             $log.debug('ids', ids);
             if(ids.length === 0) {
+                gene.classifications = [];
                 return $q.when([]);
             }
             if(ids.length > someAmount && onlyLoadSome) {

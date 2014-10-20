@@ -19,21 +19,30 @@ angular.module('orphaApp')
 
         function activate() {
             Page.setTitle('Genes');
-            $scope.genes = Gene.query({
-                fields: 'nid,gene_name,gene_symbol,gene_disgene',
-                page: $scope.page++
+            getGenes($scope.page++).then(function(genes) {
+                $scope.genes = genes;
             });
-            $scope.loadingTracker.addPromise($scope.genes.$promise);
         }
 
         function loadMore() {
-            var genes = Gene.query({
-                fields: 'nid,gene_name,gene_symbol,gene_disgene',
-                page: $scope.page++
-            }, function (genes) {
+            getGenes($scope.page++).then(function(genes) {
                 $scope.genes = $scope.genes.concat(genes);
             });
-            $scope.loadingTracker.addPromise(genes.$promise);
+        }
+
+        function getGenes(page) {
+            var genes = Gene.query({
+                fields: 'nid,gene_name,gene_symbol,gene_disgene',
+                page: page
+            });
+            var genesPromise = genes.$promise;
+            genesPromise.then(function(genes) {
+                _.each(genes, function(gene) {
+                    gene.loadDisorders(true);
+                });
+            });
+            $scope.loadingTracker.addPromise(genesPromise);
+            return genesPromise;
         }
 
     });

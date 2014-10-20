@@ -60,6 +60,9 @@ angular.module('orphaApp')
                     });
                     _.each(scope.allClassifications, function(allClassification, i) {
                         var hue = 20; //(360/31) * i;
+                        if(scope.type === 'gene') {
+                            hue = 200;
+                        }
                         var sat = 100;
                         var lightness = 50;
                         // $log.debug('scope.type', scope.type);

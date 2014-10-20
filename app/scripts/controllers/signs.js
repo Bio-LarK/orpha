@@ -17,30 +17,33 @@ angular.module('orphaApp')
         /////////////
 
         function activate() {
-            var promise = Sign.query({
-                fields: 'nid,sign_name,sign_dissign'
-            }).$promise;
-            promise.then(function(signs) {
-                $scope.signs = signs;
-                _.each(signs, function(sign) {
-                    sign.loadDisorders(true);
-                });
-            });
-            $scope.loadingTracker.addPromise(promise);
             Page.setTitle('All Clinical Signs');
+            
+            getSigns($scope.page++).then(function(signs) {
+                $scope.signs = signs;
+            });
         }
 
         function loadMore() {
+            getSigns($scope.page++).then(function(signs) {
+                $scope.signs = $scope.signs.concat(signs);
+            });
+        }
+
+        function getSigns(page) {
             var signs = Sign.query({
                 fields: 'nid,sign_name,sign_dissign,title',
-                page: ++$scope.page
-            }, function (signs) {
-                $scope.signs = $scope.signs.concat(signs);
+                page: page
+            });
+            var signsPromise = signs.$promise;
+            signsPromise.then(function(signs) {
                 _.each(signs, function(sign) {
                     sign.loadDisorders(true);
                 });
             });
-            $scope.loadingTracker.addPromise(signs.$promise);
+            $scope.loadingTracker.addPromise(signsPromise);
+            return signsPromise;
         }
+
 
     });
