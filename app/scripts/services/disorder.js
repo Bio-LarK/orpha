@@ -191,6 +191,8 @@ angular.module('orphaApp')
                     });
                 }
                 return children;
+            }, function() {
+                return [];
             });
         }
 
