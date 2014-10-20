@@ -1,3 +1,12 @@
+<a name="0.19.7"></a>
+### 0.19.7 (2014-10-20)
+
+
+#### Bug Fixes
+
+* **gene:** add in mutation disorder description ([7f96be1f](git@github.com:Bio-LarK/orpha/commit/7f96be1fd0034c0f7191d5a5ec4b493d56712d42), closes [#19](git@github.com:Bio-LarK/orpha/issues/19))
+
+
 <a name="0.19.6"></a>
 ### 0.19.6 (2014-10-17)
 
