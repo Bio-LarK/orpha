@@ -16,6 +16,7 @@ angular.module('orphaApp')
             isAccepted: isAccepted,
             isRejected: isRejected,
             isSubmitted: isSubmitted,
+            isClosed: isClosed,
             acceptedNid: null,
             rejectedNid: null,
             submittedNid: null
@@ -60,6 +61,9 @@ angular.module('orphaApp')
         }
         function isSubmitted(nid) {
             return nid === service.submittedNid;
+        }
+        function isClosed(nid) {
+            return isAccepted(nid) || isRejected(nid);
         }
 
     });

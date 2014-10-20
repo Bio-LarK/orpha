@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
   .controller('SuggestionCtrl', function ($stateParams, TransactionRequest, $state,
-   $http, toaster, transactionStatusService) {
+   $http, toaster, transactionStatusService, $log) {
     	var vm = this;
         vm.suggestion = null;
         vm.accept = accept;
@@ -17,6 +17,7 @@ angular.module('orphaApp')
         vm.comments = [];
         vm.comment = {};
         vm.addComment = addComment;
+        vm.isOpen = false;
     	activate();
 
     	//////////
@@ -29,6 +30,10 @@ angular.module('orphaApp')
                 });
                 
                 vm.suggestion = transactionRequest;
+                transactionStatusService.loadStatusCodes().then(function() {
+                    $log.debug('status codes loaded', vm.suggestion.tr_status);
+                    vm.isOpen = !transactionStatusService.isClosed(vm.suggestion.tr_status.nid);
+                });
                 // _.each(transactionRequest['$tr_trans'], function(listTransaction) {
                 //     listTransaction.loadReferences().then(function(listTransaction) {
                 //         // bit of moving stuff about
