@@ -1,3 +1,13 @@
+<a name="0.19.12"></a>
+### 0.19.12 (2014-10-20)
+
+
+#### Bug Fixes
+
+* **disorder:** make frequency appear when editing sign ([1bbec56a](git@github.com:Bio-LarK/orpha/commit/1bbec56a447c93ad7c57f2ccfa268d93dc8f889e), closes [#49](git@github.com:Bio-LarK/orpha/issues/49))
+* **suggestions:** all closed not loading ([c01695db](git@github.com:Bio-LarK/orpha/commit/c01695db05d52cbbe20e28544920c46d7567a7d2), closes [#20](git@github.com:Bio-LarK/orpha/issues/20))
+
+
 <a name="0.19.11"></a>
 ### 0.19.11 (2014-10-20)
 
