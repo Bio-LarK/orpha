@@ -19,10 +19,13 @@ angular.module('orphaApp')
                 nid: $stateParams.signId
             }).$promise.then(function(sign) {
                 $scope.sign = sign;
+                sign.sign_parent = _.reject(sign.sign_parent, function(signParent) {
+                    return signParent.title === '_NO_NAME_';
+                });
                 sign.loadDisorders();
                 sign.loadChildren().then(function(children) {
                     _.each(children, function(child) {
-                        child.loadDisorders();
+                        child.loadDisorders(true);
                     });
                 });
             });
