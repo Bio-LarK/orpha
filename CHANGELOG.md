@@ -1,3 +1,12 @@
+<a name="0.19.10"></a>
+### 0.19.10 (2014-10-20)
+
+
+#### Bug Fixes
+
+* **suggestion:** remove accept/reject if closed ([e1914b75](git@github.com:Bio-LarK/orpha/commit/e1914b75f3c47b7f8d01d1e6e97d3136326158b3), closes [#62](git@github.com:Bio-LarK/orpha/issues/62))
+
+
 <a name="0.19.9"></a>
 ### 0.19.9 (2014-10-20)
 
