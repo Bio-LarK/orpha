@@ -43,7 +43,7 @@ angular.module('orphaApp')
 
         function loadDisorders(onlyLoadSome) {
             var someAmount = 20;
-            $log.debug('some amount?', onlyLoadSome);
+            // $log.debug('some amount?', onlyLoadSome);
             /* jshint validthis: true */
             var sign = this;
 
@@ -68,14 +68,14 @@ angular.module('orphaApp')
                     // sign.disorders = disorders;
                     var classifications = _.pluck(disorders, 'disorder_class');
                     sign.classifications = _.flatten(classifications);
-                    $log.debug('disorders loaded');
+                    // $log.debug('disorders loaded');
                     return disorders;
                 });
             });
         }
 
         function _loadDisorderSignHelper(sign, ids, page) {
-            $log.debug('loading disorder sign helper', page);
+            // $log.debug('loading disorder sign helper', page);
             var params = {
                 'parameters[type]': 'disorder_sign',
                 fields: 'ds_disorder'

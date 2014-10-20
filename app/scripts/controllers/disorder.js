@@ -64,7 +64,7 @@ angular.module('orphaApp')
                             disorderSign['ds_sign'] = sign;
                             sign.loadDisorders(true);
                             // _.extend(disorderSign['ds_sign'], sign);
-                            // $log.debug('new sign!', disorderSign['ds_sign'], sign);
+                            // // $log.debug('new sign!', disorderSign['ds_sign'], sign);
                         });
                     });
                 });
@@ -76,7 +76,7 @@ angular.module('orphaApp')
                             disorderGene['disgene_gene'] = gene;
                             gene.loadDisorders(true);
                             // _.extend(disorderSign['ds_sign'], sign);
-                            // $log.debug('new sign!', disorderSign['ds_sign'], sign);
+                            // // $log.debug('new sign!', disorderSign['ds_sign'], sign);
                         });
                     });
                 });

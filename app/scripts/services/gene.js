@@ -18,14 +18,14 @@ angular.module('orphaApp')
 
         function loadDisorders(onlyLoadSome) {
             var someAmount = 20;
-            $log.debug('some amount?', onlyLoadSome);
+            // $log.debug('some amount?', onlyLoadSome);
             /* jshint validthis: true */
             var gene = this;
 
             // Find all disorders that pount to this 
 
             var ids = _.pluck(gene['gene_disgene'], 'nid');
-            $log.debug('ids', ids);
+            // $log.debug('ids', ids);
             if(ids.length === 0) {
                 gene.classifications = [];
                 return $q.when([]);
@@ -51,7 +51,7 @@ angular.module('orphaApp')
         }
 
         function _loadDisorderGeneHelper(gene, ids, page) {
-            $log.debug('loading disorder gene helper', page);
+            // $log.debug('loading disorder gene helper', page);
             var params = {
                 'parameters[type]': 'disorder_gene'
             };

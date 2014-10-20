@@ -61,7 +61,7 @@ angular.module('orphaApp')
             });
             disorder['disorder_child'] = _.sortBy(disorder['disorder_child'], 'nid');
             disorder['disorder_child'] = _.map(disorder.disorder_child, function(child) {
-                $log.debug('wrapping children');
+                // // $log.debug('wrapping children');
                 return new Disorder(child);
             });
             disorder['disorder_class'] = _.map(disorder.disorder_class, function(classification) {
@@ -105,7 +105,7 @@ angular.module('orphaApp')
                 return parent.id || parent.nid;
             });
 
-            $log.debug('GETTING PARENTS', ids);
+            // // $log.debug('GETTING PARENTS', ids);
             if (!ids.length) {
                 return $q.when([]);
             }
@@ -128,14 +128,14 @@ angular.module('orphaApp')
             return Disorder.getParentsFromDisorderInClassification(disorder, classification).then(function(parents) {
                 // Load the children for the parents
                 var promises = _.map(parents, function(parent) {
-                    $log.debug('loading children for parents', parent.title);
+                    // // $log.debug('loading children for parents', parent.title);
                     return parent.loadChildren().then(function(children) {
-                        $log.debug('loaded children for parent', parent.title, children);
+                        // // $log.debug('loaded children for parent', parent.title, children);
                         var index = _.findIndex(parent['disorder_child'], function(child) {
-                            $log.debug('finding match', child, child.nid, disorder.nid);
+                            // // $log.debug('finding match', child, child.nid, disorder.nid);
                             return child.nid === disorder.nid;
                         });
-                        $log.debug('index of child in parent', index);
+                        // // $log.debug('index of child in parent', index);
                         parent['disorder_child'].splice(index, 1);
                         parent['disorder_child'].unshift(disorder);
                         return parent;
@@ -146,10 +146,10 @@ angular.module('orphaApp')
                     // parent.disorder_child = [disorder];
                     // return parent;
                 });
-                $log.debug('returning promises');
+                // // $log.debug('returning promises');
                 return $q.all(promises);
             }, function() {
-                $log.debug('no parents found');
+                // // $log.debug('no parents found');
                 return [];
             });
         }
@@ -165,7 +165,7 @@ angular.module('orphaApp')
 
 
         function loadChildren() {
-            $log.debug('loading children now...');
+            // // $log.debug('loading children now...');
             /* jshint validthis: true */
             var disorder = this;
             if (disorder.hasLoadedChildren) {
@@ -209,7 +209,7 @@ angular.module('orphaApp')
         function loadExternalIdentifiers() {
             /* jshint validthis: true */
             var disorder = this;
-            $log.debug('ers', disorder['disorder_er']);
+            // // $log.debug('ers', disorder['disorder_er']);
 
             if (!disorder['disorder_er'].length) {
                 return [];
@@ -238,7 +238,7 @@ angular.module('orphaApp')
                     ids.push(disorderSign.ds_disorder.nid);
                 });
                 ids = _.uniq(ids);
-                $log.debug('ids', ids);
+                // // $log.debug('ids', ids);
                 var disorders = _.map(response.data, function(dsSign) {
                     return new Disorder(dsSign['ds_disorder']);
                 });
