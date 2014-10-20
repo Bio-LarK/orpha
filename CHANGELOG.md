@@ -1,3 +1,15 @@
+<a name="0.19.13"></a>
+### 0.19.13 (2014-10-20)
+
+
+#### Bug Fixes
+
+* **gene:**
+  * fix title not appearing ([f42bcdcd](git@github.com:Bio-LarK/orpha/commit/f42bcdcdf654406a118bc9e3d2c7398e9521090c))
+  * fix icon color ([aa73fd68](git@github.com:Bio-LarK/orpha/commit/aa73fd6825b75ca3a11545edddbff831f1c41324))
+* **sign:** fix sign title not appearing ([34da5876](git@github.com:Bio-LarK/orpha/commit/34da5876911245d583181504079d2dc9c06b3f46))
+
+
 <a name="0.19.12"></a>
 ### 0.19.12 (2014-10-20)
 
