@@ -334,8 +334,11 @@
             </div>
 
             <div ng-hide="disorderTracker.active()">
-                <p ng-hide="disorder.disorder_parent.length" class="text-muted">
-                    Root disorder.
+                <p ng-show="disorder.disorder_root" class="text-muted">
+                    Root disorder
+                </p>
+                <p ng-show="disorder.disorder_root == 0 && disorder.disorder_parent.length == 0" class="text-muted">
+                    No classification found.
                 </p>
                 <div class="row">
 

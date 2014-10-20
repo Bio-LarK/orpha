@@ -107,7 +107,7 @@ angular.module('orphaApp')
 
             $log.debug('GETTING PARENTS', ids);
             if (!ids.length) {
-                return $q.when(null);
+                return $q.when([]);
             }
             var request = _.indexBy(ids, function(ids, index) {
                 return 'parameters[nid][' + index + ']';
