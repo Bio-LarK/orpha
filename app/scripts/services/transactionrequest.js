@@ -124,18 +124,31 @@ angular.module('orphaApp')
             }
             var listTransaction = transactionRequest['tr_trans'][0];
             var node = listTransaction['ltrans_onnode'];
-            if(node.type !== 'disorder_gene') {
-                var params = {};
-                params[node.type + 'Id'] = node.nid;
-                transactionRequest.description = '<a href="' + 
-                $state.href(node.type, params) + '">' + node.title + '</a>';
-                return;
-            }
-            transactionRequest.description = 'Relationship between <a href="' + 
+            if(node.type === 'disorder_gene') {
+                transactionRequest.description = 'Relationship between <a href="' + 
                 $state.href('gene', {'geneId' :node['disgene_gene'].nid}) + '">' + 
                 node['disgene_gene'].title + '<a/> and ' + 
                 '<a href="' + $state.href('disorder', {'disorderId' :node['disgene_disorder'].nid}) + '">' + 
                 node['disgene_disorder'].title + '</a>';
+                return;
+            }
+
+            if(node.type === 'disorder_sign') {
+                transactionRequest.description = 'Relationship between <a href="' + 
+                $state.href('sign', {'signId' :node['ds_sign'].nid}) + '">' + 
+                node['ds_sign'].title + '<a/> and ' + 
+                '<a href="' + $state.href('disorder', {'disorderId' :node['ds_disorder'].nid}) + '">' + 
+                node['ds_disorder'].title + '</a>';
+                return;
+            }
+        
+            var params = {};
+            params[node.type + 'Id'] = node.nid;
+            transactionRequest.description = '<a href="' + 
+            $state.href(node.type, params) + '">' + node.title + '</a>';
+            return;
+            
+            
         }
 
         function loadTransactions() {
