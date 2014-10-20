@@ -44,8 +44,13 @@ angular.module('orphaApp')
                 return TransactionRequest.query({
                     'parameters[tr_status]': transactionStatusService.submittedNid,
                     page: page
-                }).$promise.then(function(transactionRequest) {
-                    return transactionRequest;
+                }).$promise.then(function(transactionRequests) {
+                    if(transactionRequests.length !== 20) {
+                        return transactionRequests;
+                    }
+                    return getOpen(page + 1).then(function(otherOpenTransactionRequests) {
+                        return transactionRequests.concat(otherOpenTransactionRequests);
+                    });
                 }, function() {
                     return [];
                 });
@@ -73,7 +78,13 @@ angular.module('orphaApp')
                     return [];
                 });
                 return $q.all([promise1, promise2]).then(function(requests) {
-                    return _.flatten(requests);
+                    var closedTransactionRequests = _.flatten(requests);
+                    if(requests[0].length !== 20 && requests[1].length !== 20) {
+                        return closedTransactionRequests;
+                    }
+                    return getClosed(page + 1).then(function(otherClosedTransactionRequests) {
+                        return closedTransactionRequests.concat(otherClosedTransactionRequests);
+                    });
                 });
             });
         }
