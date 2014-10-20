@@ -37,9 +37,17 @@ angular.module('orphaApp')
             });
             var signsPromise = signs.$promise;
             signsPromise.then(function(signs) {
-                _.each(signs, function(sign) {
+                var noNameIndex = false;
+                _.each(signs, function(sign, index) {
+                    if(sign.title === '_NO_NAME_') {
+                        noNameIndex = index;
+                        return;
+                    }
                     sign.loadDisorders(true);
                 });
+                if(noNameIndex) {
+                    signs.splice(noNameIndex, 1);
+                }
             });
             $scope.loadingTracker.addPromise(signsPromise);
             return signsPromise;
