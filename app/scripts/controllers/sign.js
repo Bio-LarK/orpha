@@ -8,7 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('SignCtrl', function ($scope, $stateParams, Disorder, Sign, promiseTracker) {
+    .controller('SignCtrl', function ($scope, $stateParams, Disorder, Sign, promiseTracker, Page) {
         $scope.signTracker = promiseTracker();
         $scope.disordersTracker = promiseTracker();
         activate();
@@ -22,6 +22,7 @@ angular.module('orphaApp')
                 sign.sign_parent = _.reject(sign.sign_parent, function(signParent) {
                     return signParent.title === '_NO_NAME_';
                 });
+                Page.setTitle(sign.title);
                 sign.loadDisorders();
                 sign.loadChildren().then(function(children) {
                     _.each(children, function(child) {
