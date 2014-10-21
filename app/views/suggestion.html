@@ -17,7 +17,7 @@
                 <div>
                     {{ vm.suggestion.created * 1000 | date:'mediumDate' }}
                 </div>
-                <div class="label label-default">
+                <div class="label" ng-class="{'label-success': vm.suggestion.isAccepted, 'label-danger': vm.suggestion.isRejected, 'label-default': vm.suggestion.isSubmitted }">
                     {{ vm.suggestion.tr_status.title }}
                 </div>
 

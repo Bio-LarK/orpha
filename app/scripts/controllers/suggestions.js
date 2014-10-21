@@ -28,8 +28,15 @@ angular.module('orphaApp')
                 TransactionRequest.getOpen().then(function(suggestions) {
                     vm.openSuggestions = suggestions;
                     vm.suggestions = vm.openSuggestions;
+                    _.each(suggestions, function(suggestion) {
+                        suggestion.isSubmitted = true;
+                    });
                 });
                 TransactionRequest.getClosed().then(function(suggestions) {
+                    _.each(suggestions, function(suggestion) {
+                        suggestion.isAccepted = transactionStatusService.isAcceptedTr(suggestion);
+                        suggestion.isRejected = transactionStatusService.isRejectedTr(suggestion);
+                    });
                     vm.closedSuggestions = suggestions;
                 });
             });

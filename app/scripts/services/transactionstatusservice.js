@@ -16,6 +16,9 @@ angular.module('orphaApp')
             isAccepted: isAccepted,
             isRejected: isRejected,
             isSubmitted: isSubmitted,
+            isAcceptedTr: isAcceptedTransactionRequest,
+            isRejectedTr: isRejectedTransactionRequest,
+            isSubmittedTr: isSubmittedTransactionRequest,
             isClosed: isClosed,
             acceptedNid: null,
             rejectedNid: null,
@@ -53,6 +56,15 @@ angular.module('orphaApp')
             });
         }
 
+        function isAcceptedTransactionRequest(transactionRequest) {
+            return isAccepted(transactionRequest['tr_status'].nid);
+        }
+        function isRejectedTransactionRequest(transactionRequest) {
+            return isRejected(transactionRequest['tr_status'].nid);
+        }
+        function isSubmittedTransactionRequest(transactionRequest) {
+            return isSubmitted(transactionRequest['tr_status'].nid);
+        }
         function isAccepted(nid) {
             return nid === service.acceptedNid;
         }

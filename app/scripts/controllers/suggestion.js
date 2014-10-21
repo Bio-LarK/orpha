@@ -33,6 +33,9 @@ angular.module('orphaApp')
                 transactionStatusService.loadStatusCodes().then(function() {
                     $log.debug('status codes loaded', vm.suggestion.tr_status);
                     vm.isOpen = !transactionStatusService.isClosed(vm.suggestion.tr_status.nid);
+                    vm.suggestion.isAccepted = transactionStatusService.isAcceptedTr(vm.suggestion);
+                    vm.suggestion.isRejected = transactionStatusService.isRejectedTr(vm.suggestion);
+                    vm.suggestion.isSubmitted = transactionStatusService.isSubmittedTr(vm.suggestion);
                 });
                 // _.each(transactionRequest['$tr_trans'], function(listTransaction) {
                 //     listTransaction.loadReferences().then(function(listTransaction) {

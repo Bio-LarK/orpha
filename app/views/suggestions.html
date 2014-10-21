@@ -45,10 +45,9 @@
                             <div class="pull-right text-muted text-right">
                                 <div>
                                     {{ suggestion.created * 1000 | date:'mediumDate' }}     
-
                                 </div>
-                                <div class="label" ng-class="{'label-success': suggestion.tr_status.nid == 1, 'label-danger': suggestion.tr_status.nid == 2}">
-                                    {{ suggestion.tr_status.trstatus_value }}
+                                <div class="label" ng-class="{'label-success': suggestion.isAccepted, 'label-danger': suggestion.isRejected, 'label-default': suggestion.isSubmitted }">
+                                    {{ suggestion.tr_status.title }}
                                 </div>
                             </div>
                             <h5>
