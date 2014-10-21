@@ -1,3 +1,12 @@
+<a name="0.19.17"></a>
+### 0.19.17 (2014-10-21)
+
+
+#### Bug Fixes
+
+* **sign:** fix icon not appearing ([5c525b2d](git@github.com:Bio-LarK/orpha/commit/5c525b2d03307c9b609a075aae0f1f86ac52c819))
+
+
 <a name="0.19.16"></a>
 ### 0.19.16 (2014-10-21)
 
