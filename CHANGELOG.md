@@ -1,3 +1,13 @@
+<a name="0.19.18"></a>
+### 0.19.18 (2014-10-21)
+
+
+#### Bug Fixes
+
+* **disorder:** fix errors when no disorders found ([5f6c399d](git@github.com:Bio-LarK/orpha/commit/5f6c399d94d75d15d7ee5e1fd03726a8a088e2fa))
+* **navbar:** disable fixed for mobile ([6790f99d](git@github.com:Bio-LarK/orpha/commit/6790f99dc6a2a87823ae6ad712aa7a3bea66cb08))
+
+
 <a name="0.19.17"></a>
 ### 0.19.17 (2014-10-21)
 

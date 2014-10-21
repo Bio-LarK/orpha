@@ -1,6 +1,6 @@
 {
   "name": "orpha",
-  "version": "0.19.17",
+  "version": "0.19.18",
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.1",
