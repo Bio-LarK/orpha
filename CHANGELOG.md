@@ -1,3 +1,17 @@
+<a name="0.19.16"></a>
+### 0.19.16 (2014-10-21)
+
+
+#### Bug Fixes
+
+* **disorder:** children not loading visualisations ([fdc07484](git@github.com:Bio-LarK/orpha/commit/fdc07484d37f6d3b89c6a6e789715345504cf8ac), closes [#72](git@github.com:Bio-LarK/orpha/issues/72))
+
+
+#### Features
+
+* **suggestion:** add label for status ([24a2354d](git@github.com:Bio-LarK/orpha/commit/24a2354dffc78ccc10c87d5001afc54e5d90fc77), closes [#73](git@github.com:Bio-LarK/orpha/issues/73))
+
+
 <a name="0.19.15"></a>
 ### 0.19.15 (2014-10-20)
 
