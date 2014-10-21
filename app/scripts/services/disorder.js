@@ -47,6 +47,11 @@ angular.module('orphaApp')
         ///////////////////
 
         function transformQueryResponse(transactionRequests, headersGetter) {
+            if(transactionRequests.length && transactionRequests[0] === 'No entities found.') {
+                return transactionRequests;
+            }
+
+            // $log.debug('request length', transactionRequests.length, headersGetter());
             _.each(transactionRequests, function(transactionRequest) {
                 transformGetResponse(transactionRequest);
             });
@@ -55,6 +60,7 @@ angular.module('orphaApp')
 
         function transformGetResponse(disorder, headersGetter) {
             // Convert parents to Disorder objects
+
             disorder['disorder_parent'] = _.sortBy(disorder['disorder_parent'], 'nid');
             disorder['disorder_parent'] = _.map(disorder.disorder_parent, function(parent) {
                 return new Disorder(parent);
