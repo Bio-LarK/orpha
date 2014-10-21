@@ -39,7 +39,7 @@ angular.module('orphaApp')
                 });
 
                 function prepData(classifications) {
-                    $log.debug('Generating for type', scope.type);
+                    // $log.debug('Generating for type', scope.type);
                     if(!scope.type || scope.type === '' || scope.type === 'disorder') {
                         // setup for stripes
                         _.each(classifications, function(classification) {
@@ -139,7 +139,7 @@ angular.module('orphaApp')
                 function getColorForClassificationName(name) {
                     var classification = _.find(scope.allClassifications, {name: name});
                     if(!classification) {
-                        $log.debug('No classification found for:', name);
+                        $log.error('No classification found for:', name);
                         return '#eeeeee';
                     }
                     return classification.color;
@@ -148,7 +148,7 @@ angular.module('orphaApp')
                 function getPositionForClassificationName(name) {
                     var classification = _.find(scope.allClassifications, {name: name});
                     if(!classification) {
-                        $log.debug('Couldn\'t get position. No classification found for:', name);
+                        $log.error('Couldn\'t get position. No classification found for:', name);
                         return 0;
                     }
                     return scope.allClassifications.indexOf(classification);
