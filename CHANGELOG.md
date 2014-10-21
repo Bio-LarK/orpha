@@ -1,3 +1,12 @@
+<a name="0.19.19"></a>
+### 0.19.19 (2014-10-21)
+
+
+#### Features
+
+* **classification:** add url for branches on the tree ([134fa824](git@github.com:Bio-LarK/orpha/commit/134fa824ff3cabb3b3ddedb31fdcc582fdf016d9))
+
+
 <a name="0.19.18"></a>
 ### 0.19.18 (2014-10-21)
 
