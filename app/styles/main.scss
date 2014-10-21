@@ -10,6 +10,7 @@ $border-radius-base: 2px;
 
 @import "modules/jumbotron.scss";
 @import "modules/navbar.scss";
+@import "modules/editbar.scss";
 @import "modules/pagenav.scss";
 @import "modules/buttons.scss";
 @import "pages/tour.scss";
@@ -47,13 +48,12 @@ body {
 .disorder-page {
   padding-top: 60px;
 }
-.edit-bar {
-  width: 100%;
-  position:fixed;
-  top:50px;
-  z-index: 1;
-  border-bottom: 1px solid #ddd;
+@media (max-width: $screen-xs-max) {
+  .disorder-page {
+    padding-top: 0;
+  }
 }
+
 footer {
   margin-top: 40px;
 }
