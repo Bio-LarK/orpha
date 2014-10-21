@@ -56,6 +56,7 @@ angular
             })
             .state('classification', {
                 url: '/classification/:classificationId?disorderId',
+                reloadOnSearch: false,
                 controller: 'ClassificationCtrl as vm',
                 templateUrl: 'views/classification.html'
             })

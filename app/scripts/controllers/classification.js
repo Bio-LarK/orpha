@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
     .controller('ClassificationCtrl', function($scope, $stateParams, $log, Disorder,
-        Classification, Page, searchService, $q) {
+        Classification, Page, searchService, $q, $location) {
         var vm = this;
 
         vm.classification = null;
@@ -97,6 +97,7 @@ angular.module('orphaApp')
 
         function selectDisorder(disorder) {
             vm.selectedDisorder = disorder;
+            $location.search('disorderId', disorder.nid);
             return open(disorder);
         }
 
