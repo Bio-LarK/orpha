@@ -1,3 +1,12 @@
+<a name="0.20.0"></a>
+## 0.20.0 (2014-10-22)
+
+
+#### Features
+
+* **tour:** add tour page ([5c84957b](git@github.com:Bio-LarK/orpha/commit/5c84957b3e1bb3574359bd1a6f61ad16658b1b17))
+
+
 <a name="0.19.21"></a>
 ### 0.19.21 (2014-10-22)
 
