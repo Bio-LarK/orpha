@@ -1,3 +1,12 @@
+<a name="0.19.21"></a>
+### 0.19.21 (2014-10-22)
+
+
+#### Bug Fixes
+
+* **disorder:** fix inborn errors color being too similar ([97110799](git@github.com:Bio-LarK/orpha/commit/971107990a88df457c0287f65ccf33675fe43014))
+
+
 <a name="0.19.20"></a>
 ### 0.19.20 (2014-10-22)
 
