@@ -1,3 +1,12 @@
+<a name="0.20.3"></a>
+### 0.20.3 (2014-10-22)
+
+
+#### Bug Fixes
+
+* **tour:** fix missing angular stuff ([fef3c499](git@github.com:Bio-LarK/orpha/commit/fef3c4995d8732857c5fb78313bfb54048de5b95))
+
+
 <a name="0.20.2"></a>
 ### 0.20.2 (2014-10-22)
 
