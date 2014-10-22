@@ -142,6 +142,9 @@ angular.module('orphaApp')
                         $log.error('No classification found for:', name);
                         return '#eeeeee';
                     }
+                    // if(classification.title === 'Inborn Errors Of Metabolism') {
+                        // return 'hsla(27, 44%, 54%, 1)';
+                    // }
                     return classification.color;
                 }
 
@@ -194,10 +197,7 @@ angular.module('orphaApp')
                     }, {
                         name: 'Rare abdominal surgical disease',
                         color: '#0000ff'
-                    }, {
-                        name: 'Inborn errors of metabolism',
-                        color: '#000099'
-                    }, 
+                    },
                     {
                         name: 'Rare genetic disease',
                         color: '#666699'
@@ -253,6 +253,9 @@ angular.module('orphaApp')
                     }, {
                         name: 'Unknown',
                         color: '#eee'
+                    }, {
+                        name: 'Inborn errors of metabolism',
+                        color: '#000099'
                     }];
 
                     _.each(scope.allClassifications, function(allClassification, i) {
