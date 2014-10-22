@@ -1,3 +1,12 @@
+<a name="0.19.20"></a>
+### 0.19.20 (2014-10-22)
+
+
+#### Bug Fixes
+
+* **classifications:** remove url changing ([fe84d64e](git@github.com:Bio-LarK/orpha/commit/fe84d64e964f52cb329ee28622b5f2d027054320))
+
+
 <a name="0.19.19"></a>
 ### 0.19.19 (2014-10-21)
 
