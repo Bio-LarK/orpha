@@ -65,6 +65,9 @@ angular
             })
             .state('tour', {
                 url: '/tour',
+                controller: function(Page) {
+                    Page.setTitle('Tour');
+                },
                 templateUrl: 'views/tour.html'
             })
             .state('gene', {
