@@ -113,8 +113,11 @@
         </div>
         <div class="col-sm-8">
             <!-- <h3 style="margin: 0;">{{ vm.selectedDisorder.disorder_name }}</h3> -->
-            <p ng-hide="vm.selectedDisorder.disorder_child.length" class="text-muted">
+            <p ng-show="vm.selectedDisorder.disorder_child.length == 0" class="text-muted">
                 No children.
+            </p>
+            <p ng-hide="vm.selectedDisorder.disorder_child" class="text-muted">
+                Loading...
             </p>
 
             <div class="row" ng-repeat="row in vm.selectedDisorder.disorder_child | filter:filterChildren |  inSlicesOf:2">
