@@ -97,7 +97,6 @@ angular.module('orphaApp')
 
         function selectDisorder(disorder) {
             vm.selectedDisorder = disorder;
-            $location.search('disorderId', disorder.nid);
             return open(disorder);
         }
 
