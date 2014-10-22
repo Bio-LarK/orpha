@@ -1,3 +1,12 @@
+<a name="0.20.1"></a>
+### 0.20.1 (2014-10-22)
+
+
+#### Bug Fixes
+
+* **spinner:** spinner not spinning ([d96c221d](git@github.com:Bio-LarK/orpha/commit/d96c221d08cd4883e0e7f55851d037fc57f7cf8d))
+
+
 <a name="0.20.0"></a>
 ## 0.20.0 (2014-10-22)
 
