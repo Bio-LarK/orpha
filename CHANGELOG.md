@@ -1,3 +1,12 @@
+<a name="0.20.5"></a>
+### 0.20.5 (2014-10-23)
+
+
+#### Bug Fixes
+
+* **disorder:** add 'coming soon' to 'suggestions' on disorder page ([64af8f19](git@github.com:Bio-LarK/orpha/commit/64af8f19728fe32bbf2f81c46d93655d5a7fc0b5))
+
+
 <a name="0.20.4"></a>
 ### 0.20.4 (2014-10-23)
 
