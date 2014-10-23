@@ -158,7 +158,12 @@ angular.module('orphaApp')
                 }
 
                 function setupColors() {
-                    scope.allClassifications = [{
+                    scope.allClassifications = [
+                    {
+                        name: 'Rare genetic disease',
+                        color: '#666699'
+                    },
+                    {
                         name: 'Rare neurologic disease',
                         color: '#ff0000'
                     }, {
@@ -197,10 +202,6 @@ angular.module('orphaApp')
                     }, {
                         name: 'Rare abdominal surgical disease',
                         color: '#0000ff'
-                    },
-                    {
-                        name: 'Rare genetic disease',
-                        color: '#666699'
                     }, 
                     {
                         name: 'Rare hepatic disease',
