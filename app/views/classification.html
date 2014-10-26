@@ -88,7 +88,6 @@
                                     <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
                                     </i>
                                 </a>
-                                
                                 <div class="tree-branch-item-content" >
                                     <a href ng-click="vm.selectDisorder(child)">
                                         <span class="badge pull-right" style="background-color:#ccc">
@@ -111,6 +110,7 @@
             </div>
 
         </div>
+
         <div class="col-sm-8">
             <!-- <h3 style="margin: 0;">{{ vm.selectedDisorder.disorder_name }}</h3> -->
             <p ng-show="vm.selectedDisorder.disorder_child.length == 0" class="text-muted">
@@ -120,7 +120,11 @@
                 Loading...
             </p>
 
-            <div class="row" ng-repeat="row in vm.selectedDisorder.disorder_child | filter:filterChildren |  inSlicesOf:2">
+            <input type="text" ng-model="vm.childrenFilter">
+
+            <h4 style="margin: 0;">{{ vm.selectedDisorder.title }}</h4>
+
+            <div class="row" ng-repeat="row in vm.selectedDisorder.disorder_child | filter:vm.childrenFilter |  inSlicesOf:2">
                 <div class="col-sm-6" ng-repeat="disorder in row">
                     <div class="panel panel-default" ng-class="{'selected-card': vm.initialDisorder.nid == disorder.nid}">
                         <div class="panel-body">

@@ -20,7 +20,7 @@ angular.module('orphaApp')
 
                 setupColors();
 
-                scope.myClassifications = [];
+                // scope.myClassifications = [];
 
                 scope.$watch('classifications', function(classifications) {
                     if(classifications) {
