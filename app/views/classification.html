@@ -116,28 +116,33 @@
 
             <!-- <input type="text" ng-model="vm.childrenFilter"> -->
 
-            <div class="row" style="margin-bottom:20px;" ng-show="vm.selectedDisorder">
-                <div class="col-sm-6">
-                    <h4 style="margin:0;margin-top:10px;color:rgba(0,0,0,0.7);font-weight:bold;font-size:16px;">
-                        <a ui-sref="disorder({disorderId: vm.selectedDisorder.nid})">
-                            {{ vm.selectedDisorder.title }}
-                        </a>
-                        ({{ vm.visibleDisorders.length }}/{{ vm.selectedDisorder.disorder_child.length }})
-                    </h4>
-                </div>
-                <div class="col-sm-6" ng-show="vm.selectedDisorder.disorder_child">
-                    <ui-select multiple ng-model="vm.filters.classifications" ng-change="vm.filterByClassifications(vm.filters.classifications)">
-                        <ui-select-match placeholder="Filter by classfication">
-                        <div style="display:inline-block;margin-right:5px;width:10px;height:10px;background-color:{{$item.color}}"></div>
-                            {{ $item.title }}
-                        </ui-select-match>
-                        <ui-select-choices repeat="item in vm.classifications | filter: $select.search">
-                            <div style="display:inline-block;margin-right:5px;width:10px;height:10px;background-color:{{item.color}}"></div>
-                            <span ng-bind-html="item.title | highlight: $select.search"></span>
-                        </ui-select-choices>
-                    </ui-select>
+            <div class="panel panel-default" ng-show="vm.selectedDisorder">
+                <div class="panel-body" style="padding:10px 20px;">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4 style="padding:10px 0;margin:0;color:rgba(0,0,0,0.5);font-weight:bold;font-size:14px;">
+                                <a ui-sref="disorder({disorderId: vm.selectedDisorder.nid})">
+                                    {{ vm.selectedDisorder.title }}
+                                </a>
+                                ({{ vm.visibleDisorders.length }}/{{ vm.selectedDisorder.disorder_child.length }})
+                            </h4>
+                        </div>
+                        <div class="col-sm-6" ng-show="vm.selectedDisorder.disorder_child">
+                            <ui-select multiple ng-model="vm.filters.classifications" ng-change="vm.filterByClassifications(vm.filters.classifications)">
+                                <ui-select-match placeholder="Filter by classfication">
+                                    <div style="display:inline-block;margin-right:5px;width:10px;height:10px;background-color:{{$item.color}}"></div>
+                                    {{ $item.title }}
+                                </ui-select-match>
+                                <ui-select-choices repeat="item in vm.classifications | filter: $select.search">
+                                    <div style="display:inline-block;margin-right:5px;width:10px;height:10px;background-color:{{item.color}}"></div>
+                                    <span ng-bind-html="item.title | highlight: $select.search"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
                 </div>
             </div>
+
 
 
             <div class="row" ng-repeat="row in vm.visibleDisorders | inSlicesOf:2">

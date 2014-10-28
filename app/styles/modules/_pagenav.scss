@@ -1,28 +1,33 @@
 $page-nav-link-padding: 7px 15px;
 
 .page-nav {
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    color: rgba(0,0,0,0.5);
-}
-.page-nav .nav-pills {
-    display: inline-block;
-    margin-bottom: -7px;
-    a {
-        padding: $page-nav-link-padding;
-    }
-}
-.page-nav {
-    // height: 60px;
-    background-color: white;
-    z-index: 99;
-}
-.sticky {
+
     height: 55px;
-}
-.sticky.ui-scrollfix .page-nav {
-    position: fixed;
-    top: 51px;
-    width: 100%;
+    z-index: 99;
+    text-align: left;
+
+    &.page-nav-center {
+        text-align: center;
+    }
+
+    .page-nav-sticky {
+        &.ui-scrollfix {
+            position: fixed;
+            top: 50px;
+            width: 100%;
+        }
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        color: rgba(0,0,0,0.5); 
+        background-color: white;
+        z-index: 99;
+
+        .nav-pills {
+            display: inline-block;
+            margin-bottom: -7px;
+            a {
+                padding: $page-nav-link-padding;
+            }
+        } 
+    }
 }
