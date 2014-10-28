@@ -170,14 +170,14 @@ angular.module('orphaApp')
         }
 
 
-        function loadChildren() {
+        function loadChildren(classification) {
             // // $log.debug('loading children now...');
             /* jshint validthis: true */
             var disorder = this;
             if (disorder.hasLoadedChildren) {
                 return $q.when(disorder['disorder_child']);
             }
-            return _loadChildrenHelper(disorder, 0).then(function(children) {
+            return _loadChildrenHelper(disorder, classification, 0).then(function(children) {
                 disorder.hasLoadedChildren = true;
                 disorder['disorder_child'] = _.sortBy(children, 'nid');
                 _markIsDisorderGroup(disorder, disorder['disorder_child']);
@@ -185,15 +185,19 @@ angular.module('orphaApp')
             });
         }
 
-        function _loadChildrenHelper(disorder, page) {
-            return Disorder.query({
+        function _loadChildrenHelper(disorder, classification, page) {
+            var request = {
                 fields: 'nid,title,disorder_name,disorder_child,disorder_class',
                 'parameters[disorder_parent]': disorder.nid,
                 page: page
-            }).$promise.then(function(children) {
+            };
+            if(classification) {
+                request['parameters[disorder_class]'] = classification.nid;
+            }
+            return Disorder.query(request).$promise.then(function(children) {
                 if (children.length === 20) {
                     // we need to get more!
-                    return _loadChildrenHelper(disorder, ++page).then(function(otherChildren) {
+                    return _loadChildrenHelper(disorder, classification, ++page).then(function(otherChildren) {
                         return children.concat(otherChildren);
                     });
                 }

@@ -97,11 +97,11 @@ angular.module('orphaApp')
             });
         }
 
-        function selectDisorder(disorder) {
+        function selectDisorder(disorder, parent) {
             vm.selectedDisorder = disorder;
             vm.filters.classifications = [];
             setVisibleDisorders(vm.selectedDisorder['disorder_child']);
-            return open(disorder);
+            return open(disorder, parent);
         }
 
         function toggleOpen(disorder) {
@@ -112,14 +112,18 @@ angular.module('orphaApp')
             return open(disorder);
         }
 
-        function open(disorder) {
+        function open(disorder, parent) {
             disorder.isOpen = true;
-            return disorder.loadChildren().then(function(children) {
+            return disorder.loadChildren(vm.classification).then(function(children) {
+                if(children.length === 0) {
+                    // select the parent somehow!
+                    selectDisorder(parent);
+                    return;
+                }
+                $log.debug('open', disorder);
                 setVisibleDisorders(vm.selectedDisorder['disorder_child']);
             });
         }
-
-        
 
         function close(disorder) {
             disorder.isOpen = false;
