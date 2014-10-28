@@ -1,3 +1,17 @@
+<a name="0.21.0"></a>
+## 0.21.0 (2014-10-28)
+
+
+#### Bug Fixes
+
+* **karma:** try and fix karma ([75dbfd72](git@github.com:Bio-LarK/orpha/commit/75dbfd72d9860aae9d864993fdcdd9386dc55842))
+
+
+#### Features
+
+* **classification:** add filter ([f0f9c655](git@github.com:Bio-LarK/orpha/commit/f0f9c6552ba688ed436cb2f463731650e4417516))
+
+
 <a name="0.20.7"></a>
 ### 0.20.7 (2014-10-23)
 
