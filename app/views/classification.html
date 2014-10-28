@@ -6,27 +6,21 @@
 .selected-card {
     border: 2px solid #FFDA00;
 }
-.tree {
-
-}
-.tree-branch {
-
-}
-.tree-branch-item {
-    border-bottom: 1px solid #eee; 
-    padding: 10px; 
+.tree {} .tree-branch {} .tree-branch-item {
+    border-bottom: 1px solid #eee;
+    padding: 10px;
     position: relative;
 }
 .tree-branch-item-arrow {
-    position: absolute; 
-    top: 0; 
+    position: absolute;
+    top: 0;
     left: 0;
     display: block;
-    background-color: #eee; 
-    width: 20px; 
-    padding:10px 0;
-    text-align: center; 
-    line-height: 1.5; 
+    background-color: #eee;
+    width: 20px;
+    padding: 10px 0;
+    text-align: center;
+    line-height: 1.5;
     height: 100%
 }
 .tree-branch-item-content {
@@ -55,7 +49,7 @@
                 <!-- <img ng-hide="vm.classification" src="http://dummyimage.com/70x70/dddddd/dddddd" alt="" class="media-object"> -->
                 <!-- <div ng-show="vm.classification" style="display:inline-block;background-color:{{vm.classification.getColor()}}></div> -->
                 <div style="width:70px;height:70px;">
-                    <colormap classification="vm.classification" type="disorder"></colormap>    
+                    <colormap classification="vm.classification" type="disorder"></colormap>
                 </div>
             </div>
             <div class="media-body">
@@ -79,7 +73,7 @@
             <div class="panel panel-default">
                 <div class="list-group">
                     <div class="list-group-item" style="padding: 10px; text-align: center;" ng-hide="vm.classification">
-                        <i class="fa fa-refresh fa-spin"></i>    
+                        <i class="fa fa-refresh fa-spin"></i> 
                     </div>
                     <div sf-treepeat="child in disorder_child of vm.rootDisorder">
                         <div ng-show="child.disorder_child.length" class="tree-branch">
@@ -88,7 +82,7 @@
                                     <i class="fa" ng-class="{'fa-caret-down': child.isOpen && child.isOpenable, 'fa-caret-right': !child.isOpen}">
                                     </i>
                                 </a>
-                                <div class="tree-branch-item-content" >
+                                <div class="tree-branch-item-content">
                                     <a href ng-click="vm.selectDisorder(child)">
                                         <span class="badge pull-right" style="background-color:#ccc">
                                             {{ child.disorder_child.length }}
@@ -97,9 +91,9 @@
                                     </a>
                                 </div>
                             </div>
-                            <div ng-show="child.isOpen" class="tree-branch-children" >
+                            <div ng-show="child.isOpen" class="tree-branch-children">
                                 <div class="tree-branch-children-loading" ng-hide="child.hasLoadedChildren">
-                                    <i class="fa fa-refresh fa-spin"></i>    
+                                    <i class="fa fa-refresh fa-spin"></i> 
                                 </div>
                                 <div sf-treecurse>
                                 </div>
@@ -120,11 +114,33 @@
                 Loading...
             </p>
 
-            <input type="text" ng-model="vm.childrenFilter">
+            <!-- <input type="text" ng-model="vm.childrenFilter"> -->
 
-            <h4 style="margin: 0;">{{ vm.selectedDisorder.title }}</h4>
+            <div class="row" style="margin-bottom:20px;" ng-show="vm.selectedDisorder">
+                <div class="col-sm-6">
+                    <h4 style="margin:0;margin-top:10px;color:rgba(0,0,0,0.7);font-weight:bold;font-size:16px;">
+                        <a ui-sref="disorder({disorderId: vm.selectedDisorder.nid})">
+                            {{ vm.selectedDisorder.title }}
+                        </a>
+                        ({{ vm.visibleDisorders.length }}/{{ vm.selectedDisorder.disorder_child.length }})
+                    </h4>
+                </div>
+                <div class="col-sm-6" ng-show="vm.selectedDisorder.disorder_child">
+                    <ui-select multiple ng-model="vm.filters.classifications" ng-change="vm.filterByClassifications(vm.filters.classifications)">
+                        <ui-select-match placeholder="Filter by classfication">
+                        <div style="display:inline-block;margin-right:5px;width:10px;height:10px;background-color:{{$item.color}}"></div>
+                            {{ $item.title }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in vm.classifications | filter: $select.search">
+                            <div style="display:inline-block;margin-right:5px;width:10px;height:10px;background-color:{{item.color}}"></div>
+                            <span ng-bind-html="item.title | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
 
-            <div class="row" ng-repeat="row in vm.selectedDisorder.disorder_child | filter:vm.childrenFilter |  inSlicesOf:2">
+
+            <div class="row" ng-repeat="row in vm.visibleDisorders | inSlicesOf:2">
                 <div class="col-sm-6" ng-repeat="disorder in row">
                     <div class="panel panel-default" ng-class="{'selected-card': vm.initialDisorder.nid == disorder.nid}">
                         <div class="panel-body">

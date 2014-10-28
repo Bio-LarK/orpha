@@ -27,7 +27,8 @@ angular
         'monospaced.elastic',
         'textAngular',
         'duScroll',
-        'sf.treeRepeat'
+        'sf.treeRepeat',
+        'ui.select'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, 
         editableOptions, Page, ENV, siteSearchService) {
@@ -38,10 +39,12 @@ angular
 
         $rootScope.siteSearchService = siteSearchService;
     })
-    .config(function ($stateProvider, $animateProvider, $urlRouterProvider, RestangularProvider, ENV) {
+    .config(function ($stateProvider, $animateProvider, uiSelectConfig, $urlRouterProvider, RestangularProvider, ENV) {
 
         RestangularProvider.setBaseUrl(ENV.apiEndpoint);
 
+        uiSelectConfig.theme = 'bootstrap';
+        
         $animateProvider.classNameFilter(/^((?!(fa-spin)).)*$/);
 
         // For any unmatched url, redirect to /state1

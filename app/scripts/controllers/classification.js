@@ -15,11 +15,16 @@ angular.module('orphaApp')
         vm.classification = null;
         vm.rootDisorder = null;
 
-        vm.selectedDisorder = null;
-
-        vm.initialDisorder = null;
-        vm.selectDisorder = selectDisorder;
+        vm.selectedDisorder = null; // the selected disorder
+        vm.filters = {
+            classifications: [] // the classifications of the child disorders
+        };
+        vm.visibleDisorders = [];
+        vm.initialDisorder = null; 
+        vm.selectDisorder = selectDisorder; 
+        vm.filterByClassifications = filterByClassifications;
         vm.toggleOpen = toggleOpen;
+        vm.filterDisorders = filterDisorders;
 
         activate();
 
@@ -79,9 +84,6 @@ angular.module('orphaApp')
             }); 
         }
 
-
-
-
         function loadClassificationTree() {
             return Classification.get({
                 nid: $stateParams.classificationId //136402
@@ -97,6 +99,8 @@ angular.module('orphaApp')
 
         function selectDisorder(disorder) {
             vm.selectedDisorder = disorder;
+            vm.filters.classifications = [];
+            setVisibleDisorders(vm.selectedDisorder['disorder_child']);
             return open(disorder);
         }
 
@@ -110,8 +114,12 @@ angular.module('orphaApp')
 
         function open(disorder) {
             disorder.isOpen = true;
-            return disorder.loadChildren();
+            return disorder.loadChildren().then(function(children) {
+                setVisibleDisorders(vm.selectedDisorder['disorder_child']);
+            });
         }
+
+        
 
         function close(disorder) {
             disorder.isOpen = false;
@@ -182,4 +190,53 @@ angular.module('orphaApp')
             });
         }
 
+        function filterDisorders(disorder, index) {
+            var visibleNids = _.pluck(vm.visibleDisorders, 'nid');
+            if(visibleNids.indexOf(disorder.nid) < 0) {
+                return false;
+            }
+            return true;
+        }
+
+        function setVisibleDisorders(disorders) {
+            vm.visibleDisorders = disorders;
+            setAvailableClassificationFilters(vm.visibleDisorders);
+        }
+        function setAvailableClassificationFilters(disorders) {
+            if(disorders.length === 0 || !angular.isDefined(disorders[0]['disorder_class'])) {
+                vm.classifications = [];
+                return;
+            }
+            var classifications = _.flatten(_.pluck(disorders, 'disorder_class'));
+            vm.classifications = _.uniq(classifications, function(classification) {
+                return classification.nid;
+            });
+        }
+
+        function filterByClassifications(classifications) {
+            $log.debug('filtering by classification', classifications);
+            if(vm.filters.classifications.length === 0) {
+                if(vm.selectedDisorder) {
+                    setVisibleDisorders(vm.selectedDisorder['disorder_child']);    
+                }
+                return;
+            }
+
+            var visibleDisorders = _.filter(vm.selectedDisorder['disorder_child'], function(disorder) {
+                // Find all disorders that have all the classifications
+                var filteredClassificationNids = _.pluck(classifications, 'nid');
+                var disorderClassificationNids = _.pluck(disorder['disorder_class'], 'nid');
+                var intersection = _.intersection(filteredClassificationNids, disorderClassificationNids);
+                if(intersection.length !== filteredClassificationNids.length) {
+                    return false;
+                }
+                return true;
+            }, []);
+            setVisibleDisorders(visibleDisorders);
+        }
     });
+
+
+
+
+

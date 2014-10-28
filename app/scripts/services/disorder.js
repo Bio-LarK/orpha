@@ -181,6 +181,7 @@ angular.module('orphaApp')
                 disorder.hasLoadedChildren = true;
                 disorder['disorder_child'] = _.sortBy(children, 'nid');
                 _markIsDisorderGroup(disorder, disorder['disorder_child']);
+                return children;
             });
         }
 
