@@ -1,3 +1,12 @@
+<a name="0.21.1"></a>
+### 0.21.1 (2014-10-28)
+
+
+#### Bug Fixes
+
+* **classifications:** fix no children in classification ([9220c74a](git@github.com:Bio-LarK/orpha/commit/9220c74a14c7f12525fae154963338c3c83f5cf2))
+
+
 <a name="0.21.0"></a>
 ## 0.21.0 (2014-10-28)
 
