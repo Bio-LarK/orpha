@@ -180,6 +180,7 @@ angular.module('orphaApp')
                 loadParents(disorder);
             });
         }
+        
 
         function loadParents(disorder) {
             disorder.isOpen = true;
@@ -212,8 +213,8 @@ angular.module('orphaApp')
                 return;
             }
             var classifications = _.flatten(_.pluck(disorders, 'disorder_class'));
-            vm.classifications = _.uniq(classifications, function(classification) {
-                return classification.nid;
+            vm.classifications = _.reject(_.uniq(classifications, 'nid'), function(classification) {
+                return _.find(vm.filters.classifications, {nid: classification.nid});
             });
         }
 
