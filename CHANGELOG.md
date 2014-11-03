@@ -1,3 +1,13 @@
+<a name="0.21.2"></a>
+### 0.21.2 (2014-11-04)
+
+
+#### Bug Fixes
+
+* **classifications:** remove duplicates in filters ([91966957](git@github.com:Bio-LarK/orpha/commit/919669574b397871ea117043ee985e76488f00f7))
+* **navbar:** fix typeahead selection ([07161218](git@github.com:Bio-LarK/orpha/commit/07161218491cc162350e4a1be0baf188f9ae6524))
+
+
 <a name="0.21.1"></a>
 ### 0.21.1 (2014-10-28)
 
