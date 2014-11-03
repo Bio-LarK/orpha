@@ -31,7 +31,7 @@ angular
         'ui.select'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, 
-        editableOptions, Page, ENV, siteSearchService) {
+        editableOptions, Page, ENV, siteSearchService, $log) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.Page = Page;
@@ -44,7 +44,7 @@ angular
         RestangularProvider.setBaseUrl(ENV.apiEndpoint);
 
         uiSelectConfig.theme = 'bootstrap';
-        
+
         $animateProvider.classNameFilter(/^((?!(fa-spin)).)*$/);
 
         // For any unmatched url, redirect to /state1

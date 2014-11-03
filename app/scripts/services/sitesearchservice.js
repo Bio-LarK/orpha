@@ -8,7 +8,7 @@
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
-    .factory('siteSearchService', function(searchService, $state) {
+    .factory('siteSearchService', function(searchService, $state, $log) {
         var service = {
             query: '',
             getResults: getResults,
@@ -22,6 +22,7 @@ angular.module('orphaApp')
         }
 
         function changed($item, $model, $label) {
+            $log.debug('got changed!', $item, $model, $label);
             var params = {};
             var type = $item.type.toLowerCase();
             if (type === 'clinical sign') {
