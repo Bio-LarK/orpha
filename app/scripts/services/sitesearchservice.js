@@ -22,7 +22,12 @@ angular.module('orphaApp')
         return service;
 
         function getResults(query) {
-            return searchService.search(query);
+            var acceptedTypes = ['Disorder', 'Clinical Sign', 'Gene'];
+            return searchService.search(query).then(function(results) {
+                return _.filter(results, function(result) {
+                    return acceptedTypes.indexOf(result.type) >= 0;
+                });
+            });
         }
 
         function changed($item, $model, $label) {
