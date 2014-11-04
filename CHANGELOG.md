@@ -1,3 +1,12 @@
+<a name="0.21.3"></a>
+### 0.21.3 (2014-11-04)
+
+
+#### Bug Fixes
+
+* **search:** results now appear above page-nav-bar ([2f87cbb0](git@github.com:Bio-LarK/orpha/commit/2f87cbb059ca1277279385ec9908af7ccae1f657))
+
+
 <a name="0.21.2"></a>
 ### 0.21.2 (2014-11-04)
 
