@@ -1,3 +1,13 @@
+<a name="0.21.4"></a>
+### 0.21.4 (2014-11-04)
+
+
+#### Bug Fixes
+
+* **routes:** update ui-router to fix problem with angular 1.3 ([8dd1e1c4](git@github.com:Bio-LarK/orpha/commit/8dd1e1c4d1a76ebe1307586531ec65eb8234b4c3), closes [#82](git@github.com:Bio-LarK/orpha/issues/82))
+* **site-search:** fix showing 'added suggestions' in dropdown ([a46a4644](git@github.com:Bio-LarK/orpha/commit/a46a464453de4f7a9a2936c7bc67b80ebc2e45e7), closes [#83](git@github.com:Bio-LarK/orpha/issues/83))
+
+
 <a name="0.21.3"></a>
 ### 0.21.3 (2014-11-04)
 
