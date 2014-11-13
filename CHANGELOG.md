@@ -1,3 +1,12 @@
+<a name="0.21.5"></a>
+### 0.21.5 (2014-11-13)
+
+
+#### Features
+
+* **suggestions:** add comments ([0e6a69dd](git@github.com:Bio-LarK/orpha/commit/0e6a69dd9ea78659ed2efd593a672a017c86f37b))
+
+
 <a name="0.21.4"></a>
 ### 0.21.4 (2014-11-04)
 
