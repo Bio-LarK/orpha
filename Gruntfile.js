@@ -181,6 +181,11 @@ module.exports = function(grunt) {
                 headers: {
                     host: 'orphanet.bio-lark.org:80'
                 },
+
+                // host: 'hpo.bio-lark.org',
+                // headers: {
+                //     host: 'hpo.bio-lark.org:80'
+                // },
                 rewrite: {
                     '^/api': '/drupal/api',
                 }

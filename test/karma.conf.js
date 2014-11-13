@@ -56,7 +56,6 @@ module.exports = function(config) {
       'bower_components/promise-tracker/promise-tracker.js',
       'bower_components/angular-ui-select/dist/select.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-scenario/angular-scenario.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
@@ -64,7 +63,7 @@ module.exports = function(config) {
     ],
 
     // list of files / patterns to exclude
-    exclude: [],
+    exclude: ['bower_components/angular-scenario/angular-scenario.js'],
 
     // web server port
     port: 8080,

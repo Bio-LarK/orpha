@@ -195,13 +195,13 @@ angular.module('orphaApp')
                 request['parameters[disorder_class]'] = classification.nid;
             }
             return Disorder.query(request).$promise.then(function(children) {
-                if (children.length === 20) {
-                    // we need to get more!
-                    return _loadChildrenHelper(disorder, classification, ++page).then(function(otherChildren) {
-                        return children.concat(otherChildren);
-                    });
+                if (children.length !== 20) {
+                    return children;
                 }
-                return children;
+                // we need to get more!
+                return _loadChildrenHelper(disorder, classification, ++page).then(function(otherChildren) {
+                    return children.concat(otherChildren);
+                });
             }, function() {
                 return [];
             });
@@ -216,7 +216,6 @@ angular.module('orphaApp')
                 });
             });
             disorder.isOpenable = isOpenable;
-
         }
 
         function loadExternalIdentifiers() {

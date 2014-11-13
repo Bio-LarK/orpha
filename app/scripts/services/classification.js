@@ -193,8 +193,11 @@ angular.module('orphaApp')
                 var classifications = _.flatten(results);
                 _.each(classifications, function(classification) {
                     var metadata = _.find(classificationMetadata, {name: classification.title});
-                    classification.disorderCount = metadata.count;
-                    classification.color = metadata.color;
+                    if(metadata) {
+                        classification.disorderCount = metadata.count;
+                        classification.color = metadata.color;    
+                    }
+                    
                 });
                 return classifications;
             });
