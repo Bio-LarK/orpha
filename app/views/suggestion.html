@@ -14,13 +14,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="pull-right" style="text-align: right;">
-                <div>
-                    {{ vm.suggestion.created * 1000 | date:'mediumDate' }}
-                </div>
                 <div class="label" ng-class="{'label-success': vm.suggestion.isAccepted, 'label-danger': vm.suggestion.isRejected, 'label-default': vm.suggestion.isSubmitted }">
                     {{ vm.suggestion.tr_status.title }}
                 </div>
-
             </div>
 
             <div class="media" style="margin-top: 0;">
@@ -31,6 +27,7 @@
                     <div>
                         <a href>
                             <strong><!-- FIXME: get real names -->Dr Anonymous {{ vm.suggestion.$author.name }}</strong>
+                            {{ vm.suggestion.created * 1000 | date:'mediumDate' }}
                         </a>
                     </div>
                     <div>
@@ -97,10 +94,11 @@
                     <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:20px;height:20px" alt="" />
                     &nbsp;&nbsp;
                     <strong>Dr John Smith</strong>
+                    <span class="text-muted">{{ comment.created * 1000 | date:'mediumDate' }}</span>
                 </div>
             </div>
         </div>
-        <div class="panel-body" style="padding: 15px;" ng-bind-html="comment.text">
+        <div class="panel-body" style="padding: 15px;" ng-bind-html="comment.comment_body.value">
         </div>
     </div>
 
@@ -117,14 +115,14 @@
         <div class="panel-body" style="padding: 15px;">
             <textarea msd-elastic="\n" ng-model="vm.comment.text" class="form-control" rows="4"></textarea>
             <div class="pull-right" style="margin-top: 10px;">
-                <button class="btn btn-default" ng-click="vm.accept(vm.suggestion)">
+                <button class="btn btn-default" ng-click="vm.addComment(vm.comment, vm.suggestion); vm.accept(vm.suggestion)">
                     <i class="fa fa-check"></i> Accept <span ng-show="vm.comment.text.length">and comment</span>
                 </button>
-                <button class="btn btn-default" ng-click="vm.reject(vm.suggestion)">
+                <button class="btn btn-default" ng-click="vm.addComment(vm.comment, vm.suggestion); vm.reject(vm.suggestion)">
                     <i class="fa fa-times"></i> Reject <span ng-show="vm.comment.text.length">and comment</span>
                 </button>
 
-                <button class="btn btn-primary" ng-click="vm.addComment(vm.comment)">Comment</button>
+                <button class="btn btn-primary" ng-click="vm.addComment(vm.comment, vm.suggestion)">Comment</button>
             </div>
         </div>
     </div>

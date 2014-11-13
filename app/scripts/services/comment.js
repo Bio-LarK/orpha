@@ -8,16 +8,29 @@
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
-  .factory('Comment', function () {
-    // Service logic
-    // ...
+    .factory('Comment', function($resource, ENV) {
+        var Comment = $resource(ENV.apiEndpoint + '/entity_comment/:cid', {
+            cid: '@cid'
+        });
+        Comment.create = create;
+        Comment.getForTransactionRequest = getForTransactionRequest;
+        return Comment;
 
-    var meaningOfLife = 42;
+        /////
 
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
-  });
+        function create(text, transactionRequestId) {
+            return new Comment({
+                node: transactionRequestId,
+                subject: text,
+                comment_body: {
+                    value: text
+                }
+            });
+        }
+
+        function getForTransactionRequest(transactionRequestId) {
+            return Comment.query({
+                'parameters[node]': transactionRequestId
+            }).$promise;
+        }
+    });

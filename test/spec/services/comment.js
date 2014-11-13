@@ -19,8 +19,11 @@ describe('Service: Comment', function() {
         expect(typeof Comment.create).toBe('function');
     });
     it('create should return a comment', function() {
-        var comment = Comment.create();
-        expect(typeof comment).toBe('Comment');
+        var comment = Comment.create('text', 1);
+        console.log(comment);
+        expect(typeof comment).toBe('object');
+        expect(comment.comment_body.value).toBe('text');
+        expect(comment.node).toBe(1);
     });
 
     it('should provide a getForTransactionRequest function', function() {
