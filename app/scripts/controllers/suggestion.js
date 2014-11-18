@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
   .controller('SuggestionCtrl', function ($stateParams, TransactionRequest, $state,
-   $http, toaster, transactionStatusService, $log, Comment) {
+   $http, toaster, transactionStatusService, $log, Comment, Page) {
     	var vm = this;
         vm.suggestion = null;
         vm.accept = accept;
@@ -23,6 +23,8 @@ angular.module('orphaApp')
     	//////////
     	function activate() {
 
+            Page.setTitle('Suggestion');
+
             // Load the comments
             Comment.getForTransactionRequest($stateParams.suggestionId).then(function(comments) {
                 vm.comments = comments;
@@ -31,7 +33,7 @@ angular.module('orphaApp')
             TransactionRequest.get({
                 nid: $stateParams.suggestionId
             }).$promise.then(function(transactionRequest) {
-
+                Page.setTitle(transactionRequest.title);
                 transactionRequest.loadTransactions().then(function() {
                     transactionRequest.loadDescription();    
                 });
