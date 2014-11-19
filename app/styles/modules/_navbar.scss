@@ -50,7 +50,16 @@
 	.nav > li.active > a:hover, .nav > li.active > a:focus {
 		background-color: white;
 	}
+
+	.navbar-search .dropdown-menu {
+		max-width: 400px;
+		li > a {
+			white-space: normal;
+			cursor: pointer;
+		}
+	}
 }
+
 
 @media (max-width: $screen-xs-max) { 
 	.navbar.ui-scrollfix {
