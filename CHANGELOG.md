@@ -1,3 +1,12 @@
+<a name="0.21.7"></a>
+### 0.21.7 (2014-11-25)
+
+
+#### Features
+
+* **classification:** add edit classification page ([91e0ac3d](git@github.com:Bio-LarK/orpha/commit/91e0ac3d50a697236c9c3a9d9763f16442f483fe))
+
+
 <a name="0.21.6"></a>
 ### 0.21.6 (2014-11-19)
 
