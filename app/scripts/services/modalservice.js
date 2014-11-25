@@ -16,11 +16,18 @@ angular.module('orphaApp')
             openEditTitle: openEditTitle,
             openEditDescription: openEditDescription,
             openEditClassification: openEditClassification,
-            openEditClassificationAddChild: openEditClassificationAddChild
+            openEditClassificationAddChild: openEditClassificationAddChild,
+            openEditClassificationRemoveDisorder: openEditClassificationRemoveDisorder
         };
         return service;
 
         ///////
+
+        function openEditClassificationRemoveDisorder(classification, disorder, parent) {
+            return $modal.open({
+
+            });
+        }
 
         function openEditClassification(classification, disorder, parent, newParent) {
             return $modal.open({
