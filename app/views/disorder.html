@@ -19,44 +19,6 @@
     <div class="page-nav">
         <div class="page-nav-sticky" ui-scrollfix="-50">
             <div class="container">
-                <!--<ul class="nav nav-pills" role="tablist">
-                    <li ng-class="{'active': $state.includes('disorder') && !isEditing }">
-                        <a href ng-click="stopEditing();">
-                            <i class="fa fa-globe"></i>
-                            Abstract
-                        </a>
-                    </li>
-                    <li>
-                        <a href ng-click="stopEditing();">
-                            <i class="fa fa-globe"></i>
-                            Classification
-                        </a>
-                    </li>
-                    <li>
-                        <a href ng-click="stopEditing();">
-                            <i class="fa fa-globe"></i>
-                            Parents
-                        </a>
-                    </li>
-                    <li>
-                        <a href ng-click="stopEditing();">
-                            <i class="fa fa-globe"></i>
-                            Children
-                        </a>
-                    </li>
-                    <li>
-                        <a href ng-click="stopEditing();">
-                            <i class="fa fa-globe"></i>
-                            Genotype
-                        </a>
-                    </li>
-                    <li>
-                        <a href ng-click="stopEditing();">
-                            <i class="fa fa-globe"></i>
-                            Phenotype
-                        </a>
-                    </li>
-                </ul>-->
                 <ul class="nav nav-pills">
                     <li ng-class="{'active': $state.includes('disorder') && !isEditing }">
                         <a href ng-click="stopEditing();">
@@ -78,7 +40,6 @@
                 </ul>
             </div>
         </div>
-
     </div>
 
 
@@ -378,7 +339,16 @@
             </div>
         </div>
 
-        <div class="panels">
+        <div class="panels" ng-show="isEditing">
+            <h2>Classification</h2>
+            <div class="panel panel-default editable-card">
+                <div class="panel-body">
+                    Edit Parents or children of {{ disorder.title }}
+                </div>
+            </div>
+        </div>
+
+        <div class="panels" ng-hide="isEditing">
             <h2>Classification</h2>
             <div class="spinner" ng-show="disorderTracker.active();">
                 <i class="fa fa-spin fa-circle-o-notch"></i>
@@ -440,7 +410,7 @@
             </div>
         </div>
 
-        <div class="panels">
+        <div class="panels" ng-hide="isEditing">
             <form class="form-inline pull-right" role="form" ng-show="disorder.disorder_parent.length > 1">
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail2">Filter</label>
@@ -487,7 +457,7 @@
         </div>
 
 
-        <div class="panels">
+        <div class="panels" ng-hide="isEditing">
             <form class="form-inline pull-right" role="form" ng-show="disorder.disorder_child.length > 1">
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail2">Filter</label>

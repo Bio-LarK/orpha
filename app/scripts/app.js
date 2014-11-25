@@ -28,7 +28,8 @@ angular
         'textAngular',
         'duScroll',
         'sf.treeRepeat',
-        'ui.select'
+        'ui.select',
+        'ui.tree'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, 
         editableOptions, Page, ENV, siteSearchService, $log) {
@@ -115,6 +116,11 @@ angular
                 url: '/disorders?page?signId',
                 controller: 'DisordersCtrl as vm',
                 templateUrl: 'views/disorders.html'
+            })
+            .state('editclassification', {
+                url: '/classification/:classificationId/edit',
+                controller: 'EditClassificationCtrl as vm',
+                templateUrl: 'views/editclassification.html'
             })
             .state('concept', {
                 url: '/concept/:conceptId',

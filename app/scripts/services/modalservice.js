@@ -8,19 +8,70 @@
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
-    .factory('modalService', function($modal) {
+    .factory('modalService', function($modal, searchService) {
         var service = {
             openPrevalenceClassModal: openPrevalenceClassModal,
             openAgeOfOnset: openAgeOfOnset,
             openAgeOfDeath: openAgeOfDeath,
             openEditTitle: openEditTitle,
-            openEditDescription: openEditDescription
+            openEditDescription: openEditDescription,
+            openEditClassification: openEditClassification,
+            openEditClassificationAddChild: openEditClassificationAddChild
         };
         return service;
 
         ///////
 
-        function openEditTitle(concept) {   
+        function openEditClassification(classification, disorder, parent, newParent) {
+            return $modal.open({
+                templateUrl: 'views/modals/edit-classification.html',
+                controller: 'ModalEditClassificationCtrl as vm',
+                resolve: {
+                    config: function() {
+                        return {
+                            classification: classification,
+                            disorder: disorder,
+                            parent: parent,
+                            newParent: newParent
+                        };
+                    }
+                }
+            });
+        }
+
+        function openEditClassificationAddChild(classification, parent) {
+            var config = {
+                classification: classification,
+                disorder: parent
+            };
+            return $modal.open({
+                templateUrl: 'views/modals/edit-classification-add-child.html',
+                controller: 'ModalsAddDisorderToClassificationCtrl as vm',
+                resolve: {
+                    config: function() {
+                        return config;
+                    }
+                }
+            });
+        }
+
+        function openEditClassificationRemove(classification, disorder, parent) {
+            var config = {
+                classification: classification,
+                disorder: parent
+            };
+            return $modal.open({
+                templateUrl: 'views/modals/edit-classification-remove.html',
+                controller: 'ModalsRemoveDisorderToClassificationCtrl as vm',
+                resolve: {
+                    config: function() {
+                        return config;
+                    }
+                }
+            });
+        }
+
+        function openEditTitle(concept) {
             var config = {
                 concept: concept,
                 propertyName: 'title',
@@ -39,7 +90,7 @@ angular.module('orphaApp')
             });
         }
 
-        function openEditDescription(concept) {   
+        function openEditDescription(concept) {
             var config = {
                 concept: concept,
                 propertyName: 'body',

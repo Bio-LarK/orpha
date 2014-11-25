@@ -1,0 +1,23 @@
+<div>
+    <div ui-tree-handle class="clearfix">
+    	<div class="pull-right">
+        	<button class="btn btn-default" data-nodrag data-nodrag ng-click="vm.addSubDisorder(this)">
+                <i class="fa fa-plus"></i> 
+                Add
+            </button>
+        	<button class="btn btn-danger" data-nodrag data-nodrag ng-click="vm.remove(this)">
+                Remove
+            </button>	
+        </div>
+
+        <button class="btn btn-default btn-tree" data-nodrag ng-click="vm.toggle(disorder, this)">
+        	<i class="fa" ng-class="{'fa-caret-right': !disorder.isOpen, 'fa-caret-down': disorder.isOpen}"></i>
+        </button>
+        {{ disorder.title }}
+    </div>
+
+    <ol ui-tree-nodes="" ng-model="disorder.disorder_child" ng-show="disorder.isOpen">
+        <li ng-repeat="disorder in disorder.disorder_child" ui-tree-node ng-include="'views/tree-disorder-node.html'">
+        </li>
+    </ol>
+</div>
