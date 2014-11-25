@@ -23,6 +23,7 @@ angular.module('orphaApp')
         }
 
         function proposeChanges() {
-        	$modalInstance.dismiss('cancel');
+            $modalInstance.close();
+        	// $modalInstance.dismiss('cancel');
         }
     });

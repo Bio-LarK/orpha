@@ -22,7 +22,7 @@ angular.module('orphaApp')
             searchService.search(disorderName).then(setDropdownDisorders);
         }
         function setDropdownDisorders(disorders) {
-            vm.disorders = disorders;
+            vm.disorders = _.filter(disorders, {type: 'Disorder'});
         }
         function save(result) {
             // get the disorder
@@ -34,7 +34,7 @@ angular.module('orphaApp')
             $modalInstance.close(disorder);
         }
         function cancel() {
-            $modalInstance.close();
+            $modalInstance.dismiss('cancel');
         }
 
     });

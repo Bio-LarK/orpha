@@ -80,7 +80,8 @@ angular.module('orphaApp')
 
         function remove(scope) {
             // TODO: show modal
-            scope.remove();
+            // modalService.openRemovep
+            // scope.remove();
         }
 
         function addSubDisorder(scope) {
@@ -110,7 +111,17 @@ angular.module('orphaApp')
             }
             // Open modal
             $timeout(function() {
-                modalService.openEditClassification(vm.classification, disorder, parent, newParent);
+                modalService.openEditClassification(vm.classification, disorder, parent, newParent)
+                .result.then(function() {
+                    console.log('closed!');
+                }, function() {
+                    // try and put it back?
+                    var index = newParent.disorder_child.indexOf(disorder);
+                    newParent.disorder_child.splice(index, 1);
+
+                    parent.disorder_child.unshift(disorder);
+                    console.log('cancelled');
+                });
             }, 500);
             
         }
