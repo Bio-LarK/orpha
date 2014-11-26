@@ -19,9 +19,10 @@ angular.module('orphaApp')
         // TODO: add child
         // TODO: rmeove child
         // 
-        $scope.treeOptions = {
+        vm.treeOptions = {
             dropped: disorderDropped,
-            dragStart: disorderDragStarted
+            dragStart: disorderDragStarted,
+            accept: disorderCanDropHere
         };
 
         function activate() {
@@ -94,10 +95,18 @@ angular.module('orphaApp')
                 });
             });
         }
-
         function disorderDragStarted(event) {
             // Close the children
             close(event.source.nodeScope.disorder);
+        }
+        function disorderCanDropHere(sourceNodeScope, destNodesScope, destIndex) {
+            // FIXME: $parent.$parent is probably going to cause problems in the future
+            var currentParent = sourceNodeScope.$parent.$parent.disorder;
+            var newParent = destNodesScope.disorder;
+            if(!newParent) {
+                return false;
+            }
+            return true;
         }
 
         function disorderDropped(event) {
@@ -105,6 +114,7 @@ angular.module('orphaApp')
             var disorder = event.source.nodeScope.disorder;
             var parent = event.source.nodesScope.disorder;
             var newParent = event.dest.nodesScope.disorder;
+            var startIndex = event.source.index;
 
             if (parent === newParent) {
                 return;
@@ -119,7 +129,9 @@ angular.module('orphaApp')
                     var index = newParent.disorder_child.indexOf(disorder);
                     newParent.disorder_child.splice(index, 1);
 
-                    parent.disorder_child.unshift(disorder);
+                    parent.disorder_child.splice(startIndex, 0, disorder);
+
+                    // parent.disorder_child.unshift(disorder);
                     console.log('cancelled');
                 });
             }, 500);
