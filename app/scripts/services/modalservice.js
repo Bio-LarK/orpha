@@ -24,8 +24,18 @@ angular.module('orphaApp')
         ///////
 
         function openEditClassificationRemoveDisorder(classification, disorder, parent) {
+            var config = {
+                disorder: disorder,
+                parent: parent
+            };
             return $modal.open({
-
+                templateUrl: 'views/modals/edit-classification-remove.html',
+                controller: 'ModalsRemoveDisorderFromClassificationCtrl as vm',
+                resolve: {
+                    config: function() {
+                        return config;
+                    }
+                }
             });
         }
 

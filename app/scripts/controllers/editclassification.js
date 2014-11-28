@@ -13,7 +13,7 @@ angular.module('orphaApp')
         var vm = this;
         vm.toggle = toggle;
         vm.addSubDisorder = addSubDisorder;
-        vm.remove = remove;
+        vm.removeDisorder = removeDisorder;
         activate();
 
         // TODO: add child
@@ -79,31 +79,39 @@ angular.module('orphaApp')
         // Editing the classification //
         ////////////////////////////////
 
-        function remove(scope) {
-            // TODO: show modal
-            // modalService.openRemovep
-            // scope.remove();
+        function removeDisorder(scope) {
+            // FIXME: the parent stuff is pretty awful, not sure how to do it though
+            var currentParent = scope.$parent.$parent.$parent.disorder;
+            modalService.openEditClassificationRemoveDisorder(
+                vm.classification,
+                scope.disorder, 
+                currentParent).result.then(function() {
+                scope.remove();
+            });
         }
 
         function addSubDisorder(scope) {
+            scope.isAdding = true;
             var parent = scope.disorder;
             open(parent).then(function() {
                 modalService.openEditClassificationAddChild(vm.classification, parent).result.then(function(child) {
-                    if(child) {
-                        parent.disorder_child.unshift(child);    
+                    if (child) {
+                        parent.disorder_child.unshift(child);
                     }
                 });
             });
         }
+
         function disorderDragStarted(event) {
             // Close the children
             close(event.source.nodeScope.disorder);
         }
+
         function disorderCanDropHere(sourceNodeScope, destNodesScope, destIndex) {
             // FIXME: $parent.$parent is probably going to cause problems in the future
             var currentParent = sourceNodeScope.$parent.$parent.disorder;
             var newParent = destNodesScope.disorder;
-            if(!newParent) {
+            if (!newParent) {
                 return false;
             }
             return true;
@@ -112,30 +120,23 @@ angular.module('orphaApp')
         function disorderDropped(event) {
             // What are dropped?
             var disorder = event.source.nodeScope.disorder;
-            var parent = event.source.nodesScope.disorder;
+            var oldParent = event.source.nodesScope.disorder;
             var newParent = event.dest.nodesScope.disorder;
-            var startIndex = event.source.index;
+            var oldIndex = event.source.index;
 
-            if (parent === newParent) {
+            if (oldParent === newParent) {
                 return;
             }
-            // Open modal
-            $timeout(function() {
-                modalService.openEditClassification(vm.classification, disorder, parent, newParent)
-                .result.then(function() {
-                    console.log('closed!');
-                }, function() {
-                    // try and put it back?
-                    var index = newParent.disorder_child.indexOf(disorder);
-                    newParent.disorder_child.splice(index, 1);
-
-                    parent.disorder_child.splice(startIndex, 0, disorder);
-
-                    // parent.disorder_child.unshift(disorder);
-                    console.log('cancelled');
+            modalService.openEditClassification(vm.classification, disorder, oldParent, newParent)
+                .result.catch(function() {
+                    disorderDroppedCancelled(disorder, oldParent, newParent, oldIndex);
                 });
-            }, 500);
-            
+        }
+
+        function disorderDroppedCancelled(disorder, oldParent, newParent, oldIndex) {
+            var newIndex = newParent.disorder_child.indexOf(disorder);
+            newParent.disorder_child.splice(newIndex, 1);
+            oldParent.disorder_child.splice(oldIndex, 0, disorder);
         }
 
     });

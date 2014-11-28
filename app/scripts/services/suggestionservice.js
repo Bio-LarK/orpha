@@ -22,6 +22,10 @@ angular.module('orphaApp')
         }
 
         function getNewSuggestions() {
+
+            // FIXME: This needs to be on the server side
+            // because its disgusting
+            
             return ListTransaction.query({}).$promise.then(function(listTransactions) {
                 // var listTransactions = response.data;
 

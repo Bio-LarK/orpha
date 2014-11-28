@@ -4,6 +4,9 @@
             <button class="btn btn-link btn-link-add" data-nodrag data-nodrag ng-click="vm.addSubDisorder(this)">
                 <i class="fa fa-plus"></i> Add Disorder
             </button>
+            <button class="btn btn-link btn-link-remove" data-nodrag data-nodrag ng-click="vm.removeDisorder(this)">
+                <i class="fa fa-minus"></i> Remove
+            </button>
             <!-- <button class="btn btn-danger" data-nodrag data-nodrag ng-click="vm.remove(this)">
                 Remove
             </button> -->
@@ -14,7 +17,8 @@
         </button>
         {{ disorder.title }}
     </div>
-
+    
+    
     <ol ui-tree-nodes="" ng-model="disorder.disorder_child" ng-show="disorder.isOpen">
         <li ng-repeat="disorder in disorder.disorder_child" ui-tree-node ng-include="'views/tree-disorder-node.html'">
         </li>

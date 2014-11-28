@@ -4,7 +4,7 @@
  * @ngdoc service
  * @name orphaApp.siteSearchService
  * @description
- * # siteSearchService
+ * # The global search box in the navbar
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
@@ -13,20 +13,22 @@ angular.module('orphaApp')
             query: '',
             getResults: getResults,
             changed: changed
-        };        
-        $rootScope.$on('$stateChangeSuccess', 
-            function(event, toState, toParams, fromState, fromParams) { 
-                service.query = '';
-            }
-        );
+        };
+        $rootScope.$on('$stateChangeSuccess', clearQuery);
         return service;
 
+        function clearQuery() {
+            service.query = '';
+        }
+
         function getResults(query) {
+            return searchService.search(query).then(filterAcceptibleResults);
+        }
+
+        function filterAcceptibleResults(results) {
             var acceptedTypes = ['Disorder', 'Clinical Sign', 'Gene'];
-            return searchService.search(query).then(function(results) {
-                return _.filter(results, function(result) {
-                    return acceptedTypes.indexOf(result.type) >= 0;
-                });
+            return _.filter(results, function(result) {
+                return acceptedTypes.indexOf(result.type) >= 0;
             });
         }
 

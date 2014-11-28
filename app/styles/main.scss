@@ -286,6 +286,20 @@ a {
   padding: 10px 0;
   border: none;
 }
+.btn-link-remove {
+  color: $brand-danger;
+  &:hover {
+    color: $brand-danger;
+  }
+  padding: 10px 0;
+  border: none;
+}
+.btn-link-add, .btn-link-remove{
+    visibility: hidden;;
+}
+.angular-ui-tree-handle:hover .btn-link-add, .angular-ui-tree-handle:hover .btn-link-remove {
+    visibility: visible;
+}
 
 // .col-sm-4.ng-enter {
 //   animation:5s fadeIn ease; 

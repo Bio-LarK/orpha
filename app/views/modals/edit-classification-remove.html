@@ -4,13 +4,13 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <h4 class="modal-title">Edit {{ vm.disorder.title }} in {{ vm.classification.title }}</h4>
+        <h4 class="modal-title">Remove {{ vm.disorder.title }}</h4>
     </div>
     <form role="form">
         <div class="modal-body">
             <div class="form-group">
                 <div>
-                    Remove {{ vm.disorder.title }} from under parent {{ vm.parent.title }}
+                    Remove <strong>{{ vm.disorder.title }}</strong> from <strong>{{ vm.parent.title }}</strong>
                 </div>
             </div>
             
@@ -29,7 +29,7 @@
             </div>
             
             <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
-            <button type="submit" class="btn btn-primary" ng-click="vm.proposeChanges(yo)">Propose Change</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.save()">Propose Change</button>
         </div>
     </form>
 </div>

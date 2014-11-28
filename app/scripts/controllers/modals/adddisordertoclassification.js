@@ -8,10 +8,11 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('ModalsAddDisorderToClassificationCtrl', function($scope, config, Disorder, $modalInstance,
+    .controller('ModalsAddDisorderToClassificationCtrl', function(TransactionRequest, toaster, config, Disorder, $modalInstance,
         searchService) {
         var vm = this;
         vm.config = config;
+        vm.disorder = config.disorder;
         vm.refreshDisorders = refreshDisorders;
         vm.save = save;
         vm.cancel = cancel;
@@ -30,9 +31,22 @@ angular.module('orphaApp')
                 nid: result.node
             }).$promise.then(closeWithAddedDisorder);
         }
-        function closeWithAddedDisorder(disorder) {
-            $modalInstance.close(disorder);
+        function closeWithAddedDisorder(newDisorder) {
+            var transactionRequest = TransactionRequest.create();
+            console.log('disorder', vm.disorder.nid, newDisorder.nid);
+            transactionRequest
+                .addAddTransaction(
+                    vm.disorder.nid,
+                    'disorder_parent',
+                    newDisorder.nid
+                )
+                .setTitle('Add ' +  newDisorder.title + ' to ' + vm.disorder.title)
+                .setReason(vm.reason)
+                .save();
+            
+            $modalInstance.close(newDisorder);
         }
+
         function cancel() {
             $modalInstance.dismiss('cancel');
         }

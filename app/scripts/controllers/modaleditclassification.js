@@ -8,22 +8,35 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('ModalEditClassificationCtrl', function($scope, config, $modalInstance) {
-    	var vm = this;
-    	vm.classification = config.classification;
-    	vm.disorder = config.disorder;
-    	vm.parent = config.parent;
-    	vm.newParent = config.newParent;
+    .controller('ModalEditClassificationCtrl', function($scope, config, TransactionRequest,
+        transactionStatusService, $modalInstance, ListTransaction, toaster, $q) {
+        var vm = this;
+        vm.classification = config.classification;
+        vm.disorder = config.disorder;
+        vm.parent = config.parent;
+        vm.newParent = config.newParent;
+        vm.proposeChanges = save;
+        vm.cancel = cancel;
 
-	 	vm.proposeChanges = proposeChanges;
-    	vm.cancel = cancel; 
-
-    	function cancel() {
+        function cancel() {
             $modalInstance.dismiss('cancel');
         }
 
-        function proposeChanges() {
+        function save() {
+            var transactionRequest = TransactionRequest.create();
+            transactionRequest
+                .addChangeTransaction(
+                    vm.disorder.nid,
+                    'disorder_parent',
+                    vm.parent.nid,
+                    vm.newParent.nid
+                )
+                .setTitle('Change the parent of ' + vm.disorder.title)
+                .setReason(vm.reason)
+                .save().then(function() {
+                    toaster.pop('success', 'Suggestion submitted.');
+                });
+            
             $modalInstance.close();
-        	// $modalInstance.dismiss('cancel');
         }
     });
