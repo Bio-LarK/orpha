@@ -11,9 +11,13 @@ angular.module('orphaApp')
     .controller('EditClassificationCtrl', function($scope, $timeout,
         Classification, cmTreeService, $stateParams, modalService, Page) {
         var vm = this;
+        var editedDisorders = {};
+        var removedDisorders = {};
         vm.toggle = toggle;
         vm.addSubDisorder = addSubDisorder;
-        vm.removeDisorder = removeDisorder;
+        vm.removeDisorder = removeDisorder;    
+        vm.isEdited = isEdited;
+        vm.isRemoved = isRemoved;
         activate();
 
         // TODO: add child
@@ -86,6 +90,7 @@ angular.module('orphaApp')
                 vm.classification,
                 scope.disorder, 
                 currentParent).result.then(function() {
+                setDisorderAsRemoved(scope.disorder);
                 scope.remove();
             });
         }
@@ -94,10 +99,10 @@ angular.module('orphaApp')
             scope.isAdding = true;
             var parent = scope.disorder;
             open(parent).then(function() {
-                modalService.openEditClassificationAddChild(vm.classification, parent).result.then(function(child) {
-                    if (child) {
-                        parent.disorder_child.unshift(child);
-                    }
+                modalService.openEditClassificationAddChild(vm.classification, parent)
+                .result.then(function(disorder) {
+                    parent.disorder_child.unshift(disorder);
+                    setDisorderAsEdited(disorder);
                 });
             });
         }
@@ -128,7 +133,9 @@ angular.module('orphaApp')
                 return;
             }
             modalService.openEditClassification(vm.classification, disorder, oldParent, newParent)
-                .result.catch(function() {
+                .result.then(function() {
+                    setDisorderAsEdited(disorder);
+                }, function() {
                     disorderDroppedCancelled(disorder, oldParent, newParent, oldIndex);
                 });
         }
@@ -139,4 +146,16 @@ angular.module('orphaApp')
             oldParent.disorder_child.splice(oldIndex, 0, disorder);
         }
 
+        function setDisorderAsEdited(disorder) {
+            editedDisorders[disorder.nid] = true;
+        }
+        function isEdited(disorder) {
+            return !!editedDisorders[disorder.nid];
+        }
+        function setDisorderAsRemoved(disorder) {
+            removedDisorders[disorder.nid] = true;
+        }
+        function isRemoved(disorder) {
+            return !!removedDisorders[disorder.nid];
+        }
     });

@@ -1,5 +1,6 @@
 <div>
-    <div ui-tree-handle class="clearfix">
+    <div ui-tree-handle class="clearfix" ng-class="{'angular-ui-tree-handle-edited': vm.isEdited(disorder), 'angular-ui-tree-handle-removed': vm.isRemoved(disorder)}">
+        
         <div class="pull-right">
             <button class="btn btn-link btn-link-add" data-nodrag data-nodrag ng-click="vm.addSubDisorder(this)">
                 <i class="fa fa-plus"></i> Add Disorder
