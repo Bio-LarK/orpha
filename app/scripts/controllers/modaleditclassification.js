@@ -24,18 +24,18 @@ angular.module('orphaApp')
 
         function save() {
             var transactionRequest = TransactionRequest.create();
-            // transactionRequest
-            //     .addChangeTransaction(
-            //         vm.disorder.nid,
-            //         'disorder_parent',
-            //         vm.parent.nid,
-            //         vm.newParent.nid
-            //     )
-            //     .setTitle('Change the parent of ' + vm.disorder.title)
-            //     .setReason(vm.reason)
-            //     .save().then(function() {
-            //         toaster.pop('success', 'Suggestion submitted.');
-            //     });
+            transactionRequest
+                .addChangeTransaction(
+                    vm.disorder.nid,
+                    'disorder_parent',
+                    vm.parent.nid,
+                    vm.newParent.nid
+                )
+                .setTitle('Change the parent of ' + vm.disorder.title)
+                .setReason(vm.reason)
+                .save().then(function() {
+                    toaster.pop('success', 'Suggestion submitted.');
+                });
             
             $modalInstance.close();
         }
