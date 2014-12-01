@@ -10,7 +10,7 @@
 angular.module('orphaApp')
     .factory('cmTreeService', function(Disorder, $log, Classification) {
         var service = {};
-        service.getTreeForDisorderInClassification = getTreeForDisorder;
+        service.getTreeForDisorder = getTreeForDisorder;
         service.getTree = getTree;
         return service;
 
@@ -22,11 +22,11 @@ angular.module('orphaApp')
             });
         }
 
-        function getTreeForDisorder(disorderId, classificationId) {
+        function getTreeForDisorder(classificationId, disorderId) {
             return Disorder.get({
                 nid: disorderId
             }).$promise.then(function(disorder) {
-                return findRoot(disorder).then(function(root) {
+                return findRoot(disorder, classificationId).then(function(root) {
                     return [root];
                 });
             });
@@ -50,7 +50,8 @@ angular.module('orphaApp')
                 // get the first parent
                 // TODO: allow multiple parents
                 var singleParent = parents[0];
-                return findRoot(singleParent);
+                singleParent.isOpen = true;
+                return findRoot(singleParent, classificationId);
             });
         }
     });

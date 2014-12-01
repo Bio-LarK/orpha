@@ -118,6 +118,7 @@ angular.module('orphaApp')
             var request = _.indexBy(ids, function(ids, index) {
                 return 'parameters[nid][' + index + ']';
             });
+            console.log('classification', classification);
             if (classification) {
                 request['parameters[disorder_class]'] = classification.nid;
             }

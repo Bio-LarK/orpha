@@ -15,7 +15,7 @@ angular.module('orphaApp')
         var removedDisorders = {};
         vm.toggle = toggle;
         vm.addSubDisorder = addSubDisorder;
-        vm.removeDisorder = removeDisorder;    
+        vm.removeDisorder = removeDisorder;
         vm.isEdited = isEdited;
         vm.isRemoved = isRemoved;
         activate();
@@ -32,13 +32,21 @@ angular.module('orphaApp')
         function activate() {
             // Get the classification
             getClassification($stateParams.classificationId).then(function(classification) {
+
+                if ($stateParams.disorderId) {
+                    cmTreeService.getTreeForDisorder(
+                        $stateParams.classificationId, 
+                        $stateParams.disorderId).then(setTree);
+                    return;
+                }
                 // Get the tree
-                cmTreeService.getTree($stateParams.classificationId).then(function(tree) {
-                    $scope.tree = tree;
-                    $scope.tree[0].isOpen = true;
-                });
+                cmTreeService.getTree($stateParams.classificationId).then(setTree);
             });
             Page.setTitle('Edit Classification');
+        }
+        function setTree(tree) {
+            $scope.tree = tree;
+            open($scope.tree[0]);
         }
 
         function getClassification(classificationId) {
@@ -88,7 +96,7 @@ angular.module('orphaApp')
             var currentParent = scope.$parent.$parent.$parent.disorder;
             modalService.openEditClassificationRemoveDisorder(
                 vm.classification,
-                scope.disorder, 
+                scope.disorder,
                 currentParent).result.then(function() {
                 setDisorderAsRemoved(scope.disorder);
                 scope.remove();
@@ -100,10 +108,10 @@ angular.module('orphaApp')
             var parent = scope.disorder;
             open(parent).then(function() {
                 modalService.openEditClassificationAddChild(vm.classification, parent)
-                .result.then(function(disorder) {
-                    parent.disorder_child.unshift(disorder);
-                    setDisorderAsEdited(disorder);
-                });
+                    .result.then(function(disorder) {
+                        parent.disorder_child.unshift(disorder);
+                        setDisorderAsEdited(disorder);
+                    });
             });
         }
 
@@ -145,7 +153,6 @@ angular.module('orphaApp')
             newParent.disorder_child.splice(newIndex, 1);
             oldParent.disorder_child.splice(oldIndex, 0, disorder);
         }
-
         function setDisorderAsEdited(disorder) {
             editedDisorders[disorder.nid] = true;
         }

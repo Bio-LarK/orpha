@@ -22,14 +22,12 @@
                 <ul class="nav nav-pills">
                     <li ng-class="{'active': $state.includes('disorder') && !isEditing }">
                         <a href ng-click="stopEditing();">
-                            <i class="fa fa-globe"></i>
-                            Public Page
+                            <i class="fa fa-globe"></i> Public Page
                         </a>
                     </li>
                     <li ng-class="{'active': $state.includes('disorder') && isEditing}">
                         <a href ng-click="startEditing();">
-                            <i class="fa fa-pencil"></i>
-                            Edit
+                            <i class="fa fa-pencil"></i> Edit
                         </a>
                     </li>
                     <li class="disabled">
@@ -138,8 +136,8 @@
                                 <span ng-repeat="synonym in disorder.disorder_synonym">
                                     {{ synonym }}
                                     <span ng-show="!$last">,</span>
-                                </span>
-                            </small>
+                        </span>
+                        </small>
                         </span>
                     </div>
                     <div style="margin-top: 5px;">
@@ -339,16 +337,16 @@
             </div>
         </div>
 
-        <div class="panels" ng-show="isEditing">
+        <!--  <div class="panels" ng-show="isEditing">
             <h2>Classification</h2>
             <div class="panel panel-default editable-card">
                 <div class="panel-body">
                     Edit Parents or children of {{ disorder.title }}
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="panels" ng-hide="isEditing">
+        <div class="panels">
             <h2>Classification</h2>
             <div class="spinner" ng-show="disorderTracker.active();">
                 <i class="fa fa-spin fa-circle-o-notch"></i>
@@ -363,7 +361,25 @@
                     <div class="col-sm-12">
                         <div class="row" ng-repeat="row in disorder.disorder_class | inSlicesOf:3">
                             <div class="col-sm-4" ng-repeat="classification in row">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default editable-card" ng-show="isEditing" ui-sref="editclassification({disorderId: disorder.nid, classificationId: classification.nid})">
+                                    <div class="panel-body">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <div style="width:50px;height:50px;">
+                                                    <colormap classification="classification" type="disorder"></colormap>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h5>
+                                                    {{ classification.title }}
+                                                </h5>
+                                                <p>An Orphanet summary for this classification is currently under development.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default" ng-hide="isEditing">
                                     <div class="panel-body">
                                         <div class="media">
                                             <div class="pull-left">
@@ -379,11 +395,6 @@
                                                     </a> 
                                                 </h5>
                                                 <p>An Orphanet summary for this classification is currently under development.</p>
-                                                <!-- <ul class="list-unstyled" style="margin: 0;">
-                                                    <li ng-repeat="parent in classification.parents">
-                                                        <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
-                                                    </li>
-                                                </ul> -->
                                             </div>
                                         </div>
 
@@ -393,14 +404,6 @@
                                         <a class="list-group-item" href ui-sref="classification({classificationId: classification.nid, disorderId: disorder.nid})">
                                             <i class="fa fa-bullseye"></i> Open to location of {{ disorder.title }}
                                         </a>
-                                        <!-- <div class="list-group-item" ng-show="classification.parents.length">
-                                            <h5>Parents</h5>
-                                            <ul class="list-unstyled">
-                                                <li ng-repeat="parent in classification.parents">
-                                                    <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
-                                                </li>
-                                            </ul>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>

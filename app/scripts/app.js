@@ -118,7 +118,7 @@ angular
                 templateUrl: 'views/disorders.html'
             })
             .state('editclassification', {
-                url: '/classification/:classificationId/edit',
+                url: '/classification/:classificationId/edit?disorderId',
                 controller: 'EditClassificationCtrl as vm',
                 templateUrl: 'views/editclassification.html'
             })
