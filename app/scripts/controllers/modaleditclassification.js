@@ -33,9 +33,7 @@ angular.module('orphaApp')
                 )
                 .setTitle('Change the parent of ' + vm.disorder.title)
                 .setReason(vm.reason)
-                .save().then(function() {
-                    toaster.pop('success', 'Suggestion submitted.');
-                });
+                .save();
             
             $modalInstance.close();
         }

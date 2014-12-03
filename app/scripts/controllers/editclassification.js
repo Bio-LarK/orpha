@@ -13,11 +13,11 @@ angular.module('orphaApp')
         var vm = this;
         var editedDisorders = {};
         var removedDisorders = {};
-        vm.toggle = toggle;
+        // vm.toggle = toggle;
         vm.addSubDisorder = addSubDisorder;
         vm.removeDisorder = removeDisorder;
-        vm.isEdited = isEdited;
-        vm.isRemoved = isRemoved;
+        // vm.isEdited = isEdited;
+        // vm.isRemoved = isRemoved;
         activate();
 
         // TODO: add child
@@ -35,7 +35,7 @@ angular.module('orphaApp')
 
                 if ($stateParams.disorderId) {
                     cmTreeService.getTreeForDisorder(
-                        $stateParams.classificationId, 
+                        $stateParams.classificationId,
                         $stateParams.disorderId).then(setTree);
                     return;
                 }
@@ -44,9 +44,11 @@ angular.module('orphaApp')
             });
             Page.setTitle('Edit Classification');
         }
+
         function setTree(tree) {
             $scope.tree = tree;
-            open($scope.tree[0]);
+            var root = $scope.tree[0];
+            // root.open();
         }
 
         function getClassification(classificationId) {
@@ -59,82 +61,54 @@ angular.module('orphaApp')
             });
         }
 
-        function toggleOpen(disorder) {
-            if (disorder.isOpen) {
-                close(disorder);
-                return;
-            }
-            return open(disorder);
-        }
-
-        function close(disorder) {
-            disorder.isOpen = false;
-            _.each(disorder['disorder_child'], function(child) {
-                close(child);
-            });
-        }
-
-        function open(disorder, parent) {
-            disorder.isOpen = true;
-            return disorder.loadChildren();
-        }
-
-        function toggle(disorder, scope) {
-            if (disorder.isOpen) {
-                close(disorder);
-                return;
-            }
-            return open(disorder);
-        }
-
         ////////////////////////////////
         // Editing the classification //
         ////////////////////////////////
 
         function removeDisorder(scope) {
             // FIXME: the parent stuff is pretty awful, not sure how to do it though
-            var currentParent = scope.$parent.$parent.$parent.disorder;
+            var currentParent = scope.$parent.$parent.$parent.node.resource;
+            var node = scope.node;
             modalService.openEditClassificationRemoveDisorder(
-                vm.classification,
-                scope.disorder,
-                currentParent).result.then(function() {
-                setDisorderAsRemoved(scope.disorder);
-                scope.remove();
-            });
+                    vm.classification,
+                    node.resource,
+                    currentParent)
+                .result.then(function() {
+                    scope.remove();
+                });
         }
 
         function addSubDisorder(scope) {
-            scope.isAdding = true;
-            var parent = scope.disorder;
-            open(parent).then(function() {
-                modalService.openEditClassificationAddChild(vm.classification, parent)
-                    .result.then(function(disorder) {
-                        parent.disorder_child.unshift(disorder);
-                        setDisorderAsEdited(disorder);
+            var node = scope.node;
+            modalService.openEditClassificationAddChild(vm.classification, node.resource)
+                .result.then(function(disorder) {
+                    node.insertChild(disorder, 0).then(function(child) {
+                        console.log('child is', child);
+                        child.isEdited = true;
                     });
-            });
+                });
         }
 
         function disorderDragStarted(event) {
             // Close the children
-            close(event.source.nodeScope.disorder);
+            close(event.source.nodeScope.node);
         }
 
         function disorderCanDropHere(sourceNodeScope, destNodesScope, destIndex) {
-            // FIXME: $parent.$parent is probably going to cause problems in the future
-            var currentParent = sourceNodeScope.$parent.$parent.disorder;
-            var newParent = destNodesScope.disorder;
-            if (!newParent) {
-                return false;
-            }
-            return true;
+            var node = sourceNodeScope.node;
+            var newParent = destNodesScope.node;
+            return node.isValidParent(newParent);
         }
 
         function disorderDropped(event) {
             // What are dropped?
-            var disorder = event.source.nodeScope.disorder;
-            var oldParent = event.source.nodesScope.disorder;
-            var newParent = event.dest.nodesScope.disorder;
+            var disorder = event.source.nodeScope.node.resource;
+            var node = event.source.nodeScope.node;
+            var oldParentNode = event.source.nodesScope.node;
+            var newParentNode = event.dest.nodesScope.node;
+
+            var oldParent = event.source.nodesScope.node.resource;
+            var newParent = event.dest.nodesScope.node.resource;
             var oldIndex = event.source.index;
 
             if (oldParent === newParent) {
@@ -142,27 +116,16 @@ angular.module('orphaApp')
             }
             modalService.openEditClassification(vm.classification, disorder, oldParent, newParent)
                 .result.then(function() {
-                    setDisorderAsEdited(disorder);
+                    node.isEdited = true;
                 }, function() {
-                    disorderDroppedCancelled(disorder, oldParent, newParent, oldIndex);
+                    disorderDroppedCancelled(oldParentNode, newParentNode, node,
+                        disorder, oldParent, newParent, oldIndex);
                 });
         }
 
-        function disorderDroppedCancelled(disorder, oldParent, newParent, oldIndex) {
-            var newIndex = newParent.disorder_child.indexOf(disorder);
-            newParent.disorder_child.splice(newIndex, 1);
-            oldParent.disorder_child.splice(oldIndex, 0, disorder);
-        }
-        function setDisorderAsEdited(disorder) {
-            editedDisorders[disorder.nid] = true;
-        }
-        function isEdited(disorder) {
-            return !!editedDisorders[disorder.nid];
-        }
-        function setDisorderAsRemoved(disorder) {
-            removedDisorders[disorder.nid] = true;
-        }
-        function isRemoved(disorder) {
-            return !!removedDisorders[disorder.nid];
-        }
+        function disorderDroppedCancelled(oldParentNode, newParentNode, node,
+                disorder, oldParent, newParent, oldIndex) {
+                oldParentNode.insertChild(node, oldIndex);
+                newParentNode.removeChild(node);
+            }
     });

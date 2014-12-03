@@ -51,7 +51,7 @@
 
         <div ui-tree="vm.treeOptions" class="tree">
             <ol ui-tree-nodes="" ng-model="tree">
-                <li ng-repeat="disorder in tree" ui-tree-node ng-include="'views/tree-disorder-node.html'"></li>
+                <li ng-repeat="node in tree" ui-tree-node ng-include="'views/tree-disorder-node.html'"></li>
             </ol>
         </div>
     </div>

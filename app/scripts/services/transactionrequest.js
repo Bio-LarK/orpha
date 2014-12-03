@@ -92,8 +92,8 @@ angular.module('orphaApp')
                 ltrans_position: this.getTransactions().length,
                 ltrans_onnode: nodeNid,
                 ltrans_onprop: propertyName,
-                ltrans_svalref: fromNid,
-                ltrans_cvalref: toNid
+                ltrans_svalref: toNid,
+                ltrans_cvalref: fromNid
             });
             this.getTransactions().push(transaction);
             return this;
