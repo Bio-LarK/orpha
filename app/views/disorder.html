@@ -1,4 +1,4 @@
-<div class="disorder-page">
+<div>
     <style>
     .details {
         float: left;
@@ -16,41 +16,52 @@
     }
     </style>
 
-    <div class="edit-bar" style="background-color: white; padding: 10px;" ui-scrollfix>
-        <div class="container">
-            <!-- <div>
+    <div class="page-nav">
+        <div class="page-nav-sticky" ui-scrollfix="-50">
+            <div class="container">
+                <ul class="nav nav-pills">
+                    <li ng-class="{'active': $state.includes('disorder') && !isEditing }">
+                        <a href ng-click="stopEditing();">
+                            <i class="fa fa-globe"></i> Public Page
+                        </a>
+                    </li>
+                    <li ng-class="{'active': $state.includes('disorder') && isEditing}">
+                        <a href ng-click="startEditing();">
+                            <i class="fa fa-pencil"></i> Edit
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a href tooltip="Coming soon">
+                            Suggestions
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <div class="edit-bar" style="background-color: white; padding: 10px;" ui-scrollfix>
+        <div class="container "> -->
+    <!-- <div>
                 <button class="btn btn-default" ng-click="startEditing()" ng-hide="isEditing"><i class="fa fa-pencil"></i> Edit</button>
                 <button class="btn btn-default" ng-click="stopEditing()" ng-show="isEditing"><i class="fa fa-check"></i> Finish Editing</button>
             </div> -->
 
-            <!-- <div class="btn-group">
+    <!-- <div class="btn-group">
                 <label class="btn btn-default" ng-class="{'btn-primary': isEditing}" ng-model="isEditing" btn-radio="true">Suggest Change</label>
                 <label class="btn btn-default" ng-model="isEditing" btn-radio="false">Off</label>
             </div> -->
 
-            <!-- <div class="btn-group"> -->
-            <!-- <button class="btn btn-link">
+    <!-- <div class="btn-group"> -->
+    <!-- <button class="btn btn-link">
                 <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:18px;height:18px" alt="" />Dr John Smith
             </button> -->
 
-            <ul class="nav nav-pills" role="tablist">
-                <li ng-class="{'active': $state.includes('disorder') && !isEditing }"><a href ng-click="stopEditing();">
-                    <i class="fa fa-globe"></i>
-                    Public Page</a>
-                </li>
-                <li ng-class="{'active': $state.includes('disorder') && isEditing}"><a href ng-click="startEditing();">
-                    <i class="fa fa-pencil"></i>
-                    Edit</a>
-                </li>
-                <li class="disabled">
-                    <a href tooltip="Coming soon">
-                        Suggestions
-                        <span class="label label-default">3</span>
-                    </a>
-                </li>
-            </ul>
 
-            <!-- <ul class="dropdown-menu" role="menu">
+
+    <!-- <ul class="dropdown-menu" role="menu">
                     <li><a href="#">Action</a>
                     </li>
                     <li><a href="#">Another action</a>
@@ -63,14 +74,14 @@
                 </ul>
             </div>
  -->
-            <!-- <span style="border: 1px solid #ddd; height: 100%; margin: 0 10px; padding: 5px 0" class=""></span>
+    <!-- <span style="border: 1px solid #ddd; height: 100%; margin: 0 10px; padding: 5px 0" class=""></span>
 
             <span>
                 Multiple Epiphyseal Dysplasia, Al-Gazali Type
             </span> -->
 
 
-            <!-- <div class="btn-group">
+    <!-- <div class="btn-group">
                 <label class="btn btn-default" ng-class="{'btn-primary': isEditing}" ng-model="isEditing" btn-radio="false">Page</label>
                 <label class="btn btn-default" ng-model="isEditing" btn-radio="true">
                     Suggestions
@@ -78,7 +89,7 @@
                 </label>
             </div> -->
 
-            <!-- <div style="display: inline-block;" class="pull-right">
+    <!-- <div style="display: inline-block;" class="pull-right">
                 <button class="btn btn-link">
                     Suggestions
                     <span class="label label-primary">3</span>
@@ -89,9 +100,8 @@
             </div> -->
 
 
-        </div>
-
-    </div>
+    <!-- </div>
+    </div> -->
     <div class="container">
 
         <div class="title">
@@ -126,8 +136,8 @@
                                 <span ng-repeat="synonym in disorder.disorder_synonym">
                                     {{ synonym }}
                                     <span ng-show="!$last">,</span>
-                                </span>
-                            </small>
+                        </span>
+                        </small>
                         </span>
                     </div>
                     <div style="margin-top: 5px;">
@@ -240,18 +250,18 @@
                         <div class="panel-body" ng-click="isEditing && editDescription()" ng-class="{'editable-card': isEditing}">
                             <div class="row">
                                 <div class="col-sm-12">
-                                  <!--   <div class="row">
+                                    <!--   <div class="row">
                                         <div class="col-sm-4">
                                             <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Idiopathic_cardiomyopathy%2C_gross_pathology_20G0018_lores.jpg/345px-Idiopathic_cardiomyopathy%2C_gross_pathology_20G0018_lores.jpg" alt="" class="pull-left img-responsive" style="border: 1px solid grey;">
                                         </div>
                                         <div class="col-sm-8" style="border-left: 1px solid #ccc;"> -->
-                                            <div ng-bind-html="disorder.body"></div>
-                                        <!-- </div>
+                                    <div ng-bind-html="disorder.body"></div>
+                                    <!-- </div>
                                     </div> -->
-                                    
 
 
-                                    
+
+
                                 </div>
 
                                 <!--<div class="col-sm-3">
@@ -305,7 +315,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4 style="margin: 0; font-weight: bold; color:rgba(0,0,0,0.6); margin-bottom: 14px; font-size: 14px;">External Identifiers</h4>
-                            
+
                             <dl class="dl-horizontal detail detail-externalidentifiers" style="margin: 0;">
                                 <dt class="detail-title">Orphanumber</dt>
                                 <dd class="detail-info">
@@ -326,7 +336,16 @@
                 </div>
             </div>
         </div>
-    
+
+        <!--  <div class="panels" ng-show="isEditing">
+            <h2>Classification</h2>
+            <div class="panel panel-default editable-card">
+                <div class="panel-body">
+                    Edit Parents or children of {{ disorder.title }}
+                </div>
+            </div>
+        </div> -->
+
         <div class="panels">
             <h2>Classification</h2>
             <div class="spinner" ng-show="disorderTracker.active();">
@@ -334,9 +353,6 @@
             </div>
 
             <div ng-hide="disorderTracker.active()">
-                <p ng-show="disorder.disorder_root" class="text-muted">
-                    Root disorder
-                </p>
                 <p ng-show="disorder.disorder_root == 0 && disorder.disorder_parent.length == 0" class="text-muted">
                     No classification found.
                 </p>
@@ -345,7 +361,25 @@
                     <div class="col-sm-12">
                         <div class="row" ng-repeat="row in disorder.disorder_class | inSlicesOf:3">
                             <div class="col-sm-4" ng-repeat="classification in row">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default editable-card" ng-show="isEditing" ui-sref="editclassification({disorderId: disorder.nid, classificationId: classification.nid})">
+                                    <div class="panel-body">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <div style="width:50px;height:50px;">
+                                                    <colormap classification="classification" type="disorder"></colormap>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h5>
+                                                    {{ classification.title }}
+                                                </h5>
+                                                <p>An Orphanet summary for this classification is currently under development.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default" ng-hide="isEditing">
                                     <div class="panel-body">
                                         <div class="media">
                                             <div class="pull-left">
@@ -361,11 +395,6 @@
                                                     </a> 
                                                 </h5>
                                                 <p>An Orphanet summary for this classification is currently under development.</p>
-                                                <!-- <ul class="list-unstyled" style="margin: 0;">
-                                                    <li ng-repeat="parent in classification.parents">
-                                                        <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
-                                                    </li>
-                                                </ul> -->
                                             </div>
                                         </div>
 
@@ -375,14 +404,6 @@
                                         <a class="list-group-item" href ui-sref="classification({classificationId: classification.nid, disorderId: disorder.nid})">
                                             <i class="fa fa-bullseye"></i> Open to location of {{ disorder.title }}
                                         </a>
-                                        <!-- <div class="list-group-item" ng-show="classification.parents.length">
-                                            <h5>Parents</h5>
-                                            <ul class="list-unstyled">
-                                                <li ng-repeat="parent in classification.parents">
-                                                    <a ui-sref="classification({classificationId: classification.nid, disorderId: parent.nid})">{{ parent.title }}</a>
-                                                </li>
-                                            </ul>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -392,7 +413,7 @@
             </div>
         </div>
 
-        <div class="panels">
+        <div class="panels" ng-hide="isEditing">
             <form class="form-inline pull-right" role="form" ng-show="disorder.disorder_parent.length > 1">
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail2">Filter</label>
@@ -426,7 +447,7 @@
                                                 {{ parent.title }}
                                             </a>
                                         </h5>
-                                        
+
                                         <p>An Orphanet summary for this disease is currently under development.</p>
                                     </div>
                                 </div>
@@ -439,7 +460,7 @@
         </div>
 
 
-        <div class="panels">
+        <div class="panels" ng-hide="isEditing">
             <form class="form-inline pull-right" role="form" ng-show="disorder.disorder_child.length > 1">
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail2">Filter</label>
@@ -473,7 +494,7 @@
                                                 {{ child.title }}
                                             </a>
                                         </h5>
-                                        
+
                                         <p>An Orphanet summary for this disease is currently under development.</p>
                                     </div>
                                 </div>

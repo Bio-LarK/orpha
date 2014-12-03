@@ -77,7 +77,7 @@ angular.module('orphaApp')
 
         function loadSuggestedRef(listTransaction) {
         	var nodeId = listTransaction['ltrans_svalref'];
-            if(!nodeId) {
+            if(!nodeId || nodeId < 1) {
                 return $q.when(false);
             }
             var nodeRequest = {
@@ -92,7 +92,8 @@ angular.module('orphaApp')
 
         function loadCurrentRef(listTransaction) {
         	var nodeId = listTransaction['ltrans_cvalref'];
-            if(!nodeId) {
+            console.log('node is', nodeId);
+            if(!nodeId || nodeId < 1) {
                 return $q.when(false);
             }
             var nodeRequest = {

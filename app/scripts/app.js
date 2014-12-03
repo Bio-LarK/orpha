@@ -27,10 +27,12 @@ angular
         'monospaced.elastic',
         'textAngular',
         'duScroll',
-        'sf.treeRepeat'
+        'sf.treeRepeat',
+        'ui.select',
+        'ui.tree'
     ])
     .run(function ($rootScope, $http, $state, $stateParams, 
-        editableOptions, Page, ENV, siteSearchService) {
+        editableOptions, Page, ENV, siteSearchService, $log) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.Page = Page;
@@ -38,9 +40,11 @@ angular
 
         $rootScope.siteSearchService = siteSearchService;
     })
-    .config(function ($stateProvider, $animateProvider, $urlRouterProvider, RestangularProvider, ENV) {
+    .config(function ($stateProvider, $animateProvider, uiSelectConfig, $urlRouterProvider, RestangularProvider, ENV) {
 
         RestangularProvider.setBaseUrl(ENV.apiEndpoint);
+
+        uiSelectConfig.theme = 'bootstrap';
 
         $animateProvider.classNameFilter(/^((?!(fa-spin)).)*$/);
 
@@ -112,6 +116,11 @@ angular
                 url: '/disorders?page?signId',
                 controller: 'DisordersCtrl as vm',
                 templateUrl: 'views/disorders.html'
+            })
+            .state('editclassification', {
+                url: '/classification/:classificationId/edit?disorderId',
+                controller: 'EditClassificationCtrl as vm',
+                templateUrl: 'views/editclassification.html'
             })
             .state('concept', {
                 url: '/concept/:conceptId',

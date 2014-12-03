@@ -1,0 +1,58 @@
+<div>
+    <style>
+    
+    </style>
+
+
+    <div class="page-nav">
+        <div class="page-nav-sticky" ui-scrollfix="-50">
+            <div class="container">
+                <ul class="nav nav-pills">
+                    <li>
+                        <a href ui-sref="classification($stateParams)">
+                            <i class="fa fa-globe"></i> Public Page
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href ui-sref="editclassification($stateParams)">
+                            <i class="fa fa-pencil"></i> Edit Classification
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="title">
+            <div class="pull-right text-muted text-right" ng-hide="disorderTracker.active()">
+                <!-- TODO: add time -->
+                Updated: {{ vm.classification.changed * 1000 | date:'d/M/yyyy' }}
+            </div>
+            <div class="media">
+                <div class="pull-left">
+                    <div style="width:70px;height:70px;">
+                        <colormap classification="vm.classification" type="disorder"></colormap>
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h1>
+                    {{ vm.classification.title || 'Loading...' }}
+                </h1>
+                    <div style="color: rgba(0,0,0,0.5); margin-top: 7px;">
+                        <span>
+                        <small style="font-size: 16px;">
+                             Classification
+                        </small>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ui-tree="vm.treeOptions" class="tree">
+            <ol ui-tree-nodes="" ng-model="tree">
+                <li ng-repeat="node in tree" ui-tree-node ng-include="'views/tree-disorder-node.html'"></li>
+            </ol>
+        </div>
+    </div>
+</div>

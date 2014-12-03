@@ -1,0 +1,32 @@
+<div>
+    <div ui-tree-handle class="clearfix" ng-class="{'angular-ui-tree-handle-edited': node.isEdited, 'angular-ui-tree-handle-removed': node.isRemoved}">
+        
+        <div class="pull-right">
+            <button class="btn btn-link btn-link-add" data-nodrag data-nodrag ng-click="vm.addSubDisorder(this)">
+                <i class="fa fa-plus"></i> Add Disorder
+            </button>
+            <button class="btn btn-link btn-link-remove" data-nodrag data-nodrag ng-click="vm.removeDisorder(this)">
+                <i class="fa fa-minus"></i> Remove
+            </button>
+            <!-- <button class="btn btn-danger" data-nodrag data-nodrag ng-click="vm.remove(this)">
+                Remove
+            </button> -->
+        </div>
+
+        <button class="btn btn-default btn-tree" data-nodrag ng-click="node.toggle()">
+            <i class="fa" ng-class="{'fa-caret-right': !node.isOpen(), 'fa-caret-down': node.isOpen()}"></i>
+        </button>
+        {{ node.resource.title }}
+    </div>
+    
+    
+    <ol ui-tree-nodes="" ng-model="node.children" ng-show="node.isOpen()">
+        <li ng-repeat="node in node.children" ui-tree-node ng-include="'views/tree-disorder-node.html'">
+        </li>
+        <li ng-show="node.isOpen() && !node.hasLoadedChildren" class="angular-ui-tree-node">
+            <div class="angular-ui-tree-handle" style="padding: 10px;text-align:center;">
+                <i class="fa fa-spin fa-refresh"></i>
+            </div>
+        </li>
+    </ol>
+</div>

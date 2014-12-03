@@ -15,11 +15,16 @@ angular.module('orphaApp')
         vm.classification = null;
         vm.rootDisorder = null;
 
-        vm.selectedDisorder = null;
-
-        vm.initialDisorder = null;
-        vm.selectDisorder = selectDisorder;
+        vm.selectedDisorder = null; // the selected disorder
+        vm.filters = {
+            classifications: [] // the classifications of the child disorders
+        };
+        vm.visibleDisorders = [];
+        vm.initialDisorder = null; 
+        vm.selectDisorder = selectDisorder; 
+        vm.filterByClassifications = filterByClassifications;
         vm.toggleOpen = toggleOpen;
+        vm.filterDisorders = filterDisorders;
 
         activate();
 
@@ -79,9 +84,6 @@ angular.module('orphaApp')
             }); 
         }
 
-
-
-
         function loadClassificationTree() {
             return Classification.get({
                 nid: $stateParams.classificationId //136402
@@ -95,9 +97,11 @@ angular.module('orphaApp')
             });
         }
 
-        function selectDisorder(disorder) {
+        function selectDisorder(disorder, parent) {
             vm.selectedDisorder = disorder;
-            return open(disorder);
+            vm.filters.classifications = [];
+            setVisibleDisorders(vm.selectedDisorder['disorder_child']);
+            return open(disorder, parent);
         }
 
         function toggleOpen(disorder) {
@@ -108,9 +112,17 @@ angular.module('orphaApp')
             return open(disorder);
         }
 
-        function open(disorder) {
+        function open(disorder, parent) {
             disorder.isOpen = true;
-            return disorder.loadChildren();
+            return disorder.loadChildren(vm.classification).then(function(children) {
+                if(children.length === 0) {
+                    // select the parent somehow!
+                    selectDisorder(parent);
+                    return;
+                }
+                $log.debug('open', disorder);
+                setVisibleDisorders(vm.selectedDisorder['disorder_child']);
+            });
         }
 
         function close(disorder) {
@@ -168,6 +180,7 @@ angular.module('orphaApp')
                 loadParents(disorder);
             });
         }
+        
 
         function loadParents(disorder) {
             disorder.isOpen = true;
@@ -182,4 +195,53 @@ angular.module('orphaApp')
             });
         }
 
+        function filterDisorders(disorder, index) {
+            var visibleNids = _.pluck(vm.visibleDisorders, 'nid');
+            if(visibleNids.indexOf(disorder.nid) < 0) {
+                return false;
+            }
+            return true;
+        }
+
+        function setVisibleDisorders(disorders) {
+            vm.visibleDisorders = disorders;
+            setAvailableClassificationFilters(vm.visibleDisorders);
+        }
+        function setAvailableClassificationFilters(disorders) {
+            if(disorders.length === 0 || !angular.isDefined(disorders[0]['disorder_class'])) {
+                vm.classifications = [];
+                return;
+            }
+            var classifications = _.flatten(_.pluck(disorders, 'disorder_class'));
+            vm.classifications = _.reject(_.uniq(classifications, 'nid'), function(classification) {
+                return _.find(vm.filters.classifications, {nid: classification.nid});
+            });
+        }
+
+        function filterByClassifications(classifications) {
+            $log.debug('filtering by classification', classifications);
+            if(vm.filters.classifications.length === 0) {
+                if(vm.selectedDisorder) {
+                    setVisibleDisorders(vm.selectedDisorder['disorder_child']);    
+                }
+                return;
+            }
+
+            var visibleDisorders = _.filter(vm.selectedDisorder['disorder_child'], function(disorder) {
+                // Find all disorders that have all the classifications
+                var filteredClassificationNids = _.pluck(classifications, 'nid');
+                var disorderClassificationNids = _.pluck(disorder['disorder_class'], 'nid');
+                var intersection = _.intersection(filteredClassificationNids, disorderClassificationNids);
+                if(intersection.length !== filteredClassificationNids.length) {
+                    return false;
+                }
+                return true;
+            }, []);
+            setVisibleDisorders(visibleDisorders);
+        }
     });
+
+
+
+
+

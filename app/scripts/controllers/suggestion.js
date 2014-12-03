@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
   .controller('SuggestionCtrl', function ($stateParams, TransactionRequest, $state,
-   $http, toaster, transactionStatusService, $log) {
+   $http, toaster, transactionStatusService, $log, Comment, Page) {
     	var vm = this;
         vm.suggestion = null;
         vm.accept = accept;
@@ -22,9 +22,18 @@ angular.module('orphaApp')
 
     	//////////
     	function activate() {
+
+            Page.setTitle('Suggestion');
+
+            // Load the comments
+            Comment.getForTransactionRequest($stateParams.suggestionId).then(function(comments) {
+                vm.comments = comments;
+            });
+
             TransactionRequest.get({
                 nid: $stateParams.suggestionId
             }).$promise.then(function(transactionRequest) {
+                Page.setTitle(transactionRequest.title);
                 transactionRequest.loadTransactions().then(function() {
                     transactionRequest.loadDescription();    
                 });
@@ -37,17 +46,6 @@ angular.module('orphaApp')
                     vm.suggestion.isRejected = transactionStatusService.isRejectedTr(vm.suggestion);
                     vm.suggestion.isSubmitted = transactionStatusService.isSubmittedTr(vm.suggestion);
                 });
-                // _.each(transactionRequest['$tr_trans'], function(listTransaction) {
-                //     listTransaction.loadReferences().then(function(listTransaction) {
-                //         // bit of moving stuff about
-                //         // the transaction request needs to know the nodes
-                //         // but it doesnt, so we just grab those from the first 
-                //         // list transaction
-                //         if(!transactionRequest.$relatedNodes) {
-                //             transactionRequest.$relatedNodes = listTransaction.relatedNodes;
-                //         }
-                //     });
-                // });
             });
     	}
 
@@ -65,8 +63,11 @@ angular.module('orphaApp')
             });
         }
 
-        function addComment(comment) {
-            vm.comments.push(comment);
+        function addComment(comment, transactionRequest) {
+            var newComment = Comment.create(comment.text, transactionRequest.nid);
+            newComment.$save();
+
+            vm.comments.push(newComment);
             vm.comment = {};
         }
   });

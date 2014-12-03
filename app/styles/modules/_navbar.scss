@@ -18,7 +18,7 @@
 	color: rgba(0,0,0,0.8);
 	font-size: 14px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
-	z-index: 1;
+	z-index: 2;
 
 	.navbar-brand {
 		text-transform: uppercase;
@@ -49,6 +49,14 @@
 	}
 	.nav > li.active > a:hover, .nav > li.active > a:focus {
 		background-color: white;
+	}
+
+	.navbar-search .dropdown-menu {
+		max-width: 400px;
+		li > a {
+			white-space: normal;
+			cursor: pointer;
+		}
 	}
 }
 

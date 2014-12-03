@@ -1,3 +1,101 @@
+<a name="0.21.13"></a>
+### 0.21.13 (2014-12-03)
+
+
+<a name="0.21.12"></a>
+### 0.21.12 (2014-12-01)
+
+
+<a name="0.21.11"></a>
+### 0.21.11 (2014-11-28)
+
+
+<a name="0.21.10"></a>
+### 0.21.10 (2014-11-28)
+
+
+<a name="0.21.9"></a>
+### 0.21.9 (2014-11-26)
+
+
+<a name="0.21.8"></a>
+### 0.21.8 (2014-11-25)
+
+
+<a name="0.21.7"></a>
+### 0.21.7 (2014-11-25)
+
+
+#### Features
+
+* **classification:** add edit classification page ([91e0ac3d](git@github.com:Bio-LarK/orpha/commit/91e0ac3d50a697236c9c3a9d9763f16442f483fe))
+
+
+<a name="0.21.6"></a>
+### 0.21.6 (2014-11-19)
+
+
+<a name="0.21.5"></a>
+### 0.21.5 (2014-11-13)
+
+
+#### Features
+
+* **suggestions:** add comments ([0e6a69dd](git@github.com:Bio-LarK/orpha/commit/0e6a69dd9ea78659ed2efd593a672a017c86f37b))
+
+
+<a name="0.21.4"></a>
+### 0.21.4 (2014-11-04)
+
+
+#### Bug Fixes
+
+* **routes:** update ui-router to fix problem with angular 1.3 ([8dd1e1c4](git@github.com:Bio-LarK/orpha/commit/8dd1e1c4d1a76ebe1307586531ec65eb8234b4c3), closes [#82](git@github.com:Bio-LarK/orpha/issues/82))
+* **site-search:** fix showing 'added suggestions' in dropdown ([a46a4644](git@github.com:Bio-LarK/orpha/commit/a46a464453de4f7a9a2936c7bc67b80ebc2e45e7), closes [#83](git@github.com:Bio-LarK/orpha/issues/83))
+
+
+<a name="0.21.3"></a>
+### 0.21.3 (2014-11-04)
+
+
+#### Bug Fixes
+
+* **search:** results now appear above page-nav-bar ([2f87cbb0](git@github.com:Bio-LarK/orpha/commit/2f87cbb059ca1277279385ec9908af7ccae1f657))
+
+
+<a name="0.21.2"></a>
+### 0.21.2 (2014-11-04)
+
+
+#### Bug Fixes
+
+* **classifications:** remove duplicates in filters ([91966957](git@github.com:Bio-LarK/orpha/commit/919669574b397871ea117043ee985e76488f00f7))
+* **navbar:** fix typeahead selection ([07161218](git@github.com:Bio-LarK/orpha/commit/07161218491cc162350e4a1be0baf188f9ae6524))
+
+
+<a name="0.21.1"></a>
+### 0.21.1 (2014-10-28)
+
+
+#### Bug Fixes
+
+* **classifications:** fix no children in classification ([9220c74a](git@github.com:Bio-LarK/orpha/commit/9220c74a14c7f12525fae154963338c3c83f5cf2))
+
+
+<a name="0.21.0"></a>
+## 0.21.0 (2014-10-28)
+
+
+#### Bug Fixes
+
+* **karma:** try and fix karma ([75dbfd72](git@github.com:Bio-LarK/orpha/commit/75dbfd72d9860aae9d864993fdcdd9386dc55842))
+
+
+#### Features
+
+* **classification:** add filter ([f0f9c655](git@github.com:Bio-LarK/orpha/commit/f0f9c6552ba688ed436cb2f463731650e4417516))
+
+
 <a name="0.20.7"></a>
 ### 0.20.7 (2014-10-23)
 

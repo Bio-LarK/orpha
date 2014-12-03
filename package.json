@@ -1,7 +1,6 @@
 {
   "name": "orpha",
-  "version": "0.20.7",
-  "dependencies": {},
+  "version": "0.21.13",
   "devDependencies": {
     "grunt": "^0.4.1",
     "grunt-autoprefixer": "^0.7.3",
@@ -24,7 +23,7 @@
     "grunt-filerev": "^0.2.1",
     "grunt-gh-pages": "^0.9.1",
     "grunt-google-cdn": "^0.4.0",
-    "grunt-karma": "^0.8.3",
+    "grunt-karma": "^0.9.0",
     "grunt-newer": "^0.7.0",
     "grunt-ng-constant": "^1.0.0",
     "grunt-ngmin": "^0.0.3",
@@ -32,7 +31,7 @@
     "grunt-usemin": "^2.1.1",
     "grunt-wiredep": "^1.7.0",
     "jshint-stylish": "^0.2.0",
-    "karma": "^0.12.19",
+    "karma": "^0.12.24",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^0.4.0",
