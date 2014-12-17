@@ -46,7 +46,7 @@
                         <i class="fa fa-globe"></i> Public Page
                     </a>
                 </li>
-                <li>
+                <li ng-show="authService.currentUser">
                     <a href ui-sref="editclassification($stateParams)">
                         <i class="fa fa-pencil"></i> Edit Classification
                     </a>

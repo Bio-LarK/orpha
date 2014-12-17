@@ -13,7 +13,7 @@
                             <i class="fa fa-globe"></i> Public Page
                         </a>
                     </li>
-                    <li class="active">
+                    <li class="active" ng-show="authService.currentUser">
                         <a href ui-sref="editclassification($stateParams)">
                             <i class="fa fa-pencil"></i> Edit Classification
                         </a>
@@ -22,6 +22,7 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="title">
             <div class="pull-right text-muted text-right" ng-hide="disorderTracker.active()">

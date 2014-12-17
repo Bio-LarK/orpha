@@ -25,14 +25,9 @@
                             <i class="fa fa-globe"></i> Public Page
                         </a>
                     </li>
-                    <li ng-class="{'active': $state.includes('disorder') && isEditing}">
+                    <li ng-show="authService.currentUser" ng-class="{'active': $state.includes('disorder') && isEditing}">
                         <a href ng-click="startEditing();">
                             <i class="fa fa-pencil"></i> Edit
-                        </a>
-                    </li>
-                    <li class="disabled">
-                        <a href tooltip="Coming soon">
-                            Suggestions
                         </a>
                     </li>
                 </ul>
