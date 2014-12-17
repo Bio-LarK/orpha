@@ -55,6 +55,7 @@ module.exports = function(config) {
       'bower_components/angular-tree-repeat/angular-tree-repeat.min.js',
       'bower_components/promise-tracker/promise-tracker.js',
       'bower_components/angular-ui-select/dist/select.js',
+      'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

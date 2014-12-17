@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
     .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, $log,
-        Page, promiseTracker, $modal, modalService, Sign, Gene) {
+        Page, promiseTracker, $modal, modalService, Sign, Gene, authService) {
         var vm = $scope;
         vm.disorderTracker = promiseTracker();
         vm.disorder = null;
@@ -90,7 +90,18 @@ angular.module('orphaApp')
         }
 
         function startEditing() {
-            vm.isEditing = true;
+            // check
+            return authService.isSessionValid().then(function(isValid) {
+                console.log('is valid?', isValid);
+                if(!isValid) {
+                    return authService.openLoginModal().then(function(user) {
+                        vm.isEditing = true;
+                    }, function() {
+                        stopEditing();
+                    });
+                }
+                vm.isEditing = true;
+            });
         }
         function stopEditing() {
             vm.isEditing = false;

@@ -11,6 +11,7 @@
 angular
     .module('orphaApp', [
         'ngAnimate',
+        'ngCookies',
         'ngSanitize',
         'ngResource',
         'ui.router',
@@ -31,16 +32,36 @@ angular
         'ui.select',
         'ui.tree'
     ])
-    .run(function ($rootScope, $http, $state, $stateParams, 
-        editableOptions, Page, ENV, siteSearchService, $log) {
+    .run(function($rootScope, $http, $state, $stateParams,
+        editableOptions, Page, ENV, siteSearchService, $log, authService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.Page = Page;
+        $rootScope.authService = authService;
         editableOptions.theme = 'bs3';
 
         $rootScope.siteSearchService = siteSearchService;
+
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {            
+            if(!authService.isLoginRequiredToState(toState)) {
+                return;
+            }
+
+            event.preventDefault();
+            authService.isSessionValid().then(function(isValid) {
+                if(!!isValid) {
+                    return $state.go(toState.name, toParams);
+                }
+                authService.openLoginModal().then(function() {
+                    $state.go(toState.name, toParams);
+                }, function() {
+                    $state.go('home');
+                });
+            });
+        });
     })
-    .config(function ($stateProvider, $animateProvider, uiSelectConfig, $urlRouterProvider, RestangularProvider, ENV) {
+    .config(function($stateProvider, $animateProvider, uiSelectConfig, $urlRouterProvider, RestangularProvider, ENV) {
 
         RestangularProvider.setBaseUrl(ENV.apiEndpoint);
 
@@ -50,7 +71,8 @@ angular
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/landing');
-        //
+        $urlRouterProvider.when('/suggestions', '/suggestions/index');
+
         // Now set up the states
         $stateProvider
             .state('home', {
@@ -94,10 +116,21 @@ angular
                 controller: 'SignsCtrl',
                 templateUrl: 'views/signs.html'
             })
+            // .state('suggestions', {
+            //     url: '/suggestions',
+            //     abstract: true,
+            //     template: '<ui-view/>',
+            //     data: {
+            //         requireLogin: true
+            //     }
+            // })
             .state('suggestions', {
-                url: '/suggestions',
+                url: '/suggestions/index',
                 controller: 'SuggestionsCtrl as vm',
                 templateUrl: 'views/suggestions.html',
+                data: {
+                    requireLogin: true
+                }
             })
             .state('suggestion', {
                 url: '/suggestions/:suggestionId',
@@ -120,14 +153,17 @@ angular
             .state('editclassification', {
                 url: '/classification/:classificationId/edit?disorderId',
                 controller: 'EditClassificationCtrl as vm',
-                templateUrl: 'views/editclassification.html'
+                templateUrl: 'views/editclassification.html',
+                data: {
+                    requireLogin: true
+                }
             })
             .state('concept', {
                 url: '/concept/:conceptId',
-                controller: function ($scope, Disorder) {
+                controller: function($scope, Disorder) {
                     var disorder = Disorder.get({
                         nid: 136402
-                    }, function () {
+                    }, function() {
                         $scope.disorder = disorder;
                     });
                 },

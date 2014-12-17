@@ -85,7 +85,7 @@
 
                 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
+                    <li class="dropdown" ng-show="authService.currentUser">
                         <a href="#" class="dropdown-toggle">
                             <!-- <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:20px;height:20px" alt="" />
                             Dr John Smith  -->
@@ -93,14 +93,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a>
-                            </li>
-                            <li><a href="#">Another action</a>
-                            </li>
-                            <li><a href="#">Something else here</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a>
+                            <li><a ng-click="authService.logout()">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -216,6 +209,7 @@
     <script src="bower_components/angular-tree-repeat/angular-tree-repeat.min.js"></script>
     <script src="bower_components/promise-tracker/promise-tracker.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -273,6 +267,8 @@
     <script src="scripts/controllers/modals/removedisorderfromclassification.js"></script>
     <script src="scripts/services/transactionrequestrepository.js"></script>
     <script src="scripts/services/cmtreenode.js"></script>
+    <script src="scripts/services/authservice.js"></script>
+    <script src="scripts/controllers/loginmodal.js"></script>
     <!-- endbuild -->
 </body>
 

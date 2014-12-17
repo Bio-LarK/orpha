@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 
 /**
  * @ngdoc service
@@ -50,9 +50,11 @@ angular.module('orphaApp')
             /* jshint validthis: true */
             if (this._isOpen) {
                 this.close();
-                return;
+                return $q.when(this.isOpen);
             }
-            this.open();
+            return this.open().then(function() {
+                return this.isOpen();
+            }.bind(this));
         }
 
         function openNode() {
