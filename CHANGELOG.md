@@ -1,3 +1,12 @@
+<a name="0.21.15"></a>
+### 0.21.15 (2014-12-17)
+
+
+#### Bug Fixes
+
+* **auth:** change to use environment endpoint ([2105cfec](git@github.com:Bio-LarK/orpha/commit/2105cfec22f5d1ecd7218aad4cebb52571e3351b))
+
+
 <a name="0.21.14"></a>
 ### 0.21.14 (2014-12-17)
 
