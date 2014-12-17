@@ -50,7 +50,7 @@ angular
 
             event.preventDefault();
             authService.isSessionValid().then(function(isValid) {
-                if(!!isValid) {
+                if(isValid) {
                     return $state.go(toState.name, toParams);
                 }
                 authService.openLoginModal().then(function() {

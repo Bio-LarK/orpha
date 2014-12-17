@@ -90,7 +90,7 @@ angular.module('orphaApp')
                     if (isNotProduction()) {
                         hackCookies(session);
                     }
-                    return assignCurrentUser(session.user);
+                    return !!assignCurrentUser(session.user);
                 }
                 return false;
             });
