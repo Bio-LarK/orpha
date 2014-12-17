@@ -1,3 +1,12 @@
+<a name="0.21.14"></a>
+### 0.21.14 (2014-12-17)
+
+
+#### Features
+
+* **auth:** add logins for editing and suggestions ([137017aa](git@github.com:Bio-LarK/orpha/commit/137017aa1a0ca16ead33ae76c7d6534eca13a4a0))
+
+
 <a name="0.21.13"></a>
 ### 0.21.13 (2014-12-03)
 
