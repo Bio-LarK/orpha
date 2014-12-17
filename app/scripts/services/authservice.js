@@ -8,7 +8,7 @@
  * Factory in the orphaApp.
  */
 angular.module('orphaApp')
-    .factory('authService', function($modal, $http, $cookies, $q, $state, $rootScope) {
+    .factory('authService', function($modal, $http, $cookies, $q, $state, $rootScope, ENV) {
         var authService = {
             openLoginModal: openLoginModal,
             isLoginRequiredToState: isLoginRequiredToState,
@@ -36,7 +36,7 @@ angular.module('orphaApp')
 
         function getCurrentSession() {
             return getCSRF().then(function() {
-                return $http.post('api/system/connect', {}).then(function(response) {
+                return $http.post(ENV.apiEndpoint + '/system/connect', {}).then(function(response) {
                     return response.data;
                 });
             });
@@ -44,7 +44,7 @@ angular.module('orphaApp')
 
         function login(credentials) {
             return getCSRF().then(function() {
-                return $http.post('api/user/login', credentials).then(function(response) {
+                return $http.post(ENV.apiEndpoint + '/user/login', credentials).then(function(response) {
                     var session = response.data;
                     saveCSRF(session.token);
                     if (isNotProduction()) {
@@ -56,14 +56,14 @@ angular.module('orphaApp')
         }
 
         function logout() {
-            return $http.post('api/user/logout', {}).then(function(response) {
+            return $http.post(ENV.apiEndpoint + '/user/logout', {}).then(function(response) {
                 delete authService.currentUser;
                 // TODO: decouple this from determining the default state
                 $state.go('home');
             });
         }
         function getCSRF() {
-            return $http.post('api/user/token', {}).then(function(response) {
+            return $http.post(ENV.apiEndpoint + '/user/token', {}).then(function(response) {
                 var token = response.data.token;
                 saveCSRF(token);
                 return token;
