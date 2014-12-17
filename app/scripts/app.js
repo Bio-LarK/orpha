@@ -47,7 +47,6 @@ angular
             if(!authService.isLoginRequiredToState(toState)) {
                 return;
             }
-
             event.preventDefault();
             authService.isSessionValid().then(function(isValid) {
                 if(isValid) {
@@ -74,7 +73,6 @@ angular
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/landing');
-        $urlRouterProvider.when('/suggestions', '/suggestions/index');
 
         // Now set up the states
         $stateProvider
