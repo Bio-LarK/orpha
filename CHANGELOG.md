@@ -1,3 +1,12 @@
+<a name="0.21.18"></a>
+### 0.21.18 (2014-12-17)
+
+
+#### Bug Fixes
+
+* **app:** fix redirection ([b1dc54b5](git@github.com:Bio-LarK/orpha/commit/b1dc54b547d1e7aaabfee4ffed18136abfe6bf14))
+
+
 <a name="0.21.17"></a>
 ### 0.21.17 (2014-12-17)
 
