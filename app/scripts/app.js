@@ -43,7 +43,7 @@ angular
         $rootScope.siteSearchService = siteSearchService;
 
 
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {            
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {            
             if(!authService.isLoginRequiredToState(toState)) {
                 return;
             }
@@ -54,9 +54,12 @@ angular
                     return $state.go(toState.name, toParams);
                 }
                 authService.openLoginModal().then(function() {
-                    $state.go(toState.name, toParams);
+                    return $state.go(toState.name, toParams);
                 }, function() {
-                    $state.go('home');
+                    if(!fromState.name) {
+                        return $state.go('home');
+                    }
+                    return $state.go(fromState.name, fromParams);
                 });
             });
         });
