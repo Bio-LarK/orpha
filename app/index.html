@@ -28,11 +28,10 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 </head>
 
-<body >
+<body>
     <toaster-container></toaster-container>
-    
+
     <style>
-        
     </style>
     <nav class="navbar navbar-bright" ng-class="{'navbar-tour': $state.includes('tour')}" role="navigation" ui-scrollfix="+1">
         <div class="container">
@@ -44,7 +43,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="home"><img style="width: 100px; position: relative; top: -2px;" src="images/logo-orphanet.png" alt=""></a>
+                <a class="navbar-brand" ui-sref="home"><img style="width: 100px; position: relative; top: -2px;" src="images/logo-orphanet.png" alt="">
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,7 +62,7 @@
                     </li>
                     <li ng-class="{'active': $state.includes('signs') || $state.includes('sign')}"><a ui-sref="signs">Clinical Signs</a>
                     </li>
-                    <li ng-class="{'active': $state.includes('suggestion') || $state.includes('suggestions')}"><a ui-sref="suggestions">Suggestions</a>
+                    <li ng-show="authService.currentUser" ng-class="{'active': $state.includes('suggestion') || $state.includes('suggestions')}"><a ui-sref="suggestions">Suggestions</a>
                     </li>
                     <!--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
@@ -83,7 +83,7 @@
                     </li>-->
                 </ul>
 
-                
+
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" ng-show="authService.currentUser">
                         <a href="#" class="dropdown-toggle">
@@ -97,14 +97,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li ng-hide="authService.currentUser">
+                        <a ng-click="authService.openLoginModal()" href>
+                            Login
+                        </a>
+                    </li>
                 </ul>
-                <form class="navbar-form navbar-right navbar-search" role="search">
+                <form class="navbar-form navbar-right navbar-search" role="search" style="margin-right:10px;">
                     <div class="form-group">
                         <input type="text" class="form-control" ng-model="siteSearchService.query" placeholder="Search" typeahead="result.title for result in siteSearchService.getResults($viewValue)" typeahead-on-select="siteSearchService.changed($item, $model, $label)">
                     </div>
                     <!-- <button type="submit" class="btn btn-default">Search</button> -->
                 </form>
-                
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -117,9 +122,9 @@
     <!-- Add your site or application content here -->
     <div>
         <div style="background-color: #F4F4F4; padding-bottom: 40px;">
-            <ui-view></ui-view>    
+            <ui-view></ui-view>
         </div>
-        
+
         <!-- <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div> -->
 
         <footer class="footer">
@@ -132,11 +137,11 @@
                         <img src="images/logo-orphanet.png" alt="">
                     </li>
                     <li class="logo-list-item logo-list-item-garvan">
-                        <img src="images/logo-garvan.png" alt="" class="logo">    
+                        <img src="images/logo-garvan.png" alt="" class="logo">
                     </li>
                     <li class="logo-list-item logo-list-item-uq">
-                        <img src="images/logo-uq.gif" alt="">    
-                    </li>                
+                        <img src="images/logo-uq.gif" alt="">
+                    </li>
                     <li class="logo-list-item logo-list-item-usyd">
                         <img src="images/logo-usyd.jpeg" alt="">
                     </li>
@@ -155,7 +160,7 @@
             (i[r].q = i[r].q || []).push(arguments)
         }, i[r].l = 1 * new Date();
         a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
+            m = s.getElementsByTagName(o)[0];
         a.async = 1;
         a.src = g;
         m.parentNode.insertBefore(a, m)

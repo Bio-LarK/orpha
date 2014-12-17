@@ -45,6 +45,9 @@ angular
 
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {            
             if(!authService.isLoginRequiredToState(toState)) {
+                // Check if the session is valid just for fun
+                // just so its set up for other requiests
+                authService.isSessionValid();
                 return;
             }
             event.preventDefault();
