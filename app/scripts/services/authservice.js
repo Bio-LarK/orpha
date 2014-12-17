@@ -59,7 +59,10 @@ angular.module('orphaApp')
             return $http.post(ENV.apiEndpoint + '/user/logout', {}).then(function(response) {
                 delete authService.currentUser;
                 // TODO: decouple this from determining the default state
-                $state.go('home');
+
+                if(isLoginRequiredToState($state.current)) {
+                    $state.go('home');
+                }
             });
         }
         function getCSRF() {
