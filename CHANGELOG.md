@@ -1,3 +1,12 @@
+<a name="0.21.20"></a>
+### 0.21.20 (2014-12-18)
+
+
+#### Features
+
+* **user:** add user page ([80ab7745](git@github.com:Bio-LarK/orpha/commit/80ab7745818dea1c03568d21910fce94ead35165))
+
+
 <a name="0.21.19"></a>
 ### 0.21.19 (2014-12-17)
 
