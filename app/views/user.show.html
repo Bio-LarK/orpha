@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="title">
+        <div class="pull-right text-muted text-right" ng-hide="disorderTracker.active()">
+
+            <!-- Updated {{ disorder.changed * 1000 | date:'d/M/yyyy' }} -->
+        </div>
+        <div class="media">
+            <div class="pull-left">
+                <div style="width:70px;height:70px;background-color:#ddd;">
+                </div>
+            </div>
+            <div class="media-body">
+                <h1>
+                   {{ vm.user.name }}    
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contributions -->
+    <h2>Contributions</h2>
+    <div ng-repeat="transactionRequest in vm.transactionRequests">
+    	<a ui-sref="suggestion({suggestionId: transactionRequest.nid})">{{ transactionRequest.title }}</a>
+    </div>
+</div>

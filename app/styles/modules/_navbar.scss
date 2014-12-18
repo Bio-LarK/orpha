@@ -30,10 +30,10 @@
 		background-color: rgba(255, 255, 255, 0.5);
 		box-shadow: none;
 	}
-	.navbar-nav li {
+	.navbar-nav > li {
 		margin-right: 5px;
 	}
-	.navbar-nav li a {
+	.navbar-nav > li > a {
 		border-radius: 3px;
 		margin: 7px 0;
 		padding-top: 7px;

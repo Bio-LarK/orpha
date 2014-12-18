@@ -20,28 +20,6 @@ angular.module('orphaApp')
 
         ///////
 
-        function assignCurrentUser(user) {
-            authService.currentUser = user;
-            return user;
-        }
-
-        function openLoginModal() {
-            var instance = $modal.open({
-                templateUrl: 'views/modals/login.html',
-                controller: 'LoginModalCtrl',
-                controllerAs: 'vm'
-            });
-            return instance.result;
-        }
-
-        function getCurrentSession() {
-            return getCSRF().then(function() {
-                return $http.post(ENV.apiEndpoint + '/system/connect', {}).then(function(response) {
-                    return response.data;
-                });
-            });
-        }
-
         function login(credentials) {
             return getCSRF().then(function() {
                 return $http.post(ENV.apiEndpoint + '/user/login', credentials).then(function(response) {
@@ -65,6 +43,29 @@ angular.module('orphaApp')
                 }
             });
         }
+
+        function assignCurrentUser(user) {
+            authService.currentUser = user;
+            return user;
+        }
+
+        function openLoginModal() {
+            var instance = $modal.open({
+                templateUrl: 'views/modals/login.html',
+                controller: 'LoginModalCtrl',
+                controllerAs: 'vm'
+            });
+            return instance.result;
+        }
+
+        function getCurrentSession() {
+            return getCSRF().then(function() {
+                return $http.post(ENV.apiEndpoint + '/system/connect', {}).then(function(response) {
+                    return response.data;
+                });
+            });
+        }
+
         function getCSRF() {
             return $http.post(ENV.apiEndpoint + '/user/token', {}).then(function(response) {
                 var token = response.data.token;

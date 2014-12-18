@@ -84,6 +84,24 @@ angular
                 controller: 'HomeCtrl as vm',
                 templateUrl: 'views/home.html'
             })
+            .state('user', {
+                abstract: true,
+                url: '/users/:userId',
+                template: '<ui-view/>'
+            })
+            .state('user.show', {
+                url: '',
+                controller: 'UserCtrl',
+                controllerAs: 'vm',
+                templateUrl: 'views/user.show.html'
+            }) 
+            .state('user.edit', {
+                url: '/edit',
+                template: '<h1>Edit</h1>',
+                data: {
+                    requireLogin: true
+                }
+            })
             .state('classification', {
                 url: '/classification/:classificationId?disorderId',
                 controller: 'ClassificationCtrl as vm',

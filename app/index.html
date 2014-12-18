@@ -93,6 +93,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a ui-sref="user.show({userId: authService.currentUser.uid })">{{ authService.currentUser.name }} Profile</a>
+                            </li>
                             <li><a ng-click="authService.logout()">Logout</a>
                             </li>
                         </ul>
@@ -274,6 +276,8 @@
     <script src="scripts/services/cmtreenode.js"></script>
     <script src="scripts/services/authservice.js"></script>
     <script src="scripts/controllers/loginmodal.js"></script>
+    <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/services/user.js"></script>
     <!-- endbuild -->
 </body>
 

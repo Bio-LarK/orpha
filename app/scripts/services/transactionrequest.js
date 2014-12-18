@@ -40,6 +40,7 @@ angular.module('orphaApp')
 
         TransactionRequest.getOpen = getOpen;
         TransactionRequest.getClosed = getClosed;
+        TransactionRequest.getForUser = getForUser;
         TransactionRequest.create = create;
         return TransactionRequest;
 
@@ -68,15 +69,18 @@ angular.module('orphaApp')
             console.log('it set reason');
             return this;
         }
+
         function setTitle(title) {
             /* jshint validthis: true */
             this.title = title;
             return this;
         }
+
         function getTransactions() {
             /* jshint validthis: true */
             return this.$$transactions;
         }
+
         function addTransaction(transaction) {
             /* jshint validthis: true */
             this.getTransactions().push(transaction);
@@ -98,6 +102,7 @@ angular.module('orphaApp')
             this.getTransactions().push(transaction);
             return this;
         }
+
         function addAddTransaction(nodeNid, propertyName, newNid) {
             /* jshint validthis: true */
             var transaction = new ListTransaction({
@@ -112,6 +117,7 @@ angular.module('orphaApp')
             this.getTransactions().push(transaction);
             return this;
         }
+
         function addRemoveTransaction(nodeNid, propertyName, currentNid) {
             /* jshint validthis: true */
             var transaction = new ListTransaction({
@@ -146,6 +152,18 @@ angular.module('orphaApp')
             });
         }
 
+        function getForUser(userId) {
+            // return transactionStatusService.loadStatusCodes().then(function() {
+                return TransactionRequest.query({
+                    'uid': userId
+                }).$promise.then(function(transactionRequests) {
+                    return transactionRequests;
+                }, function() {
+                    return [];
+                });
+            // });
+        }
+
         function getOpen(page) {
             if (!page) {
                 page = 0;
@@ -171,24 +189,12 @@ angular.module('orphaApp')
             if (!page) {
                 page = 0;
             }
+            // TODO: Make this less gross
             return transactionStatusService.loadStatusCodes().then(function() {
-                var promise1 = TransactionRequest.query({
-                    'parameters[tr_status]': transactionStatusService.acceptedNid,
-                    page: page
-                }).$promise.then(function(transactionRequests) {
-                    return transactionRequests;
-                }, function() {
-                    return [];
-                });
-                var promise2 = TransactionRequest.query({
-                    'parameters[tr_status]': transactionStatusService.rejectedNid,
-                    page: page
-                }).$promise.then(function(transactionRequests) {
-                    return transactionRequests;
-                }, function() {
-                    return [];
-                });
-                return $q.all([promise1, promise2]).then(function(requests) {
+                return $q.all([
+                    _getAccepted(page),
+                    _getRejected(page)
+                ]).then(function(requests) {
                     var closedTransactionRequests = _.flatten(requests);
                     if (requests[0].length !== 20 && requests[1].length !== 20) {
                         return closedTransactionRequests;
@@ -197,6 +203,25 @@ angular.module('orphaApp')
                         return closedTransactionRequests.concat(otherClosedTransactionRequests);
                     });
                 });
+            });
+        }
+
+        function _getAccepted(page) {
+            return _getStatus(transactionStatusService.acceptedNid, page);
+        }
+
+        function _getRejected(page) {
+            return _getStatus(transactionStatusService.rejectedNid, page);
+        }
+
+        function _getStatus(status, page) {
+            return TransactionRequest.query({
+                'parameters[tr_status]': status,
+                page: page
+            }).$promise.then(function(transactionRequests) {
+                return transactionRequests;
+            }, function() {
+                return [];
             });
         }
 
