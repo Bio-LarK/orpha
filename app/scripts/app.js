@@ -93,6 +93,13 @@ angular
                 url: '',
                 controller: 'UserCtrl',
                 controllerAs: 'vm',
+                data: {
+                    // TODO: remove this
+                    // this is there currently since user.show is only showing
+                    // the logged in users profile page
+                    // in the future, when users can register, this will be removed
+                    requireLogin: true 
+                },
                 templateUrl: 'views/user.show.html'
             }) 
             .state('user.edit', {
