@@ -1,3 +1,13 @@
+<a name="0.21.21"></a>
+### 0.21.21 (2014-12-19)
+
+
+#### Features
+
+* **profile:** add profile module ([73829e55](git@github.com:Bio-LarK/orpha/commit/73829e559cee60674678fa4c443ee7345c3a6cdd))
+* **user:** add user profile page for logged in user ([2dd776c9](git@github.com:Bio-LarK/orpha/commit/2dd776c9ef0458f3ab8fc90d869a91a4d06956d8))
+
+
 <a name="0.21.20"></a>
 ### 0.21.20 (2014-12-18)
 
