@@ -95,7 +95,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a ui-sref="user.show({userId: authService.currentUser.uid })">{{ authService.currentUser.name }} Profile</a>
                             </li>
-                            <li><a ng-click="authService.logout()">Logout</a>
+                            <li><a href ng-click="authService.logout()">Logout</a>
                             </li>
                         </ul>
                     </li>
