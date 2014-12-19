@@ -13,6 +13,9 @@ describe('Service: disorder', function() {
         $httpBackend = _$httpBackend_;
         ENV = _ENV_;
         $httpBackend.whenGET(/views.*/).respond(200, '');
+        $httpBackend.whenPOST('api/user/token').respond(200, '{"token":"76kooYEu-BP2dT7wWfZM9JFitKFCMa-AJrjUgL5VDHo"}');
+        $httpBackend.whenPOST('api/system/connect').respond(200, '{"sessid":"KiXFcIQi9T2vnfM-XadmxS2ewjwUX7VsxcSx9kvplOE","session_name":"SESS429e3c08d2c1664d563d8b3d34d8bac0","user":{"uid":"1","name":"orpha","mail":"tudor.groza@gmail.com","theme":"","signature":"","signature_format":null,"created":"1412727388","access":"1418947485","login":"1418860645","status":"1","timezone":"Australia/Brisbane","language":"","picture":"0","init":"tudor.groza@gmail.com","data":false,"sid":"KiXFcIQi9T2vnfM-XadmxS2ewjwUX7VsxcSx9kvplOE","ssid":"","hostname":"130.102.158.16","timestamp":"1418947485","cache":"0","session":"","roles":{"2":"authenticated user","3":"administrator"}}}');
+
         disorder = new Disorder({
             'body': [],
             'disorder_orphaid': '12948',

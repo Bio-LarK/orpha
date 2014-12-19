@@ -6,20 +6,93 @@
         </div>
         <div class="media">
             <div class="pull-left">
-                <div style="width:70px;height:70px;background-color:#ddd;">
-                </div>
+                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/128.jpg" style="width75px;height:75px" alt="" />
             </div>
             <div class="media-body">
-                <h1>
-                   {{ vm.user.name }}    
+                <h1 style="margin-bottom:10px;">
+                    Dr John Smith
+                   <!-- {{ vm.user.name }}     -->
                 </h1>
+                <p class="text-muted">
+                    Joined December 19th 2014
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- Contributions -->
-    <h2>Contributions</h2>
-    <div ng-repeat="transactionRequest in vm.transactionRequests">
-    	<a ui-sref="suggestion({suggestionId: transactionRequest.nid})">{{ transactionRequest.title }}</a>
+    <div class="panels">
+        <h2>Biography</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    Prof Smith is Head of the Academic Department of Medical Genetics at the Sydney Children's Hospital Network (Westmead) and Professor of Medical Genetics at the University of Sydney. In his clinical role, Prof Smith is a clinical geneticist with an interest in rare diseases, in particular skeletal dysplasias. He heads the Sydney Children's Hospital Network's Connective Tissue Dysplasia Service, one of the oldest and largest bone dysplasia clinics in the world. Together with an interdisciplinary team of clinical geneticists, endocrinologists, rehabilitation medicine specialists, orthopaedic surgeons and allied health professionals he tries to provide patients with skeletal dysplasias with the best possible care. This also includes clinical research, such as natural history studies and clinical trials.
+                </p>
+                <p>
+                    Prof Smith's other research interest is in clinical genomics, bioinformatics and computational medicine. The advent of high-throughput sequencing technologies such as as whole exome sequencing and whole genome sequencing is revolutionising all aspects of medicine. Prof Smith's research focuses on how these new technologies can be translated into better healthcare, in particular for patients with skeletal dysplasias and other rare diseases. Key research areas are Phenomics (the large scale characterisation of clinical phenotypes) and Computational Medicine (applying computational methods to medical problems, in particular those that require integration of large amounts of data). His research approach makes extensive use of ontologies and other Semantic Web technologies, and applies data visualisation, machine learning and other 'Big Data' mining strategies to large clinical and genomic datasets.
+                </p>
+                <p>
+                    Prof Smith's research is interdisciplinary and he can accommodate students at all levels with a background in either medicine, molecular biology or computer science. Please contact Prof Smith by email to discuss potential projects and collaborations.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="panels">
+        <h2>Contributions</h2>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-8">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input type="text" ng-model="filter" class="form-control" placeholder="Search..." />
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <div class="list-group-item text-center" ng-show="vm.transactionRequests === null">
+                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                </div>
+                <div class="list-group-item text-muted" ng-hide="vm.transactionRequests.length">
+                    No suggestions
+                </div>
+                <div class="list-group-item" ng-repeat="suggestion in vm.transactionRequests | filter:filter | orderBy:'-changed'">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <div class="text-muted">
+                                #{{ suggestion.nid }}
+                            </div>
+                        </div>
+                        <div class="col-sm-11">
+                            <div class="pull-right text-muted text-right">
+                                <div>
+                                    {{ suggestion.created * 1000 | date:'mediumDate' }}
+                                </div>
+                                <div class="label" ng-class="{'label-success': suggestion.isAccepted(), 'label-danger': suggestion.isRejected(), 'label-default': suggestion.isSubmitted() }">
+                                    {{ suggestion.tr_status.title }}
+                                </div>
+                            </div>
+                            <h5>
+                                <a ui-sref="suggestion({suggestionId: suggestion.nid})">
+                                    {{ suggestion.title }}
+                                </a>
+                                &nbsp;
+                                &nbsp;
+                                <i class="fa fa-comment"></i> {{ suggestion.comment_count }}
+                            </h5>
+                            <div class="text-muted">
+                                <!-- FIXME: get real author name somewhere -->
+                                Dr {{ suggestion.author.name }} Anonymous
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

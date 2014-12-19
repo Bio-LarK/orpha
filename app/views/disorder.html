@@ -16,7 +16,7 @@
     }
     </style>
 
-    <div class="page-nav">
+    <div class="page-nav" ng-show="authService.currentUser">
         <div class="page-nav-sticky" ui-scrollfix="-50">
             <div class="container">
                 <ul class="nav nav-pills">
@@ -25,7 +25,7 @@
                             <i class="fa fa-globe"></i> Public Page
                         </a>
                     </li>
-                    <li ng-show="authService.currentUser" ng-class="{'active': $state.includes('disorder') && isEditing}">
+                    <li ng-class="{'active': $state.includes('disorder') && isEditing}">
                         <a href ng-click="startEditing();">
                             <i class="fa fa-pencil"></i> Edit
                         </a>

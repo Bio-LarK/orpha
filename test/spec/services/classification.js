@@ -3,7 +3,11 @@
 describe('Service: classification', function() {
 
     // load the service's module
-    beforeEach(module('orphaApp'));
+     beforeEach(function() {
+        // Load the controller's module
+        module('orphaApp');
+        module('authServiceMock');
+    });
 
     // instantiate service
     var Classification, $httpBackend, ENV, $rootScope, classification;
@@ -13,7 +17,7 @@ describe('Service: classification', function() {
         ENV = _ENV_;
         $rootScope = _$rootScope_;
         $httpBackend.whenGET(/views.*/).respond(200, '');
-
+        
         classification = new Classification({
             title: 'Rare eye disease'
         });

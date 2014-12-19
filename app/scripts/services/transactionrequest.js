@@ -25,24 +25,52 @@ angular.module('orphaApp')
             }
         });
 
-        TransactionRequest.prototype.loadTransactions = loadTransactions;
-        TransactionRequest.prototype.loadDescription = loadDescription;
-        TransactionRequest.prototype.accept = accept;
-        TransactionRequest.prototype.reject = reject;
-        TransactionRequest.prototype.addChangeTransaction = addChangeTransaction;
-        TransactionRequest.prototype.addAddTransaction = addAddTransaction;
-        TransactionRequest.prototype.addRemoveTransaction = addRemoveTransaction;
-        TransactionRequest.prototype.setReason = setReason;
-        TransactionRequest.prototype.setTitle = setTitle;
-        TransactionRequest.prototype.save = save;
-        TransactionRequest.prototype.getTransactions = getTransactions;
-        TransactionRequest.prototype.addTransaction = addTransaction;
+        // TransactionRequest.prototype.loadTransactions = loadTransactions;
+        // TransactionRequest.prototype.loadDescription = loadDescription;
+        // TransactionRequest.prototype.accept = accept;
+        // TransactionRequest.prototype.reject = reject;
+        // TransactionRequest.prototype.addChangeTransaction = addChangeTransaction;
+        // TransactionRequest.prototype.addAddTransaction = addAddTransaction;
+        // TransactionRequest.prototype.addRemoveTransaction = addRemoveTransaction;
+        // TransactionRequest.prototype.setReason = setReason;
+        // TransactionRequest.prototype.setTitle = setTitle;
+        // TransactionRequest.prototype.save = save;
+        // TransactionRequest.prototype.getTransactions = getTransactions;
+        // TransactionRequest.prototype.addTransaction = addTransaction;
 
+        angular.extend(TransactionRequest.prototype, {
+            loadTransactions: loadTransactions,
+            loadDescription: loadDescription,
+            accept: accept,
+            reject: reject,
+            addChangeTransaction: addChangeTransaction,
+            addAddTransaction: addAddTransaction,
+            addRemoveTransaction: addRemoveTransaction,
+            setReason: setReason,
+            setTitle: setTitle,
+            save: save,
+            getTransactions: getTransactions,
+            addTransaction: addTransaction,
+            isAccepted: isAccepted,
+            isRejected: isRejected,
+            isSubmitted: isSubmitted
+        });
         TransactionRequest.getOpen = getOpen;
         TransactionRequest.getClosed = getClosed;
         TransactionRequest.getForUser = getForUser;
         TransactionRequest.create = create;
-        return TransactionRequest;
+
+        return angular.extend(function(data) {
+            var transactionRequest = new TransactionRequest(data);
+
+            Object.defineProperty(transactionRequest, 'isAccepted', {
+                get: function() {
+                    return true;
+                },
+                writable: false
+            });
+            return transactionRequest;
+        }, TransactionRequest);
 
         ///////////////////
 
@@ -153,15 +181,15 @@ angular.module('orphaApp')
         }
 
         function getForUser(userId) {
-            // return transactionStatusService.loadStatusCodes().then(function() {
+            return transactionStatusService.loadStatusCodes().then(function() {
                 return TransactionRequest.query({
                     'uid': userId
-                }).$promise.then(function(transactionRequests) {
-                    return transactionRequests;
-                }, function() {
-                    return [];
-                });
-            // });
+                }).$promise;
+            }).then(function(transactionRequests) {
+                return transactionRequests;
+            }, function() {
+                return [];
+            });
         }
 
         function getOpen(page) {
@@ -315,6 +343,21 @@ angular.module('orphaApp')
                     return listTransactions;
                 });
             });
+        }
+
+        function isAccepted() {
+            /* jshint validthis: true */
+            return transactionStatusService.isAcceptedTr(this);
+        }
+
+        function isRejected() {
+            /* jshint validthis: true */
+            return transactionStatusService.isRejectedTr(this);
+        }
+
+        function isSubmitted() {
+            /* jshint validthis: true */
+            return transactionStatusService.isSubmittedTr(this);
         }
 
     });

@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Service: user', function () {
+describe('Service: User', function () {
 
   // load the service's module
   beforeEach(module('orphaApp'));
 
   // instantiate service
   var user;
-  beforeEach(inject(function (_user_) {
-    user = _user_;
+  beforeEach(inject(function (_User_) {
+    user = _User_;
   }));
 
   it('should do something', function () {

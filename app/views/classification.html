@@ -37,7 +37,7 @@
     border-bottom: 1px solid #eee;
 }
 </style>
-<div class="page-nav">
+<div class="page-nav" ng-show="authService.currentUser">
     <div class="page-nav-sticky" ui-scrollfix="-50">
         <div class="container">
             <ul class="nav nav-pills">
@@ -46,7 +46,7 @@
                         <i class="fa fa-globe"></i> Public Page
                     </a>
                 </li>
-                <li ng-show="authService.currentUser">
+                <li>
                     <a href ui-sref="editclassification($stateParams)">
                         <i class="fa fa-pencil"></i> Edit Classification
                     </a>

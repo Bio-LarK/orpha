@@ -8,7 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder, $log,
+    .controller('DisorderCtrl', function ($scope, $stateParams, Disorder,
         Page, promiseTracker, $modal, modalService, Sign, Gene, authService) {
         var vm = $scope;
         vm.disorderTracker = promiseTracker();

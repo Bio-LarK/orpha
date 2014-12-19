@@ -10,6 +10,8 @@
 angular.module('orphaApp')
     .factory('CmTreeNode', function($q) {
 
+        // TODO: make it clearer what a 'child' is
+        // TODO: make it clearer what a 'resource' is
         var CmTreeNode = function(resource) {
             this.children = null;
             this._isOpen = false;
@@ -88,13 +90,15 @@ angular.module('orphaApp')
 
         function updateChild(newChild) {
             /* jshint validthis: true */
-            return this.open().then(function() {
+            return this.open().then(function(children) {
                 var existingChild = _.find(this.getChildren(), function(existingChild) {
-                    return existingChild.resource.nid === newChild.resource.nid;
+                    
+                    return existingChild.resource.nid === newChild.nid;
                 });
                 var index = this.getChildren().indexOf(existingChild);
                 this.removeChild(existingChild);
-                this.insertChild(newChild, index);
+                return this.insertChild(newChild, index);
+                
             }.bind(this));
         }
         function removeChild(child) {

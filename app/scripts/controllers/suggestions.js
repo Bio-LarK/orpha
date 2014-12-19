@@ -28,40 +28,14 @@ angular.module('orphaApp')
                 TransactionRequest.getOpen().then(function(suggestions) {
                     vm.openSuggestions = suggestions;
                     vm.suggestions = vm.openSuggestions;
-                    _.each(suggestions, function(suggestion) {
-                        suggestion.isSubmitted = true;
-                    });
                 });
                 TransactionRequest.getClosed().then(function(suggestions) {
                     _.each(suggestions, function(suggestion) {
-                        suggestion.isAccepted = transactionStatusService.isAcceptedTr(suggestion);
-                        suggestion.isRejected = transactionStatusService.isRejectedTr(suggestion);
                     });
                     vm.closedSuggestions = suggestions;
                 });
             });
         }
-
-        // function getSubmittedTransactions() {
-        //     return getTransactions(transactionStatusService.submittedNid);
-        // }
-        // function getClosedTransactions() {
-        //     return $q.all([
-        //         getTransactions(transactionStatusService.acceptedNid),
-        //         getTransactions(transactionStatusService.rejectedNid)
-        //     ]).then(function(transactions) {
-        //         return _.flatten(transactions);
-        //     });
-        // }
-        // function getTransactions(status) {
-        //     return TransactionRequest.query({
-        //         'parameters[tr_status]': status,
-        //     }).$promise.then(function(suggestions) {
-        //         return suggestions;
-        //     }, function() {
-        //         return [];
-        //     });
-        // }
 
         function suggestionTypeChanged(isShowingOpen) {
             vm.suggestions = null;

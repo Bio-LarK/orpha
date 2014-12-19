@@ -3,7 +3,11 @@
 describe('Service: Comment', function() {
 
     // load the service's module
-    beforeEach(module('orphaApp'));
+    beforeEach(function() {
+        // Load the controller's module
+        module('orphaApp');
+        module('authServiceMock');
+    });
 
     // instantiate service
     var Comment, $httpBackend, ENV, $rootScope;

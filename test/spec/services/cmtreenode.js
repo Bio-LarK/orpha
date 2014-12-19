@@ -3,7 +3,13 @@
 describe('Service: CmTreeNode', function() {
 
     // load the service's module
-    beforeEach(module('orphaApp'));
+    // beforeEach(module('orphaApp'));
+
+    beforeEach(function() {
+        // Load the controller's module
+        module('orphaApp');
+        module('authServiceMock');
+    });
 
     // instantiate service
     var CmTreeNode, myTreeNode, $q, $rootScope;
@@ -167,6 +173,7 @@ describe('Service: CmTreeNode', function() {
                 .toBe(newChildDisorder);
         });
         $rootScope.$digest();
+        $rootScope.$digest();
     });
     it('should provide a insertChild function', function() {
         expect(typeof myTreeNode.insertChild).toBe('function');
@@ -178,7 +185,7 @@ describe('Service: CmTreeNode', function() {
         };
         var promise = myTreeNode.insertChild(newChildDisorder, 0);
         promise.then(function() {
-            expect(myTreeNode.getChildren()[0]).toBe(newChildDisorder);
+            expect(myTreeNode.getChildren()[0].resource).toBe(newChildDisorder);
         });
         $rootScope.$digest();
     });

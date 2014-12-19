@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="input-group">
-                            <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search..." />
+                            <input type="text" ng-model="filter" class="form-control" placeholder="Search..." />
                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="list-group-item text-muted" ng-hide="vm.suggestions.length">
                     No suggestions
                 </div>
-                <div class="list-group-item" ng-repeat="suggestion in vm.suggestions | orderBy:'-changed'">
+                <div class="list-group-item" ng-repeat="suggestion in vm.suggestions | filter:filter | orderBy:'-changed'">
                     <div class="row">
                         <div class="col-sm-1">
                             <div class="text-muted">
@@ -46,7 +46,7 @@
                                 <div>
                                     {{ suggestion.created * 1000 | date:'mediumDate' }}     
                                 </div>
-                                <div class="label" ng-class="{'label-success': suggestion.isAccepted, 'label-danger': suggestion.isRejected, 'label-default': suggestion.isSubmitted }">
+                                <div class="label" ng-class="{'label-success': suggestion.isAccepted(), 'label-danger': suggestion.isRejected(), 'label-default': suggestion.isSubmitted() }">
                                     {{ suggestion.tr_status.title }}
                                 </div>
                             </div>
