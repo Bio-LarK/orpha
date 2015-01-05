@@ -75,6 +75,7 @@ angular.module('orphaApp')
         }
         function saveCSRF(token) {
             $http.defaults.headers.post['X-CSRF-Token'] = token;
+            $http.defaults.headers.put['X-CSRF-Token'] = token;
         }
 
         function isLoginRequiredToState(toState) {
