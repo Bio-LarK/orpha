@@ -25,94 +25,65 @@ angular.module('orphaApp')
                 scope.$watch('classifications', function(classifications) {
                     if(classifications) {
                         prepData(classifications);
-                        // scope.myClassifications = classifications;
-                        // prepData(scope.myClassifications);    
                     }
                     
                 });
                 scope.$watch('classification', function(classification) {
                     if(classification) {
                         prepData([classification]);
-                        // scope.myClassifications = [classification]; 
-                        // prepData(scope.myClassifications);   
                     }
                 });
 
+                function isDisorder(type) {
+                    return !type || type === '' || type === 'disorder';
+                }
+
+                function addDisorderDisplayData(classification, classifications) {
+                    classification.color = getColorForClassificationName(classification.title);
+                    classification.tooltip =
+                        getTooltipForClassificationName(classification.title, 100 / classifications.length);
+                    classification.position = getPositionForClassificationName(classification.title);
+                }
+
                 function prepData(classifications) {
                     // $log.debug('Generating for type', scope.type);
-                    if(!scope.type || scope.type === '' || scope.type === 'disorder') {
-                        // setup for stripes
+                    if(isDisorder(scope.type)) {
                         _.each(classifications, function(classification) {
-                            classification.color = getColorForClassificationName(classification.title);
-                            classification.tooltip = getTooltipForClassificationName(classification.title);
-                            classification.position = getPositionForClassificationName(classification.title);
+                            addDisorderDisplayData(classification, classifications);
                         });
                         scope.myClassifications = classifications;
-                    } else {
-                        // the grid type
-                        var highestCount = 0;
-
-                        var myClassifications = angular.copy(scope.allClassifications);
-                        _.each(classifications, function(classification) {
-                            var myClassification = _.find(myClassifications, {name: classification.title});
-                            if(!myClassification) {
-                                $log.error('No matching classification found', classification);
-                            }
-                            _.extend(myClassification, classification);
-                            myClassification.tooltip = getTooltipForClassificationName(myClassification.title);
-                            myClassification.isOn = true;
-
-                            if(!myClassification.count) {
-                               myClassification.count = 0;
-                            }
-                            myClassification.count++;
-                            if(myClassification.count > highestCount) {
-                                highestCount = myClassification.count;
-                            }
-                        });
-                        // regen colors
-                        _.each(myClassifications, function(myClassification, i) {
-                            var hue = getHueForType(scope.type);
-                            var sat = 100;
-                            var lightness = getLightnessForCountMax(myClassification.count, highestCount);
-                            myClassification.color = 'hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)';
-                        });
-                        scope.myClassifications = myClassifications;
+                        return;
                     }
-                    // _.each(classifications, function(classification) {
-                        
-                    //     // classification.color = getColorForClassificationName(classification.title);
-                    //     // classification.position = scope.allClassifications.indexOf(allClassification);
-                    //     // $log.debug('position', classifications.position);
-                    //     allClassification.isOn = true;
-                    //     allClassification.nid = classification.nid;
-                    //     if(!allClassification.count) {
-                    //         allClassification.count = 0;
-                    //     }
-                    //     allClassification.count++;
-                    //     // $log.debug('count', allClassification.count);
-                    //     if(allClassification.count > highestCount) {
-                    //         highestCount = allClassification.count;
-                    //     }
-                    // });
-                    // _.each(scope.allClassifications, function(allClassification, i) {
-                    //     var hue = 20; //(360/31) * i;
-                    //     if(scope.type === 'gene') {
-                    //         hue = 200;
-                    //     }
-                    //     var sat = 100;
-                    //     var lightness = 50;
-                    //     // $log.debug('scope.type', scope.type);
-                    //     if(scope.type === 'disorder') {
-                    //         lightness = 70;
-                    //         sat = 70;
-                    //     }
-                    //     if(highestCount > 1) {
-                    //         lightness = 100 - allClassification.count / highestCount * 50;    
-                    //     }
-                    //     allClassification.color = 'hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)';
-                    // });
-                    // $log.debug('all clasisications', scope.allClassifications);
+
+                    // the grid type
+                    var highestCount = 0;
+
+                    var myClassifications = angular.copy(scope.allClassifications);
+                    _.each(classifications, function(classification) {
+                        var myClassification = _.find(myClassifications, {name: classification.title});
+                        if(!myClassification) {
+                            $log.error('No matching classification found', classification);
+                        }
+                        _.extend(myClassification, classification);
+                        myClassification.tooltip = getTooltipForClassificationName(myClassification.title);
+                        myClassification.isOn = true;
+
+                        if(!myClassification.count) {
+                           myClassification.count = 0;
+                        }
+                        myClassification.count++;
+                        if(myClassification.count > highestCount) {
+                            highestCount = myClassification.count;
+                        }
+                    });
+                    // regen colors
+                    _.each(myClassifications, function(myClassification, i) {
+                        var hue = getHueForType(scope.type);
+                        var sat = 100;
+                        var lightness = getLightnessForCountMax(myClassification.count, highestCount);
+                        myClassification.color = 'hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)';
+                    });
+                    scope.myClassifications = myClassifications;
                 }
 
                 function getHueForType(type) {
@@ -130,10 +101,14 @@ angular.module('orphaApp')
                     return 100 - count / maxCount * 50;
                 }
 
-                function getTooltipForClassificationName(name) {
-                    return '<div style="display:inline-block;margin-right:5px;' + 
+                function getTooltipForClassificationName(name, percentage) {
+                    var tooltip = '<div style="display:inline-block;margin-right:5px;' + 
                         'width:10px;height:10px;background-color:'+ 
                         getColorForClassificationName(name) + '"></div>' + name;
+                    if(percentage) {
+                        tooltip += ' ' + percentage + '%';
+                    }
+                    return tooltip;
                 }
 
                 function getColorForClassificationName(name) {
@@ -142,9 +117,6 @@ angular.module('orphaApp')
                         $log.error('No classification found for:', name);
                         return '#eeeeee';
                     }
-                    // if(classification.title === 'Inborn Errors Of Metabolism') {
-                        // return 'hsla(27, 44%, 54%, 1)';
-                    // }
                     return classification.color;
                 }
 
