@@ -1,3 +1,12 @@
+<a name="0.21.26"></a>
+### 0.21.26 (2015-01-05)
+
+
+#### Bug Fixes
+
+* **auth:** fix invalid CSRF for PUT requests ([00450733](git@github.com:Bio-LarK/orpha/commit/00450733f86c9d1f8ccb515208e2e7aebe5d1496))
+
+
 <a name="0.21.25"></a>
 ### 0.21.25 (2014-12-19)
 
