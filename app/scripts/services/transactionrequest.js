@@ -25,19 +25,6 @@ angular.module('orphaApp')
             }
         });
 
-        // TransactionRequest.prototype.loadTransactions = loadTransactions;
-        // TransactionRequest.prototype.loadDescription = loadDescription;
-        // TransactionRequest.prototype.accept = accept;
-        // TransactionRequest.prototype.reject = reject;
-        // TransactionRequest.prototype.addChangeTransaction = addChangeTransaction;
-        // TransactionRequest.prototype.addAddTransaction = addAddTransaction;
-        // TransactionRequest.prototype.addRemoveTransaction = addRemoveTransaction;
-        // TransactionRequest.prototype.setReason = setReason;
-        // TransactionRequest.prototype.setTitle = setTitle;
-        // TransactionRequest.prototype.save = save;
-        // TransactionRequest.prototype.getTransactions = getTransactions;
-        // TransactionRequest.prototype.addTransaction = addTransaction;
-
         angular.extend(TransactionRequest.prototype, {
             loadTransactions: loadTransactions,
             loadDescription: loadDescription,
@@ -60,17 +47,7 @@ angular.module('orphaApp')
         TransactionRequest.getForUser = getForUser;
         TransactionRequest.create = create;
 
-        return angular.extend(function(data) {
-            var transactionRequest = new TransactionRequest(data);
-
-            Object.defineProperty(transactionRequest, 'isAccepted', {
-                get: function() {
-                    return true;
-                },
-                writable: false
-            });
-            return transactionRequest;
-        }, TransactionRequest);
+        return TransactionRequest;
 
         ///////////////////
 
@@ -280,6 +257,8 @@ angular.module('orphaApp')
         }
 
         function loadDescription() {
+            // TODO: fix up this type switching
+            
             /* jshint validthis: true */
             var transactionRequest = this;
             // Get the nodes
