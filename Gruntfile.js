@@ -175,21 +175,32 @@ module.exports = function(grunt) {
             //     host: '130.56.248.140',
             //     https: false
             // }],
-            proxies: [{
-                context: '/api',
-                host: 'orphanet.bio-lark.org',
-                headers: {
-                    host: 'orphanet.bio-lark.org:80'
-                },
 
-                // host: 'hpo.bio-lark.org',
-                // headers: {
-                //     host: 'hpo.bio-lark.org:80'
-                // },
-                rewrite: {
-                    '^/api': '/drupal/api',
-                }
-            }],
+            orpha: {
+                proxies: [{
+                    context: '/api',
+                    host: 'orphanet.bio-lark.org',
+                    headers: {
+                        host: 'orphanet.bio-lark.org:80'
+                    },
+                    rewrite: {
+                        '^/api': '/drupal/api'
+                    }
+                }]
+            },
+            neworpha: {
+                proxies: [{
+                    context: '/api',
+                    host: '130.56.248.140',
+                    headers: {
+                        host: '130.56.248.140:80'
+                    },
+                    rewrite: {
+                        '^/api': 'new_orpha/api'
+                    }
+                }]
+            },
+
             livereload: {
                 options: {
                     open: true,
@@ -550,7 +561,7 @@ module.exports = function(grunt) {
             'clean:server',
             'ngconstant:development',
             'wiredep',
-            'configureProxies:server',
+            'configureProxies:orpha',
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',
