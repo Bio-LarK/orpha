@@ -142,7 +142,7 @@ angular.module('orphaApp')
 
             var modalInstance = $modal.open({
                 templateUrl: 'views/editdisordergene.modal.html',
-                controller: 'EditDisorderGeneCtrl as editVm',
+                controller: 'EditDisorderGeneCtrl as vm',
                 // size: size,
                 resolve: {
                     config: function() {

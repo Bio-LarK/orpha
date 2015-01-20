@@ -15,7 +15,7 @@ angular.module('orphaApp')
             nid: '@nid'
         }, {
             get: {
-                method: 'GET',
+                 method: 'GET',
                 transformResponse: $http.defaults.transformResponse.concat([
                     transformGetResponse
                 ])
@@ -71,7 +71,6 @@ angular.module('orphaApp')
             reason = reason || '';
             this.body.value = reason;
             this.body.summary = reason;
-            console.log('it set reason');
             return this;
         }
 
@@ -123,7 +122,7 @@ angular.module('orphaApp')
             return this;
         }
 
-        function addRemoveTransaction(nodeNid, propertyName, currentNid) {
+        function addRemoveTransaction(nodeNid, propertyName, removeNid) {
             /* jshint validthis: true */
             var transaction = new ListTransaction({
                 title: 'transaction',
@@ -132,7 +131,7 @@ angular.module('orphaApp')
                 ltrans_onnode: nodeNid,
                 ltrans_onprop: propertyName,
                 ltrans_svalref: 0,
-                ltrans_cvalref: currentNid
+                ltrans_cvalref: removeNid
             });
             this.getTransactions().push(transaction);
             return this;

@@ -35,68 +35,6 @@
         </div>
     </div>
 
-
-
-    <!-- <div class="edit-bar" style="background-color: white; padding: 10px;" ui-scrollfix>
-        <div class="container "> -->
-    <!-- <div>
-                <button class="btn btn-default" ng-click="startEditing()" ng-hide="isEditing"><i class="fa fa-pencil"></i> Edit</button>
-                <button class="btn btn-default" ng-click="stopEditing()" ng-show="isEditing"><i class="fa fa-check"></i> Finish Editing</button>
-            </div> -->
-
-    <!-- <div class="btn-group">
-                <label class="btn btn-default" ng-class="{'btn-primary': isEditing}" ng-model="isEditing" btn-radio="true">Suggest Change</label>
-                <label class="btn btn-default" ng-model="isEditing" btn-radio="false">Off</label>
-            </div> -->
-
-    <!-- <div class="btn-group"> -->
-    <!-- <button class="btn btn-link">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:18px;height:18px" alt="" />Dr John Smith
-            </button> -->
-
-
-
-    <!-- <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a>
-                    </li>
-                    <li><a href="#">Another action</a>
-                    </li>
-                    <li><a href="#">Something else here</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a>
-                    </li>
-                </ul>
-            </div>
- -->
-    <!-- <span style="border: 1px solid #ddd; height: 100%; margin: 0 10px; padding: 5px 0" class=""></span>
-
-            <span>
-                Multiple Epiphyseal Dysplasia, Al-Gazali Type
-            </span> -->
-
-
-    <!-- <div class="btn-group">
-                <label class="btn btn-default" ng-class="{'btn-primary': isEditing}" ng-model="isEditing" btn-radio="false">Page</label>
-                <label class="btn btn-default" ng-model="isEditing" btn-radio="true">
-                    Suggestions
-                    <span class="label label-default">3</span>
-                </label>
-            </div> -->
-
-    <!-- <div style="display: inline-block;" class="pull-right">
-                <button class="btn btn-link">
-                    Suggestions
-                    <span class="label label-primary">3</span>
-                </button>
-                <button class="btn btn-link">
-                    Edit
-                </button>
-            </div> -->
-
-
-    <!-- </div>
-    </div> -->
     <div class="container">
 
         <div class="title">
@@ -523,6 +461,7 @@
                 <p ng-hide="disorder.disorder_disgene.length" class="text-muted">
                     No genotype.
                 </p>
+
                 <div class="row" ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:3">
                     <div class="col-sm-4" ng-repeat="disorder_gene in row">
 

@@ -9,12 +9,15 @@
  */
 angular.module('orphaApp')
     .controller('EditDisorderPhenotypeCtrl', function($scope, $http, $modalInstance,
-        config, ENV, ListTransaction, $q, TransactionRequest, toaster, transactionStatusService) {
+        config, ENV, ListTransaction, $q, TransactionRequest, TransactionRequestRemovePhenotype,
+        toaster, transactionStatusService) {
         var vm = this;
+        var EDIT_TYPE = 'edit';
+        var REMOVE_TYPE = 'remove';
         vm.disorderSign = config.relationshipNode;
         vm.disorder = config.leftNode;
         vm.sign = config.rightNode;
-        vm.proposalType = 'edit';
+        vm.type = EDIT_TYPE;
         vm.disorderSignFrequencies = null;
         vm.reason = null;
         vm.cancel = cancel;
@@ -26,12 +29,14 @@ angular.module('orphaApp')
 
         function activate() {
             getSignFrequencies();
+            //console.log("remove phenotype?", TransactionRequestRemovePhenotype);
             // getDisorderGeneTypes();
         }
 
         function cancel() {
             $modalInstance.dismiss('cancel');
         }
+
 
         function getSignFrequencies() {
             return $http.get(ENV.apiEndpoint + '/entity_node', {
@@ -81,7 +86,7 @@ angular.module('orphaApp')
                     toaster.pop('success', 'Suggestion submitted.');
                     return transactionRequest.$save();
                 });
-                
+
             });
 
             $modalInstance.dismiss('cancel');
