@@ -21,6 +21,7 @@ angular.module('orphaApp')
                 setupColors();
 
                 // scope.myClassifications = [];
+                scope.highestCount = 0;
 
                 scope.$watch('classifications', function(classifications) {
                     if(classifications) {
@@ -34,8 +35,63 @@ angular.module('orphaApp')
                     }
                 });
 
+
+                function prepData(activeClassifications) {
+                    // $log.debug('Generating for type', scope.type);
+                    if(isDisorder(scope.type)) {
+                        scope.myClassifications = prepDataForDisorders(activeClassifications);
+                        return;
+                    }
+                    if(isGene(scope.type) || isSign(scope.type) || isOther()) {
+                        scope.myClassifications = prepDataForGeneOrSign(activeClassifications);
+                    }
+                }
+
                 function isDisorder(type) {
                     return !type || type === '' || type === 'disorder';
+                }
+
+                function isGene(type) {
+                    return type === 'gene';
+                }
+                function isSign(type) {
+                    return type === 'sign';
+                }
+                function isOther() {
+                    return true;
+                }
+
+                function prepDataForGeneOrSign(activeClassifications) {
+                    var allClassifications = angular.copy(scope.allClassifications);
+                    _.each(allClassifications, function (classification) {
+                        getClassificationAppearanceCount(classification, activeClassifications);
+                    });
+
+                    // setup properties
+                    _.each(allClassifications, function (classification) {
+                        addGeneSignDisplayData(classification, activeClassifications);
+                    });
+                    return allClassifications;
+                }
+
+                /**
+                 * Counts how many times a classification appears in the active
+                 * classification list (list has duplicates)
+                 * @param classification
+                 * @param activeClassifications
+                 */
+                function getClassificationAppearanceCount(classification, activeClassifications) {
+                    classification.count = _.filter(activeClassifications, {title: classification.name}).length;
+                    if(classification.count > scope.highestCount) {
+                        scope.highestCount = classification.count;
+                    }
+                }
+
+                function prepDataForDisorders(activeClassifications) {
+                    _.each(activeClassifications, function (classification) {
+                        addDisorderDisplayData(classification, activeClassifications);
+                    });
+                    return activeClassifications;
                 }
 
                 function addDisorderDisplayData(classification, classifications) {
@@ -45,45 +101,16 @@ angular.module('orphaApp')
                     classification.position = getPositionForClassificationName(classification.title);
                 }
 
-                function prepData(classifications) {
-                    // $log.debug('Generating for type', scope.type);
-                    if(isDisorder(scope.type)) {
-                        _.each(classifications, function(classification) {
-                            addDisorderDisplayData(classification, classifications);
-                        });
-                        scope.myClassifications = classifications;
-                        return;
-                    }
 
-                    // the grid type
-                    var highestCount = 0;
-
-                    var myClassifications = angular.copy(scope.allClassifications);
-                    _.each(classifications, function(classification) {
-                        var myClassification = _.find(myClassifications, {name: classification.title});
-                        if(!myClassification) {
-                            $log.error('No matching classification found', classification);
-                        }
-                        _.extend(myClassification, classification);
-                        myClassification.tooltip = getTooltipForClassificationName(myClassification.title);
-                        myClassification.isOn = true;
-
-                        if(!myClassification.count) {
-                           myClassification.count = 0;
-                        }
-                        myClassification.count++;
-                        if(myClassification.count > highestCount) {
-                            highestCount = myClassification.count;
-                        }
-                    });
-                    // regen colors
-                    _.each(myClassifications, function(myClassification, i) {
-                        var hue = getHueForType(scope.type);
-                        var sat = 100;
-                        var lightness = getLightnessForCountMax(myClassification.count, highestCount);
-                        myClassification.color = 'hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)';
-                    });
-                    scope.myClassifications = myClassifications;
+                function addGeneSignDisplayData(classification, activeClassifications) {
+                    _.extend(classification, _.find(activeClassifications, {title: classification.name}));
+                    //$log.debug('classification', classification);
+                    classification.tooltip = getTooltipForClassificationName(classification.name);
+                    classification.isOn = true;
+                    var hue = getHueForType(scope.type);
+                    var sat = 100;
+                    var lightness = getLightnessForCountMax(classification.count, scope.highestCount);
+                    classification.color = 'hsla(' + hue + ', ' + sat + '%, ' + lightness + '%, 1)';
                 }
 
                 function getHueForType(type) {
