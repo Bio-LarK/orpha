@@ -561,7 +561,7 @@ module.exports = function(grunt) {
             'clean:server',
             'ngconstant:development',
             'wiredep',
-            'configureProxies:orpha',
+            'configureProxies:orphanew',
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',
