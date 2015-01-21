@@ -1,3 +1,12 @@
+<a name="0.21.27"></a>
+### 0.21.27 (2015-01-21)
+
+
+#### Bug Fixes
+
+* **build:** fix url to correct new_orpha url ([9af00fd9](git@github.com:Bio-LarK/orpha/commit/9af00fd91b89eb95635359a5eb8542d576ef7fa4))
+
+
 <a name="0.21.26"></a>
 ### 0.21.26 (2015-01-05)
 
