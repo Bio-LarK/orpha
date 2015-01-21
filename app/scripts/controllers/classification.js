@@ -8,8 +8,16 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('ClassificationCtrl', function($scope, $stateParams, $log, Disorder,
-        Classification, Page, searchService, $q, $location) {
+    .controller('ClassificationCtrl', function(
+        $scope,
+        $stateParams,
+        $log,
+        Disorder,
+        Classification,
+        Page,
+        searchService,
+        $q
+    ) {
         var vm = this;
 
         vm.classification = null;
@@ -31,12 +39,39 @@ angular.module('orphaApp')
         ////////////
 
         function activate() {
-            
+
             if($stateParams.disorderId) {
-                locateInTree();    
+                locateInTree();
             } else {
-                loadClassificationTree();  
-            } 
+
+                loadClassificationTree();
+            }
+        }
+
+        function loadClassificationTree() {
+            getClassification($stateParams.classificationId)
+                .then(setPageClassification)
+                .then(getRootDisorderForClassification).then(function(rootDisorder) {
+                vm.rootDisorder = rootDisorder;
+                selectDisorder(vm.rootDisorder);
+            });
+        }
+
+        function getClassification(classificationId) {
+            return Classification.get({
+                nid: classificationId
+            }).$promise;
+        }
+
+        function setPageClassification(classification) {
+            vm.classification = classification;
+            Page.setTitle(classification['title']);
+            return classification;
+        }
+
+        function getRootDisorderForClassification(classification) {
+            // FIXME: why isn't it using the ID!?!
+            return Disorder.getRootForClassification(classification);
         }
 
         function locateInTree() {
@@ -50,7 +85,7 @@ angular.module('orphaApp')
                 // if so, its in the tree, so we can select it there,
                 // otherwise, we will need to do something with its parent
                 if(disorder.disorder_child.length) {
-                    selectDisorder(disorder);    
+                    selectDisorder(disorder);
                 }
                 openParents(disorder);
             });
@@ -81,19 +116,6 @@ angular.module('orphaApp')
                 // vm.rootDisorder.isOpen = true;
                 openParents(singleParent);
 
-            }); 
-        }
-
-        function loadClassificationTree() {
-            return Classification.get({
-                nid: $stateParams.classificationId //136402
-            }, function(classification) {
-                vm.classification = classification;
-                Page.setTitle(classification['title']);
-                return Disorder.getRootForClassification(classification).then(function(rootDisorder) {
-                    vm.rootDisorder = rootDisorder;
-                    selectDisorder(vm.rootDisorder);
-                });
             });
         }
 
