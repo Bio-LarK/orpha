@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                 constants: {
                     ENV: {
                         name: 'production',
-                        apiEndpoint: 'new_orpha/drupal/api'
+                        apiEndpoint: '/new_orpha/api'
                     }
                 }
             }
