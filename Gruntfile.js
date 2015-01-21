@@ -196,7 +196,7 @@ module.exports = function(grunt) {
                         host: '130.56.248.140:80'
                     },
                     rewrite: {
-                        '^/api': 'new_orpha/api'
+                        '^/api': '/new_orpha/api'
                     }
                 }]
             },
