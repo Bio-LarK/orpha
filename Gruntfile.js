@@ -101,6 +101,13 @@ module.exports = function(grunt) {
                     tag: require('./package.json').version
                 }
             },
+            neworpha: {
+                options: {
+                    remote: 'ssh://craig@130.56.248.140/var/repo/neworpha.git',
+                    branch: 'new-orpha',
+                    tag: require('./package.json').version
+                }
+            },
             local: {
                 options: {
                     remote: '../',
