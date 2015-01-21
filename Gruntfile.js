@@ -72,6 +72,17 @@ module.exports = function(grunt) {
                         apiEndpoint: '/drupal/api'
                     }
                 }
+            },
+            neworpha: {
+                options: {
+                    dest: '<%= yeoman.dist %>/scripts/config.js'
+                },
+                constants: {
+                    ENV: {
+                        name: 'production',
+                        apiEndpoint: 'new_orpha/drupal/api'
+                    }
+                }
             }
         },
 
@@ -608,6 +619,25 @@ module.exports = function(grunt) {
         'htmlmin'
     ]);
 
+
+    grunt.registerTask('build2', [
+        'clean:dist',
+        'ngconstant:neworpha',
+        'wiredep',
+        'useminPrepare',
+        'concurrent:dist',
+        'autoprefixer',
+        'concat',
+        'ngmin',
+        'copy:dist',
+        // 'cdnify',
+        'cssmin',
+        'uglify',
+        'filerev',
+        'usemin',
+        'htmlmin'
+    ]);
+
     grunt.registerTask('default', [
         'newer:jshint',
         'test',
@@ -622,7 +652,7 @@ module.exports = function(grunt) {
     grunt.registerTask('deployToNewOrpha', 'Builds and deploys', function(type) {
         type = type || 'patch';
 
-        grunt.task.run(['build', 'bump-only:' + type, 'changelog', 'bump-commit', 'buildcontrol:neworpha']);
+        grunt.task.run(['build2', 'bump-only:' + type, 'changelog', 'bump-commit', 'buildcontrol:neworpha']);
     });
 
     grunt.registerTask('deploy', 'Builds and deploys', function(type) {
