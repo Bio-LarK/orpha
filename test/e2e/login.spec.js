@@ -22,7 +22,7 @@ describe("Login", function () {
         expect(loginButton.isPresent()).toBe(true);
     });
 
-    iit('should be able to sign in', function() {
+    it('should be able to sign in', function() {
         loginButton.click();
         var username = element(by.css('input#username'));
         var password = element(by.css('input#password'));
