@@ -24,7 +24,6 @@ describe("Browse Top Level Classification", function () {
 
         var classificationRows;
         beforeEach (function(){
-            console.log('going to home page');
             browser.get('/#');
             classificationRows = element.all(by.repeater('row in vm.classification'));
         });
@@ -35,7 +34,6 @@ describe("Browse Top Level Classification", function () {
 
         describe("classification", function() {
             it('should go to a classification', function() {
-                console.log('clicking home page tilte');
                 var title = classificationRows.first().all(by.css('a')).first();
                 expect(title.getText()).toBe('Rare Cardiac Disease');
                 title.click();
@@ -49,7 +47,6 @@ describe("Browse Top Level Classification", function () {
 
         var classificationRows2;
         beforeEach (function(){
-            console.log('going to disorders page');
             browser.get('/#/disorders');
             classificationRows2 = element.all(by.repeater('row in vm.classifications'));
         });
@@ -60,7 +57,6 @@ describe("Browse Top Level Classification", function () {
 
         describe("classification", function() {
             it('should go to a classification', function() {
-                console.log('clicking disorder page tilte');
                 var title2 = classificationRows2.first().all(by.css('a')).first();
                 title2.click();
                 expect(browser.getTitle()).toEqual('Rare cardiac disease - Orphanet');
