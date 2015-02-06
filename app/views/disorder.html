@@ -93,9 +93,9 @@
                                 <div class="row" ng-show="isEditing">
                                     <div class="col-sm-3">
                                         <div class="detail">
-                                            <h3 class="detail-title">Prevalence Class</h3>
-                                            <div class="detail-info" ng-click="editPrevalenceClass()">
-                                                <span class="editable">{{ disorder.disorder_prevalence.title || 'Unknown' }}</span>
+                                            <h3 class="detail-title">Disorder Type</h3>
+                                            <div class="detail-info">
+                                                <span class="editable">{{ disorder.disorder_distype.title || 'Unknown' }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -138,9 +138,9 @@
                                 <div class="row" ng-hide="isEditing">
                                     <div class="col-sm-3">
                                         <div class="detail">
-                                            <h3 class="detail-title">Prevalence Class</h3>
+                                            <h3 class="detail-title">Disorder Type</h3>
                                             <div class="detail-info">
-                                                <span class="">{{ disorder.disorder_prevalence.title || 'Unknown' }}</span>
+                                                <span class="">{{ disorder.disorder_distype.title || 'Unknown' }}</span>
                                             </div>
                                         </div>
                                     </div>
