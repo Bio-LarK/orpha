@@ -9,7 +9,7 @@
  */
 angular.module('orphaApp')
     .controller('DisorderCtrl', function ($scope, $stateParams, Disorder,
-        Page, promiseTracker, $modal, modalService, Sign, Gene, authService) {
+        Page, promiseTracker, $modal, modalService, Sign, Gene, authService, prevalenceRepo) {
         var vm = $scope;
         vm.disorderTracker = promiseTracker();
         vm.disorder = null;
@@ -29,11 +29,21 @@ angular.module('orphaApp')
         activate();
         ////////////
 
+
+        function getPrevalenceIds(disorder) {
+            var prevalenceIds = _.pluck(disorder.disorder_prevalence, 'nid');
+            return prevalenceIds;
+        }
+
         function activate() {
             var disorder = Disorder.get({
                 nid: $stateParams.disorderId //136402
             }, function (disorder) {
                 vm.disorder = disorder;
+
+                prevalenceRepo.getSome(getPrevalenceIds(disorder)).then(function(prevalences) {
+                    vm.prevalences = prevalences;
+                });
 
                 vm.disorder.loadChildren();
                 vm.disorder.loadParents();
@@ -44,7 +54,7 @@ angular.module('orphaApp')
                         _.each(parent['disorder_class'], function(parentClassification) {
                             var classification = _.find(vm.disorder['disorder_class'], {nid: parentClassification.nid});
                             if(classification) {
-                                classification.parents = classification.parents || [];    
+                                classification.parents = classification.parents || [];
                                 classification.parents.push(parent);
                             }
                         });

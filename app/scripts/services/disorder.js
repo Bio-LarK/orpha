@@ -28,7 +28,7 @@ angular.module('orphaApp')
                 transformResponse: $http.defaults.transformResponse.concat([
                     transformQueryResponse
                 ])
-            },
+            }
         });
         Disorder.prototype.getGenes = getGenes;
         Disorder.prototype.getSigns = getSigns;

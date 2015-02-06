@@ -5,4 +5,5 @@ exports.config = {
     ],
 
     baseUrl: 'http://localhost:9000',
+    allScriptsTimeout: 500000
 }
