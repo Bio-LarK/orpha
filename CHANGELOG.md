@@ -1,3 +1,17 @@
+<a name="0.21.32"></a>
+### 0.21.32 (2015-02-06)
+
+
+#### Bug Fixes
+
+* **test:** remove iit ([fd910cf7](git@github.com:Bio-LarK/orpha/commit/fd910cf7f8219aac79773e25cb0516cf5b6d896c))
+
+
+#### Features
+
+* **disorder:** add type of disorder to disorder page ([906d2c08](git@github.com:Bio-LarK/orpha/commit/906d2c08c574f798fe30aed85a7648979e64c984))
+
+
 <a name="0.21.31"></a>
 ### 0.21.31 (2015-02-06)
 
