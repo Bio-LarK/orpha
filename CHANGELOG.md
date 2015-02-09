@@ -1,3 +1,12 @@
+<a name="0.21.33"></a>
+### 0.21.33 (2015-02-09)
+
+
+#### Features
+
+* **disorder:** add prevalence ([913c6684](git@github.com:Bio-LarK/orpha/commit/913c6684e4df4a9e4b0bfa33c5b9dee93bd841cc))
+
+
 <a name="0.21.32"></a>
 ### 0.21.32 (2015-02-06)
 
