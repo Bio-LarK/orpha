@@ -13,14 +13,17 @@ describe("Disorder", function() {
     describe("Age of Onset", function () {
 
         beforeEach(function() {
-            browser.get('#/disorders/26332', 30000);
+            browser.get('#/disorders/39614', 30000);
             var title = element(by.css('h1')).getText();
-            expect(title).toBe('Multiple Epiphyseal Dysplasia, Al-Gazali Type');
+            expect(title).toBe('Carney Complex');
         });
 
         it('should have an age of onset', function() {
             // Should be an array
-            console.error('PENDING: Age of Onset');
+            var ageOfOnsets = element.all(by.repeater('onset in disorder.disorder_onset'));
+            expect(ageOfOnsets.count()).toEqual(2);
+            expect(ageOfOnsets.get(0).getText()).toEqual('Infancy');
+            expect(ageOfOnsets.get(1).getText()).toEqual('Neonatal');
         });
     });
 });
