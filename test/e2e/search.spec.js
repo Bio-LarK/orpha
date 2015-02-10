@@ -30,7 +30,7 @@ describe("Search", function () {
         expect(carneyComplexOption.isPresent()).toBe(true);
     });
 
-    iit('should open disorder pages', function () {
+    it('should open disorder pages', function () {
         searchInput.sendKeys('Carne');
         searchInput.sendKeys('y');
 

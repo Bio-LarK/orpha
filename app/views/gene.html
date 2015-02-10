@@ -16,7 +16,7 @@
             </div>
             <div class="media-body">
                 <h1>
-                    {{ gene.title || 'Loading...' }} 
+                    {{ gene.gene_name || 'Loading...' }}
                     <span>({{ gene.gene_symbol }})</span>
                 </h1>
                 <div style="color: rgba(0,0,0,0.5); margin-top: 7px;" ng-show="gene.gene_synonym.length">

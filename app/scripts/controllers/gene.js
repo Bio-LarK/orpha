@@ -11,17 +11,14 @@ angular.module('orphaApp')
     .controller('GeneCtrl', function ($scope, $stateParams, Gene, Disorder, promiseTracker, Page) {
         $scope.disordersTracker = promiseTracker();
         $scope.geneTracker = promiseTracker();
+
         activate();
 
-        ///////////
+
+        ///
+
         function activate() {
-            Gene.get({
-                nid: $stateParams.geneId //136402
-            }).$promise.then(function(gene) {
-                $scope.gene = gene;
-                Page.setTitle(gene.title);
-                gene.loadDisorders();
-            });
+            getGene($stateParams.geneId).then(setGene);
             // $scope.geneTracker.addPromise($scope.gene.$promise);
             // $scope.disordersTracker.addPromise($scope.gene.$promise);
             // $scope.gene.$promise.then(function(gene) {
@@ -34,7 +31,22 @@ angular.module('orphaApp')
             //     $scope.disorders = disorders;
             //     $scope.gene.classifications = _.flatten(_.pluck($scope.disorders, 'disorder_class'));
             // });
-            // $scope.disordersTracker.addPromise(disordersPromise);
+            // $scope.disordersTracker.addPromise(disordersPromise);eParams.geneId).then(setGene);
 
         }
+
+        ///////////
+        function getGene(geneId) {
+            return Gene.get({
+                nid: geneId //136402
+            }).$promise;
+        }
+
+        function setGene(gene) {
+            $scope.gene = gene;
+            Page.setTitle(gene.gene_name);
+            gene.loadDisorders();
+        }
+
+
     });
