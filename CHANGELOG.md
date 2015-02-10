@@ -1,3 +1,12 @@
+<a name="0.21.34"></a>
+### 0.21.34 (2015-02-10)
+
+
+#### Bug Fixes
+
+* **gene:** fix gene title not appearing ([8818019b](git@github.com:Bio-LarK/orpha/commit/8818019bc4673054d050afaae8d5d17daaa71864))
+
+
 <a name="0.21.33"></a>
 ### 0.21.33 (2015-02-09)
 
