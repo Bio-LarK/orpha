@@ -387,7 +387,7 @@
                         </div>
                         <!-- /parents -->
 
-                        <div class="panels container" ng-hide="isEditing">
+                        <div class="panels container" ng-hide="isEditing" id="children">
                             <form class="form-inline pull-right" role="form"
                                   ng-show="disorder.disorder_child.length > 1">
                                 <div class="form-group">
@@ -409,8 +409,8 @@
                                 </p>
 
                                 <div class="row"
-                                     ng-repeat="row in disorder.disorder_child | filter:filterChildren |  inSlicesOf:2">
-                                    <div class="col-sm-6" ng-repeat="child in row">
+                                     ng-repeat="row in disorder.disorder_child | filter:filterChildren |  inSlicesOf:3">
+                                    <div class="col-sm-4" ng-repeat="child in row">
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                 <div class="media">
@@ -673,6 +673,11 @@
                         <li du-scrollspy="parents" offset="{{ getScrollOffset() + 50 }}">
                             <a href="#parents" offset="{{ getScrollOffset() }}" du-smooth-scroll>
                                 Parents
+                            </a>
+                        </li>
+                        <li du-scrollspy="children" offset="{{ getScrollOffset() + 50 }}">
+                            <a href="#children" offset="{{ getScrollOffset() }}" du-smooth-scroll>
+                                Children
                             </a>
                         </li>
                         <li du-scrollspy="genotype" offset="{{ getScrollOffset() + 50 }}">
