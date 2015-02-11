@@ -188,8 +188,24 @@
                                                 {{ inheritance.title }}
                                             </div>
                                         </dd>
-
                                     </dl>
+
+                                    <dl class="dl-horizontal" style="margin-top:40px;">
+                                        <dt class="detail-title">Orphanumber</dt>
+                                        <dd class="detail-info">
+                                            <a target="_" ng-href="http://www.orpha.net/consor/cgi-bin/OC_Exp.php?lng=EN&Expert={{ disorder.disorder_orphanumber }}">
+                                                ORPHA{{ disorder.disorder_orphanumber }}
+                                            </a>
+                                        </dd>
+
+                                        <dt class="detail-title" ng-repeat-start="er in disorder.disorder_er">
+                                            {{ er.er_source }}
+                                        </dt>
+                                        <dd ng-repeat-end class="detail-info">
+                                            {{ er.er_reference }}
+                                        </dd>
+                                    </dl>
+
                                     <!--<div class="col-sm-3">-->
                                     <!--<div class="detail">-->
                                     <!--<h3 class="detail-title"></h3>-->
