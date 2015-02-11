@@ -31,6 +31,7 @@ describe("Search", function () {
     });
 
     it('should open disorder pages', function () {
+        searchInput.clear();
         searchInput.sendKeys('Carne');
         searchInput.sendKeys('y');
 
@@ -38,6 +39,8 @@ describe("Search", function () {
         carneyComplexOption.click();
 
         expect(browser.getTitle()).toBe('Carney triad - Orphanet');
+
+        expect(searchInput.getAttribute('value')).toBe('');
 
         // If this fails, check that search is enabled, it has been indexed, and the permissions enabled for everyone
     });

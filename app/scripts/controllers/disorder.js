@@ -9,7 +9,8 @@
  */
 angular.module('orphaApp')
     .controller('DisorderCtrl', function ($scope, $stateParams, Disorder,
-        Page, promiseTracker, $modal, modalService, Sign, Gene, authService, prevalenceRepo) {
+        Page, promiseTracker, $modal, modalService, Sign, Gene, authService, prevalenceRepo,
+        $location, $anchorScroll) {
         var vm = $scope;
         vm.disorderTracker = promiseTracker();
         vm.disorder = null;
@@ -26,10 +27,30 @@ angular.module('orphaApp')
         vm.editTitle = editTitle;
         vm.isEditing = false;
         vm.editDescription = editDescription;
+        vm.goToAnchor = goToAnchor;
+        vm.getScrollOffset = getScrollOffset;
         activate();
         ////////////
 
+        function getScrollOffset() {
+            if(authService.currentUser) {
+                return 120;
+            }
+            return 70;
+        }
 
+        function goToAnchor(anchorName) {
+            //var newHash = anchorName;
+            //if ($location.hash() !== newHash) {
+                // set the $location.hash to `newHash` and
+                // $anchorScroll will automatically scroll to it
+                $location.hash(anchorName);
+            //} else {
+                // call $anchorScroll() explicitly,
+                // since $location.hash hasn't changed
+
+            //}
+        }
         function getPrevalenceIds(disorder) {
             var prevalenceIds = _.pluck(disorder.disorder_prevalence, 'nid');
             return prevalenceIds;

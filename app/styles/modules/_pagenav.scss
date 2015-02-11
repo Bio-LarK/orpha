@@ -2,7 +2,7 @@ $page-nav-link-padding: 7px 15px;
 
 .page-nav {
 
-    height: 55px;
+    height: 56px;
     z-index: 99;
     text-align: left;
 
@@ -18,10 +18,11 @@ $page-nav-link-padding: 7px 15px;
         &.ui-scrollfix {
             position: fixed;
             top: 50px;
-            width: 100%;
+
         }
+
         border-bottom: 1px solid #ddd;
-        padding: 10px;
+        padding: 10px 0;
         color: rgba(0,0,0,0.5); 
         background-color: white;
         z-index: 1;
@@ -35,3 +36,15 @@ $page-nav-link-padding: 7px 15px;
         } 
     }
 }
+
+@media (min-width: 992px) {
+  .page-nav-sticky.ui-scrollfix {
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+    .page-nav-sticky.ui-scrollfix {
+      width: 82.8%;
+    }
+}
+

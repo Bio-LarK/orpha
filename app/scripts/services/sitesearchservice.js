@@ -40,6 +40,7 @@ angular.module('orphaApp')
             }
             params[type + 'Id'] = $item.node;
             $state.go(type, params);
+            service.query = '';
         }
 
     });

@@ -33,14 +33,17 @@ angular
         'ui.tree'
     ])
     .run(function($rootScope, $http, $state, $stateParams,
-        editableOptions, Page, ENV, siteSearchService, $log, authService) {
+        editableOptions, Page, ENV, siteSearchService, $log, authService, $anchorScroll, $location) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.Page = Page;
         $rootScope.authService = authService;
         editableOptions.theme = 'bs3';
+        $rootScope.$location = $location;
 
         $rootScope.siteSearchService = siteSearchService;
+
+        $anchorScroll.yOffset = 70;
 
 
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {            

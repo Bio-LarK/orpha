@@ -18,7 +18,7 @@ describe("Disorder", function() {
 
         it('should have a type of disorder listed', function() {
             // Should be an array
-            var disorderType = element(by.cssContainingText('.panel p', 'Disease'));
+            var disorderType = element(by.cssContainingText('dd', 'Disease'));
             expect(disorderType.isPresent()).toBe(true);
         });
     });
