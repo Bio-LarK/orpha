@@ -43,8 +43,9 @@
             <div class="col-lg-10 col-md-12 col-xs-12 col-sm-12">
                 <div style="border-right: 1px solid #ddd">
                     <!-- page nav -->
-                    <div class="page-nav" ng-show="authService.currentUser" >
-                        <div class="page-nav-sticky" style="border-bottom: 1px solid #ddd;" ui-scrollfix="-50"> <!-- ui-scrollfix="-50" -->
+                    <div class="page-nav" ng-show="authService.currentUser">
+                        <div class="page-nav-sticky" style="border-bottom: 1px solid #ddd;" ui-scrollfix="-50">
+                            <!-- ui-scrollfix="-50" -->
                             <div class="container">
                                 <ul class="nav nav-pills">
                                     <li ng-class="{'active': $state.includes('disorder') && !isEditing }">
@@ -64,7 +65,8 @@
                     <!-- /page pav -->
 
                     <!-- text content -->
-                    <div style="background-color: white;border-bottom: 1px solid #ddd;padding-bottom: 30px;" id="properties">
+                    <div style="background-color: white;border-bottom: 1px solid #ddd;padding-bottom: 30px;"
+                         id="properties">
                         <div class="container">
                             <div class="title">
                                 <div class="pull-right text-muted text-right" ng-hide="disorderTracker.active()">
@@ -134,7 +136,8 @@
                                         </tr>
                                     </table>
 
-                                    <div id="abstract" ng-click="isEditing && editDescription()" ng-class="{'editable-card': isEditing}">
+                                    <div id="abstract" ng-click="isEditing && editDescription()"
+                                         ng-class="{'editable-card': isEditing}">
                                         <div ng-bind-html="disorder.body"></div>
                                     </div>
 
@@ -235,7 +238,7 @@
                     <div style="background-color:#F4F4F4;">
                         <div class="panels" id="classification">
                             <div class="container">
-                                <h2 >Classification</h2>
+                                <h2>Classification</h2>
 
                                 <div class="spinner" ng-show="disorderTracker.active();">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
@@ -433,7 +436,7 @@
                                 <!-- <button type="submit" class="btn btn-default">Sign in</button> -->
                             </form>
 
-                            <h2 >Genotype
+                            <h2>Genotype
                                 <!-- <button class="btn btn-default">
                                     <i class="fa fa-plus"></i>
                                 </button> -->
@@ -448,8 +451,8 @@
                                 </p>
 
                                 <div class="row"
-                                     ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:2">
-                                    <div class="col-sm-6" ng-repeat="disorder_gene in row">
+                                     ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:3">
+                                    <div class="col-sm-4" ng-repeat="disorder_gene in row">
 
                                         <div class="panel panel-default" ng-hide="isEditing">
                                             <div class="panel-body">
@@ -463,12 +466,12 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <div>
-                                            <span class="text-muted">
-                                                {{ disorder_gene.disgene_at.title }}
-                                            </span>
+                                                            <span class="text-muted">
+                                                                {{ disorder_gene.disgene_at.title }}
+                                                            </span>
                                                             <h5 style="display: inline">
                                                                 <a ui-sref="gene({geneId: disorder_gene.disgene_gene.nid})">{{
-                                                                    disorder_gene.disgene_gene.title }}</a>
+                                                                    disorder_gene.disgene_gene.gene_name }}</a>
                                                             </h5>
                                                             <!--<span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)-->
                                                         </div>
@@ -544,7 +547,7 @@
                                 </div>
                                 <!-- <button type="submit" class="btn btn-default">Sign in</button> -->
                             </form>
-                            <h2 >Phenotype</h2>
+                            <h2>Phenotype</h2>
 
                             <div class="spinner" ng-show="signsTracker.active();">
                                 <i class="fa fa-spin fa-circle-o-notch"></i>

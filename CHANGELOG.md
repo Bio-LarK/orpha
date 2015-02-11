@@ -1,3 +1,12 @@
+<a name="0.21.35"></a>
+### 0.21.35 (2015-02-11)
+
+
+#### Features
+
+* **disorder:** add in page navigation ([d0163a03](git@github.com:Bio-LarK/orpha/commit/d0163a0357ff234b1608cd5d2d8189c91d383fa1))
+
+
 <a name="0.21.34"></a>
 ### 0.21.34 (2015-02-10)
 
