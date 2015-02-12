@@ -1,3 +1,12 @@
+<a name="0.21.38"></a>
+### 0.21.38 (2015-02-12)
+
+
+#### Bug Fixes
+
+* **disorder:** fix horizontal scrolling ([29ad1bc9](git@github.com:Bio-LarK/orpha/commit/29ad1bc9a47bb60f4d8561a9c2ea86de38cebb57))
+
+
 <a name="0.21.37"></a>
 ### 0.21.37 (2015-02-11)
 
