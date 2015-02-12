@@ -119,8 +119,11 @@
                                 <div class="col-md-8">
                                     <table class="table table-bordered" style="margin-bottom: 40px;" data-ng-show="prevalences.length">
                                         <tr>
+
                                             <th>Geography</th>
-                                            <th>Prevalence</th>
+                                            <th>Class</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
                                             <th>Source</th>
                                         </tr>
                                         <tr ng-repeat="prevalence in prevalences">
@@ -129,6 +132,12 @@
                                             </td>
                                             <td>
                                                 {{ prevalence.prevalence_class.title || 'Unknown' }}
+                                            </td>
+                                            <td>
+                                                {{ prevalence.prevalence_type.title }}
+                                            </td>
+                                            <td>
+                                                {{ prevalence.prevalence_status.title }}
                                             </td>
                                             <td>
                                                 {{ prevalence.prevalence_source }}
