@@ -35,6 +35,17 @@
             color: #3f51b5;
             font-weight: bold;;
         }
+        .properties-dl-horizontal dt {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+            position: relative;
+            top: 3px;
+            
+        }
+        .properties-dl-horizontal dd {
+            color: #888;
+        }
 
     </style>
 
@@ -152,7 +163,7 @@
 
                                 </div>
                                 <div class="col-md-4">
-                                    <dl class="dl-horizontal">
+                                    <dl class="dl-horizontal properties-dl-horizontal">
                                         <dt>
                                             Disorder Type
                                         </dt>
@@ -160,7 +171,7 @@
                                             {{ disorder.disorder_distype.title || 'Unknown' }}
                                         </dd>
                                     </dl>
-                                    <dl class="dl-horizontal" data-ng-show="disorder.disorder_distype.title == 'Disease'">
+                                    <dl class="dl-horizontal properties-dl-horizontal" data-ng-show="disorder.disorder_distype.title == 'Disease'">
                                         <dt>
                                             Age of Onset
                                         </dt>
@@ -199,7 +210,7 @@
                                         </dd>
                                     </dl>
 
-                                    <dl class="dl-horizontal" style="margin-top:40px;">
+                                    <dl class="dl-horizontal properties-dl-horizontal" style="margin-top:40px;">
                                         <dt class="detail-title">Orphanumber</dt>
                                         <dd class="detail-info">
                                             <a target="_" ng-href="http://www.orpha.net/consor/cgi-bin/OC_Exp.php?lng=EN&Expert={{ disorder.disorder_orphanumber }}">
