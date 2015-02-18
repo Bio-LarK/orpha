@@ -1,0 +1,50 @@
+<div>
+    <dl class="dl-horizontal properties-dl-horizontal">
+        <dt>
+            Disorder Type
+        </dt>
+        <dd>
+            {{ disorder.disorder_distype.title || 'Unknown' }}
+        </dd>
+    </dl>
+    <dl class="dl-horizontal properties-dl-horizontal">
+        <dt>
+            <cm-edit editing="isEditing" click="editAgeOfOnset()">
+                Age of Onset
+            </cm-edit>
+        </dt>
+        <dd>
+            <div class="text-muted" data-ng-hide="disorder.disorder_onset.length">
+                Unknown
+            </div>
+            <div ng-repeat="onset in disorder.disorder_onset">
+                {{ onset.title }}
+            </div>
+        </dd>
+
+        <dt>
+            Age of Death
+        </dt>
+        <dd>
+            <div class="text-muted" data-ng-hide="disorder.disorder_death.length">
+                Unknown
+            </div>
+            <div ng-repeat="death in disorder.disorder_death">
+                {{ death.title }}
+            </div>
+        </dd>
+
+        <dt>
+            Type of Inheritance
+        </dt>
+        <dd>
+            <div class="text-muted" ng-hide="disorder.disorder_inheritance.length">
+                Unknown
+            </div>
+            <div ng-repeat="inheritance in disorder.disorder_inheritance"
+                 class="detail-info">
+                {{ inheritance.title }}
+            </div>
+        </dd>
+    </dl>
+</div>

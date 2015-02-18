@@ -10,6 +10,7 @@
 angular.module('orphaApp')
     .factory('TransactionRequest', function($resource, $http, ENV, ListTransaction,
         $q, $state, $log, transactionStatusService, toaster) {
+
         var TransactionRequest = $resource(ENV.apiEndpoint + '/entity_node/:nid', {
             'parameters[type]': 'transaction_request',
             nid: '@nid'
@@ -24,6 +25,7 @@ angular.module('orphaApp')
                 method: 'PUT'
             }
         });
+
 
         angular.extend(TransactionRequest.prototype, {
             loadTransactions: loadTransactions,
@@ -94,6 +96,7 @@ angular.module('orphaApp')
         // TODO: Abstract these listTransctions into somewhere else
         function addChangeTransaction(nodeNid, propertyName, fromNid, toNid) {
             /* jshint validthis: true */
+            console.log(this.$$transactions);
             var transaction = new ListTransaction({
                 title: 'transaction',
                 type: 'list_transaction',
@@ -107,28 +110,28 @@ angular.module('orphaApp')
             return this;
         }
 
-        function addAddTransaction(nodeNid, propertyName, newNid) {
+        function addAddTransaction(conceptNid, propertyName, addedNid) {
             /* jshint validthis: true */
             var transaction = new ListTransaction({
                 title: 'transaction',
                 type: 'list_transaction',
                 ltrans_position: this.getTransactions().length,
-                ltrans_onnode: nodeNid,
+                ltrans_onnode: conceptNid,
                 ltrans_onprop: propertyName,
-                ltrans_svalref: newNid,
+                ltrans_svalref: addedNid,
                 ltrans_cvalref: 0
             });
             this.getTransactions().push(transaction);
             return this;
         }
 
-        function addRemoveTransaction(nodeNid, propertyName, removeNid) {
+        function addRemoveTransaction(conceptNid, propertyName, removeNid) {
             /* jshint validthis: true */
             var transaction = new ListTransaction({
                 title: 'transaction',
                 type: 'list_transaction',
                 ltrans_position: this.getTransactions().length,
-                ltrans_onnode: nodeNid,
+                ltrans_onnode: conceptNid,
                 ltrans_onprop: propertyName,
                 ltrans_svalref: 0,
                 ltrans_cvalref: removeNid

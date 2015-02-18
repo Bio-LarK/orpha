@@ -12,7 +12,33 @@
                 <label>
                     {{ editVm.propertyLabel }}
                 </label>
-                <select ng-model="editVm.prevalenceClass" ng-options="class as class.title for class in editVm.prevalenceClasses" class="form-control"></select>
+
+                <ui-select
+                        multiple
+                        reset-search-input="true"
+                        ng-model="editVm.ageOfOnsets.selectedOnsets"
+                        theme="bootstrap"
+                        ng-disabled="disabled"
+                        style="width: 100%;"
+                        title="Select an Age of Onset">
+                    <ui-select-match placeholder="Select age of onset...">
+                        {{ $item.title }}
+                    </ui-select-match>
+                    <ui-select-choices repeat="ageOfOnset in editVm.ageOfOnsetTypes | propsFilter: {title: $select.search}"
+                                       refresh="editVm.refreshAgeOfOnsetTypes($select.search)"
+                                       refresh-delay="0">
+                        <div ng-bind-html="ageOfOnset.title | highlight: $select.search">
+                        </div>
+                    </ui-select-choices>
+                </ui-select>
+
+                <pre>
+                    {{ editVm.ageOfOnsets.selectedOnsets | json }}
+                </pre>
+                <!---->
+                <!--<p>Selected: {{multipleDemo.selectedPeople}}</p>-->
+
+                <!--<select ng-model="editVm.prevalenceClass" ng-options="class as class.title for class in editVm.prevalenceClasses" class="form-control"></select>-->
             </div>
             <div class="form-group">
                 <label>
