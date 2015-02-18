@@ -1,3 +1,17 @@
+<a name="0.21.39"></a>
+### 0.21.39 (2015-02-19)
+
+
+#### Bug Fixes
+
+* **disorder:** stop disorder hiding properties ([797e12d0](git@github.com:Bio-LarK/orpha/commit/797e12d07cb3ed3527eddd4b2ecf868d8ac4a10d), closes [#118](git@github.com:Bio-LarK/orpha/issues/118))
+
+
+#### Features
+
+* **disorder:** add editing age of onset ([1afae009](git@github.com:Bio-LarK/orpha/commit/1afae0092f92bc9065b0849b64e2d6f2d0f5e29a))
+
+
 <a name="0.21.38"></a>
 ### 0.21.38 (2015-02-12)
 
