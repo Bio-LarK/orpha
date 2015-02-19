@@ -19,6 +19,7 @@ angular.module('orphaApp')
         vm.toggleParents = toggleParents;
         vm.editAgeOfOnset = editAgeOfOnset;
         vm.editPrevalenceClass = editPrevalenceClass;
+        vm.editDisorderType = editDisorderType;
         vm.editAgeOfDeath = editAgeOfDeath;
         vm.editTypeOfInheritance = editTypeOfInheritance;
         vm.editDisorderGene = editDisorderGene;
@@ -167,6 +168,9 @@ angular.module('orphaApp')
         }
         function editAgeOfDeath() {
             return modalService.openAgeOfDeath(vm.disorder);
+        }
+        function editDisorderType() {
+            return modalService.openDisorderType(vm.disorder);
         }
         function editTypeOfInheritance() {
             return modalService.openTypeOfInheritance(vm.disorder);

@@ -1,7 +1,9 @@
 <div>
     <dl class="dl-horizontal properties-dl-horizontal">
         <dt>
-            Disorder Type
+            <cm-edit editing="isEditing" click="editDisorderType()">
+                Disorder Type
+            </cm-edit>
         </dt>
         <dd>
             {{ disorder.disorder_distype.title || 'Unknown' }}

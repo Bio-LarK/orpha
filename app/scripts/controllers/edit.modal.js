@@ -8,8 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('EditModalCtrl', function($scope, $http, $modalInstance,
-        ENV, ListTransaction, config, TransactionRequest, transactionStatusService,
+    .controller('EditModalCtrl', function($scope, $http, $modalInstance, config,
         toaster, autocompleteService, EditPropertyTransactionRequest) {
 
         var vm = this;
@@ -30,28 +29,18 @@ angular.module('orphaApp')
         // See github
         // https://github.com/angular-ui/ui-select/issues/404
         var currentSelectedOnsets = angular.copy(vm.concept[vm.propertyName]);
-        vm.ageOfOnsetTypes = currentSelectedOnsets;
+        if(_.isArray(currentSelectedOnsets)) {
+            vm.isMultiple = true;
+            vm.ageOfOnsetTypes = currentSelectedOnsets;
+        } else {
+            vm.isMultiple = false;
+            vm.ageOfOnsetTypes = [currentSelectedOnsets];
+        }
+
+        // FIXME: change to a more generic name (since its not just age of onset)
+
         vm.ageOfOnsets.selectedOnsets = currentSelectedOnsets;
-
-        vm.refreshAgeOfOnsetTypes = function(term) {
-            autocompleteService.autocomplete(vm.propertyContentType, term).then(function(ageOfOnsetTypes) {
-                vm.ageOfOnsetTypes = ageOfOnsetTypes;
-            });
-        };
-
-        function getAddedPropertyValues() {
-            var addedPropertiesValues = _.reject(vm.ageOfOnsets.selectedOnsets, function (selectedOnset) {
-                return _.find(vm.concept[vm.propertyName], {nid: selectedOnset.nid})
-            });
-            return addedPropertiesValues;
-        }
-
-        function getRemovedPropertyValues() {
-            var removedPropertyValues = _.reject(vm.concept[vm.propertyName], function (originalOnset) {
-                return _.find(vm.ageOfOnsets.selectedOnsets, {nid: originalOnset.nid})
-            });
-            return removedPropertyValues;
-        }
+        vm.refreshAgeOfOnsetTypes = refreshAgeOfOnsetTypes;
 
         function save() {
             // create a new transaction
@@ -60,14 +49,20 @@ angular.module('orphaApp')
             // save it
             var transactionRequest = EditPropertyTransactionRequest.create(vm.concept, vm.propertyLabel, vm.reason);
 
-            // Add transactions
-            _.forEach(getAddedPropertyValues(), function(addedPropertiesValue) {
-                transactionRequest.addAddTransaction(vm.concept.nid, vm.propertyName, addedPropertiesValue.nid);
-            });
-            // Remove transactions
-            _.forEach(getRemovedPropertyValues(), function(removedPropertyValue) {
-                transactionRequest.addRemoveTransaction(vm.concept.nid, vm.propertyName, removedPropertyValue.nid);
-            });
+            // FIXME: probably this type switching should be pull out
+            if(vm.isMultiple) {
+                // Add transactions
+                _.forEach(getAddedPropertyValues(), function(addedPropertiesValue) {
+                    transactionRequest.addAddTransaction(vm.concept.nid, vm.propertyName, addedPropertiesValue.nid);
+                });
+                // Remove transactions
+                _.forEach(getRemovedPropertyValues(), function(removedPropertyValue) {
+                    transactionRequest.addRemoveTransaction(vm.concept.nid, vm.propertyName, removedPropertyValue.nid);
+                });
+            } else {
+                transactionRequest.addChangeTransaction(vm.concept.nid, vm.propertyName, vm.concept[vm.propertyName].nid, vm.ageOfOnsets.selectedOnsets.nid);
+            }
+
             transactionRequest.save();
             $modalInstance.close();
         }
@@ -76,4 +71,48 @@ angular.module('orphaApp')
             $modalInstance.dismiss('cancel');
         }
 
+        function refreshAgeOfOnsetTypes(term) {
+            return autocompleteService.autocomplete(vm.propertyContentType, term).then(function(ageOfOnsetTypes) {
+                vm.ageOfOnsetTypes = ageOfOnsetTypes;
+            });
+        }
+
+        /**
+         * Get all the new property values
+         * @returns {*}
+         */
+        function getAddedPropertyValues() {
+            var originalValues = vm.concept[vm.propertyName];
+            var newValues = vm.ageOfOnsets.selectedOnsets;
+
+            return without(newValues, originalValues, 'nid');
+        }
+
+        /**
+         * Get all the property values that were removed
+         * @returns {*}
+         */
+        function getRemovedPropertyValues() {
+            var originalValues = vm.concept[vm.propertyName];
+            var newValues = vm.ageOfOnsets.selectedOnsets;
+
+            return without(originalValues, newValues, 'nid');
+        }
+
+
+        // TODO: extract to service
+        /**
+         * Get all items in the array, that arent in the second array
+         * @param array
+         * @param minusArray
+         * @param property
+         * @returns {*}
+         */
+        function without(array, minusArray, property) {
+            return _.reject(array, function (item) {
+                var where = {};
+                where[property] = item[property];
+                return _.find(minusArray, where);
+            });
+        }
     });

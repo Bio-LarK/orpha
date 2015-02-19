@@ -1,0 +1,74 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="editVm.cancel()">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">{{ editVm.concept.title }}</h4>
+    </div>
+    <form role="form">
+        <div class="modal-body">
+            <div class="form-group">
+                <label>
+                    {{ editVm.propertyLabel }}
+                </label>
+
+
+                <div ng-if="editVm.isMultiple">
+                    <ui-select
+                            multiple
+                            reset-search-input="true"
+                            ng-model="editVm.ageOfOnsets.selectedOnsets"
+                            theme="bootstrap"
+                            ng-disabled="disabled"
+                            style="width: 100%;"
+                            title="Select an {{ editVm.propertyLabel }}">
+                        <ui-select-match placeholder="Select {{ editVm.propertyLabel }}...">
+                            {{ $item.title }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="ageOfOnset in editVm.ageOfOnsetTypes | propsFilter: {title: $select.search}"
+                                           refresh="editVm.refreshAgeOfOnsetTypes($select.search)"
+                                           refresh-delay="0">
+                            <div ng-bind-html="ageOfOnset.title | highlight: $select.search">
+                            </div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div ng-if="!editVm.isMultiple">
+                    <ui-select ng-model="editVm.ageOfOnsets.selectedOnsets"
+                               theme="bootstrap"
+                               ng-disabled="disabled"
+                               style="width: 100%;"
+                               title="Select an {{ editVm.propertyLabel }}">
+                        <ui-select-match placeholder="Select {{ editVm.propertyLabel }}...">
+                            {{ $select.selected.title }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="ageOfOnset in editVm.ageOfOnsetTypes"
+                                           refresh="editVm.refreshAgeOfOnsetTypes($select.search)"
+                                           refresh-delay="0">
+                            <div ng-bind-html="ageOfOnset.title | highlight: $select.search">
+                            </div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    Explain the change
+                </label>
+                <textarea msd-elastic="\n" ng-model="editVm.reason" class="form-control" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="pull-left">
+                <div style="">
+                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/aaroni/48.jpg" style="width:35px;height:35px" alt="" />&nbsp;&nbsp;Dr John Smith
+                </div>
+            </div>
+
+            <button class="btn btn-default" ng-click="editVm.cancel()">Cancel</button>
+            <button type="submit" class="btn btn-primary" ng-click="editVm.save(yo)">Propose Change</button>
+        </div>
+    </form>
+</div>

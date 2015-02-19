@@ -13,6 +13,7 @@ angular.module('orphaApp')
             openPrevalenceClassModal: openPrevalenceClassModal,
             openAgeOfOnset: openAgeOfOnset,
             openAgeOfDeath: openAgeOfDeath,
+            openDisorderType: openDisorderType,
             openTypeOfInheritance: openTypeOfInheritance,
             openEditTitle: openEditTitle,
             openEditDescription: openEditDescription,
@@ -164,6 +165,15 @@ angular.module('orphaApp')
             );
         }
 
+        function openDisorderType(concept) {
+            return openPropertyModal(
+                concept,
+                'Disorder Type',
+                'disorder_distype',
+                'disorder_type'
+            );
+        }
+
 
         function openPropertyModal(concept, propertyLabel, propertyName, propertyContentType) {
             var config = {
@@ -173,7 +183,7 @@ angular.module('orphaApp')
                 propertyContentType: propertyContentType
             };
             return $modal.open({
-                templateUrl: 'views/edit.modal.html',
+                templateUrl: 'views/disorder/modals/edit-properties.html',
                 controller: 'EditModalCtrl as editVm',
                 resolve: {
                     config: function() {
