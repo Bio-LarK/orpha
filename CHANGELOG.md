@@ -1,3 +1,12 @@
+<a name="0.21.40"></a>
+### 0.21.40 (2015-02-19)
+
+
+#### Features
+
+* **disorder:** add editing death and age of inheritance ([97811445](git@github.com:Bio-LarK/orpha/commit/97811445a67044b3c7500129e79ac852b6e7b843))
+
+
 <a name="0.21.39"></a>
 ### 0.21.39 (2015-02-19)
 
