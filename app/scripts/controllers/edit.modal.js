@@ -17,12 +17,9 @@ angular.module('orphaApp')
         vm.propertyName = config.propertyName;
         vm.propertyContentType = config.propertyContentType;
         vm.propertyLabel = config.propertyLabel;
+        vm.reason = '';
         vm.save = save;
         vm.cancel = cancel;
-        vm.stuff = null;
-        vm.prevalenceClasses = null;
-        vm.prevalenceClass = null;
-        vm.reason = '';
 
 
         vm.ageOfOnsets = {
