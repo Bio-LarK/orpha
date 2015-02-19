@@ -24,6 +24,32 @@ describe("Disorder", function() {
             expect(ageOfOnsets.count()).toEqual(2);
             expect(ageOfOnsets.get(0).getText()).toEqual('Infancy');
             expect(ageOfOnsets.get(1).getText()).toEqual('Neonatal');
+
+            console.log("HERE????");
+        });
+
+        iit('can be edited', function() {
+            var loginButton = element(by.cssContainingText('a', 'Login'));
+            loginButton.click();
+            var username = element(by.css('input#username'));
+            var password = element(by.css('input#password'));
+            username.sendKeys('new_orpha');
+            password.sendKeys('new_orpha');
+
+            var login = element(by.cssContainingText('button', 'Login'));
+            login.click();
+
+            browser.sleep(5000);
+
+            element(by.cssContainingText('a', 'Edit')).click();
+
+            var ageOfOnsets = element(by.cssContainingText('dt div', 'Age of Onset'));
+
+            ageOfOnsets.click();
+
+            browser.sleep(5000);
+
+            expect(element(by.css('.modal-dialog')).isPresent()).toBe(true);
         });
     });
 });
