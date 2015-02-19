@@ -1,3 +1,12 @@
+<a name="0.21.43"></a>
+### 0.21.43 (2015-02-19)
+
+
+#### Bug Fixes
+
+* **disorder:** fix already selected values appearing property editing select options ([2c407ff3](git@github.com:Bio-LarK/orpha/commit/2c407ff3feda1dcd1e825c75b9c1a8cda640b81c), closes [#119](git@github.com:Bio-LarK/orpha/issues/119))
+
+
 <a name="0.21.42"></a>
 ### 0.21.42 (2015-02-19)
 
