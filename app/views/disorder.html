@@ -557,27 +557,27 @@
                         </li>
                         <li du-scrollspy="classification" offset="{{ getScrollOffset() + 50 }}">
                             <a href="#classification" offset="{{ getScrollOffset() }}" du-smooth-scroll>
-                                Classification
+                                Classification ({{ disorder.disorder_class.length }})
                             </a>
                         </li>
                         <li du-scrollspy="parents" offset="{{ getScrollOffset() + 50 }}">
                             <a href="#parents" offset="{{ getScrollOffset() }}" du-smooth-scroll>
-                                Parents
+                                Parents ({{ disorder.disorder_parent.length }})
                             </a>
                         </li>
                         <li du-scrollspy="children" offset="{{ getScrollOffset() + 50 }}">
                             <a href="#children" offset="{{ getScrollOffset() }}" du-smooth-scroll>
-                                Children
+                                Children ({{ disorder.disorder_child.length }})
                             </a>
                         </li>
                         <li du-scrollspy="genotype" offset="{{ getScrollOffset() + 50 }}">
                             <a href="#genotype" offset="{{ getScrollOffset() }}" du-smooth-scroll>
-                                Genotype
+                                Genotype ({{ disorder.disorder_disgene.length }})
                             </a>
                         </li>
                         <li du-scrollspy="phenotype" offset="{{ getScrollOffset() + 50 }}">
                             <a href="#phenotype" offset="{{ getScrollOffset() }}" du-smooth-scroll>
-                                Phenotype
+                                Phenotype ({{ disorder.disorder_phenotype.length }})
                             </a>
                         </li>
                     </ul>
