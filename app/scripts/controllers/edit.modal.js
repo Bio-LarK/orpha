@@ -73,7 +73,14 @@ angular.module('orphaApp')
 
         function refreshAgeOfOnsetTypes(term) {
             return autocompleteService.autocomplete(vm.propertyContentType, term).then(function(ageOfOnsetTypes) {
+                //vm.ageOfOnsetTypes = ageOfOnsetTypes;
+                if(vm.isMultiple) {
+                    vm.ageOfOnsetTypes = without(ageOfOnsetTypes, vm.ageOfOnsets.selectedOnsets, 'nid');
+                    return;
+                }
+
                 vm.ageOfOnsetTypes = ageOfOnsetTypes;
+
             });
         }
 
