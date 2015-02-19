@@ -13,6 +13,7 @@ angular.module('orphaApp')
             openPrevalenceClassModal: openPrevalenceClassModal,
             openAgeOfOnset: openAgeOfOnset,
             openAgeOfDeath: openAgeOfDeath,
+            openTypeOfInheritance: openTypeOfInheritance,
             openEditTitle: openEditTitle,
             openEditDescription: openEditDescription,
             openEditClassification: openEditClassification,
@@ -154,11 +155,11 @@ angular.module('orphaApp')
             );
         }
 
-        function openTOI(concept) {
+        function openTypeOfInheritance(concept) {
             return openPropertyModal(
                 concept,
                 'Type of Inheritance',
-                'disorder_inhertiance',
+                'disorder_inheritance',
                 'type_of_inheritance'
             );
         }

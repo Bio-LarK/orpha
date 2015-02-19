@@ -20,8 +20,8 @@
                         theme="bootstrap"
                         ng-disabled="disabled"
                         style="width: 100%;"
-                        title="Select an Age of Onset">
-                    <ui-select-match placeholder="Select age of onset...">
+                        title="Select an {{ editVm.propertyLabel }}">
+                    <ui-select-match placeholder="Select {{ editVm.propertyLabel }}...">
                         {{ $item.title }}
                     </ui-select-match>
                     <ui-select-choices repeat="ageOfOnset in editVm.ageOfOnsetTypes | propsFilter: {title: $select.search}"

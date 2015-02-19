@@ -23,7 +23,9 @@
         </dd>
 
         <dt>
-            Age of Death
+            <cm-edit editing="isEditing" click="editAgeOfDeath()">
+                Age of Death
+            </cm-edit>
         </dt>
         <dd>
             <div class="text-muted" data-ng-hide="disorder.disorder_death.length">
@@ -35,7 +37,9 @@
         </dd>
 
         <dt>
-            Type of Inheritance
+            <cm-edit editing="isEditing" click="editTypeOfInheritance()">
+                Type of Inheritance
+            </cm-edit>
         </dt>
         <dd>
             <div class="text-muted" ng-hide="disorder.disorder_inheritance.length">
