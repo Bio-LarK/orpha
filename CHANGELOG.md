@@ -1,3 +1,12 @@
+<a name="0.21.42"></a>
+### 0.21.42 (2015-02-19)
+
+
+#### Features
+
+* **disorder:** edit disorder type property ([52a14034](git@github.com:Bio-LarK/orpha/commit/52a140349b4fe26f05f2f42332e393fa37bf476c))
+
+
 <a name="0.21.41"></a>
 ### 0.21.41 (2015-02-19)
 
