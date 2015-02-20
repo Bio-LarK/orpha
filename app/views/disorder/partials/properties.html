@@ -1,17 +1,17 @@
 <div>
     <dl class="dl-horizontal properties-dl-horizontal">
-        <dt cm-edit editing="isEditing" click="editDisorderType()" border="bottom">
+        <dt>
             Disorder Type
         </dt>
-        <dd>
+        <dd cm-edit editing="isEditing" click="editDisorderType()" border="bottom">
             {{ disorder.disorder_distype.title || 'Unknown' }}
         </dd>
     </dl>
     <dl class="dl-horizontal properties-dl-horizontal">
-        <dt cm-edit editing="isEditing" click="editAgeOfOnset()" border="bottom">
+        <dt>
             Age of Onset
         </dt>
-        <dd>
+        <dd cm-edit editing="isEditing" click="editAgeOfOnset()" border="bottom">
             <div class="text-muted" data-ng-hide="disorder.disorder_onset.length">
                 Unknown
             </div>
@@ -20,10 +20,10 @@
             </div>
         </dd>
 
-        <dt cm-edit editing="isEditing" click="editAgeOfDeath()" border="bottom">
+        <dt>
             Age of Death
         </dt>
-        <dd>
+        <dd cm-edit editing="isEditing" click="editAgeOfDeath()" border="bottom">
             <div class="text-muted" data-ng-hide="disorder.disorder_death.length">
                 Unknown
             </div>
@@ -32,10 +32,10 @@
             </div>
         </dd>
 
-        <dt cm-edit editing="isEditing" click="editTypeOfInheritance()" border="bottom">
+        <dt>
             Type of Inheritance
         </dt>
-        <dd>
+        <dd cm-edit editing="isEditing" click="editTypeOfInheritance()" border="bottom">
             <div class="text-muted" ng-hide="disorder.disorder_inheritance.length">
                 Unknown
             </div>
