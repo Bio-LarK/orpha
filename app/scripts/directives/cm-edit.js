@@ -24,9 +24,8 @@ angular.module('orphaApp')
 
                 function editingStateChanged(isEditing) {
                     if(isEditing) {
-                        if($scope.border == 'bottom') {
-                            element.addClass('editable');
-                        } else {
+                        element.addClass('editable');
+                        if($scope.border !== 'bottom') {
                             element.addClass('editable-card');
                         }
 
@@ -34,11 +33,9 @@ angular.module('orphaApp')
                         disableInternalLinks(element);
                         return;
                     }
-                    if($scope.border == 'bottom') {
-                        element.removeClass('editable');
-                    } else {
-                        element.removeClass('editable-card');
-                    }
+
+                    element.removeClass('editable');
+                    element.removeClass('editable-card');
                     element.unbind('click', editClickHandler);
                     enableInternalLinks(element);
                 }

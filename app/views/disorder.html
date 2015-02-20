@@ -161,29 +161,35 @@
                                         <div class="col-sm-12">
                                             <div class="row" ng-repeat="row in disorder.disorder_class | inSlicesOf:3">
                                                 <div class="col-sm-4" ng-repeat="classification in row">
-                                                    <div class="panel panel-default editable-card" ng-show="isEditing"
+                                                    <!--<div class="panel panel-default"-->
+                                                         <!--cm-edit-->
+                                                         <!--editing="isEditing"-->
+                                                         <!--click="editclassification({disorderId: disorder.nid, classificationId: classification.nid})">-->
+
+                                                        <!--<div class="panel-body">-->
+                                                            <!--<div class="media">-->
+                                                                <!--<div class="pull-left">-->
+                                                                    <!--<div style="width:50px;height:50px;">-->
+                                                                        <!--<colormap classification="classification"-->
+                                                                                  <!--type="disorder"></colormap>-->
+                                                                    <!--</div>-->
+                                                                <!--</div>-->
+                                                                <!--<div class="media-body">-->
+                                                                    <!--<h5>-->
+                                                                        <!--{{ classification.title }}-->
+                                                                    <!--</h5>-->
+
+                                                                    <!--<p class="text-muted">An Orphanet summary for this classification is-->
+                                                                        <!--currently under development.</p>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <div class="panel panel-default"
+                                                         cm-edit
+                                                         editing="isEditing"
                                                          ui-sref="editclassification({disorderId: disorder.nid, classificationId: classification.nid})">
-                                                        <div class="panel-body">
-                                                            <div class="media">
-                                                                <div class="pull-left">
-                                                                    <div style="width:50px;height:50px;">
-                                                                        <colormap classification="classification"
-                                                                                  type="disorder"></colormap>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <h5>
-                                                                        {{ classification.title }}
-                                                                    </h5>
-
-                                                                    <p class="text-muted">An Orphanet summary for this classification is
-                                                                        currently under development.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="panel panel-default" ng-hide="isEditing">
                                                         <div class="panel-body">
                                                             <div class="media">
                                                                 <div class="pull-left">
@@ -207,7 +213,7 @@
 
                                                         </div>
 
-                                                        <div class="list-group">
+                                                        <div class="list-group" ng-hide="isEditing">
                                                             <a class="list-group-item" href
                                                                ui-sref="classification({classificationId: classification.nid, disorderId: disorder.nid})">
                                                                 <i class="fa fa-bullseye"></i> Open to location of {{
@@ -436,7 +442,10 @@
                                     <div class="col-sm-4 repeated-item" ng-repeat="disorder_phenotype in row">
 
 
-                                        <div class="panel panel-default" ng-hide="isEditing">
+                                        <div class="panel panel-default"
+                                             cm-edit
+                                             editing="isEditing"
+                                             click="editDisorderPhenotype(disorder_phenotype)">
                                             <div class="panel-body">
                                                 <div class="media">
                                                     <div class="pull-left">
@@ -467,7 +476,7 @@
 
 
                                             <div class="list-group"
-                                                 ng-show="disorder_phenotype.ds_sign.sign_dissign.length">
+                                                 ng-show="disorder_phenotype.ds_sign.sign_dissign.length && !isEditing">
                                                 <a class="list-group-item"
                                                    ui-sref="sign({signId: disorder_phenotype.ds_sign.nid })">
                                                     <i class="fa fa-search"></i> View Disorders
@@ -476,30 +485,6 @@
                                             </div>
                                         </div>
 
-
-                                        <div class="panel panel-default editable-card"
-                                             ng-click="editDisorderPhenotype(disorder_phenotype)" ng-show="isEditing">
-                                            <div class="panel-body">
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <!-- <img src="http://dummyimage.com/40x40/fdd835/fdd835" alt="" class="media-body"> -->
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>
-                                                            <h5>
-                                                                {{ disorder_phenotype.ds_sign.sign_name }}
-                                                            </h5>
-
-                                                            <p class="" ng-hide="disorder_phenotype.ds_sign.sign_name">
-                                                                Loading...</p>
-                                                        </div>
-                                                        <div class="text-muted">
-                                                            {{ disorder_phenotype.ds_frequency.title }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

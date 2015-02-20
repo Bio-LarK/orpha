@@ -52,12 +52,16 @@ footer {
 .editable {
     border-bottom: 2px blue dotted;
     cursor: pointer;
+    color: #3f51b5 !important;
+}
+.editable *, .editable .text-muted {
+    color: #3f51b5 !important;
 }
 .editable-card {
-    border: 2px blue dotted;
+    border: 2px #3f51b5 dotted;
     cursor: pointer;
     a {
-        color: black !important;
+        color: #3f51b5 !important;
     }
 }
 .modal-content {
