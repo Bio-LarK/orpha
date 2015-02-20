@@ -359,9 +359,11 @@
                                 <div class="row"
                                      ng-repeat="row in disorder.disorder_disgene | filter:filterGenotype | inSlicesOf:3">
                                     <div class="col-sm-4" ng-repeat="disorder_gene in row">
-
-                                        <div class="panel panel-default" ng-hide="isEditing">
-                                            <div class="panel-body">
+                                        <div class="panel panel-default"
+                                             cm-edit
+                                             editing="isEditing"
+                                             click="editDisorderGene(disorder_gene)">
+                                            <div class="panel-body" >
                                                 <div class="media">
                                                     <div class="pull-left">
                                                         <div style="width:40px;height:40px;">
@@ -372,9 +374,9 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <div>
-                                                            <span class="text-muted">
-                                                                {{ disorder_gene.disgene_at.title }}
-                                                            </span>
+                                                        <span class="text-muted">
+                                                            {{ disorder_gene.disgene_at.title }}
+                                                        </span>
                                                             <h5 style="display: inline">
                                                                 <a ui-sref="gene({geneId: disorder_gene.disgene_gene.nid})">{{
                                                                     disorder_gene.disgene_gene.gene_name }}</a>
@@ -394,45 +396,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="list-group">
+                                            <div class="list-group" ng-hide="isEditing">
                                                 <a ui-sref="gene({geneId: disorder_gene.disgene_gene.nid})"
                                                    class="list-group-item">
                                                     <i class="fa fa-search"></i> View Disorders
                                                 </a>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- editable -->
-                                        <div class="panel panel-default editable-card"
-                                             ng-click="editDisorderGene(disorder_gene)" ng-show="isEditing">
-                                            <div class="panel-body">
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <!-- <img src="http://dummyimage.com/40x40/f57f17/f57f17" alt="" class="media-body"> -->
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>
-                                            <span class="text-muted">
-                                                {{ disorder_gene.disgene_at.title }}
-                                            </span>
-                                                            <h5 style="display: inline">
-                                                                {{ disorder_gene.disgene_gene.title }}
-                                                            </h5>
-                                                            <!--<span ng-repeat="syn in disorder_gene.disgene_gene.gene_synonym">, {{ syn }}</span>)-->
-                                                        </div>
-                                                        <div style="margin-top: 10px;">
-                                                            <div class="detail detail-genotype">
-                                                                <div class="detail-title">
-                                                                    Status:
-                                                                </div>
-                                                                <div class="detail-info">
-                                                                    {{ disorder_gene.disgene_as.title }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
