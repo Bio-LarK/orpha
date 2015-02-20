@@ -1,3 +1,12 @@
+<a name="0.21.45"></a>
+### 0.21.45 (2015-02-20)
+
+
+#### Bug Fixes
+
+* **disorder:** fix gene modal not showing gene name ([c62f6555](git@github.com:Bio-LarK/orpha/commit/c62f6555426d017be5061ffe669c6a948c7abee1))
+
+
 <a name="0.21.44"></a>
 ### 0.21.44 (2015-02-19)
 
