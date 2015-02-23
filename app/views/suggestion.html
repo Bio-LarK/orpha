@@ -46,10 +46,31 @@
                     <div ng-show="transaction.isRefChange">
                         <strong>
                             {{ transaction.ltrans_onprop }}
-                        </strong>: {{ transaction.ltrans_cvalref.title || 'Unknown' }}
-                        <i class="fa fa-arrow-right"></i>
-                        {{ transaction.ltrans_svalref.title }}
+                        </strong>:
+
+                        <span data-ng-show="transaction.ltrans_svalref == 0">
+                            Remove
+                        </span>
+                        <span data-ng-show="transaction.ltrans_cvalref == 0">
+                            Add
+                        </span>
+                        <span data-ng-hide="transaction.ltrans_cvalref == 0">
+                            <em>
+                                {{ transaction.ltrans_cvalref.title || 'Unknown' }}
+                            </em>
+                        </span>
+                        <span data-ng-hide="transaction.ltrans_svalref == 0 || transaction.ltrans_cvalref == 0">
+                            <i class="fa fa-arrow-right"></i>
+                        </span>
+
+                        <span data-ng-hide="transaction.ltrans_svalref == 0">
+                            <em>
+                                {{ transaction.ltrans_svalref.title }}
+                            </em>
+                        </span>
+
                     </div>
+
 
                     <div ng-hide="transaction.isRefChange">
 
