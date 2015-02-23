@@ -27,7 +27,7 @@ angular.module('orphaApp')
 
         function getPrevalences(prevalenceIds) {
             var prevalencePromises = _.map(prevalenceIds, function (prevalenceId) {
-                return getPrevalence(prevalenceId)
+                return getPrevalence(prevalenceId);
             });
             return $q.all(prevalencePromises);
         }

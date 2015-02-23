@@ -32,9 +32,7 @@ angular.module('orphaApp')
         vm.goToAnchor = goToAnchor;
         vm.getScrollOffset = getScrollOffset;
 
-        $scope.test = function(name) {
-            alert('hello ' + name);
-        }
+
         activate();
         ////////////
 
