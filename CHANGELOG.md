@@ -1,3 +1,12 @@
+<a name="0.21.47"></a>
+### 0.21.47 (2015-02-23)
+
+
+#### Features
+
+* **gene:** add gene details ([ff440c4f](git@github.com:Bio-LarK/orpha/commit/ff440c4f9bb11cfad2445f1d0d5ee9e46923aca9))
+
+
 <a name="0.21.46"></a>
 ### 0.21.46 (2015-02-23)
 
