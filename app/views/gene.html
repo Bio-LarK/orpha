@@ -36,6 +36,47 @@
     </div>
 
     <div class="panels">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <dl class="dl-horizontal properties-dl-horizontal" style="margin:0px;">
+                            <dt>Type</dt>
+                            <dd class="text-capitalize">{{ gene.gene_genetype.title }}</dd>
+                            <dt>
+                                Locus
+                            </dt>
+                            <dd style="margin-bottom: 20px;">
+                                <div ng-repeat="locus in gene.gene_genelocus">
+                                    {{ locus.genelocus_locus }} - key:
+                                    {{ locus.genetype_key }}
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-4">
+                        <dl class="dl-horizontal properties-dl-horizontal" style="margin:0px;">
+                            <dt class="detail-title">Orphanumber</dt>
+                            <dd class="detail-info">
+                                <a target="_" ng-href="http://www.orpha.net/consor/cgi-bin/OC_Exp.php?lng=EN&Expert={{ gene.gene_orphanumber }}">
+                                    ORPHA{{ gene.gene_orphanumber }}
+                                </a>
+                            </dd>
+
+                            <dt class="detail-title" ng-repeat-start="er in gene.gene_er">
+                                {{ er.er_source }}
+                            </dt>
+                            <dd ng-repeat-end class="detail-info">
+                                {{ er.er_reference }}
+                            </dd>
+                        </dl>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panels">
 
     	<form class="form-inline pull-right" role="form" ng-show="disorders.length > 1">
             <div class="form-group">

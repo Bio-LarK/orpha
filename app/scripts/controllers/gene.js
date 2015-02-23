@@ -8,7 +8,7 @@
  * Controller of the orphaApp
  */
 angular.module('orphaApp')
-    .controller('GeneCtrl', function ($scope, $stateParams, Gene, Disorder, promiseTracker, Page) {
+    .controller('GeneCtrl', function ($scope, $stateParams, Gene, Disorder, promiseTracker, Page, ENV, $http, $q) {
         $scope.disordersTracker = promiseTracker();
         $scope.geneTracker = promiseTracker();
 
@@ -46,7 +46,33 @@ angular.module('orphaApp')
             $scope.gene = gene;
             Page.setTitle(gene.gene_name);
             gene.loadDisorders();
+
+            // load locuses
+            var locusNids = _.pluck(gene.gene_genelocus, 'nid');
+            loadSelected(locusNids).then(function(locuses) {
+                 gene.gene_genelocus = locuses;
+            });
+
+            var erNids = _.pluck(gene.gene_er, 'nid');
+            loadSelected(erNids).then(function(externalReferences) {
+                gene.gene_er = externalReferences;
+            });
         }
+
+        function loadSelected(nids) {
+            var promises = _.map(nids, function (nid) {
+                return load(nid);
+            });
+            return $q.all(promises);
+        }
+
+        function load(nid) {
+            return $http.get(ENV.apiEndpoint + '/entity_node/' + nid).then(function(response) {
+                return response.data;
+            });
+        }
+
+
 
 
     });
