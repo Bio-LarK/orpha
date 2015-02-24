@@ -24,8 +24,6 @@ describe("Disorder", function() {
             expect(ageOfOnsets.count()).toEqual(2);
             expect(ageOfOnsets.get(0).getText()).toEqual('Infancy');
             expect(ageOfOnsets.get(1).getText()).toEqual('Neonatal');
-
-            console.log("HERE????");
         });
 
         iit('can be edited', function() {
@@ -43,9 +41,10 @@ describe("Disorder", function() {
 
             element(by.cssContainingText('a', 'Edit')).click();
 
-            var ageOfOnsets = element(by.cssContainingText('dt div', 'Age of Onset'));
+            var ageOfOnset = element.all(by.repeater('onset in disorder.disorder_onset')).first();
+            //var ageOfOnsets = element(by.cssContainingText('dt div', 'Age of Onset'));
 
-            ageOfOnsets.click();
+            ageOfOnset.click();
 
             browser.sleep(5000);
 
