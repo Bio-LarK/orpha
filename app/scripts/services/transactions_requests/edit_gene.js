@@ -11,14 +11,9 @@ angular.module('orphaApp')
     .factory('TransactionRequestEditGene', function(TransactionRequest) {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
-        var TransactionRequestEditGene = function(data) {
-            TransactionRequest.call(this, data);
+        return {
+            create: create
         };
-        TransactionRequestEditGene.create = create;
-        TransactionRequestEditGene.prototype = TransactionRequest.prototype;
-        TransactionRequestEditGene.prototype.constructor = TransactionRequestEditGene;
-        TransactionRequestEditGene.prototype.changeRelationshipStatus = changeRelationshipStatus;
-        TransactionRequestEditGene.prototype.changeRelationshipType = changeRelationshipType;
 
         ////
 
@@ -30,9 +25,11 @@ angular.module('orphaApp')
             transactionRequest.$$gene = gene;
             transactionRequest.$$disorderGene = disorderGene;
             transactionRequest.$$reason = reason;
+            transactionRequest.changeRelationshipStatus = changeRelationshipStatus;
+            transactionRequest.changeRelationshipType = changeRelationshipType;
             transactionRequest.setTitle('Edit Relationship between ' + disorder.title + ' and ' + gene.title);
             transactionRequest.setReason(reason);
-            return new TransactionRequestEditGene(transactionRequest);
+            return transactionRequest;
         }
 
         ////

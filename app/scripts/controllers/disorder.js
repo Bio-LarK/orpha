@@ -108,6 +108,7 @@ angular.module('orphaApp')
                         Gene.get({
                             nid: disorderGene['disgene_gene'].nid
                         }).$promise.then(function(gene) {
+                            gene.title = gene.gene_name;
                             disorderGene['disgene_gene'] = gene;
                             gene.loadDisorders(true);
                             // _.extend(disorderSign['ds_sign'], sign);
